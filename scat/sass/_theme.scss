@@ -1,0 +1,66 @@
+$prime: #f60;
+
+$white: #fff;
+$text: #333;
+
+$gray1: #f6f6f6;
+$gray2: #eee;
+$gray3: #ddd;
+$gray4: #bbb;
+$gray5: #999;
+
+
+.topbar {
+  //color: $prime;
+  background-color: $white;
+  border-bottom: 1px solid $gray2;
+  nav a {
+    color: $text;
+  }
+}
+
+.logo {
+  color: $prime;
+}
+
+.view-heading {
+  background-color: $gray1;
+  color: $gray4;
+}
+
+.view {
+  background-color: $white;
+}
+
+.loading-indicator {
+  color: $gray4;
+}
+
+.track { border-bottom: 1px solid $gray2; }
+.track:first-child { border-top: 1px solid $gray2; }
+
+
+.sc-player {}
+.sc-play { background-color: $gray4; }
+.sc-play:hover { background-color: $gray4; }
+.sc-pause { background-color: $prime; }
+.sc-pause:hover { background-color: lighten($prime, 5%);}
+//.sc-title { color: darken($prime, 50%); }
+
+.sc-buffer { background-color: $gray2; opacity: .5; }
+
+.sc-played {
+  background-color: $prime;
+  opacity: .1;
+}
+
+.playing .sc-played {
+  border-right: 1px solid $prime;
+  opacity: .4;
+}
+
+.page-next:hover {
+  //background-color: darken($prime, 5%);
+}
+
+

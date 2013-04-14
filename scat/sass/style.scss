@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  //-moz-box-sizing: border-box;
+  //-webkit-box-sizing: border-box;
+  //box-sizing: border-box;
+}
+
+@import "theme";
+@import "base";
+@import "type";
+@import "animations";
+
+@import "layout";
+@import "sc-player";
+//@import "sm-player";
+//@import "player";
