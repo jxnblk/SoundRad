@@ -1,17 +1,9 @@
 <div ng-controller="TracklistCtrl">
+<div ng-controller="LikesCtrl">
 
 <!-- <a href="#" ng-click="connect();">Connect</a> -->
 
 <h1>Viewing: {{scget}}</h1>
-<select ng-model="userName" ng-change="updateTracks()">
-  <option value="jxnblk">Jxnblk</option>
-  <option value="mrsjxn">Mrsjxn</option>
-</select>
-<select ng-model="getType" ng-change="updateTracks()">
-  <option value="/tracks">Tracks</option>
-  <option value="/favorites">Likes</option>
-  <option value="/playlists">Sets</option>
-</select>
 <label>Page Size:</label>
 <select ng-model="pageSize" ng-change="updateTracks()">
   <option value="4">4</option>
@@ -22,11 +14,7 @@
   <option value="128">128</option>
 </select>
 
-<button ng-click="checkVar(tracksLoading)">CheckVar</button>
-
-<div class="sc-tracklist"ng-class="{loading: tracksLoading}">
-
-  <div ng-hide="tracks.length">No tracks for {{scget}}</div>
+<div class="sc-tracklist">
 
   <div class="track" ng-repeat="track in tracks">
     <div class="jx-player media" ng-model="track.playing">
@@ -44,6 +32,7 @@
       
     </div>
   </div>
-</div>
+</div> <!-- End Tracklist -->
 
+</div>
 </div>

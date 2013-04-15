@@ -13,7 +13,10 @@ var app = angular.module('sndcat', ['sndcat.services']).
 
 var app = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
+    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'TracklistCtrl'});
+    $routeProvider.when('/likes', {templateUrl: 'partials/likes.html', controller: 'TracklistCtrl'});
+    $routeProvider.when('/sets', {templateUrl: 'partials/sets.html', controller: 'TracklistCtrl'});
+    //$locationProvider.html5Mode(true);
   }]).
   factory('soundcloud', function() {
     // SoundCloud Init
@@ -25,12 +28,25 @@ var app = angular.module('scat', []).
     return {
     
       get:    function($scope){
-                console.log('scget' + $scope.scget);
+                //console.log('scget' + $scope.scget);
                 SC.get($scope.scget, {limit: $scope.pageSize}, function(tracks){
                   $scope.$apply(function () {
                     $scope.tracks = tracks;
-                  });    
+                    $scope.tracksLoading = false;
+                  });      
                 });
+              },
+              
+      play:   function(track){
+                track.playing = true;
+                console.log('play' + track.title); // + $scope.track.stream_url
+                
+                
+                /*  SC.get($scope.scget, {limit: $scope.pageSize}, function(tracks){
+                  $scope.$apply(function () {
+                    $scope.tracks = tracks;
+                  });    
+                }); */
               },
     
       test:   function($scope){
@@ -41,36 +57,3 @@ var app = angular.module('scat', []).
   });
 
 
-// Controllers
-
-function NavCtrl($scope, soundcloud) {
-  
-};
- 
-function HomeCtrl($scope, soundcloud) {
-
-  $scope.userName = 'jxnblk';
-  
-  $scope.scget = '/users/' + $scope.userName + '/tracks';
-  $scope.pageSize = 32;
-  $scope.pageOffset = 0;
-
-  soundcloud.get($scope);
-
-  // update tracks in view
-  $scope.updateTracks = function() {
-    $scope.scget = '/users/' + $scope.userName + '/tracks';
-    soundcloud.get($scope);
-  };  
-    
- 
- 
-   /*
-SC.get($scope.scget, {limit: $scope.pageSize}, function(tracks){
-    $scope.$apply(function () {
-      $scope.tracks = tracks;
-    });   
-  });
-*/ 
-  
-}
