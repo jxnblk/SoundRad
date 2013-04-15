@@ -13,7 +13,7 @@ var app = angular.module('sndcat', ['sndcat.services']).
 
 var app = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'TracklistCtrl'});
+    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
     $routeProvider.when('/likes', {templateUrl: 'partials/likes.html', controller: 'TracklistCtrl'});
     $routeProvider.when('/sets', {templateUrl: 'partials/sets.html', controller: 'TracklistCtrl'});
     //$locationProvider.html5Mode(true);
@@ -25,11 +25,15 @@ var app = angular.module('scat', []).
       client_id: clientId,
       redirect_uri: 'http://jxnblk.com/sc'
     });
+    
+    var player;
+    
     return {
     
       get:    function($scope){
-                //console.log('scget' + $scope.scget);
-                SC.get($scope.scget, {limit: $scope.pageSize}, function(tracks){
+                console.log($scope.scget);
+                //remove offset here?
+                SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
                   $scope.$apply(function () {
                     $scope.tracks = tracks;
                     $scope.tracksLoading = false;
@@ -37,41 +41,34 @@ var app = angular.module('scat', []).
                 });
               },
               
+      getMore:  function($scope){
+                  console.log($scope.scget);
+                  SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
+                    $scope.$apply(function () {
+                      console.log(tracks);
+                      $scope.tracks = $scope.tracks.concat(tracks);
+                      $scope.tracksLoading = false;
+                    });      
+                  });
+                },
+              
       play:   function($scope, track){
-                console.log('play' + track.title);
-                //console.log($scope.sound);
                 SC.stream(track.stream_url, {preferFlash: false, useHTML5Audio: true}, function(sound){
-                  //$scope.sound = sound;
-                  //sound.togglePause();
-                  sound.togglePause();
-                  console.log(track);
-                  console.log(sound);
-                });
-                
-                
-                
-                //var soundToPlay; 
-                // first do async action
-                /*SC.stream("/tracks/293", {
-                  useHTML5Audio: true,
-                  preferFlash: false
-                }, function(sound) {
-                  soundToPlay = sound;
-                  document.querySelector('input').disabled = false;
-                });*/
-                
-                /*function playTrack () {
-                  soundToPlay.play();
-                }*/
-                
-                
-                
-                
+                  if (player){
+                    console.log('found a player');
+                    console.log(player);
+                    player.pause();  
+                  };
+                  player = sound;
+                  player.play();
+                  track.playing = true;
+                  //track.playing = true;
+                });      
               },
-      pause:  function($scope){
-                track.playing = false;
-                console.log('pause' + track.title); // + $scope.track.stream_url
-                $scope.sound.pause();
+              
+      pause:  function($scope, track){
+                player.pause();
+                //track.playing = false;
               },
     
       test:   function($scope){

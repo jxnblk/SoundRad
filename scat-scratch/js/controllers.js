@@ -5,6 +5,10 @@
 function NavCtrl($scope, soundcloud) {
   
 };
+
+function HomeCtrl($scope, soundcloud) {
+
+};
  
 function TracklistCtrl($scope, soundcloud) {
 
@@ -14,7 +18,6 @@ function TracklistCtrl($scope, soundcloud) {
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
-  $scope.sound = null;
   
 
   soundcloud.get($scope);
@@ -28,17 +31,20 @@ function TracklistCtrl($scope, soundcloud) {
   
   // Pagination
   $scope.showMore = function() {
+    // fix: Using the select values changes numbers to strings
+    console.log($scope.pageOffset);
     $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+    console.log($scope.pageOffset);
+    soundcloud.getMore($scope);
   } 
 
+  // SM Player
   $scope.playTrack = function($scope, track) {
-    console.log('clicked play');
     soundcloud.play($scope, track);
-    track.playing = true;
+    //track.playing = true;
   };
   
-  $scope.pauseTrack = function($scope) {
-    console.log('clicked pause');
+  $scope.pauseTrack = function($scope, track) {
     soundcloud.pause($scope);
     track.playing = false;
   };

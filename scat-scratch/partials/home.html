@@ -1,4 +1,5 @@
 <div ng-controller="TracklistCtrl">
+<div ng-controller="HomeCtrl">
 
 <!-- <a href="#" ng-click="connect();">Connect</a> -->
 
@@ -22,7 +23,8 @@
   <option value="128">128</option>
 </select>
 
-<button ng-click="checkVar(tracksLoading)">CheckVar</button>
+<!-- For Debugging -->
+<!-- <button ng-click="checkVar(tracksLoading)">CheckVar</button> -->
 
 <div class="sc-tracklist"ng-class="{loading: tracksLoading}">
 
@@ -30,8 +32,8 @@
 
   <div class="track" ng-repeat="track in tracks">
     <div class="jx-player media" ng-model="track.playing">
-      <a class="jx-play" ng-click="playTrack($scope, track)" ng-hide="track.playing"><i class="i-jxn-play"></i></a>
-      <a class="jx-pause" ng-click="pauseTrack($scope)" ng-show="track.playing"><i class="i-jxn-pause"></i></a>
+      <a href="" class="jx-play" ng-click="playTrack($scope, track)" ng-hide="track.playing"><i class="i-jxn-play"></i></a>
+      <a href="" class="jx-pause" ng-click="pauseTrack($scope, track)" ng-show="track.playing"><i class="i-jxn-pause"></i></a>
       
       <div class="bd">
         <p class="jx-artist">{{track.user.username}}</p>
@@ -43,7 +45,12 @@
       </div>
       
     </div>
-  </div>
+  </div><!-- Track -->
+  
+  <a href="" class="show-more" ng-click="showMore()" ng-hide="!tracks.length">Show More</a>
+  
+  
 </div>
 
+</div>
 </div>
