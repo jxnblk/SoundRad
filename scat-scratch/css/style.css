@@ -1,0 +1,378 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.topbar {
+  background-color: white;
+  border-bottom: 1px solid #eeeeee; }
+  .topbar nav a {
+    color: #333333; }
+
+.logo {
+  color: #ff6600; }
+
+.view-heading {
+  background-color: #f6f6f6;
+  color: #bbbbbb; }
+
+.view {
+  background-color: white; }
+
+.loading-indicator {
+  color: #bbbbbb; }
+
+.track {
+  border-bottom: 1px solid #eeeeee; }
+
+.track:first-child {
+  border-top: 1px solid #eeeeee; }
+
+.sc-play {
+  background-color: #bbbbbb; }
+
+.sc-play:hover {
+  background-color: #bbbbbb; }
+
+.sc-pause {
+  background-color: #ff6600; }
+
+.sc-pause:hover {
+  background-color: #ff751a; }
+
+.sc-buffer {
+  background-color: #eeeeee;
+  opacity: .5; }
+
+.sc-played {
+  background-color: #ff6600;
+  opacity: .1; }
+
+.playing .sc-played {
+  border-right: 1px solid #ff6600;
+  opacity: .4; }
+
+.jx-play {
+  background-color: #bbbbbb; }
+
+.jx-play:hover {
+  background-color: #bbbbbb; }
+
+.jx-pause {
+  background-color: #ff6600; }
+
+.jx-pause:hover {
+  background-color: #ff751a; }
+
+.jx-buffer {
+  background-color: #eeeeee;
+  opacity: .5; }
+
+.jx-played {
+  background-color: #ff6600;
+  opacity: .1; }
+
+.playing .jx-played {
+  border-right: 1px solid #ff6600;
+  opacity: .4; }
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  color: #444; }
+
+a {
+  text-decoration: none;
+  color: #ff6600; }
+
+.btn {
+  display: inline-block;
+  height: 3rem;
+  line-height: 3rem;
+  color: white;
+  font-weight: bold;
+  background-color: #ff6600;
+  border-radius: .125rem;
+  padding: 0 16px; }
+  .btn:hover {
+    background-color: #ff751a; }
+
+.page-next {
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center; }
+
+/*
+
+.js-more-container {
+  position: relative;
+}
+
+.js-more-content {
+  position: absolute;
+  color: #fff;
+  background-color: #444;
+  padding: 1rem;
+  z-index: 512;
+  border-radius: 0 0 .125rem .125rem;
+  display: none;
+}
+
+.js-more-container.open .js-more-content {
+  display: block;
+}
+*/
+.h1 {
+  font-size: 64px; }
+
+.h2 {
+  font-size: 48px; }
+
+.h3 {
+  font-size: 32px; }
+
+.h4 {
+  font-size: 24px; }
+
+.h5 {
+  font-size: 16px; }
+
+.h6 {
+  font-size: 12px; }
+
+.sm {
+  font-size: 12px; }
+
+.b {
+  font-weight: 700; }
+
+@-webkit-keyframes transpulse {
+  0% {
+    opacity: .2; }
+
+  50% {
+    opacity: .4; }
+
+  100% {
+    opacity: .2; } }
+
+@-webkit-keyframes popin {
+  0% {
+    -webkit-transform: scale(0.2); }
+
+  80% {
+    -webkit-transform: scale(1.1); }
+
+  100% {
+    -webkit-transform: scale(1); } }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+.anim-pulse {
+  -webkit-animation: transpulse 2s infinite; }
+
+.anim-popin {
+  -webkit-animation: popin .1s; }
+
+.anim-spin {
+  -webkit-animation: spin 4s linear infinite; }
+
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 8px;
+  z-index: 1024; }
+
+.logo {
+  float: left;
+  margin-right: 16px;
+  height: 48px; }
+
+.nav {
+  height: 48px;
+  float: right; }
+  .nav a {
+    font-weight: 700;
+    display: block;
+    padding: 0 8px;
+    float: left;
+    height: 48px; }
+    .nav a:hover {
+      background-color: #f6f6f6; }
+    .nav a i {
+      font-size: 24px; }
+
+.js-more-nav {
+  background-color: #eeeeee;
+  padding: 16px;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  z-index: 512;
+  display: none; }
+  .js-more-nav ul {
+    list-style: none; }
+  .js-more-nav label {
+    display: block;
+    font-size: 12px;
+    line-height: 12px; }
+
+input[type="text"] {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-family: Helvetica, sans-serif;
+  border: 1px solid #dddddd;
+  border-radius: 4px; }
+
+.view {
+  position: relative;
+  top: 48px;
+  right: 0;
+  left: 0;
+  -webkit-overflow-scrolling: touch; }
+
+.view-heading {
+  padding: 0 5%; }
+
+.loading-indicator {
+  position: absolute;
+  z-index: 1024;
+  width: 64px;
+  height: 64px;
+  top: 40%;
+  left: 50%;
+  margin-left: -32px; }
+  .loading-indicator i {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    font-size: 64px; }
+
+/* JxPlayer */
+.jx-player {
+  position: relative;
+  overflow: hidden; }
+  .jx-player .bd {
+    overflow: hidden;
+    margin-left: 64px;
+    position: relative;
+    background-color: pink; }
+
+.jx-player.loading {
+  -webkit-animation: transpulse 2s linear infinite; }
+
+/* Play/Pause Button */
+.jx-play i, .jx-pause i {
+  -webkit-animation: popin .2s linear; }
+
+.jx-play,
+.jx-pause {
+  float: left;
+  color: #fff;
+  height: 20px;
+  width: 20px;
+  padding: 22px;
+  position: relative;
+  z-index: 256; }
+
+.jx-play i,
+.jx-pause i {
+  font-size: 20px;
+  line-height: 1;
+  display: block;
+  width: 20px;
+  height: 20px; }
+
+.jx-play i {
+  margin-left: 2px; }
+
+.jx-play:active,
+.jx-pause:active {
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6); }
+
+.jx-pause {
+  display: none; }
+
+.playing .jx-play {
+  display: none; }
+
+.playing .jx-pause {
+  display: block; }
+
+/* Scrubber */
+.jx-time-span {
+  height: 64px;
+  position: relative; }
+
+.jx-buffer,
+.jx-played {
+  height: 64px;
+  position: absolute;
+  top: 0;
+  z-index: 256; }
+
+.jx-artist {
+  overflow: hidden;
+  font-size: 12px;
+  position: absolute;
+  top: 8px;
+  left: 16px; }
+
+.jx-title {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  overflow: hidden;
+  font-size: 24px;
+  height: 32px;
+  line-height: 32px;
+  text-overflow: ellipsis;
+  text-wrap: none;
+  white-space: no-wrap; }
+
+/*
+.sc-title h2 {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  font-size: $m1;
+  width: 100%;
+  white-space: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+*/
+.jx-buffer,
+.jx-played {
+  width: 0; }
+
+/*
+.jx-time-indicators {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  font-size: 10px;
+  line-height: 1;
+  color: rgba(0,0,0,0.5);
+  display: none;
+  -webkit-animation: popin .2s linear;
+}
+
+.playing .jx-time-indicators {
+  display: block;
+}
+*/

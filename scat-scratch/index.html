@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" ng-app="scat">
+<head>
+  <meta charset="utf-8">
+  <title>Sndcat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />  
+  <link rel="stylesheet" href="http://jxnblk.com/i/icons.css" />
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <header class="topbar" ng-controller="NavCtrl">
+    <a href="/"><h1 class="logo h4 bold"><i class="i-jxn-waveform icon"></i></h1></a>
+    <nav class="nav">
+      <!-- <a href="/stream" class="js-nav js-nav-stream" data-nav="/me/activities/tracks/affiliated">Stream</a> -->
+      <!-- <a href="#jxnblk" class="js-nav js-nav-jxnblk active" data-nav="/users/jxnblk/tracks">Me</a> -->
+      <a href="/likes" class="">Likes</a>
+      <a href="/sets" class="">Sets</a>
+      <a href="#" class="js-show-more-nav"><i class="i-jxn-cog icon"></i></a>
+    </nav>
+    <div class="js-more-nav">
+      <div class="js-more-content">
+        <ul>
+          <li><form><label>SC API:</label><input type="text" name="fname" class="sc-view-form" placeholder="loading..."></form></li>
+          <li><form><label>User:</label><input type="text" name="fname" class="sc-view-form-name" placeholder="loading..."></form></li>
+        </ul>
+        <div class="user-meta">
+          <p class="sc-connect-status">Not Connected</p>
+          <p class="sc-username"></p>
+          <p class="sc-description"></p>    
+          <a href="#" class="sc-connect btn">Connect</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+  <div class="view" ng-view></div>
+
+  <script src="//connect.soundcloud.com/sdk.js"></script>
+  
+  <!-- Dumb js player -->
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+  <!-- <script src="js/sc-player-edit.js"></script> -->
+  
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  <script src="js/app.js"></script> 
+  <!-- <script src="js/controllers.js"></script> -->
+</body>
+</html>

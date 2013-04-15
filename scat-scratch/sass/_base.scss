@@ -1,0 +1,69 @@
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  color: #444;
+}
+
+a {
+  text-decoration: none;
+  color: $prime;
+}
+a:hover {
+  //color: #0ac;
+}
+
+//      Organize this
+
+
+.btn {
+  display: inline-block;
+  height: 3rem;
+  line-height: 3rem;
+  color: $white;
+  font-weight: bold;
+  background-color: $prime;
+  border-radius: .125rem;
+  padding: 0 16px;
+  &:hover {
+    background-color: lighten($prime, 5%);
+  }
+}
+
+
+
+
+.page-next {
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+}
+
+
+
+/*
+
+.js-more-container {
+  position: relative;
+}
+
+.js-more-content {
+  position: absolute;
+  color: #fff;
+  background-color: #444;
+  padding: 1rem;
+  z-index: 512;
+  border-radius: 0 0 .125rem .125rem;
+  display: none;
+}
+
+.js-more-container.open .js-more-content {
+  display: block;
+}
+*/
+
+
+
+
+

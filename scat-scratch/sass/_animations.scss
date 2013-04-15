@@ -1,0 +1,28 @@
+@-webkit-keyframes transpulse {
+  0% { opacity: .2; }
+  50% { opacity: .4; }
+  100% { opacity: .2; }
+}
+
+@-webkit-keyframes popin {
+  0% { -webkit-transform: scale(.2); }
+  80% { -webkit-transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); }
+} 
+
+@-webkit-keyframes spin {
+  from  {-webkit-transform: rotate(0deg);}
+  to    {-webkit-transform: rotate(360deg);}
+} 
+
+.anim-pulse {
+  -webkit-animation: transpulse 2s infinite;
+}
+
+.anim-popin {
+  -webkit-animation: popin .1s;
+}
+
+.anim-spin {
+  -webkit-animation: spin 4s linear infinite;
+}

@@ -1,0 +1,42 @@
+<div ng-controller="HomeCtrl">
+
+<!-- <a href="#" ng-click="connect();">Connect</a> -->
+
+<h1>Viewing: {{scget}}</h1>
+<select ng-model="userName" ng-change="updateTracks()">
+  <option value="jxnblk">Jxnblk</option>
+  <option value="mrsjxn">Mrsjxn</option>
+</select>
+<label>Page Size:</label>
+<select ng-model="pageSize" ng-change="updateTracks()">
+  <option value="4">4</option>
+  <option value="8">8</option>
+  <option value="16">16</option>
+  <option value="32">32</option>
+  <option value="64">64</option>
+  <option value="128">128</option>
+</select>
+
+<button ng-click="updateTracks()">Update Tracks</button>
+
+<div class="sc-tracklist">
+
+  <div class="track" ng-repeat="track in tracks">
+    <div class="jx-player media">
+      <a href="#" class="jx-play"><i class="i-jxn-play"></i></a>
+      <a href="#" class="jx-pause"><i class="i-jxn-pause"></i></a>
+      
+      <div class="bd">
+        <p class="jx-artist">{{track.user.username}}</p>
+        <h2 class="jx-title">{{track.title}}</h2>
+        <div class="jx-time-span">
+          <div class="jx-buffer"></div>
+          <div class="jx-played"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
