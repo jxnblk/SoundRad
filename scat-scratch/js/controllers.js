@@ -24,13 +24,16 @@ function TracklistCtrl($scope, soundcloud) {
 
   // update tracks in view
   $scope.updateTracks = function() {
+    $scope.pageOffset = 0;
     $scope.tracksLoading = true;
+    console.log($scope.userName + ':' + $scope.getType);
     $scope.scget = '/users/' + $scope.userName + $scope.getType;
     soundcloud.get($scope);
   };
   
   // Pagination
   $scope.showMore = function() {
+    $scope.scget = '/users/' + $scope.userName + $scope.getType;
     // fix: Using the select values changes numbers to strings
     console.log($scope.pageOffset);
     $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
@@ -39,14 +42,18 @@ function TracklistCtrl($scope, soundcloud) {
   } 
 
   // SM Player
-  $scope.playTrack = function($scope, track) {
-    soundcloud.play($scope, track);
-    //track.playing = true;
+  $scope.playTrack = function(track) {
+    soundcloud.play(track);
+    track.playing = true;
   };
   
-  $scope.pauseTrack = function($scope, track) {
-    soundcloud.pause($scope);
+  $scope.pauseTrack = function(track) {
+    soundcloud.pause();
     track.playing = false;
+  };
+  
+  $scope.pauseAll = function() {
+    soundcloud.pauseAll();
   };
   
   $scope.checkVar = function(value){

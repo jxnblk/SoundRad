@@ -52,24 +52,29 @@ var app = angular.module('scat', []).
                   });
                 },
               
-      play:   function($scope, track){
+      play:   function(track){
                 SC.stream(track.stream_url, {preferFlash: false, useHTML5Audio: true}, function(sound){
                   if (player){
+                    console.log(player.trackId);
                     console.log('found a player');
                     console.log(player);
                     player.pause();  
                   };
                   player = sound;
+                  player.trackId = track.id;
+                  console.log(player.sID);
                   player.play();
-                  track.playing = true;
                   //track.playing = true;
                 });      
               },
               
-      pause:  function($scope, track){
+      pause:  function(){
                 player.pause();
-                //track.playing = false;
               },
+              
+      pauseAll: function(){
+                  player.pauseAll();
+                },
     
       test:   function($scope){
                 console.log('test factory' + $scope.userName);
