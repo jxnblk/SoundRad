@@ -37,16 +37,41 @@ var app = angular.module('scat', []).
                 });
               },
               
-      play:   function(track){
-                track.playing = true;
-                console.log('play' + track.title); // + $scope.track.stream_url
+      play:   function($scope, track){
+                console.log('play' + track.title);
+                //console.log($scope.sound);
+                SC.stream(track.stream_url, {preferFlash: false, useHTML5Audio: true}, function(sound){
+                  //$scope.sound = sound;
+                  //sound.togglePause();
+                  sound.togglePause();
+                  console.log(track);
+                  console.log(sound);
+                });
                 
                 
-                /*  SC.get($scope.scget, {limit: $scope.pageSize}, function(tracks){
-                  $scope.$apply(function () {
-                    $scope.tracks = tracks;
-                  });    
-                }); */
+                
+                //var soundToPlay; 
+                // first do async action
+                /*SC.stream("/tracks/293", {
+                  useHTML5Audio: true,
+                  preferFlash: false
+                }, function(sound) {
+                  soundToPlay = sound;
+                  document.querySelector('input').disabled = false;
+                });*/
+                
+                /*function playTrack () {
+                  soundToPlay.play();
+                }*/
+                
+                
+                
+                
+              },
+      pause:  function($scope){
+                track.playing = false;
+                console.log('pause' + track.title); // + $scope.track.stream_url
+                $scope.sound.pause();
               },
     
       test:   function($scope){

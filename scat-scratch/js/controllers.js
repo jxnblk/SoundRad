@@ -14,8 +14,8 @@ function TracklistCtrl($scope, soundcloud) {
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
-
-  //$scope.track.playing = false;
+  $scope.sound = null;
+  
 
   soundcloud.get($scope);
 
@@ -31,16 +31,16 @@ function TracklistCtrl($scope, soundcloud) {
     $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
   } 
 
-  $scope.playTrack = function(track) {
-    track.playing = true;
+  $scope.playTrack = function($scope, track) {
     console.log('clicked play');
-    soundcloud.play(track);
+    soundcloud.play($scope, track);
+    track.playing = true;
   };
   
-  $scope.pauseTrack = function(track) {
-    track.playing = false;
+  $scope.pauseTrack = function($scope) {
     console.log('clicked pause');
-    //soundcloud.play(track);
+    soundcloud.pause($scope);
+    track.playing = false;
   };
   
   $scope.checkVar = function(value){

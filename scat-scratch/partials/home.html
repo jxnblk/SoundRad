@@ -30,8 +30,8 @@
 
   <div class="track" ng-repeat="track in tracks">
     <div class="jx-player media" ng-model="track.playing">
-      <a class="jx-play" ng-click="playTrack(track)" ng-hide="track.playing"><i class="i-jxn-play"></i></a>
-      <a class="jx-pause" ng-click="pauseTrack(track)" ng-show="track.playing"><i class="i-jxn-pause"></i></a>
+      <a class="jx-play" ng-click="playTrack($scope, track)" ng-hide="track.playing"><i class="i-jxn-play"></i></a>
+      <a class="jx-pause" ng-click="pauseTrack($scope)" ng-show="track.playing"><i class="i-jxn-pause"></i></a>
       
       <div class="bd">
         <p class="jx-artist">{{track.user.username}}</p>
