@@ -25,13 +25,14 @@ if ($routeParams.viewUser){
 */
 
 
-  //$scope.player = player;
+  $scope.player = player;
   $scope.viewUser = 'jxnblk';  
   $scope.getType = '/tracks';
   $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
+  //$scope.currentTrack = player.current.track;
   
   // Toggle Dev Nav - look into toggle function & make this reusable
   $scope.dropmenuOpen = false;
@@ -69,36 +70,18 @@ if ($routeParams.viewUser){
 
   // Jxn Player (Based on Peepcode Tunes)
   $scope.playTrack = function(tracks, i) {
-    //console.log(tracks[i]);
-    //console.log(i);
-    //track = tracks[i];
-    //$scope.nextTrackIndex = i + 1;
-    
-    // This probs won't work twices
-    //$scope.nextTrack = $scope.tracks[i + 1];
-
-    $scope.currentTrack = tracks[i];
-    
-    // Just do this in the factory??
-    //tracks[i].url = tracks[i].stream_url + '?client_id=' + soundcloud.clientid;
-    
     console.log('play: ' + tracks[i].title);
     player.play(tracks, i);
-    tracks[i].playing = true;
+    // For displaying only
+    $scope.currentTrack = player.current.track;
   };
 
   $scope.pauseTrack = function(track) {
-    $scope.currentTrack = null;
     player.pause();
-    track.playing = false;
   };
   
-  $scope.playNextTrack = function() {
-    console.log('play next track');
-    
-    //var i = $scope.nextTrackIndex;
-    //console.log($scope.tracks[i].title);
-    //$scope.playTrack($scope.tracks[i], i);
+  $scope.playNextTrack = function(tracks, i) {
+    console.log('play next track' + tracks[i]);
     player.next();
   };
   

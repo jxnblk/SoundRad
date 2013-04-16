@@ -78,12 +78,15 @@ var scat = angular.module('scat', []).
         paused = false,
         current = {
           //album: 0,
-          track: 0
+          track: null
         },
+        // trying to get global-ish, currently playing var
+        tracks = {}, 
         clientId = '66828e9e2042e682190d1fde4b02e265',
 
     player = {
       current: current,
+      tracks: tracks,
       playing: false,
 
       play: function(tracks, i) {
@@ -105,21 +108,16 @@ var scat = angular.module('scat', []).
         if (player.playing) {
           audio.pause();
           player.playing = false;
+          current.track = null;
           paused = true;
         }
       },
       
       next: function() {
-        console.log('need to make player find next track');
-        //console.log(tracks);
-        //console.log(tracks[i]);
-        console.log('next current.track: ' + current.track);
         if (current.tracks.length > (current.track + 1)) {
-          console.log(current.track+1);
           current.track = current.track+1;
           if (player.playing) player.play();
-        }
-            
+        }    
       },
 
       reset: function() {
@@ -130,7 +128,6 @@ var scat = angular.module('scat', []).
 
     audio.addEventListener('ended', function() {
       $rootScope.$apply(player.next());
-      //$rootScope.$apply(playNextTrack());
     }, false);
 
     return player;

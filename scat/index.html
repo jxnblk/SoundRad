@@ -14,10 +14,17 @@
 
   <header class="topbar">
     <a href="#/"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
+    <!-- This ain't working  -->
+    <!-- <span>Current Track: {{player.tracks[current.track]}}</span> -->
+    
+    
+    
+    
+    
     <nav class="nav">
       <!-- <a href="/stream" class="js-nav js-nav-stream" data-nav="/me/activities/tracks/affiliated">Stream</a> -->
       <!-- <a href="#jxnblk" class="js-nav js-nav-jxnblk active" data-nav="/users/jxnblk/tracks">Me</a> -->
-      <a href="" ng-click="playNextTrack()">Next</a>
+      <a href="" ng-click="playNextTrack(tracks)">Next</a>
       <a href="#/likes" class="">Likes</a>
       <!-- <a href="#/sets" class="">Sets</a> -->
       <a href="#" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
