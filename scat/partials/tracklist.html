@@ -7,7 +7,7 @@
 
   <div class="track" ng-repeat="track in tracks">
     <div class="jx-player media" ng-model="currentTrack">
-      <a href="" class="jx-play" ng-click="playTrack(track, $index)" ng-hide="track==currentTrack"><i class="i-jxn-play"></i></a>
+      <a href="" class="jx-play" ng-click="playTrack(tracks, $index)" ng-hide="track==currentTrack"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause" ng-click="pauseTrack(track)" ng-show="track==currentTrack"><i class="i-jxn-pause"></i></a>
       
       <div class="bd track-{{$index}}">

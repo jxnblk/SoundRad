@@ -68,20 +68,23 @@ if ($routeParams.viewUser){
   soundcloud.get($scope);
 
   // Jxn Player (Based on Peepcode Tunes)
-  $scope.playTrack = function(track, i) {
-    console.log(i);
-    
-    $scope.nextTrackIndex = i + 1;
+  $scope.playTrack = function(tracks, i) {
+    //console.log(tracks[i]);
+    //console.log(i);
+    //track = tracks[i];
+    //$scope.nextTrackIndex = i + 1;
     
     // This probs won't work twices
     //$scope.nextTrack = $scope.tracks[i + 1];
 
-    $scope.currentTrack = track;
-    track.url = track.stream_url + '?client_id=' + soundcloud.clientid;
-    //$scope.player.source = track.stream_url + '?client_id=' + soundcloud.clientid;
-    console.log('play: ' + track.title);
-    player.play(track);
-    track.playing = true;
+    $scope.currentTrack = tracks[i];
+    
+    // Just do this in the factory??
+    //tracks[i].url = tracks[i].stream_url + '?client_id=' + soundcloud.clientid;
+    
+    console.log('play: ' + tracks[i].title);
+    player.play(tracks, i);
+    tracks[i].playing = true;
   };
 
   $scope.pauseTrack = function(track) {
@@ -93,9 +96,10 @@ if ($routeParams.viewUser){
   $scope.playNextTrack = function() {
     console.log('play next track');
     
-    var i = $scope.nextTrackIndex;
-    console.log($scope.tracks[i].title);
-    $scope.playTrack($scope.tracks[i], i);
+    //var i = $scope.nextTrackIndex;
+    //console.log($scope.tracks[i].title);
+    //$scope.playTrack($scope.tracks[i], i);
+    player.next();
   };
   
   

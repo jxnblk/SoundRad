@@ -20,6 +20,9 @@ var scat = angular.module('scat', []).
     //$routeProvider.when('/sets', {templateUrl: 'partials/sets.html', controller: 'TracklistCtrl'});
     $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);
+    
+    //var clientId = '66828e9e2042e682190d1fde4b02e265';
+    
   }]);
 
   scat.factory('soundcloud', function() {
@@ -73,14 +76,26 @@ var scat = angular.module('scat', []).
   scat.factory('player', function(audio, $rootScope) {
     var player,
         paused = false,
+        current = {
+          //album: 0,
+          track: 0
+        },
+        clientId = '66828e9e2042e682190d1fde4b02e265',
 
     player = {
-    
+      current: current,
       playing: false,
 
-      play: function(track) {
+      play: function(tracks, i) {
               //if (!paused) audio.src = track.url;
-        audio.src = track.url;
+
+        if (angular.isDefined(tracks)) { 
+          current.tracks = tracks;
+          current.track = i;
+        };
+        console.log('current track:' + current.track);
+              
+        audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
         audio.play();
         player.playing = true;
         paused = false;
@@ -96,7 +111,15 @@ var scat = angular.module('scat', []).
       
       next: function() {
         console.log('need to make player find next track');
-        //console.log(nextTrack);
+        //console.log(tracks);
+        //console.log(tracks[i]);
+        console.log('next current.track: ' + current.track);
+        if (current.tracks.length > (current.track + 1)) {
+          console.log(current.track+1);
+          current.track = current.track+1;
+          if (player.playing) player.play();
+        }
+            
       },
 
       reset: function() {
