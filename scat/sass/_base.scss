@@ -33,7 +33,7 @@ a:hover {
 
 
 
-.page-next {
+.show-more {
   display: block;
   height: 3rem;
   line-height: 3rem;
@@ -41,27 +41,30 @@ a:hover {
 }
 
 
-
-/*
-
-.js-more-container {
+.dropmenu-container {
   position: relative;
+  top: 48px;
+  /*
+background-color: #eeeeee; // move this to themes
+  padding: 16px;
+
+  
+  right: 0;
+  z-index: 512;
+*/
 }
 
-.js-more-content {
+.dropmenu {
   position: absolute;
-  color: #fff;
-  background-color: #444;
+  background-color: #eee;
+  right: 0;
   padding: 1rem;
   z-index: 512;
   border-radius: 0 0 .125rem .125rem;
-  display: none;
+  list-style: none; 
+/*   display: none; */
 }
 
-.js-more-container.open .js-more-content {
-  display: block;
-}
-*/
 
 
 

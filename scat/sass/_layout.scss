@@ -4,9 +4,8 @@
   right: 0;
   left: 0;
   height: $m3;
-  //overflow: hidden;
   line-height: $m3;
-  padding: 0 $m-5;
+  padding: 0 $m-5 0 $m1;
   z-index: 1024;
 }
 
@@ -15,7 +14,9 @@
   margin-right: $m1;
   height: $m3;
   i {
-
+    position: relative;
+    //top: .49px;
+    -webkit-font-smoothing: none;
   }
 }
 
@@ -43,7 +44,6 @@
   position: absolute;
   top: $m3;
   right: 0;
-  //left: 0;
   z-index: 512;
   display: none;
   ul {
@@ -73,7 +73,7 @@ input[type="text"] {
   //bottom: 0;
   left: 0;
   //overflow-y: scroll;
-  //-webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
 }
 
 .view-heading {

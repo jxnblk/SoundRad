@@ -1,53 +1,88 @@
 <!doctype html>
-<html lang="en" ng-app="sndcat">
+<html lang="en" ng-app="scat">
 <head>
   <meta charset="utf-8">
   <title>Sndcat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />  
-  <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="http://jxnblk.com/i/icons.css" />
-  <!-- <base href="/scat/"> -->
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
+<div ng-controller="NavCtrl">
+
   <header class="topbar">
-    <a href="/"><h1 class="logo h4 bold"><i class="i-jxn-waveform icon"></i></h1></a>
+    <a href="#/"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
     <nav class="nav">
       <!-- <a href="/stream" class="js-nav js-nav-stream" data-nav="/me/activities/tracks/affiliated">Stream</a> -->
       <!-- <a href="#jxnblk" class="js-nav js-nav-jxnblk active" data-nav="/users/jxnblk/tracks">Me</a> -->
-      <a href="/likes" class="">Likes</a>
-      <a href="/sets" class="">Sets</a>
-      <a href="#" class="js-show-more-nav"><i class="i-jxn-cog icon"></i></a>
-    </nav>
-    <div class="js-more-nav">
-      <div class="js-more-content">
-        <ul>
-          <li><form><label>SC API:</label><input type="text" name="fname" class="sc-view-form" placeholder="loading..."></form></li>
-          <li><form><label>User:</label><input type="text" name="fname" class="sc-view-form-name" placeholder="loading..."></form></li>
+      <a href="#/likes" class="">Likes</a>
+      <!-- <a href="#/sets" class="">Sets</a> -->
+      <a href="#" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
+      <div class="dropmenu-container" ng-model="dropmenuOpen">
+        
+        <ul class="dropmenu" ng-show="dropmenuOpen">
+          <li>{{scget}}</li>
+          <li>          
+            <select ng-model="viewUser" ng-change="updateTracks()">
+              <option value="jxnblk">Jxnblk</option>
+              <option value="mrsjxn">Mrsjxn</option>
+            </select>
+          </li>
+          <li>
+            <select ng-model="getType" ng-change="updateTracks()">
+              <option value="/tracks">Tracks</option>
+              <option value="/favorites">Likes</option>
+              <option value="/playlists">Sets</option>
+            </select>
+          </li>
+          <li>
+            <label>Page Size:</label>
+            <select ng-model="pageSize" ng-change="updateTracks()">
+              <option value="4">4</option>
+              <option value="8">8</option>
+              <option value="16">16</option>
+              <option value="32">32</option>
+              <option value="64">64</option>
+              <option value="128">128</option>
+            </select>
+          </li>
+          
+          <li>        
+            <div class="user-meta">
+              <p class="sc-connect-status">Not Connected</p>
+              <!-- <p class="sc-viewUser"></p> -->
+              <!-- <p class="sc-description"></p>     -->
+              <!-- <a href="#" class="sc-connect btn">Connect</a> -->
+              <!-- <a href="#" ng-click="connect();">Connect</a> -->
+            </div>
+          </li>
+          
+          <!-- <li><button ng-click="pauseAll()">Kill All</button></li> -->
+          
+          <!-- For Debugging -->
+          <!-- <li><button ng-click="checkVar(scget)">CheckVar</button></li> -->
         </ul>
-        <div class="user-meta">
-          <p class="sc-connect-status">Not Connected</p>
-          <p class="sc-username"></p>
-          <p class="sc-description"></p>    
-          <a href="#" class="sc-connect btn">Connect</a>
-        </div>
       </div>
-    </div>
+    
+    </nav>
   </header>
 
-  <div ng-view class="view"></div>
+  <div class="view" ng-view></div>
+  
+ <!--
+ <audio controls ng-model="player">
+    <source src="{{player.source}}" type="audio/mpeg">
+  </audio>
+-->
 
-  <script type="text/javascript" src="//connect.soundcloud.com/sdk.js"></script>
+</div><!-- NavCtrl -->
 
-  <!-- In production use: -->
+  <script src="//connect.soundcloud.com/sdk.js"></script>
+  
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
- 
-  <!-- <script src="lib/angular/angular.js"></script> -->
   <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
-  <!-- <script src="js/filters.js"></script> -->
-  <!-- <script src="js/directives.js"></script> -->
 </body>
 </html>

@@ -1,34 +1,115 @@
 'use strict';
 
-/* Controllers */
+// Controllers
 
-function HomeCtrl($rootScope, $scope, $http) {
+function NavCtrl($scope, $routeParams, soundcloud, player) {
+
+  //console.log($routeParams);
   
-  $http.get('http://api.soundcloud.com/resolve.json?url=http://soundcloud.com/jxnblk&client_id=' + $rootScope.clientId).
-    success(function(apiUrl){
-      console.log('apiUrl: ' + apiUrl);
-    }).
-    error(function(){
-      console.log('what the fucking shit');
+  // Init Defaults
+  /*
+if ($routeParams.viewUser){
+    $scope.viewUser = $routeParams.viewUser
+  } else {
+    $scope.viewUser = 'jxnblk';
+  }
+*/
+
+/*
+  NavCtrl = function($scope, $http, player) {
+    $scope.player = player;
+    $http.get('albums.json').success(function(data) {
+      $scope.albums = data;
     });
-      
+  };
+*/
+
+
+  //$scope.player = player;
+  $scope.viewUser = 'jxnblk';  
+  $scope.getType = '/tracks';
+  $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+  $scope.pageSize = 32;
+  $scope.pageOffset = 0;
+  $scope.tracksLoading = true;
+  
+  // Toggle Dev Nav - look into toggle function & make this reusable
+  $scope.dropmenuOpen = false;
+  $scope.toggleDropmenu = function(){
+    if (!$scope.dropmenuOpen){
+      $scope.dropmenuOpen = true;
+    } else {
+      $scope.dropmenuOpen = false;
+    };
+  };
+
+  // Something else goes here, fur sure
+  
+  // update tracks in view
+  $scope.updateTracks = function() {
+    $scope.pageOffset = 0;
+    $scope.tracksLoading = true;
+    console.log($scope.viewUser + ':' + $scope.getType);
+    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    soundcloud.get($scope);
+  };
+  
+  // Pagination
+  $scope.showMore = function() {
+    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    // fix: Using the select values changes numbers to strings
+    console.log($scope.pageOffset);
+    $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+    console.log($scope.pageOffset);
+    soundcloud.getMore($scope);
+  } 
+
+  // Get some data motherfucker
+  soundcloud.get($scope);
+
+  // Jxn Player (Based on Peepcode Tunes)
+  $scope.playTrack = function(track, i) {
+    console.log(i);
+    $scope.nextTrackIndex = i + 1;
+    
+    // This probs won't work twice
+    $scope.nextTrack = $scope.tracks[i + 1];
+    
+    
+    $scope.currentTrack = track;
+    track.url = track.stream_url + '?client_id=' + soundcloud.clientid;
+    //$scope.player.source = track.stream_url + '?client_id=' + soundcloud.clientid;
+    console.log('play: ' + track.title);
+    player.play(track);
+    track.playing = true;
+  };
+
+  $scope.pauseTrack = function(track) {
+    $scope.currentTrack = null;
+    player.pause();
+    track.playing = false;
+  };
+ 
 };
 
+function TracklistCtrl($scope, soundcloud) {
+  // Figure out what is in scope for tracklist
+  // + How to split page scope up 
+};
 
-// I do not understand how to use this controllers module. Totally different from the tutorial.
-/*
-angular.module('sndcat.controllers', []).
-  controller('HomeCtrl', [function HomeCtrl($scope) {
-    // why this doesn't work???
-    //$scope.tracks = jxnblkTracks;
-  }])
-  .controller('SetsCtrl', [function() {
+function LikesCtrl($scope, soundcloud) {
+  // Should include these in separate controllers for each page
+  $scope.getType = '/favorites';
+  $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+  soundcloud.get($scope);
+};
 
-  }])
-  .controller('LikesCtrl', [function() {
-
-  }]);
-*/
+function SetsCtrl($scope, soundcloud) {
+  // Should include these in separate controllers for each page
+  $scope.getType = '/playlists';
+  $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+  soundcloud.get($scope);
+};
   
   
   

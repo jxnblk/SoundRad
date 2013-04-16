@@ -1,17 +1,31 @@
+<div ng-controller="TracklistCtrl">
 
 
-<p>Home View</p>
+<div class="sc-tracklist"ng-class="{loading: tracksLoading}">
+
+  <div ng-hide="tracks.length">No tracks for {{scget}}</div>
+
+  <div class="track" ng-repeat="track in tracks">
+    <div class="jx-player media" ng-model="track.playing">
+      <a href="" class="jx-play" ng-click="playTrack(track)" ng-hide="track.playing"><i class="i-jxn-play"></i></a>
+      <a href="" class="jx-pause" ng-click="pauseTrack(track)" ng-show="track.playing"><i class="i-jxn-pause"></i></a>
+      
+      <div class="bd">
+        <p class="jx-artist">{{track.user.username}}</p>
+        <h2 class="jx-title">{{track.title}}</h2>
+        <div class="jx-time-span">
+          <div class="jx-buffer"></div>
+          <div class="jx-played"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div><!-- Track -->
+  
+  <a href="" class="show-more" ng-click="showMore()" ng-hide="!tracks.length">Show More</a>
+  
+  
+</div>
 
 
-
-
-<a href="#" ng-click="connect();">Connect</a>
-
-<ul ng-controller="HomeCtrl">
-  <p>clientId: {{clientId}}</p>
-  <p>User: {{userName}}</p>
-  <li ng-repeat="track in tracks">
-    {{track.title}}
-    <p>{{track.permalink_url}}</p>
-  </li>
-</ul>
+</div><!-- TracklistCtrl -->

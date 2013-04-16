@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" ng-app="scat">
+  <!-- also try using the "scatFake" module instead and uncomment angular-mocks.js below -->
+  <head>
+    <meta charset="utf-8">
+
+    <title>Angular Tunes</title>
+    <meta name="author" content="David Goodlad <david@goodlad.ca>">
+    <meta name="author" content="Igor Minar <igor@angularjs.org>">
+
+    <link rel="stylesheet" href="style/screen.css" media="screen, projection">
+    <link rel="stylesheet" href="style/fancypants.css" media="screen, projection">
+
+    <script src="js/vendor/angular.js"></script>
+    <!-- <script src="js/vendor/angular-mocks.js"></script> -->
+    <script src="js/Tunes.js"></script>
+  </head>
+
+  <body ng-controller="TunesCtrl">
+    <div id="container">
+      <div class="playlist">
+        <h1>Playlist</h1>
+        <nav>
+          <button class="control play" ng-click="player.play()" ng-hide="player.playing">Play</button>
+          <button class="control pause" ng-click="player.pause()" ng-show="player.playing">Pause</button>
+          <button class="control prev" ng-click="player.previous()">Prev</button>
+          <button class="control next" ng-click="player.next()">Next</button>
+        </nav>
+        <ul class="albums">
+          <li class="album" ng-repeat="album in player.playlist"
+              ng-class="{current: player.current.album == $index}">
+            <button class="queue remove" ng-click="player.playlist.remove(album)"></button>
+            <span class="album-title">{{album.title}}</span>
+            <span class="artist-name">{{album.artist}}</span>
+            <ol class="tracks">
+              <li ng-repeat="track in album.tracks" class="track"
+                  ng-class="{current: player.current.track == $index}"
+                  ng-click="player.play($index, $parent.$index)">{{track.title}}</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+      <section class="library">
+        <h1>Music Library</h1>
+        <ul class="albums">
+          <li class="album current" ng-repeat="album in albums">
+            <button class="queue add" ng-click="player.playlist.add(album)"></button>
+            <span class="album-title">{{album.title}}</span>
+            <span class="artist-name">{{album.artist}}</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
