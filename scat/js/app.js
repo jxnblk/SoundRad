@@ -96,6 +96,7 @@ var scat = angular.module('scat', []).
       
       next: function() {
         console.log('need to make player find next track');
+        //console.log(nextTrack);
       },
 
       reset: function() {
@@ -105,7 +106,8 @@ var scat = angular.module('scat', []).
     };
 
     audio.addEventListener('ended', function() {
-      $rootScope.$apply(player.next);
+      $rootScope.$apply(player.next());
+      //$rootScope.$apply(playNextTrack());
     }, false);
 
     return player;

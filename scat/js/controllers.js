@@ -70,12 +70,12 @@ if ($routeParams.viewUser){
   // Jxn Player (Based on Peepcode Tunes)
   $scope.playTrack = function(track, i) {
     console.log(i);
+    
     $scope.nextTrackIndex = i + 1;
     
-    // This probs won't work twice
-    $scope.nextTrack = $scope.tracks[i + 1];
-    
-    
+    // This probs won't work twices
+    //$scope.nextTrack = $scope.tracks[i + 1];
+
     $scope.currentTrack = track;
     track.url = track.stream_url + '?client_id=' + soundcloud.clientid;
     //$scope.player.source = track.stream_url + '?client_id=' + soundcloud.clientid;
@@ -89,6 +89,16 @@ if ($routeParams.viewUser){
     player.pause();
     track.playing = false;
   };
+  
+  $scope.playNextTrack = function() {
+    console.log('play next track');
+    
+    var i = $scope.nextTrackIndex;
+    console.log($scope.tracks[i].title);
+    $scope.playTrack($scope.tracks[i], i);
+  };
+  
+  
  
 };
 
