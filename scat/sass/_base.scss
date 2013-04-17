@@ -31,7 +31,11 @@ a:hover {
 }
 
 
-
+.subhead {
+  padding: 0 16px;
+  height: 48px;
+  line-height: 48px;
+}
 
 .show-more {
   display: block;
@@ -44,27 +48,29 @@ a:hover {
 .dropmenu-container {
   position: relative;
   top: 48px;
-  /*
-background-color: #eeeeee; // move this to themes
-  padding: 16px;
-
-  
-  right: 0;
-  z-index: 512;
-*/
 }
 
 .dropmenu {
   position: absolute;
   background-color: #eee;
+    min-width: 288px;
   right: 0;
   padding: 1rem;
   z-index: 512;
   border-radius: 0 0 .125rem .125rem;
   list-style: none; 
-/*   display: none; */
+  li {
+    display: block;
+    a {
+      float: none;
+    }
+  }
 }
 
+.rot-180 {
+  display: block;
+  -webkit-transform: rotate(180deg);
+}
 
 
 

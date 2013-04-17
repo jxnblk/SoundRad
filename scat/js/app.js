@@ -44,6 +44,7 @@ var scat = angular.module('scat', []).
                 //remove offset here?
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
                   $scope.$apply(function () {
+                    console.log(tracks);
                     $scope.tracks = tracks;
                     $scope.tracksLoading = false;
                   });      
@@ -77,47 +78,73 @@ var scat = angular.module('scat', []).
     var player,
         paused = false,
         current = {
-          //album: 0,
-          track: null
+          track: null,
+          title: null
         },
-        // trying to get global-ish, currently playing var
-        tracks = {}, 
+        tracks = {},
         clientId = '66828e9e2042e682190d1fde4b02e265',
 
     player = {
       current: current,
       tracks: tracks,
       playing: false,
+      //currentTime: function($scope) {
+      //    $scope.currentTime = audio.currentTime;
+      //},
+      //currentTime: function() { return audio.currentTime },
 
       play: function(tracks, i) {
               //if (!paused) audio.src = track.url;
-
+              //console.log(tracks);
         if (angular.isDefined(tracks)) { 
           current.tracks = tracks;
           current.track = i;
         };
-        console.log('current track:' + current.track);
-              
+        
+        current.title = current.tracks[current.track].title;
+        //console.log('current track:' + track);
+        
+        
+        console.log(current.tracks);
+        console.log(current.track);
+        // Check if track is streamable
+        // Apps enabled set to off disables streaming?
         audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
+        
+        console.log('audio src' + audio.src);
+        
         audio.play();
+        console.log('current time: ' + audio.currentTime);
         player.playing = true;
         paused = false;
       },
 
       pause: function() {
+        console.log('current time: ' + audio.currentTime);
         if (player.playing) {
           audio.pause();
           player.playing = false;
           current.track = null;
+          current.title = null;
           paused = true;
         }
       },
       
       next: function() {
+        console.log('current time: ' + audio.currentTime);
         if (current.tracks.length > (current.track + 1)) {
           current.track = current.track+1;
           if (player.playing) player.play();
         }    
+      },
+      
+      previous: function() {
+        if (!current.tracks.length) return;
+        paused = false;
+        
+        current.track-1;
+        
+        if (player.playing) player.play();
       },
 
       reset: function() {

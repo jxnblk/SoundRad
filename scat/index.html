@@ -14,8 +14,9 @@
 
   <header class="topbar">
     <a href="#/"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
-    <!-- This ain't working  -->
-    <!-- <span>Current Track: {{player.tracks[current.track]}}</span> -->
+    <!-- for debugging  -->
+    <!-- <span>Playing: {{player.current.title}}</span> -->
+    
     
     
     
@@ -24,28 +25,43 @@
     <nav class="nav">
       <!-- <a href="/stream" class="js-nav js-nav-stream" data-nav="/me/activities/tracks/affiliated">Stream</a> -->
       <!-- <a href="#jxnblk" class="js-nav js-nav-jxnblk active" data-nav="/users/jxnblk/tracks">Me</a> -->
-      <a href="" ng-click="playNextTrack(tracks)">Next</a>
-      <a href="#/likes" class="">Likes</a>
+      
+      <!-- For Debugging -->
+      <!-- <a href="" ng-click="playPreviousTrack()"><i class="icon i-jxn-forward rot-180"></i></a> -->
+      <!-- <a href="" ng-click="playTrack(tracks, 0)" ng-hide="player.playing"><i class="icon i-jxn-play"></i></a> -->
+      <!-- <a href="" ng-click="pauseTrack()" ng-show="player.playing"><i class="icon i-jxn-pause"></i></a> -->
+      <!-- <a href="" ng-click="playNextTrack()"><i class="icon i-jxn-forward"></i></a> -->
+      
+      <!-- <a href="#/likes" class="">Likes</a> -->
       <!-- <a href="#/sets" class="">Sets</a> -->
       <a href="#" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
       <div class="dropmenu-container" ng-model="dropmenuOpen">
         
         <ul class="dropmenu" ng-show="dropmenuOpen">
-          <li>{{scget}}</li>
-          <li>          
+          <!-- <li>{{scget}}</li> -->
+          
+          <li><a href="" ng-click="updateTracks('jxnblk', '/tracks')">Jxnblk</a></li>
+          <li><a href="" ng-click="updateTracks('jxnblk', '/favorites')">Jxnblk's Likes</a></li>
+          <li><a href="" ng-click="updateTracks('mrsjxn', '/tracks')">Mrsjxn</a></li>
+          <li><a href="" ng-click="updateTracks('mrsjxn', '/favorites')">Mrsjxn's Likes</a></li>
+          <li><a href="" ng-click="updateTracks('xlr8r', '/tracks')">XLR8R</a></li>
+          <li><a href="" ng-click="updateTracks('ghostly', '/tracks')">Ghostly</a></li>
+          
+          
+          <!--<li>          
             <select ng-model="viewUser" ng-change="updateTracks()">
               <option value="jxnblk">Jxnblk</option>
               <option value="mrsjxn">Mrsjxn</option>
             </select>
-          </li>
-          <li>
+          </li>-->
+          <!--<li>
             <select ng-model="getType" ng-change="updateTracks()">
               <option value="/tracks">Tracks</option>
               <option value="/favorites">Likes</option>
               <option value="/playlists">Sets</option>
             </select>
-          </li>
-          <li>
+          </li>-->
+          <!--<li>
             <label>Page Size:</label>
             <select ng-model="pageSize" ng-change="updateTracks()">
               <option value="4">4</option>
@@ -55,7 +71,7 @@
               <option value="64">64</option>
               <option value="128">128</option>
             </select>
-          </li>
+          </li>-->
           
           <li>        
             <div class="user-meta">

@@ -2,7 +2,7 @@
 
 // Controllers
 
-function NavCtrl($scope, $routeParams, soundcloud, player) {
+function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
 
   //console.log($routeParams);
   
@@ -15,16 +15,6 @@ if ($routeParams.viewUser){
   }
 */
 
-/*
-  NavCtrl = function($scope, $http, player) {
-    $scope.player = player;
-    $http.get('albums.json').success(function(data) {
-      $scope.albums = data;
-    });
-  };
-*/
-
-
   $scope.player = player;
   $scope.viewUser = 'jxnblk';  
   $scope.getType = '/tracks';
@@ -32,6 +22,7 @@ if ($routeParams.viewUser){
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
+  //$scope.currentTime = player.currentTime;
   //$scope.currentTrack = player.current.track;
   
   // Toggle Dev Nav - look into toggle function & make this reusable
@@ -47,11 +38,15 @@ if ($routeParams.viewUser){
   // Something else goes here, fur sure
   
   // update tracks in view
-  $scope.updateTracks = function() {
+  $scope.updateTracks = function(viewUser, getType) {
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
-    console.log($scope.viewUser + ':' + $scope.getType);
-    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    //console.log($scope.viewUser + ':' + $scope.getType);
+    $scope.viewUser = viewUser;
+    $scope.getType = getType;
+    
+      $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    
     soundcloud.get($scope);
   };
   
@@ -80,9 +75,14 @@ if ($routeParams.viewUser){
     player.pause();
   };
   
-  $scope.playNextTrack = function(tracks, i) {
-    console.log('play next track' + tracks[i]);
+  $scope.playNextTrack = function() {
+    //console.log('play next track' + tracks[i]);
     player.next();
+  };
+  
+  $scope.playPreviousTrack = function() {
+    //console.log('play next track' + tracks[i]);
+    player.previous();
   };
   
   

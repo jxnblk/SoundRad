@@ -1,5 +1,6 @@
 <div ng-controller="TracklistCtrl">
 
+<div class="subhead"><h3>{{viewUser}} <span ng-show="getType == '/favorites'">Likes</span></h3></div>
 
 <div class="sc-tracklist" ng-class="{loading: tracksLoading}">
 
@@ -7,9 +8,9 @@
 
   <div class="track" ng-repeat="track in tracks">
     <div class="jx-player media">
-      <a href="" class="jx-play" ng-click="playTrack(tracks, $index)" ng-hide="player.current.track == $index"><i class="i-jxn-play"></i></a>
-      <a href="" class="jx-pause" ng-click="pauseTrack(track)" ng-show="player.current.track == $index"><i class="i-jxn-pause"></i></a>
-      <!-- ng-class="{current: player.current.track == $index}" -->
+      <a href="" class="jx-play" ng-click="playTrack(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
+      <a href="" class="jx-pause" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
+      
       <div class="bd track-{{$index}}">
         <p class="jx-artist">{{track.user.username}}</p>
         <p class="h4 b jx-title">{{track.title}}</p>
