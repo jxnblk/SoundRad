@@ -70,7 +70,7 @@ input[type="text"] {
   position: relative;
   top: $m3;
   right: 0;
-  //bottom: 0;
+  bottom: $m3;
   left: 0;
   //overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -79,6 +79,7 @@ input[type="text"] {
 .view-heading {
   padding: 0 5%;
 }
+
 
 
 .loading-indicator {

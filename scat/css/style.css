@@ -11,7 +11,7 @@
 .logo {
   color: #ff6600; }
 
-.subhead {
+.subhead, footer {
   background-color: #f6f6f6;
   color: #bbbbbb; }
 
@@ -100,7 +100,7 @@ a {
   .btn:hover {
     background-color: #ff751a; }
 
-.subhead {
+.subhead, footer {
   padding: 0 16px;
   height: 48px;
   line-height: 48px; }
@@ -256,6 +256,7 @@ input[type="text"] {
   position: relative;
   top: 48px;
   right: 0;
+  bottom: 48px;
   left: 0;
   -webkit-overflow-scrolling: touch; }
 

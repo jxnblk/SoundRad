@@ -44,11 +44,10 @@ var scat = angular.module('scat', []).
       clientid: clientId,
     
       get:    function($scope){
-                console.log($scope.scget);
+                
                 //remove offset here?
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
                   $scope.$apply(function () {
-                    console.log(tracks);
                     $scope.tracks = tracks;
                     $scope.tracksLoading = false;
                   });      
@@ -56,10 +55,8 @@ var scat = angular.module('scat', []).
               },
               
       getMore:  function($scope){
-                  console.log($scope.scget);
                   SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
                     $scope.$apply(function () {
-                      console.log(tracks);
                       $scope.tracks = $scope.tracks.concat(tracks);
                       $scope.tracksLoading = false;
                     });      
@@ -67,8 +64,8 @@ var scat = angular.module('scat', []).
                 },
     
       test:   function($scope){
-                console.log('test factory' + $scope.userName);
-                $scope.userName = 'ran test';
+                console.log('test factory $scope');
+                console.log($scope);
               }
     };
   });
@@ -81,10 +78,7 @@ var scat = angular.module('scat', []).
   scat.factory('player', function(audio, $rootScope) {
     var player,
         paused = false,
-        current = {
-          track: null,
-          title: null
-        },
+        current = { track: null, title: null },
         tracks = {},
         clientId = '66828e9e2042e682190d1fde4b02e265',
 
@@ -99,19 +93,21 @@ var scat = angular.module('scat', []).
 
       play: function(tracks, i) {
               //if (!paused) audio.src = track.url;
-              //console.log(tracks);
+              
         if (angular.isDefined(tracks)) { 
           current.tracks = tracks;
           current.track = i;
         };
-        
+        // using this as an id for controller
         current.title = current.tracks[current.track].title;
-        //console.log('current track:' + track);
         
-        
-        console.log(current.tracks);
-        console.log(current.track);
         // Check if track is streamable
+        // to-do -- Provide visual cues for disabled tracks
+        if (!current.tracks[current.track].streamable) {
+          console.log('not streamable - wtf');
+          current.track = current.track + 1;
+          current.title = current.tracks[current.track].title;
+        };
         // Apps enabled set to off disables streaming?
         audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
         

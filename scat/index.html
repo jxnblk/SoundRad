@@ -34,7 +34,7 @@
       
       <!-- <a href="#/likes" class="">Likes</a> -->
       <!-- <a href="#/sets" class="">Sets</a> -->
-      <a href="#" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
+      <a href="" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
       <div class="dropmenu-container" ng-model="dropmenuOpen">
         
         <ul class="dropmenu" ng-show="dropmenuOpen">
@@ -88,6 +88,7 @@
           
           <!-- For Debugging -->
           <!-- <li><button ng-click="checkVar(scget)">CheckVar</button></li> -->
+          <li>Powered by SoundCloud</li>
         </ul>
       </div>
     
@@ -96,11 +97,6 @@
 
   <div class="view" ng-view></div>
   
- <!--
- <audio controls ng-model="player">
-    <source src="{{player.source}}" type="audio/mpeg">
-  </audio>
--->
 
 </div><!-- NavCtrl -->
 

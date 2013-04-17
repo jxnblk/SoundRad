@@ -4,7 +4,7 @@
 
 <div class="sc-tracklist" ng-class="{loading: tracksLoading}">
 
-  <div ng-hide="tracks.length">No tracks for {{scget}}</div>
+  <div ng-hide="tracks.length || tracksLoading">No tracks for {{scget}}</div>
 
   <div class="track" ng-repeat="track in tracks">
     <div class="jx-player media">
@@ -23,7 +23,8 @@
     </div>
   </div><!-- Track -->
   
-  <a href="" class="show-more" ng-click="showMore()" ng-hide="!tracks.length">Show More</a>
+  <a href="" class="show-more" ng-click="showMore()" ng-hide="tracks.length <= pageOffset || tracksLoading">Show More</a>
+  <div class="show-more" ng-show="tracksLoading">Loading...</div>
   
 </div>
 

@@ -3,40 +3,25 @@
 // Controllers
 
 function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
-
-  //console.log($routeParams);
   
   // Init Defaults
-  
   $scope.$routeParams = $routeParams;
-  console.log($scope.$routeParams);
-  console.log($scope.$routeParams.viewUser);
-  /*
-if ($routeParams.viewUser){
-    $scope.viewUser = $routeParams.viewUser
-  } else {
-    $scope.viewUser = 'jxnblk';
-  }
-*/
-
   $scope.player = player;
   if($scope.$routeParams.viewUser){
     $scope.viewUser = $scope.$routeParams.viewUser;  
   } else {
     $scope.viewUser = 'jxnblk';
   }
-  
   if($scope.$routeParams.getType){
     $scope.getType = '/' + $scope.$routeParams.getType;  
   } else {
     $scope.getType = '/tracks';
   }
-  
   $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
-  //$scope.currentTime = player.currentTime;
+  $scope.currentTime = player.currentTime;
   //$scope.currentTrack = player.current.track;
   
   // Toggle Dev Nav - look into toggle function & make this reusable
@@ -48,40 +33,30 @@ if ($routeParams.viewUser){
       $scope.dropmenuOpen = false;
     };
   };
-
-  // Something else goes here, fur sure
   
   // update tracks in view
-  $scope.updateTracks = function(viewUser, getType) {
+  $scope.updateTracks = function() {
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
-    //console.log($scope.viewUser + ':' + $scope.getType);
-    $scope.viewUser = viewUser;
-    $routeParams.viewUser = viewUser;
-    $scope.getType = getType;
-    
-      $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-    
+    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
     soundcloud.get($scope);
   };
   
   // Pagination
   $scope.showMore = function() {
+    $scope.tracksLoading = true;
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-    // fix: Using the select values changes numbers to strings
-    console.log($scope.pageOffset);
     $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-    console.log($scope.pageOffset);
     soundcloud.getMore($scope);
   } 
 
-  // Get some data motherfucker
+  // Gimme some data
   soundcloud.get($scope);
 
   // Jxn Player (Based on Peepcode Tunes)
   $scope.playTrack = function(tracks, i) {
-    console.log('play: ' + tracks[i].title);
     player.play(tracks, i);
+
     // For displaying only
     $scope.currentTrack = player.current.track;
   };
@@ -91,12 +66,10 @@ if ($routeParams.viewUser){
   };
   
   $scope.playNextTrack = function() {
-    //console.log('play next track' + tracks[i]);
     player.next();
   };
   
   $scope.playPreviousTrack = function() {
-    //console.log('play next track' + tracks[i]);
     player.previous();
   };
   
@@ -107,20 +80,6 @@ if ($routeParams.viewUser){
 function TracklistCtrl($scope, soundcloud) {
   // Figure out what is in scope for tracklist
   // + How to split page scope up 
-};
-
-function LikesCtrl($scope, soundcloud) {
-  // Should include these in separate controllers for each page
-  $scope.getType = '/favorites';
-  $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-  soundcloud.get($scope);
-};
-
-function SetsCtrl($scope, soundcloud) {
-  // Should include these in separate controllers for each page
-  $scope.getType = '/playlists';
-  $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-  soundcloud.get($scope);
 };
   
   
