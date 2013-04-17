@@ -7,6 +7,10 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
   //console.log($routeParams);
   
   // Init Defaults
+  
+  $scope.$routeParams = $routeParams;
+  console.log($scope.$routeParams);
+  console.log($scope.$routeParams.viewUser);
   /*
 if ($routeParams.viewUser){
     $scope.viewUser = $routeParams.viewUser
@@ -16,8 +20,18 @@ if ($routeParams.viewUser){
 */
 
   $scope.player = player;
-  $scope.viewUser = 'jxnblk';  
-  $scope.getType = '/tracks';
+  if($scope.$routeParams.viewUser){
+    $scope.viewUser = $scope.$routeParams.viewUser;  
+  } else {
+    $scope.viewUser = 'jxnblk';
+  }
+  
+  if($scope.$routeParams.getType){
+    $scope.getType = '/' + $scope.$routeParams.getType;  
+  } else {
+    $scope.getType = '/tracks';
+  }
+  
   $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
@@ -43,6 +57,7 @@ if ($routeParams.viewUser){
     $scope.tracksLoading = true;
     //console.log($scope.viewUser + ':' + $scope.getType);
     $scope.viewUser = viewUser;
+    $routeParams.viewUser = viewUser;
     $scope.getType = getType;
     
       $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
