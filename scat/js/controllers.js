@@ -2,11 +2,12 @@
 
 // Controllers
 
-function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
+function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   
   // Init Defaults
   $scope.$routeParams = $routeParams;
   $scope.player = player;
+  $scope.audio = audio;
   if($scope.$routeParams.viewUser){
     $scope.viewUser = $scope.$routeParams.viewUser;  
   } else {
@@ -21,8 +22,7 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
-  $scope.currentTime = player.currentTime;
-  //$scope.currentTrack = player.current.track;
+  
   
   // Toggle Dev Nav - look into toggle function & make this reusable
   $scope.dropmenuOpen = false;
@@ -56,9 +56,6 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
   // Jxn Player (Based on Peepcode Tunes)
   $scope.playTrack = function(tracks, i) {
     player.play(tracks, i);
-
-    // For displaying only
-    $scope.currentTrack = player.current.track;
   };
 
   $scope.pauseTrack = function(track) {
@@ -72,14 +69,33 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player) {
   $scope.playPreviousTrack = function() {
     player.previous();
   };
+    
+  // Scrubbers
   
+  function updateView() {
+    $scope.$apply(function() {
+      $scope.currentTimePercentage = (audio.currentTime / audio.duration) * 100;
+      //console.log($scope.currentTimePercentage);
+    });
+  };
+  audio.addEventListener('timeupdate', updateView);
   
+  $scope.mouseX = null;
+  $scope.scrubClick = function(event){
+    $scope.mouseX = event.pageX;
+    console.log('clicked scrub bar');
+  }
+  
+  // Ref For Seeking
+  //audio.addEventListener('durationchange', setupSeekbar);
  
 };
 
 function TracklistCtrl($scope, soundcloud) {
   // Figure out what is in scope for tracklist
   // + How to split page scope up 
+  
+  // Audio and player scope can probably be limited to tracklist
 };
   
   

@@ -56,9 +56,14 @@
 
 
 
-.jx-time-span {
+.bd {
   height: 64px;
   position: relative;
+}
+
+.jx-time-span {
+  width: 100%;
+  height: 64px;
 }
 
 .jx-buffer,

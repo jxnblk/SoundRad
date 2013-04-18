@@ -1,31 +1,15 @@
 'use strict';
 
-/*
-var app = angular.module('sndcat', ['sndcat.services']).
-  config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
-    $routeProvider.when('/likes', {templateUrl: 'partials/likes.html', controller: 'LikesCtrl'});
-    $routeProvider.when('/sets', {templateUrl: 'partials/sets.html', controller: 'SetsCtrl'});
-    $routeProvider.otherwise({redirectTo: '/'});
-    $locationProvider.html5Mode(true);
-  }]);
-*/
-
-
-
 var scat = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'}); 
-    //$routeProvider.when('/likes', {templateUrl: 'partials/likes.html', controller: 'LikesCtrl'}); 
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
     $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
-    //$routeProvider.when('/user/:viewUser', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'});
-    //$routeProvider.when('/likes', {templateUrl: 'partials/likes.html', controller: 'TracklistCtrl'});
-    //$routeProvider.when('/sets', {templateUrl: 'partials/sets.html', controller: 'TracklistCtrl'});
+    
     $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);
-    
-    //var clientId = '66828e9e2042e682190d1fde4b02e265';
+        // need to figure out how to define this globally
+        //var clientId = '66828e9e2042e682190d1fde4b02e265';
     
   }]);
 
@@ -70,26 +54,18 @@ var scat = angular.module('scat', []).
     };
   });
   
-  
-  // Peepcode player - need to strip this down for single track playback
-  // 03 - swap artist for username
-
-  //
   scat.factory('player', function(audio, $rootScope) {
     var player,
         paused = false,
-        current = { track: null, title: null },
+        current = { track: null, title: null, time: 0 },
         tracks = {},
         clientId = '66828e9e2042e682190d1fde4b02e265',
+        currentTimePercentage = audio.currentTime,
 
     player = {
       current: current,
       tracks: tracks,
       playing: false,
-      //currentTime: function($scope) {
-      //    $scope.currentTime = audio.currentTime;
-      //},
-      //currentTime: function() { return audio.currentTime },
 
       play: function(tracks, i) {
               //if (!paused) audio.src = track.url;
@@ -108,10 +84,9 @@ var scat = angular.module('scat', []).
           current.track = current.track + 1;
           current.title = current.tracks[current.track].title;
         };
-        // Apps enabled set to off disables streaming?
-        audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
         
-        console.log('audio src' + audio.src);
+        
+        if (!paused) audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
         
         audio.play();
         console.log('current time: ' + audio.currentTime);
@@ -124,7 +99,8 @@ var scat = angular.module('scat', []).
         if (player.playing) {
           audio.pause();
           player.playing = false;
-          current.track = null;
+          //current.track = null;
+          // using this to show/hide play/pause buttons - probs a better way to do this
           current.title = null;
           paused = true;
         }
@@ -141,21 +117,31 @@ var scat = angular.module('scat', []).
       previous: function() {
         if (!current.tracks.length) return;
         paused = false;
-        
+        // this is really janky with iphone system prev control
         current.track-1;
-        
         if (player.playing) player.play();
       },
-
       reset: function() {
         player.pause();
-      },
-
+      }
+      
     };
 
     audio.addEventListener('ended', function() {
       $rootScope.$apply(player.next());
     }, false);
+    
+    // For scrubber
+    /*
+function updateView() {
+      $rootScope.$apply(function() {
+        currentTime = (audio.currentTime / audio.duration) * 100;
+        console.log(currentTime);
+      });
+    };
+    audio.addEventListener('timeupdate', updateView);
+*/
+    
 
     return player;
   });
@@ -165,22 +151,5 @@ var scat = angular.module('scat', []).
     return audio;
   }); 
   
-  
-
-  
-  /*.factory('player', function(){
-    var clientId = '66828e9e2042e682190d1fde4b02e265';
-    //$rootScope.player = [];
-    return {
-      
-      play:  function($scope, track){
-        console.log($scope);
-        console.log('jxn player plays: ' + track.title);
-        //$scope.player.source = track.stream_url + '?client_id=' + clientId;
-      },
-      
-      
-    }  
-  })*/
 
 
