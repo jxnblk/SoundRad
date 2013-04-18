@@ -121,26 +121,20 @@ var scat = angular.module('scat', []).
         current.track-1;
         if (player.playing) player.play();
       },
+      
+      seek: function(time) {
+        audio.currentTime = time;
+      },
+      
       reset: function() {
         player.pause();
-      }
+      },
       
     };
 
     audio.addEventListener('ended', function() {
       $rootScope.$apply(player.next());
     }, false);
-    
-    // For scrubber
-    /*
-function updateView() {
-      $rootScope.$apply(function() {
-        currentTime = (audio.currentTime / audio.duration) * 100;
-        console.log(currentTime);
-      });
-    };
-    audio.addEventListener('timeupdate', updateView);
-*/
     
 
     return player;

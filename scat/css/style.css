@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0; }
 
+.no-touch-color {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
 .topbar {
   background-color: white;
   border-bottom: 1px solid #eeeeee; }
@@ -63,21 +66,18 @@
 .jx-pause:hover {
   background-color: #ff751a; }
 
-.jx-artist {
-  color: #999999; }
-
 .jx-buffer {
-  background-color: #eeeeee;
-  opacity: .5; }
+  background-color: rgba(255, 102, 0, 0.05); }
 
 .jx-played {
-  background-color: #ff6600;
-  opacity: .1; }
+  background-color: rgba(255, 102, 0, 0.5); }
 
+/*
 .playing .jx-played {
-  border-right: 1px solid #ff6600;
-  opacity: .4; }
-
+  border-right: 1px solid $prime;
+  opacity: .4;
+}
+*/
 body {
   font-family: Helvetica, sans-serif;
   font-size: 100%;
@@ -328,6 +328,12 @@ input[type="text"] {
   width: 100%;
   height: 64px; }
 
+.jx-scrubber {
+  width: 100%;
+  height: 64px;
+  position: absolute;
+  z-index: 512; }
+
 .jx-buffer,
 .jx-played {
   height: 64px;
@@ -352,19 +358,11 @@ input[type="text"] {
   text-wrap: none;
   white-space: no-wrap; }
 
-/*
-.sc-title h2 {
-  display: inline;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-  font-size: $m1;
-  width: 100%;
-  white-space: no-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis; 
-}
-*/
+.jx-time {
+  position: absolute;
+  top: 6px;
+  right: 8px; }
+
 .jx-buffer,
 .jx-played {
   width: 0; }

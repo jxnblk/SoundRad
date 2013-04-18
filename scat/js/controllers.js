@@ -23,6 +23,8 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
   
+  $scope.currentTime = audio.currentTime;
+  
   
   // Toggle Dev Nav - look into toggle function & make this reusable
   $scope.dropmenuOpen = false;
@@ -74,20 +76,19 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   
   function updateView() {
     $scope.$apply(function() {
+      $scope.currentBufferPercentage = ((audio.buffered.length && audio.buffered.end(0)) / audio.duration) * 100;
       $scope.currentTimePercentage = (audio.currentTime / audio.duration) * 100;
-      //console.log($scope.currentTimePercentage);
+      $scope.currentTimeMS = (audio.currentTime * 1000).toFixed();
+      $scope.durationMS = (audio.duration * 1000).toFixed();
     });
   };
   audio.addEventListener('timeupdate', updateView);
-  
-  $scope.mouseX = null;
-  $scope.scrubClick = function(event){
-    $scope.mouseX = event.pageX;
-    console.log('clicked scrub bar');
-  }
-  
-  // Ref For Seeking
-  //audio.addEventListener('durationchange', setupSeekbar);
+
+  // Seeking
+  $scope.seekTo = function($event){
+    var xpos = $event.layerX / $event.target.offsetWidth;
+    player.seek(xpos * audio.duration);
+  };
  
 };
 
