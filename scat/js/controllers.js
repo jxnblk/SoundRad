@@ -22,9 +22,8 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
-  
-  $scope.currentTime = audio.currentTime;
-  
+  $scope.connected = soundcloud.connected;
+  $scope.username = soundcloud.username;  
   
   // Toggle Dev Nav - look into toggle function & make this reusable
   $scope.dropmenuOpen = false;
@@ -36,10 +35,16 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
     };
   };
   
+  $scope.connect = function() {
+    soundcloud.connect($scope);
+    //$scope.username = soundcloud.username;
+  };
+  
   // update tracks in view
   $scope.updateTracks = function() {
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
+    // Need to create a more dynamic way of doing this??
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
     soundcloud.get($scope);
   };

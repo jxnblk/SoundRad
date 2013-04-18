@@ -211,8 +211,7 @@ a {
   margin-right: 16px;
   height: 48px; }
   .logo i {
-    position: relative;
-    -webkit-font-smoothing: none; }
+    position: relative; }
 
 .nav {
   height: 48px;

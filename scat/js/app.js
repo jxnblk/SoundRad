@@ -2,12 +2,14 @@
 
 var scat = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider.when('/', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'}); 
+    //$routeProvider.when('/', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'}); 
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
     $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
+    //$routeProvider.when('/stream', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
     
-    $routeProvider.otherwise({ redirectTo: '/' });
+    $routeProvider.otherwise({ redirectTo: '/jxnblk' });
     //$locationProvider.html5Mode(true);
+        
         // need to figure out how to define this globally
         //var clientId = '66828e9e2042e682190d1fde4b02e265';
     
@@ -18,18 +20,40 @@ var scat = angular.module('scat', []).
     var clientId = '66828e9e2042e682190d1fde4b02e265';
     SC.initialize({
       client_id: clientId,
-      redirect_uri: 'http://jxnblk.com/sc'
+      redirect_uri: 'http://jxnblk.com/scat'
     });
     
-    var smplayer = 'testing';
+    var connected = false,
+        username = null,
+        token = null,
     
-    return {
-    
+    soundcloud = {
+      connected: connected,
+      username: username,
+      token: token,
       clientid: clientId,
+      
+      connect:  function($scope){
+                  SC.connect(function() {
+                    $scope.$apply(function () {
+                      console.log('connecting...');
+                      SC.get('/me', function(me) { 
+                        $scope.$apply(function () {
+                          console.log(me.username + ' Connected'); 
+                          $scope.connected = true;
+                          $scope.username = me.username;
+                          localStorage['scat.username'] = $scope.username;
+                        });
+                      });
+                      $scope.token = SC.accessToken();
+                      //localStorage['scat'] = {};
+                      localStorage['scat.token'] = $scope.token;
+                      
+                    });
+                  });
+                },
     
       get:    function($scope){
-                
-                //remove offset here?
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
                   $scope.$apply(function () {
                     $scope.tracks = tracks;
@@ -52,6 +76,9 @@ var scat = angular.module('scat', []).
                 console.log($scope);
               }
     };
+    
+    return soundcloud;
+    
   });
   
   scat.factory('player', function(audio, $rootScope) {

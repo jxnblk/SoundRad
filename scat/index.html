@@ -10,18 +10,17 @@
 </head>
 <body>
 
+
 <div ng-controller="NavCtrl">
 
   <header class="topbar">
     <a href="#/"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
+
+
     <!-- for debugging  -->
     <!-- <span>Playing: {{player.current.title}}</span> -->
-    
-    
-    
-    
-    
-    
+
+      
     <nav class="nav">
       <!-- <a href="/stream" class="js-nav js-nav-stream" data-nav="/me/activities/tracks/affiliated">Stream</a> -->
       <!-- <a href="#jxnblk" class="js-nav js-nav-jxnblk active" data-nav="/users/jxnblk/tracks">Me</a> -->
@@ -37,50 +36,22 @@
       <a href="" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
       <div class="dropmenu-container" ng-model="dropmenuOpen">
         
-        <ul class="dropmenu" ng-show="dropmenuOpen">
-          <!-- <li>{{scget}}</li> -->
-          
-          <!-- change to links and use routeparams -->
+        <ul class="dropmenu" ng-show="dropmenuOpen"> 
           <li><a href="#jxnblk">Jxnblk</a></li>
           <li><a href="#jxnblk/favorites">Jxnblk's Likes</a></li>
           <li><a href="#mrsjxn">Mrsjxn</a></li>
           <li><a href="#mrsjxn/favorites">Mrsjxn's Likes</a></li>
           <li><a href="#xlr8r">XLR8R</a></li>
           <li><a href="#ghostly">Ghostly</a></li>
-          
-          
-          <!--<li>          
-            <select ng-model="viewUser" ng-change="updateTracks()">
-              <option value="jxnblk">Jxnblk</option>
-              <option value="mrsjxn">Mrsjxn</option>
-            </select>
-          </li>-->
-          <!--<li>
-            <select ng-model="getType" ng-change="updateTracks()">
-              <option value="/tracks">Tracks</option>
-              <option value="/favorites">Likes</option>
-              <option value="/playlists">Sets</option>
-            </select>
-          </li>-->
-          <!--<li>
-            <label>Page Size:</label>
-            <select ng-model="pageSize" ng-change="updateTracks()">
-              <option value="4">4</option>
-              <option value="8">8</option>
-              <option value="16">16</option>
-              <option value="32">32</option>
-              <option value="64">64</option>
-              <option value="128">128</option>
-            </select>
-          </li>-->
-          
+
           <li>        
             <div class="user-meta">
-              <p class="sc-connect-status">Not Connected</p>
+              <p ng-show='connected'>{{username}} Connected</p>
               <!-- <p class="sc-viewUser"></p> -->
               <!-- <p class="sc-description"></p>     -->
               <!-- <a href="#" class="sc-connect btn">Connect</a> -->
-              <!-- <a href="#" ng-click="connect();">Connect</a> -->
+              <a href="" class="sc-connect btn" ng-click="connect();" ng-hide="connected">Connect</a>
+              <!-- Make a sign out button -->
             </div>
           </li>
           
