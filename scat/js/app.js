@@ -112,8 +112,9 @@ var scat = angular.module('scat', []).
           current.title = current.tracks[current.track].title;
         };
         
-        
-        if (!paused) audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
+        // Causing a bug when switching views
+        //if (!paused) audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
+        audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
         
         audio.play();
         console.log('current time: ' + audio.currentTime);
