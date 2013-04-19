@@ -8,22 +8,43 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   $scope.$routeParams = $routeParams;
   $scope.player = player;
   $scope.audio = audio;
+  
+  // Reconnect user
+  $scope.token = localStorage.getItem('token');
+  // Need better error states here
+  if ($scope.token){
+    console.log('got local token');
+    $scope.connected = true;
+    //$scope.token = localStorage['scat.token'];
+    $scope.username = localStorage.getItem('username');
+    //soundcloud.connect($scope);
+    window.SC.storage().setItem('SC.accessToken', $scope.token); 
+  };
+  
+  // Define initial view
+  
+  
   if($scope.$routeParams.viewUser){
-    $scope.viewUser = $scope.$routeParams.viewUser;  
+    $scope.viewUser = $scope.$routeParams.viewUser;
+    if($scope.$routeParams.getType){
+      $scope.getType = '/' + $scope.$routeParams.getType;  
+    } else {
+      $scope.getType = '/tracks';
+    };
+    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+  } else if ($scope.connected) {
+    console.log('getting users stream');
+    $scope.scget = '/me/activities/tracks/affiliated';
   } else {
+    // Default Views - all about me
     $scope.viewUser = 'jxnblk';
-  }
-  if($scope.$routeParams.getType){
-    $scope.getType = '/' + $scope.$routeParams.getType;  
-  } else {
     $scope.getType = '/tracks';
-  }
-  $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+  };
+     
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
   $scope.tracksLoading = true;
-  $scope.connected = soundcloud.connected;
-  $scope.username = soundcloud.username;  
   
   // Toggle Dev Nav - look into toggle function & make this reusable
   $scope.dropmenuOpen = false;
@@ -37,7 +58,6 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   
   $scope.connect = function() {
     soundcloud.connect($scope);
-    //$scope.username = soundcloud.username;
   };
   
   // update tracks in view
@@ -52,9 +72,25 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   // Pagination
   $scope.showMore = function() {
     $scope.tracksLoading = true;
-    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    //$scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    console.log($scope.pageOffset);
     $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-    soundcloud.getMore($scope);
+    console.log($scope.pageOffset);
+    //soundcloud.getMore($scope);
+
+    // this will definitely break other pagination
+    /*
+if ($scope.streamNextPage) {
+      $scope.scget = $scope.streamNextPage;
+      soundcloud.get($scope, {add: true});
+    } else {
+      soundcloud.get($scope, {add: true});
+    };
+*/
+    
+    soundcloud.get($scope, {add: true});
+    
+    
   } 
 
   // Gimme some data

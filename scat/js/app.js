@@ -2,12 +2,12 @@
 
 var scat = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    //$routeProvider.when('/', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'}); 
+    $routeProvider.when('/', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'}); 
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
     $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
     //$routeProvider.when('/stream', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
     
-    $routeProvider.otherwise({ redirectTo: '/jxnblk' });
+    $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);
         
         // need to figure out how to define this globally
@@ -20,7 +20,7 @@ var scat = angular.module('scat', []).
     var clientId = '66828e9e2042e682190d1fde4b02e265';
     SC.initialize({
       client_id: clientId,
-      redirect_uri: 'http://jxnblk.com/scat'
+      redirect_uri: 'http://jxnblk.com/scat/'
     });
     
     var connected = false,
@@ -34,29 +34,53 @@ var scat = angular.module('scat', []).
       clientid: clientId,
       
       connect:  function($scope){
-                  SC.connect(function() {
-                    $scope.$apply(function () {
-                      console.log('connecting...');
-                      SC.get('/me', function(me) { 
-                        $scope.$apply(function () {
-                          console.log(me.username + ' Connected'); 
-                          $scope.connected = true;
-                          $scope.username = me.username;
-                          localStorage['scat.username'] = $scope.username;
+                  if($scope.connected){
+                    console.log('got local token & connecting...');
+                    //window.SC.storage().setItem('SC.accessToken', $scope.token); 
+                  } else {
+                    SC.connect(function() {
+                      $scope.$apply(function () {
+                        console.log('connecting...');
+                        SC.get('/me', function(me) { 
+                          $scope.$apply(function () { 
+                            $scope.connected = true;
+                            $scope.username = me.username;
+                            localStorage.setItem('username', $scope.username);
+                          });
                         });
+                        $scope.token = SC.accessToken();
+                        localStorage.setItem('token', $scope.token);
                       });
-                      $scope.token = SC.accessToken();
-                      //localStorage['scat'] = {};
-                      localStorage['scat.token'] = $scope.token;
-                      
                     });
-                  });
+                  };
                 },
     
-      get:    function($scope){
-                SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
+      get:    function($scope, params){
+                console.log(params);
+                SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
+                  console.log(data);
                   $scope.$apply(function () {
-                    $scope.tracks = tracks;
+                    var tracks = [];
+                    if(data.collection){
+                      console.log(data.next_href);
+                      $scope.streamNextPage = data.next_href;
+                      // Looks like a stream - probs need to account for non-collection data
+                      for (var i = 0; i < data.collection.length; i++) { 
+                        var track = data.collection[i].origin;
+                        tracks.push(track);
+                      };
+                    } else {
+                      // Interpreting as tracks
+                      tracks = data;
+                    };
+                    if (params) {
+                      //console.log(params.add);  // may need to account for other params
+                      console.log('need to add these');
+                      $scope.tracks = $scope.tracks.concat(tracks);
+                    } else {
+                      console.log('replace all the tracks');
+                      $scope.tracks = tracks;
+                    };
                     $scope.tracksLoading = false;
                   });      
                 });
@@ -117,17 +141,14 @@ var scat = angular.module('scat', []).
         audio.src = current.tracks[current.track].stream_url + '?client_id=' + clientId;;
         
         audio.play();
-        console.log('current time: ' + audio.currentTime);
         player.playing = true;
         paused = false;
       },
 
       pause: function() {
-        console.log('current time: ' + audio.currentTime);
         if (player.playing) {
           audio.pause();
           player.playing = false;
-          //current.track = null;
           // using this to show/hide play/pause buttons - probs a better way to do this
           current.title = null;
           paused = true;
