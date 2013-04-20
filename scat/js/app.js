@@ -20,7 +20,7 @@ var scat = angular.module('scat', []).
     var clientId = '66828e9e2042e682190d1fde4b02e265';
     SC.initialize({
       client_id: clientId,
-      redirect_uri: 'http://jxnblk.com/scat/'
+      redirect_uri: 'http://jxnblk.com/scat/callback.html'
     });
     
     var connected = false,
@@ -36,6 +36,7 @@ var scat = angular.module('scat', []).
       connect:  function($scope){
                   if($scope.connected){
                     console.log('got local token & connecting...');
+                    // this is factory stuff, right?
                     //window.SC.storage().setItem('SC.accessToken', $scope.token); 
                   } else {
                     SC.connect(function() {
@@ -56,7 +57,7 @@ var scat = angular.module('scat', []).
                 },
     
       get:    function($scope, params){
-                console.log(params);
+                //console.log(params);
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
                   console.log(data);
                   $scope.$apply(function () {
