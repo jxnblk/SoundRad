@@ -3,9 +3,9 @@
 var scat = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {templateUrl: 'partials/tracklist.html', controller: 'TracklistCtrl'}); 
-    $routeProvider.when('/:viewUser', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
-    $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
-    //$routeProvider.when('/stream', {templateUrl: 'partials/tracklist.html', controller: 'NavCtrl'});
+    $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
+    $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
+    $routeProvider.when('/stream', {templateUrl: 'partials/tracklist.html', controller: 'StreamCtrl'});
     
     $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);
@@ -54,14 +54,39 @@ var scat = angular.module('scat', []).
                       });
                     });
                   };
-                },
+      },
     
       get:    function($scope, params){
-                //console.log(params);
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
-                  console.log(data);
                   $scope.$apply(function () {
-                    var tracks = [];
+                    if (params) {
+                      console.log('need to add these');
+                      $scope.tracks = $scope.tracks.concat(data);
+                    } else {
+                      console.log('replace all the tracks');
+                      $scope.tracks = data;
+                    };
+                    $scope.tracksLoading = false;
+                  });      
+                });
+      },
+      
+      // Get rid of this if using params.add in get function        
+      getMore:  function($scope){
+                  SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
+                    $scope.$apply(function () {
+                      $scope.tracks = $scope.tracks.concat(tracks);
+                      $scope.tracksLoading = false;
+                    });      
+                  });
+      },
+                
+      getStream:  function($scope){
+                    console.log('do some shit to get the stream');
+                    
+                    // Need to adjust this
+                    /*
+var tracks = [];
                     if(data.collection){
                       console.log(data.next_href);
                       $scope.streamNextPage = data.next_href;
@@ -74,32 +99,14 @@ var scat = angular.module('scat', []).
                       // Interpreting as tracks
                       tracks = data;
                     };
-                    if (params) {
-                      //console.log(params.add);  // may need to account for other params
-                      console.log('need to add these');
-                      $scope.tracks = $scope.tracks.concat(tracks);
-                    } else {
-                      console.log('replace all the tracks');
-                      $scope.tracks = tracks;
-                    };
-                    $scope.tracksLoading = false;
-                  });      
-                });
-              },
-              
-      getMore:  function($scope){
-                  SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(tracks){
-                    $scope.$apply(function () {
-                      $scope.tracks = $scope.tracks.concat(tracks);
-                      $scope.tracksLoading = false;
-                    });      
-                  });
-                },
+*/
+                    
+      },
     
       test:   function($scope){
                 console.log('test factory $scope');
                 console.log($scope);
-              }
+      }
     };
     
     return soundcloud;

@@ -1,9 +1,4 @@
-<div ng-controller="TracklistCtrl">
-
 <div class="subhead"><h3>{{viewUser}} <span ng-show="getType == '/favorites'">Likes</span></h3></div>
-
-
-
 
 <div class="sc-tracklist" ng-class="{loading: tracksLoading}">
 
@@ -33,7 +28,4 @@
   <a href="" class="show-more" ng-click="showMore()" ng-hide="tracks.length <= pageOffset || tracksLoading">Show More</a>
   <div class="show-more" ng-show="tracksLoading">Loading...</div>
   
-</div>
-
-
-</div>
+</div><!-- end sc-tracklist -->

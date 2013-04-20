@@ -2,12 +2,10 @@
 
 // Controllers
 
-function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
+function NavCtrl($scope, $route, $routeParams, $location, soundcloud) {
   
   // Init Defaults
   $scope.$routeParams = $routeParams;
-  $scope.player = player;
-  $scope.audio = audio;
   
   // Reconnect user
   $scope.token = localStorage.getItem('token');
@@ -23,7 +21,7 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   
   // Define initial view
   
-  
+  // Move view types into scoped controllers
   if($scope.$routeParams.viewUser){
     $scope.viewUser = $scope.$routeParams.viewUser;
     if($scope.$routeParams.getType){
@@ -33,6 +31,8 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
     };
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
   } else if ($scope.connected) {
+    //$location.path() = '/stream'
+    console.log($scope.connected);
     console.log('getting users stream');
     $scope.scget = '/me/activities/tracks/affiliated';
   } else {
@@ -59,43 +59,35 @@ function NavCtrl($scope, $route, $routeParams, soundcloud, player, audio) {
   $scope.connect = function() {
     soundcloud.connect($scope);
   };
-  
-  // update tracks in view
-  $scope.updateTracks = function() {
-    $scope.pageOffset = 0;
-    $scope.tracksLoading = true;
-    // Need to create a more dynamic way of doing this??
-    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-    soundcloud.get($scope);
-  };
-  
+
+};
+
+function UserCtrl($scope, soundcloud){
+  // Put user view specific shit here
+};
+
+function StreamCtrl($scope, soundcloud) {
   // Pagination
   $scope.showMore = function() {
     $scope.tracksLoading = true;
-    //$scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-    console.log($scope.pageOffset);
-    $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-    console.log($scope.pageOffset);
-    //soundcloud.getMore($scope);
 
-    // this will definitely break other pagination
-    /*
-if ($scope.streamNextPage) {
+    // Pagination for stream view
+    if ($scope.streamNextPage) {
       $scope.scget = $scope.streamNextPage;
       soundcloud.get($scope, {add: true});
     } else {
       soundcloud.get($scope, {add: true});
-    };
-*/
-    
+    };   
     soundcloud.get($scope, {add: true});
-    
-    
-  } 
+ 
+  }; 
+};
 
-  // Gimme some data
-  soundcloud.get($scope);
+function TracklistCtrl($scope, soundcloud, player, audio) {
 
+  $scope.player = player;
+  $scope.audio = audio;
+  
   // Jxn Player (Based on Peepcode Tunes)
   $scope.playTrack = function(tracks, i) {
     player.play(tracks, i);
@@ -114,7 +106,6 @@ if ($scope.streamNextPage) {
   };
     
   // Scrubbers
-  
   function updateView() {
     $scope.$apply(function() {
       $scope.currentBufferPercentage = ((audio.buffered.length && audio.buffered.end(0)) / audio.duration) * 100;
@@ -130,14 +121,20 @@ if ($scope.streamNextPage) {
     var xpos = $event.layerX / $event.target.offsetWidth;
     player.seek(xpos * audio.duration);
   };
- 
-};
-
-function TracklistCtrl($scope, soundcloud) {
-  // Figure out what is in scope for tracklist
-  // + How to split page scope up 
   
-  // Audio and player scope can probably be limited to tracklist
+  // Pagination
+  $scope.showMore = function() {
+    $scope.tracksLoading = true;
+    //$scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+    //Old way
+    //soundcloud.getMore($scope);
+    soundcloud.get($scope, {add: true});  
+  }; 
+
+  // Gimme some track data
+  soundcloud.get($scope);
+  
 };
   
   

@@ -1,0 +1,33 @@
+<header class="topbar">
+    <a href="#/"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
+      
+    <nav class="nav">
+      <!-- <a href="#/likes" class="">Likes</a> -->
+      <!-- <a href="#/sets" class="">Sets</a> -->
+      <a href="" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
+      <div class="dropmenu-container" ng-model="dropmenuOpen">
+        
+        <ul class="dropmenu" ng-show="dropmenuOpen"> 
+          <li><a href="#jxnblk">Jxnblk</a></li>
+          <li><a href="#jxnblk/favorites">Jxnblk's Likes</a></li>
+          <li><a href="#mrsjxn">Mrsjxn</a></li>
+          <li><a href="#mrsjxn/favorites">Mrsjxn's Likes</a></li>
+          <li><a href="#xlr8r">XLR8R</a></li>
+          <li><a href="#ghostly">Ghostly</a></li>
+
+          <li>        
+            <div class="user-meta">
+              <p ng-show='connected'>{{username}} Connected</p>
+              <a href="" class="sc-connect btn" ng-click="connect();" ng-hide="connected">Connect</a>
+              <!-- Make a sign out button -->
+            </div>
+          </li>
+          
+          <!-- <li><button ng-click="pauseAll()">Kill All</button></li> -->
+          
+          <li>Powered by SoundCloud</li>
+        </ul>
+      </div>
+    
+    </nav>
+  </header>
