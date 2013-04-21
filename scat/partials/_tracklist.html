@@ -1,5 +1,3 @@
-<div class="subhead"><h3>{{viewUser}} <span ng-show="getType == '/favorites'">Likes</span></h3></div>
-
 <div class="sc-tracklist" ng-class="{loading: tracksLoading}">
 
   <div ng-hide="tracks.length || tracksLoading">No tracks for {{scget}}</div>
@@ -10,7 +8,7 @@
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
       
       <div class="bd">
-        <p class="jx-artist">{{track.user.username}}</p>
+        <p class="jx-artist">{{track.user.username}} - {{track.sharing}}</p>
         <p class="h4 b jx-title">{{track.title}}</p>
         
         <!-- To do: find a way to show progress on paused tracks -->

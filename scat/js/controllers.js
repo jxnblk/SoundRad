@@ -3,43 +3,31 @@
 // Controllers
 
 function NavCtrl($scope, $route, $routeParams, $location, soundcloud) {
-  
-  // Init Defaults
+  console.log('NavCtrl');
+  // Get routeparams - probably don't need this if app.js handles routing
   $scope.$routeParams = $routeParams;
   
   // Reconnect user
   $scope.token = localStorage.getItem('token');
   // Need better error states here
   if ($scope.token){
-    console.log('got local token');
     $scope.connected = true;
     //$scope.token = localStorage['scat.token'];
     $scope.username = localStorage.getItem('username');
     //soundcloud.connect($scope);
+    
+    // Should probably do this in factory
     window.SC.storage().setItem('SC.accessToken', $scope.token); 
+    soundcloud.token = $scope.token;
   };
   
-  // Define initial view
-  
-  // Move view types into scoped controllers
-  if($scope.$routeParams.viewUser){
-    $scope.viewUser = $scope.$routeParams.viewUser;
-    if($scope.$routeParams.getType){
-      $scope.getType = '/' + $scope.$routeParams.getType;  
-    } else {
-      $scope.getType = '/tracks';
-    };
-    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-  } else if ($scope.connected) {
-    //$location.path() = '/stream'
-    console.log($scope.connected);
-    console.log('getting users stream');
-    $scope.scget = '/me/activities/tracks/affiliated';
+  // Define initial view - should move this to home controller
+  if ($scope.connected) {
+    $location.path('/stream');
+    $scope.home = '/stream';
   } else {
-    // Default Views - all about me
-    $scope.viewUser = 'jxnblk';
-    $scope.getType = '/tracks';
-    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    $location.path('/jxnblk');
+    $scope.home = '/jxnblk';
   };
      
   $scope.pageSize = 32;
@@ -58,33 +46,65 @@ function NavCtrl($scope, $route, $routeParams, $location, soundcloud) {
   
   $scope.connect = function() {
     soundcloud.connect($scope);
+    $scope.home = '/stream';
   };
 
 };
 
 function UserCtrl($scope, soundcloud){
-  // Put user view specific shit here
-};
-
-function StreamCtrl($scope, soundcloud) {
+  console.log('UserCtrl');
+  
+  // Setting scget to user views
+  if($scope.$routeParams.viewUser){
+    $scope.viewUser = $scope.$routeParams.viewUser;
+    if($scope.$routeParams.getType){
+      $scope.getType = '/' + $scope.$routeParams.getType;  
+    } else {
+      $scope.getType = '/tracks';
+    };
+    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+  };
+  
   // Pagination
   $scope.showMore = function() {
     $scope.tracksLoading = true;
+    $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+    soundcloud.get($scope, {add: true});  
+  }; 
+  
+  // Gimme some track data
+  soundcloud.get($scope);
+  
+};
 
+function StreamCtrl($scope, soundcloud) {
+  console.log('StreamCtrl');
+  
+  // Set scget to stream
+  $scope.scget = '/me/activities/tracks';
+  
+  // Pagination
+  $scope.showMore = function() {
+    $scope.tracksLoading = true;
     // Pagination for stream view
     if ($scope.streamNextPage) {
       $scope.scget = $scope.streamNextPage;
-      soundcloud.get($scope, {add: true});
+      soundcloud.get($scope, {add: true, stream: true});
     } else {
-      soundcloud.get($scope, {add: true});
+      soundcloud.get($scope, {add: true, stream: true});
     };   
-    soundcloud.get($scope, {add: true});
- 
+    soundcloud.get($scope, {add: true, stream: true});
   }; 
+  
+  // Gimme some stream data
+  console.log('getting stream data');
+  soundcloud.get($scope, {stream: true});
+  
+  
 };
 
 function TracklistCtrl($scope, soundcloud, player, audio) {
-
+  console.log('TracklistCtrl');
   $scope.player = player;
   $scope.audio = audio;
   
@@ -94,7 +114,7 @@ function TracklistCtrl($scope, soundcloud, player, audio) {
   };
 
   $scope.pauseTrack = function(track) {
-    player.pause();
+    player.pause(track);
   };
   
   $scope.playNextTrack = function() {
@@ -121,19 +141,6 @@ function TracklistCtrl($scope, soundcloud, player, audio) {
     var xpos = $event.layerX / $event.target.offsetWidth;
     player.seek(xpos * audio.duration);
   };
-  
-  // Pagination
-  $scope.showMore = function() {
-    $scope.tracksLoading = true;
-    //$scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-    $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-    //Old way
-    //soundcloud.getMore($scope);
-    soundcloud.get($scope, {add: true});  
-  }; 
-
-  // Gimme some track data
-  soundcloud.get($scope);
   
 };
   
