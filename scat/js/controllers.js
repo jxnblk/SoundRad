@@ -22,13 +22,13 @@ function NavCtrl($scope, $route, $routeParams, $location, soundcloud) {
   };
   
   // Define initial view - should move this to home controller & handle with routeparams
-  //if ($scope.connected) {
+  if ($scope.connected) {
     //$location.path('/stream');
-    //$scope.home = '/stream';
-  //} else {
+    $scope.home = '/stream';
+  } else {
     //$location.path('/jxnblk');
-    //$scope.home = '/jxnblk';
-  //};
+    $scope.home = '/jxnblk';
+  };
      
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
@@ -77,6 +77,7 @@ function UserCtrl($scope, soundcloud){
   // Gimme some track data
   soundcloud.get($scope);
   
+  soundcloud.getUser($scope);
 };
 
 function StreamCtrl($scope, soundcloud) {

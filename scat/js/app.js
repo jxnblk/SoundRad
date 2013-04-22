@@ -7,6 +7,10 @@ var scat = angular.module('scat', []).
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
     $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
     
+    //$routeProvider.when('/:viewUser/sets', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
+    //$routeProvider.when('/:viewUser/likes', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
+    //$routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/user.html', controller: 'TrackDetailCtrl'});
+    
     
     $routeProvider.otherwise({ redirectTo: '/jxnblk' });
     //$locationProvider.html5Mode(true);
@@ -56,7 +60,7 @@ var scat = angular.module('scat', []).
                         });
                         
                           $scope.token = SC.accessToken();
-                          console.log($scope.token);
+                          //console.log($scope.token);
                         
                         localStorage.setItem('token', $scope.token);
                       });
@@ -119,19 +123,31 @@ var scat = angular.module('scat', []).
                       $scope.streamNextPage = data.next_href;                                 
                     } else {
                       // Handle default get 
+                      
+                      // for some reason this change all the tracks kind to playlists
                       //tracks = [];
                       for (var i = 0; i < data.length; i++) {
                         //console.log('checking each piece of data array');
-                        console.log(data[i].kind);
+                        //console.log(data[i].kind);
                         
                       };
                       tracks = data;
-                      console.log(data);
+                      //console.log(data);
                       $scope.tracks = tracks;
                     };
                     $scope.tracksLoading = false;
                   });      
                 });
+      },
+      
+      getUser:  function($scope, params){
+                  SC.get('/users/' + $scope.viewUser, function(data){
+                    $scope.$apply(function () {
+                      console.log('getting user');
+                      //console.log(data);
+                      $scope.userData = data;
+                    });
+                  });
       },
 
       test:   function($scope){

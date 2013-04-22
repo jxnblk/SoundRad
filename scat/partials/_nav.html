@@ -2,15 +2,16 @@
     <a href="#{{home}}"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
       
     <nav class="nav">
-      <!-- <a href="#/likes" class="">Likes</a> -->
-      <!-- <a href="#/sets" class="">Sets</a> -->
+      <a href="#/{{username}}" class="" ng-show="connected">{{username}}</a>
+      <a href="#/{{username}}/favorites" class="" ng-show="connected">Likes</a>
+      <a href="#/{{username}}/playlists" class="" ng-show="connected">Sets</a>
       <a href="" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
       <div class="dropmenu-container" ng-model="dropmenuOpen">
         
         <ul class="dropmenu" ng-show="dropmenuOpen"> 
-          <li><a href="#jxnblk">Jxnblk</a></li>
-          <li><a href="#jxnblk/favorites">Jxnblk's Likes</a></li>
-          <li><a href="#jxnblk/playlists">Jxnblk's Sets</a></li>
+          <li><a href="#jxnblk" ng-hide="connected">Jxnblk</a></li>
+          <li><a href="#jxnblk/favorites" ng-hide="connected">Jxnblk's Likes</a></li>
+          <li><a href="#jxnblk/playlists" ng-hide="connected">Jxnblk's Sets</a></li>
           <li><a href="#mrsjxn">Mrsjxn</a></li>
           <li><a href="#mrsjxn/favorites">Mrsjxn's Likes</a></li>
           <li><a href="#xlr8r">XLR8R</a></li>
