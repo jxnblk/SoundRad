@@ -25,7 +25,7 @@ var scat = angular.module('scat', []).
     var clientId = '66828e9e2042e682190d1fde4b02e265';
     SC.initialize({
       client_id: clientId,
-      redirect_uri: 'http://jxnblk.com/scat/callback.html'
+      redirect_uri: 'http://sndcmd.com/callback.html'
     });
     
     var connected = false,

@@ -2,9 +2,9 @@
 
   <div ng-hide="tracks.length || tracksLoading">No tracks for {{scget}}</div>
 
-  <div class="track track-{{track.title}}" ng-repeat="track in tracks">
+  <div class="track track-{{track.title}}" ng-repeat="track in tracks" ng-switch on="track.kind">
     
-    <div class="jx-player media" ng-show="track.kind == 'track'">
+    <div class="jx-player media" ng-switch-when="track">
     
       <a href="" class="jx-play no-touch-color" ng-click="playTrack(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
@@ -21,7 +21,7 @@
       </div>
     </div>
     
-    <div class="set" ng-show="track.kind == 'playlist'">
+    <div class="set" ng-switch-when="playlist">
       
       <h2>{{track.title}}</h2>  
       

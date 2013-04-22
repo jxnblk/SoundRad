@@ -151,10 +151,8 @@ function TracklistCtrl($scope, soundcloud, player, audio) {
 
   // Seeking
   $scope.seekTo = function($event){
-    // Switch to something else
-    var xpos = $event.layerX / $event.target.offsetWidth;
+    var xpos = $event.offsetX / $event.target.offsetWidth;
     player.seek(xpos * audio.duration);
-    
   };
   
 };
