@@ -1,8 +1,7 @@
-<!-- <div ng-controller="UserCtrl"> -->
 
-<div class="subhead"><h3>{{viewUser}} <span ng-show="getType == '/favorites'">Likes</span></h3></div>
+
+<div class="subhead"><h3>{{viewUser}} <span ng-show="getType == '/favorites'">Likes</span><span ng-show="getType == '/playlists'">Sets</span></h3></div>
 
   <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
 
 
-<!-- </div> -->

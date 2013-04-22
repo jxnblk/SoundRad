@@ -2,10 +2,11 @@
 
 var scat = angular.module('scat', []).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    //$routeProvider.when('/', {templateUrl: 'partials/_tracklist.html', controller: 'TracklistCtrl'}); 
+    //$routeProvider.when('/', {templateUrl: 'partials/_tracklist.html', controller: 'NavCtrl'}); 
     $routeProvider.when('/stream', {templateUrl: 'partials/stream.html', controller: 'StreamCtrl'});
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
     $routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
+    
     
     $routeProvider.otherwise({ redirectTo: '/jxnblk' });
     //$locationProvider.html5Mode(true);
@@ -42,14 +43,21 @@ var scat = angular.module('scat', []).
                     SC.connect(function() {
                       $scope.$apply(function () {
                         console.log('connecting...');
-                        SC.get('/me', function(me) { 
-                          $scope.$apply(function () { 
-                            $scope.connected = true;
-                            $scope.username = me.username;
-                            localStorage.setItem('username', $scope.username);
+                        SC.get('/me', function(me, error) { 
+                          $scope.$apply(function () {
+                            if (error){
+                              alert('Error Getting');
+                            } else {
+                              $scope.connected = true;
+                              $scope.username = me.username;
+                              localStorage.setItem('username', $scope.username);
+                            }
                           });
                         });
-                        $scope.token = SC.accessToken();
+                        
+                          $scope.token = SC.accessToken();
+                          console.log($scope.token);
+                        
                         localStorage.setItem('token', $scope.token);
                       });
                     });
@@ -102,6 +110,7 @@ var scat = angular.module('scat', []).
                         };    
                       } else if(params.add){
                         // Add non-stream tracks
+                        // to-do: account for sets
                         console.log('Adding tracks to list');
                         tracks = data;
                         $scope.tracks = $scope.tracks.concat(tracks);
@@ -110,7 +119,14 @@ var scat = angular.module('scat', []).
                       $scope.streamNextPage = data.next_href;                                 
                     } else {
                       // Handle default get 
+                      //tracks = [];
+                      for (var i = 0; i < data.length; i++) {
+                        //console.log('checking each piece of data array');
+                        console.log(data[i].kind);
+                        
+                      };
                       tracks = data;
+                      console.log(data);
                       $scope.tracks = tracks;
                     };
                     $scope.tracksLoading = false;

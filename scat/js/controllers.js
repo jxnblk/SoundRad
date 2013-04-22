@@ -21,14 +21,14 @@ function NavCtrl($scope, $route, $routeParams, $location, soundcloud) {
     soundcloud.token = $scope.token;
   };
   
-  // Define initial view - should move this to home controller
-  if ($scope.connected) {
-    $location.path('/stream');
-    $scope.home = '/stream';
-  } else {
-    $location.path('/jxnblk');
-    $scope.home = '/jxnblk';
-  };
+  // Define initial view - should move this to home controller & handle with routeparams
+  //if ($scope.connected) {
+    //$location.path('/stream');
+    //$scope.home = '/stream';
+  //} else {
+    //$location.path('/jxnblk');
+    //$scope.home = '/jxnblk';
+  //};
      
   $scope.pageSize = 32;
   $scope.pageOffset = 0;
@@ -47,6 +47,8 @@ function NavCtrl($scope, $route, $routeParams, $location, soundcloud) {
   $scope.connect = function() {
     soundcloud.connect($scope);
     $scope.home = '/stream';
+    $scope.tokenUrl = $location.path();
+    console.log($scope.tokenUrl);
   };
 
 };
@@ -103,6 +105,11 @@ function StreamCtrl($scope, soundcloud) {
   
 };
 
+function SetsCtrl($scope, soundcloud) {
+  console.log('SetsCtrl');
+  
+};
+
 function TracklistCtrl($scope, soundcloud, player, audio) {
   console.log('TracklistCtrl');
   $scope.player = player;
@@ -111,6 +118,11 @@ function TracklistCtrl($scope, soundcloud, player, audio) {
   // Jxn Player (Based on Peepcode Tunes)
   $scope.playTrack = function(tracks, i) {
     player.play(tracks, i);
+  };
+  
+  $scope.playSet = function(tracks, i) {
+    console.log(i);
+    console.log(tracks[i].title);
   };
 
   $scope.pauseTrack = function(track) {
@@ -138,11 +150,26 @@ function TracklistCtrl($scope, soundcloud, player, audio) {
 
   // Seeking
   $scope.seekTo = function($event){
+    // Switch to something else
     var xpos = $event.layerX / $event.target.offsetWidth;
     player.seek(xpos * audio.duration);
+    
   };
   
 };
+
+
+// Move controllers into module
+// No fucking clue how to get this shit working
+/*
+angular.module('scat.controllers', []).
+  controller('MyCtrl1', [function() {
+
+  }])
+  .controller('TracklistCtrl', [function($scope, soundcloud, player, audio) {
+
+  }]);
+*/
   
   
   

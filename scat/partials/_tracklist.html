@@ -3,14 +3,14 @@
   <div ng-hide="tracks.length || tracksLoading">No tracks for {{scget}}</div>
 
   <div class="track track-{{track.title}}" ng-repeat="track in tracks">
-    <div class="jx-player media">
+    
+    <div class="jx-player media" ng-show="track.kind == 'track'">
+    
       <a href="" class="jx-play no-touch-color" ng-click="playTrack(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
-      
       <div class="bd">
-        <p class="jx-artist">{{track.user.username}} - {{track.sharing}}</p>
+        <p class="jx-artist">{{track.user.username}} - {{track.kind}}<span ng-show="track.sharing == 'private'"> [private]</span></p>
         <p class="h4 b jx-title">{{track.title}}</p>
-        
         <!-- To do: find a way to show progress on paused tracks -->
         <div class="jx-time-span" ng-show="player.current.title == track.title">
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
@@ -19,8 +19,38 @@
           <p class="jx-time sm">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
         </div>
       </div>
-      
     </div>
+    
+    <div class="set" ng-show="track.kind == 'playlist'">
+      
+      <h2>{{track.title}} - {{track.kind}}</h2>  
+      
+      <div class="track track-{{track.title}}" ng-repeat="setTrack in track.tracks">
+        
+        <div class="jx-player media">
+        
+          <a href="" class="jx-play no-touch-color" ng-click="playTrack(track.tracks, $index)" ng-hide="player.current.title == setTrack.title"><i class="i-jxn-play"></i></a>
+          <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(setTrack)" ng-show="player.current.title == setTrack.title"><i class="i-jxn-pause"></i></a>
+          <div class="bd">
+            <p class="jx-artist">{{setTrack.user.username}}</p>
+            <p class="h4 b jx-title">{{setTrack.title}}</p>
+            <!-- To do: find a way to show progress on paused tracks -->
+            <div class="jx-time-span" ng-show="player.current.title == setTrack.title">
+              <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
+              <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
+              <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
+              <p class="jx-time sm">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+            </div> <!-- /.jx-time-span -->
+          </div> <!-- /.bd -->
+          
+        </div><!-- /.jx-player -->
+          
+      </div><!-- /.track -->
+    </div><!-- /.set -->
+    
+    
+    
+    
   </div><!-- Track -->
   
   <a href="" class="show-more" ng-click="showMore()" ng-hide="tracks.length <= pageOffset || tracksLoading">Show More</a>
