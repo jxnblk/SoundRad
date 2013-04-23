@@ -22,6 +22,7 @@
         <div class="jx-toggle-actions" ng-hide="viewActions" ng-click="viewActions = true"><i class="icon i-jxn-show-more"></i></div>
         <div class="jx-toggle-actions" ng-show="viewActions" ng-click="viewActions = false"><i class="icon i-jxn-close"></i></div>
         <div class="jx-actions" style="display:none" ng-cloak ng-hide="!viewActions" ng-animate="'slideleft'">
+          <a ng-href="{{track.permalink_url}}" target="_blank"><i class="icon i-jxn-link"></i></a>
           <a href="" ng-click="like(track.id)" ng-hide="liked"><i class="icon i-jxn-heart"></i></a>
           <a href="" ng-click="unlike(track.id)" ng-show="liked" class="active"><i class="icon i-jxn-heart"></i></a>
         </div>

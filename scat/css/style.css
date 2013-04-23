@@ -96,7 +96,18 @@ a {
   background-color: #ff6600;
   border-radius: .125rem;
   padding: 0 16px; }
+  .btn .small {
+    height: 2rem;
+    line-height: 2rem; }
   .btn:hover {
+    background-color: #ff751a; }
+
+nav a.btn.small {
+  height: 2rem;
+  line-height: 2rem;
+  margin: .5rem;
+  color: white; }
+  nav a.btn.small:hover {
     background-color: #ff751a; }
 
 .subhead, footer {
@@ -120,7 +131,7 @@ a {
   min-width: 288px;
   right: 0;
   padding: 1rem;
-  z-index: 512;
+  z-index: 2048;
   border-radius: 0 0 .125rem .125rem;
   list-style: none; }
   .dropmenu li {
@@ -361,7 +372,7 @@ input[type="text"] {
   width: 100%;
   height: 64px;
   position: absolute;
-  z-index: 512; }
+  z-index: 320; }
 
 .jx-buffer,
 .jx-played {
@@ -398,11 +409,11 @@ input[type="text"] {
   right: 0;
   bottom: 0;
   padding: 0 8px;
-  z-index: 1024;
+  z-index: 512;
   color: rgba(187, 187, 187, 0.5);
   cursor: pointer; }
   .jx-toggle-actions i {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 64px; }
 
 .jx-actions {
@@ -411,12 +422,12 @@ input[type="text"] {
   right: 0;
   bottom: 0;
   left: 0;
-  padding-right: 36px;
+  padding-right: 48px;
   text-align: right;
-  z-index: 768;
+  z-index: 480;
   line-height: 64px;
   color: white;
-  background: #444444; }
+  background: rgba(68, 68, 68, 0.8); }
   .jx-actions a {
     font-size: 24px;
     line-height: 64px;

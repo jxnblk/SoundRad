@@ -27,6 +27,21 @@ a:hover {
   background-color: $prime;
   border-radius: .125rem;
   padding: 0 16px;
+  .small {
+    height: 2rem;
+    line-height: 2rem;
+  }
+  &:hover {
+    background-color: lighten($prime, 5%);
+  }
+}
+
+// This is a hack - need to switch everything to OOCSS
+nav a.btn.small {
+  height: 2rem;
+  line-height: 2rem;
+  margin: .5rem;
+  color: $white;
   &:hover {
     background-color: lighten($prime, 5%);
   }
@@ -58,7 +73,7 @@ a:hover {
     min-width: 288px;
   right: 0;
   padding: 1rem;
-  z-index: 512;
+  z-index: 2048;
   border-radius: 0 0 .125rem .125rem;
   list-style: none; 
   li {

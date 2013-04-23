@@ -3,6 +3,7 @@
 var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     //$routeProvider.when('/', {templateUrl: 'partials/_tracklist.html', controller: 'NavCtrl'}); 
+    $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
     $routeProvider.when('/stream', {templateUrl: 'partials/stream.html', controller: 'StreamCtrl'});
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserTracksCtrl'});
     
@@ -15,7 +16,7 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
     //$routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackCtrl'});
     
     
-    $routeProvider.otherwise({ redirectTo: '/jxnblk' });
+    $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);
         
         // need to figure out how to define this globally

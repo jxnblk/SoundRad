@@ -68,7 +68,7 @@
   width: 100%;
   height: $m4;
   position: absolute;
-  z-index: 512;
+  z-index: 320;
 }
 
 .jx-buffer,
@@ -113,12 +113,12 @@
   right: 0;
   bottom: 0;
   padding: 0 8px;
-  z-index: 1024;
+  z-index: 512;
   color: rgba($gray4, .5);
   cursor: pointer;
   //background: rgba(255,0,0,0.2);
   i {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 64px;
   }
 }
@@ -129,12 +129,12 @@
   right: 0;
   bottom: 0;
   left: 0;
-  padding-right: 36px;
+  padding-right: 48px;
   text-align: right;
-  z-index: 768;
+  z-index: 480;
   line-height: 64px;
   color: $white;
-  background: $text;
+  background: rgba($text, .8);
   a {
     font-size: 24px;
     line-height: 64px;

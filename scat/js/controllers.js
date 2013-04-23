@@ -53,6 +53,28 @@ angular.module('scat.controllers', [])
     };
 
   }])
+  
+  .controller('HomeCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+    console.log('HomeCtrl');
+    
+    // Setting scget to home views
+    if ($scope.connected) {
+      $scope.scget = '/me/activities/tracks';
+      soundcloud.get($scope, {stream: true});
+    } else {
+      // Not sure if this works
+      $scope.scget = '/tracks';
+      soundcloud.get($scope);
+    };
+
+    // Pagination - need to move this elsewhere / combine with stream pagination?
+    $scope.showMore = function() {
+      $scope.tracksLoading = true;
+      $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+      soundcloud.get($scope, {add: true});  
+    };   
+
+  }])
 
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     console.log('UserCtrl');

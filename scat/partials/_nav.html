@@ -5,6 +5,7 @@
       <a href="#/{{username}}" class="" ng-show="connected">{{username}}</a>
       <a href="#/{{username}}/likes" class="" ng-show="connected">Likes</a>
       <a href="#/{{username}}/sets" class="" ng-show="connected">Sets</a>
+      <a href="" class="sc-connect btn small" ng-click="connect();" ng-hide="connected">Connect</a>
       <a href="" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
       <div class="dropmenu-container" ng-model="dropmenuOpen">
         
@@ -20,7 +21,7 @@
           <li>        
             <div class="user-meta">
               <p ng-show='connected'>{{username}} Connected</p>
-              <a href="" class="sc-connect btn" ng-click="connect();" ng-hide="connected">Connect</a>
+              
               <!-- Make a sign out button -->
             </div>
           </li>
