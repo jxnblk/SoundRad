@@ -1,5 +1,4 @@
 body {
-  font-family: Helvetica, sans-serif;
   font-size: 100%;
   line-height: 1.5;
   color: #444;
@@ -15,6 +14,9 @@ a:hover {
 
 //      Organize this
 
+.hide {
+  //visibility: hidden;
+}
 
 .btn {
   display: inline-block;

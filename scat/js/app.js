@@ -10,7 +10,9 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
     
     $routeProvider.when('/:viewUser/sets', {templateUrl: 'partials/user.html', controller: 'SetsCtrl'});
     $routeProvider.when('/:viewUser/likes', {templateUrl: 'partials/user.html', controller: 'LikesCtrl'});
-    $routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackCtrl'});
+    
+    // Need to work on this - rename to TrackDetail
+    //$routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackCtrl'});
     
     
     $routeProvider.otherwise({ redirectTo: '/jxnblk' });

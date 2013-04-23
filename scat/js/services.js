@@ -77,8 +77,8 @@ angular.module('scat.services', [])
                             var track = data.collection[i].origin;
                             tracks.push(track);
                           } else if (data.collection[i].type == 'track-sharing') {
-                            console.log('its a private track');
-                            console.log(data.collection[i]);
+                            //console.log('its a private track');
+                            //console.log(data.collection[i]);
                             var track = data.collection[i].origin.track;
                             tracks.push(track);
                           } else if (data.collection[i].type == 'playlist') {
@@ -129,28 +129,19 @@ angular.module('scat.services', [])
                   });
       },
       
-      getMyLikes: function(trackid){
-                    SC.get('/me/favorites/' + trackid, function(data, error){
-                      if (data){
-                        console.log('get my likes' + data);  
-                      } else if (error) {
-                        console.log(error)
-                        
-                      };
-                      
-                    });
-      },
-      
-      like:   function(trackid){
-                
+      like:   function($scope, trackid){
                 SC.put('/me/favorites/' + trackid, function(){
-                  console.log('liked' + trackid);  
+                  console.log('liked' + trackid);
+                  $scope.liked = true;
+                  $scope.track.user_favorite = true;
                 });
       },
       
-      unlike: function(trackid){
+      unlike: function($scope, trackid){
                 SC.delete('/me/favorites/' + trackid, function(){
                   console.log('unliked' + trackid);  
+                  $scope.liked = false;
+                  $scope.track.user_favorite = false;
                 });
       },
 

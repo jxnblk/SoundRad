@@ -118,8 +118,8 @@ angular.module('scat.controllers', [])
     $scope.getType = '/favorites';
   }])
   
-  .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud){
-    console.log('TrackCtrl');
+  .controller('TrackDetailCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
+    console.log('TrackDetailCtrl');
     //console.log($routeParams.track);
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.trackUrl = $scope.$routeParams.track;
@@ -131,28 +131,38 @@ angular.module('scat.controllers', [])
     
     soundcloud.get($scope, {track: true});
     if ($scope.connected) {
-      soundcloud.getMyLikes($scope.trackUrl);
       
-      $scope.like = function(trackid) {
-        soundcloud.like(trackid);
-      };
-      
-      $scope.unlike = function(trackid) {
-        soundcloud.unlike(trackid);
-      };
       
     };
     
   }])
   
   .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
-    
+      
   }])
   
-  .controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
+  .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+  
+    if ($scope.connected) {
+      // Init liked from track object
+      $scope.liked = $scope.track.user_favorite;
+      
+      $scope.like = function(trackid) {
+        soundcloud.like($scope, trackid);
+      };
+      
+      $scope.unlike = function(trackid) {
+        soundcloud.unlike($scope, trackid);
+      };
+      
+    };
+  }])
+  
+  .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
     console.log('PlayerCtrl');
     $scope.player = player;
     $scope.audio = audio;
+    $scope.viewActions = false;
     
     // Jxn Player (Based on Peepcode Tunes)
     $scope.playTracks = function(tracks, i) {
@@ -191,6 +201,15 @@ angular.module('scat.controllers', [])
       var xpos = $event.offsetX / $event.target.offsetWidth;
       player.seek(xpos * audio.duration);
     };
+    
+    // Track Actions
+    $scope.showActions = function(){
+      $scope.viewActions = true;
+    };
+    
+    
+    
+    
   }]);
   
   

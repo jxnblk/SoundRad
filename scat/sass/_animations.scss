@@ -13,6 +13,11 @@
 @-webkit-keyframes spin {
   from  {-webkit-transform: rotate(0deg);}
   to    {-webkit-transform: rotate(360deg);}
+}
+
+@-webkit-keyframes slideleft {
+  from  {-webkit-transform: translate(100%, 0);}
+  to    {-webkit-transform: translate(0%, 0);}
 } 
 
 .anim-pulse {
@@ -27,6 +32,29 @@
   -webkit-animation: spin 4s linear infinite;
 }
 
+.anim-slideleft {
+  -webkit-animation: slideleft .2s ease;
+}
+
 .loading {
   -webkit-animation: transpulse 2s infinite;
+}
+
+// Angular ng-animate animations
+.slideleft-show-setup, .slideleft-hide-setup {
+  -webkit-transition: all .2s ease;
+}
+
+.slideleft-show-setup {
+  -webkit-transform: translate(100%, 0);
+}
+.slideleft-show-setup.slideleft-show-start {
+  -webkit-transform: translate(0, 0);
+}
+
+.slideleft-hide-setup {
+  -webkit-transform: translate(0, 0);
+}
+.slideleft-hide-setup.slideleft-hide-start {
+  -webkit-transform: translate(100%, 0);
 }

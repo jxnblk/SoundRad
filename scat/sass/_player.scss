@@ -102,8 +102,49 @@
 
 .jx-time {
   position: absolute;
-  top: 6px;
+  top: 4px;
   right: 8px;
+  
+}
+
+.jx-toggle-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 8px;
+  z-index: 1024;
+  color: rgba($gray4, .5);
+  cursor: pointer;
+  //background: rgba(255,0,0,0.2);
+  i {
+    font-size: 20px;
+    line-height: 64px;
+  }
+}
+
+.jx-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-right: 36px;
+  text-align: right;
+  z-index: 768;
+  line-height: 64px;
+  color: $white;
+  background: $text;
+  a {
+    font-size: 24px;
+    line-height: 64px;
+    padding: 0 8px;
+    margin: 0 8px;
+    color: $gray4;
+    &.active {
+      color: $prime;
+    }
+  }
 }
 
 .jx-buffer,
@@ -111,21 +152,4 @@
   width: 0;
 }
 
-
-/*
-.jx-time-indicators {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  font-size: 10px;
-  line-height: 1;
-  color: rgba(0,0,0,0.5);
-  display: none;
-  -webkit-animation: popin .2s linear;
-}
-
-.playing .jx-time-indicators {
-  display: block;
-}
-*/
 

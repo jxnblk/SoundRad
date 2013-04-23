@@ -79,7 +79,6 @@
 }
 */
 body {
-  font-family: Helvetica, sans-serif;
   font-size: 100%;
   line-height: 1.5;
   color: #444; }
@@ -133,6 +132,9 @@ a {
   display: block;
   -webkit-transform: rotate(180deg); }
 
+body {
+  font-family: "proxima-nova-condensed", "urbana", Helvetica, sans-serif; }
+
 .h1 {
   font-size: 64px; }
 
@@ -153,6 +155,9 @@ a {
 
 .sm {
   font-size: 12px; }
+
+.tiny {
+  font-size: 10px; }
 
 .b {
   font-weight: 700; }
@@ -184,6 +189,13 @@ a {
   to {
     -webkit-transform: rotate(360deg); } }
 
+@-webkit-keyframes slideleft {
+  from {
+    -webkit-transform: translate(100%, 0); }
+
+  to {
+    -webkit-transform: translate(0%, 0); } }
+
 .anim-pulse {
   -webkit-animation: transpulse 2s infinite; }
 
@@ -193,8 +205,26 @@ a {
 .anim-spin {
   -webkit-animation: spin 4s linear infinite; }
 
+.anim-slideleft {
+  -webkit-animation: slideleft .2s ease; }
+
 .loading {
   -webkit-animation: transpulse 2s infinite; }
+
+.slideleft-show-setup, .slideleft-hide-setup {
+  -webkit-transition: all .2s ease; }
+
+.slideleft-show-setup {
+  -webkit-transform: translate(100%, 0); }
+
+.slideleft-show-setup.slideleft-show-start {
+  -webkit-transform: translate(0, 0); }
+
+.slideleft-hide-setup {
+  -webkit-transform: translate(0, 0); }
+
+.slideleft-hide-setup.slideleft-hide-start {
+  -webkit-transform: translate(100%, 0); }
 
 .topbar {
   position: fixed;
@@ -359,26 +389,43 @@ input[type="text"] {
 
 .jx-time {
   position: absolute;
-  top: 6px;
+  top: 4px;
   right: 8px; }
+
+.jx-toggle-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 8px;
+  z-index: 1024;
+  color: rgba(187, 187, 187, 0.5);
+  cursor: pointer; }
+  .jx-toggle-actions i {
+    font-size: 20px;
+    line-height: 64px; }
+
+.jx-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-right: 36px;
+  text-align: right;
+  z-index: 768;
+  line-height: 64px;
+  color: white;
+  background: #444444; }
+  .jx-actions a {
+    font-size: 24px;
+    line-height: 64px;
+    padding: 0 8px;
+    margin: 0 8px;
+    color: #bbbbbb; }
+    .jx-actions a.active {
+      color: #ff6600; }
 
 .jx-buffer,
 .jx-played {
   width: 0; }
-
-/*
-.jx-time-indicators {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  font-size: 10px;
-  line-height: 1;
-  color: rgba(0,0,0,0.5);
-  display: none;
-  -webkit-animation: popin .2s linear;
-}
-
-.playing .jx-time-indicators {
-  display: block;
-}
-*/
