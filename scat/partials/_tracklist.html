@@ -1,4 +1,4 @@
-<div class="sc-tracklist" ng-class="{loading: tracksLoading}">
+<div class="sc-tracklist" ng-class="{loading: tracksLoading}" ng-controller="PlayerCtrl">
 
   <div ng-hide="tracks.length || tracksLoading">No tracks for {{scget}}</div>
 
@@ -6,10 +6,10 @@
     
     <div class="jx-player media" ng-switch-when="track">
     
-      <a href="" class="jx-play no-touch-color" ng-click="playTrack(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
+      <a href="" class="jx-play no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
       <div class="bd">
-        <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span></p>
+        <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span> &mdash; {{track.id}}</p>
         <p class="h4 b jx-title">{{track.title}}</p>
         <!-- To do: find a way to show progress on paused tracks -->
         <div class="jx-time-span" ng-show="player.current.title == track.title">
@@ -21,7 +21,7 @@
       </div>
     </div>
     
-    <div class="set" ng-switch-when="playlist">
+    <div class="set"  ng-switch-when="playlist">
       
       <h2>{{track.title}}</h2>  
       
@@ -29,7 +29,7 @@
         
         <div class="jx-player media">
         
-          <a href="" class="jx-play no-touch-color" ng-click="playTrack(track.tracks, $index)" ng-hide="player.current.title == setTrack.title"><i class="i-jxn-play"></i></a>
+          <a href="" class="jx-play no-touch-color" ng-click="playTracks(track.tracks, $index)" ng-hide="player.current.title == setTrack.title"><i class="i-jxn-play"></i></a>
           <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(setTrack)" ng-show="player.current.title == setTrack.title"><i class="i-jxn-pause"></i></a>
           <div class="bd">
             <p class="jx-artist">{{setTrack.user.username}}</p>

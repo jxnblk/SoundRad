@@ -1,0 +1,35 @@
+<div ng-class="{loading: tracksLoading}" ng-controller="PlayerCtrl">  
+
+  <!-- Is this shit really only 100px? -->
+  <!-- <img ng-src="{{track.artwork_url}}" /> -->
+
+  <div class="jx-player media">
+    <a href="" class="jx-play no-touch-color" ng-click="playTrack(track)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
+    <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
+    <div class="bd">
+      <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span> &mdash; {{track.id}}</p>
+      <p class="h4 b jx-title">{{track.title}}</p>
+      <!-- To do: find a way to show progress on paused tracks -->
+      <div class="jx-time-span" ng-show="player.current.title == track.title">
+        <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
+        <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
+        <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
+        <p class="jx-time sm">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <span>{{}}</span>
+  
+  <a href="" ng-click="like(track.id)">Like this track</a>
+  <br />
+  <a href="" ng-click="unlike(track.id)">Unlike</a>
+  
+  
+
+</div>
+
+
+
+
+
