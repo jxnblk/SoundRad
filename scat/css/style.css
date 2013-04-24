@@ -6,17 +6,18 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 .topbar {
+  color: #999999;
   background-color: white;
   border-bottom: 1px solid #eeeeee; }
   .topbar nav a {
-    color: #444444; }
+    color: #999999; }
 
 .logo {
   color: #ff6600; }
 
 .subhead, footer {
-  background-color: #f6f6f6;
-  color: #bbbbbb; }
+  color: #999999;
+  border-bottom: 1px solid #eeeeee; }
 
 .view {
   background-color: white; }
@@ -30,47 +31,25 @@
 .track:first-child {
   border-top: 1px solid #eeeeee; }
 
-.sc-play {
-  background-color: #bbbbbb; }
-
-.sc-play:hover {
-  background-color: #bbbbbb; }
-
-.sc-pause {
-  background-color: #ff6600; }
-
-.sc-pause:hover {
-  background-color: #ff751a; }
-
-.sc-buffer {
-  background-color: #eeeeee;
-  opacity: .5; }
-
-.sc-played {
-  background-color: #ff6600;
-  opacity: .1; }
-
-.playing .sc-played {
-  border-right: 1px solid #ff6600;
-  opacity: .4; }
-
 .jx-play {
-  background-color: #bbbbbb; }
+  color: #bbbbbb;
+  /* background-color: $gray4; */ }
 
 .jx-play:hover {
-  background-color: #bbbbbb; }
+  background-color: #f6f6f6; }
 
 .jx-pause {
+  color: white;
   background-color: #ff6600; }
 
 .jx-pause:hover {
   background-color: #ff751a; }
 
 .jx-buffer {
-  background-color: rgba(255, 102, 0, 0.05); }
+  background-color: #f6f6f6; }
 
 .jx-played {
-  background-color: rgba(255, 102, 0, 0.5); }
+  background-color: #dddddd; }
 
 /*
 .playing .jx-played {
@@ -115,36 +94,18 @@ nav a.btn.small {
   height: 48px;
   line-height: 48px; }
 
+.rot-180 {
+  display: block;
+  -webkit-transform: rotate(180deg); }
+
 .show-more {
   display: block;
   height: 3rem;
   line-height: 3rem;
   text-align: center; }
 
-.dropmenu-container {
-  position: relative;
-  top: 48px; }
-
-.dropmenu {
-  position: absolute;
-  background-color: #eee;
-  min-width: 288px;
-  right: 0;
-  padding: 1rem;
-  z-index: 2048;
-  border-radius: 0 0 .125rem .125rem;
-  list-style: none; }
-  .dropmenu li {
-    display: block; }
-    .dropmenu li a {
-      float: none; }
-
-.rot-180 {
-  display: block;
-  -webkit-transform: rotate(180deg); }
-
 body {
-  font-family: "proxima-nova-condensed", "urbana", Helvetica, sans-serif; }
+  font-family: "myriad-pro-semi-condensed", "source-sans-pro", "proxima-nova-condensed", "urbana", Helvetica, sans-serif; }
 
 .h1 {
   font-size: 64px; }
@@ -318,6 +279,11 @@ input[type="text"] {
     display: block;
     font-size: 64px; }
 
+.tap-pad {
+  display: block;
+  line-height: 48px;
+  padding: 0 16px; }
+
 /* JxPlayer */
 .jx-player {
   position: relative;
@@ -337,7 +303,6 @@ input[type="text"] {
 .jx-play,
 .jx-pause {
   float: left;
-  color: #fff;
   height: 20px;
   width: 20px;
   padding: 22px;
@@ -378,14 +343,14 @@ input[type="text"] {
 .jx-played {
   height: 64px;
   position: absolute;
-  top: 0;
-  z-index: 256; }
+  top: 0; }
 
 .jx-artist {
   overflow: hidden;
   position: absolute;
   top: 6px;
-  left: 16px; }
+  left: 16px;
+  z-index: 256; }
 
 .jx-title {
   position: absolute;
@@ -396,12 +361,14 @@ input[type="text"] {
   line-height: 32px;
   text-overflow: ellipsis;
   text-wrap: none;
-  white-space: no-wrap; }
+  white-space: no-wrap;
+  z-index: 256; }
 
 .jx-time {
   position: absolute;
   top: 4px;
-  right: 8px; }
+  right: 8px;
+  z-index: 256; }
 
 .jx-toggle-actions {
   position: absolute;
@@ -413,7 +380,6 @@ input[type="text"] {
   color: rgba(187, 187, 187, 0.5);
   cursor: pointer; }
   .jx-toggle-actions i {
-    font-size: 24px;
     line-height: 64px; }
 
 .jx-actions {

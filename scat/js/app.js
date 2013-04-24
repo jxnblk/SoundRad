@@ -5,6 +5,7 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
     //$routeProvider.when('/', {templateUrl: 'partials/_tracklist.html', controller: 'NavCtrl'}); 
     $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
     $routeProvider.when('/stream', {templateUrl: 'partials/stream.html', controller: 'StreamCtrl'});
+    $routeProvider.when('/more', {templateUrl: 'partials/_navmore.html'});
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserTracksCtrl'});
     
     //$routeProvider.when('/:viewUser/:getType', {templateUrl: 'partials/user.html', controller: 'UserCtrl'});
@@ -15,12 +16,8 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
     // Need to work on this - rename to TrackDetail
     //$routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackCtrl'});
     
-    
     $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);
-        
-        // need to figure out how to define this globally
-        //var clientId = '66828e9e2042e682190d1fde4b02e265';
     
   }]);
 

@@ -5,7 +5,7 @@
 
 angular.module('scat.controllers', [])
 
-  .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$location', 'soundcloud', function($scope, $route, $routeParams, $location, soundcloud) {
+  .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$location', 'soundcloud', 'player', function($scope, $route, $routeParams, $location, soundcloud, player) {
     console.log('NavCtrl');
     // Get routeparams - probably don't need this if app.js handles routing
     $scope.$routeParams = $routeParams;
@@ -51,6 +51,9 @@ angular.module('scat.controllers', [])
       $scope.tokenUrl = $location.path();
       console.log($scope.tokenUrl);
     };
+    
+    //$scope.current.title = player.current.title;
+    
 
   }])
   

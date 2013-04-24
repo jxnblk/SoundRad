@@ -1,0 +1,21 @@
+<div class="currently-playing tap-pad">
+  Now Playing: <a ng-href="{{}}">{{player.current.title}}</a>
+</div>
+
+<ul>
+  <li><a href="#/jxnblk" class="tap-pad">Jxnblk</a></li>
+  <li><a href="#/jxnblk/likes" class="tap-pad">Jxnblk's Likes</a></li>
+  <li><a href="#/jxnblk/sets" class="tap-pad">Jxnblk's Sets</a></li>
+  <li><a href="#/mrsjxn" class="tap-pad">Mrsjxn</a></li>
+  <li><a href="#/mrsjxn/likes" class="tap-pad">Mrsjxn's Likes</a></li>
+  <li><a href="#/xlr8r" class="tap-pad">XLR8R</a></li>
+  <li><a href="#/ghostly" class="tap-pad">Ghostly</a></li>
+  <li ng-show='connected' class="tap-pad">{{username}} Connected <!-- Make a sign out button --></li>
+  <!-- <li><button ng-click="pauseAll()">Kill All</button></li> -->  
+  <li class="tap-pad">Powered by SoundCloud</li>
+</ul>
+
+<h3 class="tap-pad">Following</h3>
+<ul>
+  <li class="tap-pad">Put following list here</li>
+</ul>

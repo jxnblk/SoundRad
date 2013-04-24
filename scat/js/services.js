@@ -269,6 +269,10 @@ angular.module('scat.services', [])
       $rootScope.$apply(player.next());
     }, false);
     
+    //audio.addEventListener('pause', function() {
+      //$rootScope.$apply(player.pause());
+    //}, false);
+    
 
     return player;
   })

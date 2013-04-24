@@ -25,7 +25,7 @@
 .jx-play,
 .jx-pause {
   float: left;
-  color: #fff;
+  //color: #fff;
   height: 20px;
   width: 20px;
   padding: 22px;
@@ -76,7 +76,7 @@
   height: $m4;
   position: absolute;
   top: 0;
-  z-index: 256;
+  //z-index: 256;
 }
 
 .jx-artist {
@@ -84,7 +84,7 @@
   position: absolute;
   top: 6px;
   left: 16px;
-  //z-index: 256;
+  z-index: 256;
 }
 
 .jx-title {
@@ -97,14 +97,14 @@
   text-overflow: ellipsis; 
   text-wrap: none;
   white-space: no-wrap;
-  //z-index: 256;
+  z-index: 256;
 }
 
 .jx-time {
   position: absolute;
   top: 4px;
   right: 8px;
-  
+  z-index: 256;
 }
 
 .jx-toggle-actions {
@@ -118,7 +118,7 @@
   cursor: pointer;
   //background: rgba(255,0,0,0.2);
   i {
-    font-size: 24px;
+    //font-size: 24px;
     line-height: 64px;
   }
 }

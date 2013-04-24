@@ -2,35 +2,13 @@
     <a href="#{{home}}"><h1 class="logo h3 bold"><i class="i-jxn-scat icon"></i></h1></a>
       
     <nav class="nav">
-      <a href="#/{{username}}" class="" ng-show="connected">{{username}}</a>
+      
       <a href="#/{{username}}/likes" class="" ng-show="connected">Likes</a>
       <a href="#/{{username}}/sets" class="" ng-show="connected">Sets</a>
+      <a href="#/{{username}}" class="" ng-show="connected">{{username}}</a>
       <a href="" class="sc-connect btn small" ng-click="connect();" ng-hide="connected">Connect</a>
-      <a href="" class="" ng-click="toggleDropmenu()"><i class="i-jxn-cog icon"></i></a>
-      <div class="dropmenu-container" ng-model="dropmenuOpen">
-        
-        <ul class="dropmenu" ng-show="dropmenuOpen"> 
-          <li><a href="#jxnblk" ng-hide="connected">Jxnblk</a></li>
-          <li><a href="#jxnblk/likes" ng-hide="connected">Jxnblk's Likes</a></li>
-          <li><a href="#jxnblk/sets" ng-hide="connected">Jxnblk's Sets</a></li>
-          <li><a href="#mrsjxn">Mrsjxn</a></li>
-          <li><a href="#mrsjxn/likes">Mrsjxn's Likes</a></li>
-          <li><a href="#xlr8r">XLR8R</a></li>
-          <li><a href="#ghostly">Ghostly</a></li>
-
-          <li>        
-            <div class="user-meta">
-              <p ng-show='connected'>{{username}} Connected</p>
-              
-              <!-- Make a sign out button -->
-            </div>
-          </li>
-          
-          <!-- <li><button ng-click="pauseAll()">Kill All</button></li> -->
-          
-          <li>Powered by SoundCloud</li>
-        </ul>
-      </div>
+      
+      <a href="#/more">More</a>
     
     </nav>
   </header>

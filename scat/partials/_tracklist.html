@@ -4,7 +4,7 @@
 
   <div class="track track-{{track.title}}" ng-repeat="track in tracks" ng-switch on="track.kind">
     
-    <div class="jx-player media" ng-switch-when="track" ng-controller="TrackCtrl">
+    <div class="jx-player media" ng-class="{active: player.current.title == track.title}" ng-switch-when="track" ng-controller="TrackCtrl">
     
       <a href="" class="jx-play no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
@@ -16,11 +16,11 @@
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
           <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
           <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
-          <p class="jx-time tiny">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+          <p class="jx-time tiny" ng-cloak>{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
         </div>
         
-        <div class="jx-toggle-actions" ng-hide="viewActions" ng-click="viewActions = true"><i class="icon i-jxn-show-more"></i></div>
-        <div class="jx-toggle-actions" ng-show="viewActions" ng-click="viewActions = false"><i class="icon i-jxn-close"></i></div>
+        <div class="jx-toggle-actions" ng-hide="viewActions" ng-click="viewActions = true"><i class="icon i-jxn-carat"></i></div>
+        <div class="jx-toggle-actions" ng-show="viewActions" ng-click="viewActions = false"><i class="h4 icon i-jxn-close"></i></div>
         <div class="jx-actions" style="display:none" ng-cloak ng-hide="!viewActions" ng-animate="'slideleft'">
           <a ng-href="{{track.permalink_url}}" target="_blank"><i class="icon i-jxn-link"></i></a>
           <a href="" ng-click="like(track.id)" ng-hide="liked"><i class="icon i-jxn-heart"></i></a>
