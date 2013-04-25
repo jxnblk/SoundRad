@@ -15,6 +15,7 @@ angular.module('scat.controllers', [])
     // Need better error states here
     if ($scope.token){
       $scope.connected = true;
+      $scope.home = '/stream';
       //$scope.token = localStorage['scat.token'];
       $scope.username = localStorage.getItem('username');
       //soundcloud.connect($scope);
@@ -23,49 +24,35 @@ angular.module('scat.controllers', [])
       window.SC.storage().setItem('SC.accessToken', $scope.token); 
       soundcloud.token = $scope.token;
     };
-    
-    // Define initial view - should move this to home controller & handle with routeparams - yes
-    if ($scope.connected) {
-      $scope.home = '/stream';
-    } else {
-      $scope.home = '/jxnblk';
-    };
        
     $scope.pageSize = 32;
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
     
-    // Toggle Dev Nav - look into toggle function & make this reusable
-    $scope.dropmenuOpen = false;
-    $scope.toggleDropmenu = function(){
-      if (!$scope.dropmenuOpen){
-        $scope.dropmenuOpen = true;
-      } else {
-        $scope.dropmenuOpen = false;
-      };
-    };
-    
     $scope.connect = function() {
       soundcloud.connect($scope);
       $scope.home = '/stream';
-      $scope.tokenUrl = $location.path();
-      console.log($scope.tokenUrl);
+      
+      // For testing connect
+      //$scope.tokenUrl = $location.path();
+      //console.log($scope.tokenUrl);
     };
     
-    //$scope.current.title = player.current.title;
-    
+    $scope.current = player.current;
+    //$scope.currentTrackURL = null;
 
   }])
   
   .controller('HomeCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     console.log('HomeCtrl');
     
+    // should probs handle this with redirects??
     // Setting scget to home views
     if ($scope.connected) {
       $scope.scget = '/me/activities/tracks';
       soundcloud.get($scope, {stream: true});
     } else {
-      // Not sure if this works
+      // Get all tracks
       $scope.scget = '/tracks';
       soundcloud.get($scope);
     };
@@ -143,9 +130,15 @@ angular.module('scat.controllers', [])
     $scope.getType = '/favorites';
   }])
   
+  .controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){  
+    // Let's not do this on initial load
+    $scope.viewUser = $scope.$routeParams.viewUser;
+    console.log('FollowingCtrl');
+    soundcloud.getFollowings($scope, $scope.viewUser);
+  }])
+  
   .controller('TrackDetailCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
     console.log('TrackDetailCtrl');
-    //console.log($routeParams.track);
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.trackUrl = $scope.$routeParams.track;
     $scope.scget = '/tracks/' + $scope.trackUrl;
@@ -194,6 +187,7 @@ angular.module('scat.controllers', [])
       player.play(tracks, i);
     };
     
+    // For testing Track Detail view
     $scope.playTrack = function(track) {
       player.playSingle(track);
     };

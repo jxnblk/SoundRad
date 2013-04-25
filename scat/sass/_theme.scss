@@ -22,13 +22,15 @@ $gray5: #999;
   }
 }
 
-.logo {
+.prime {
   color: $prime;
 }
 
-.subhead, footer {
-  //background-color: $gray1;
+.gry {
   color: $gray5;
+}
+
+.bobo {
   border-bottom: 1px solid $gray2;
 }
 
@@ -45,8 +47,10 @@ $gray5: #999;
 
 // Amazing JxPlayer
 
-//.active .jx-artist { color: $white; }
-//.active .jx-title { color: $white; }
+.playing.jx-player { background-color: $text; }
+.playing .jx-artist { color: $white; }
+.playing .jx-title { color: $white; }
+.playing .jx-time { color: $white; }
 
 .jx-player {}
 .jx-play { color: $gray4; /* background-color: $gray4; */ }
@@ -54,11 +58,11 @@ $gray5: #999;
 .jx-pause { color: $white; background-color: $prime; }
 .jx-pause:hover { background-color: lighten($prime, 5%);}
 //.sc-title { color: darken($prime, 50%); }
-//.jx-artist { color: $gray5; }
-.jx-buffer { background-color: $gray1; }
+.jx-artist { color: $gray5; }
+.jx-buffer { background-color: lighten($text, 5%); }
 
 .jx-played {
-  background-color: $gray3;
+  background-color: $prime;
   //opacity: .1;
 }
 

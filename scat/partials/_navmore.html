@@ -1,21 +1,24 @@
-<div class="currently-playing tap-pad">
-  Now Playing: <a ng-href="{{}}">{{player.current.title}}</a>
+<div class="currently-playing bobo" ng-show="current.title">
+  <a ng-href="#{{current.URL}}" class="tappad">Now Playing: {{current.title}}</a>
+  <!-- Use this once there's better URL structures in place -->
+  <!-- {{current.tracks[current.i].user.permalink}} -- {{current.tracks[current.i].permalink}} -->
 </div>
 
-<ul>
-  <li><a href="#/jxnblk" class="tap-pad">Jxnblk</a></li>
-  <li><a href="#/jxnblk/likes" class="tap-pad">Jxnblk's Likes</a></li>
-  <li><a href="#/jxnblk/sets" class="tap-pad">Jxnblk's Sets</a></li>
-  <li><a href="#/mrsjxn" class="tap-pad">Mrsjxn</a></li>
-  <li><a href="#/mrsjxn/likes" class="tap-pad">Mrsjxn's Likes</a></li>
-  <li><a href="#/xlr8r" class="tap-pad">XLR8R</a></li>
-  <li><a href="#/ghostly" class="tap-pad">Ghostly</a></li>
-  <li ng-show='connected' class="tap-pad">{{username}} Connected <!-- Make a sign out button --></li>
-  <!-- <li><button ng-click="pauseAll()">Kill All</button></li> -->  
-  <li class="tap-pad">Powered by SoundCloud</li>
+
+<h5 class="tappad">Bookmarks</h5>
+<ul class="bobo">
+  <li><a href="#/mrsjxn" class="h4 tappad">Mrsjxn</a></li>
+  <li><a href="#/mrsjxn/likes" class="h4 tappad">Mrsjxn's Likes</a></li>
+  <li><a href="#/xlr8r" class="h4 tappad">XLR8R</a></li>
+  <li><a href="#/ghostly" class="h4 tappad">Ghostly</a></li>
 </ul>
 
-<h3 class="tap-pad">Following</h3>
-<ul>
-  <li class="tap-pad">Put following list here</li>
-</ul>
+<div ng-show='connected' class="currently-playing bobo">
+  <a ng-href="#/{{username}}/following" class="tappad">Following</a>
+</div>
+
+
+<p ng-show='connected' class="tappad">
+  {{username}} Connected <!-- Make a sign out button --><br>
+  Powered by SoundCloud
+</p>

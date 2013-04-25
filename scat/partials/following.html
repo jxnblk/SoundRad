@@ -1,0 +1,10 @@
+<div class="bobo subhead">
+  <h3>Following ({{followings.length}})</h3>
+</div>
+
+<div class="padto" ng-hide="followings.length"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div>
+<ul>
+  <li ng-repeat="following in followings | orderBy: 'username' ">
+    <a ng-href="#/{{following.permalink}}" class="h4 tappad">{{following.username}}</a>
+  </li>
+</ul>

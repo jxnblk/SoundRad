@@ -129,6 +129,31 @@ angular.module('scat.services', [])
                   });
       },
       
+      //{limit: 200, offset: $scope.pageOffset}
+      getFollowings:  function($scope, user){
+                        var initLimit = 200,
+                            initOffset = 0;
+                        $scope.followings = [];
+                        var getF = function(){
+                          SC.get('/users/' + user + '/followings', {limit: initLimit, offset: initOffset}, function(data){
+                            console.log('offset: ' + initOffset);
+                            $scope.$apply(function () {
+                              console.log('getting followings');
+                              $scope.followings = $scope.followings.concat(data);
+                              if ($scope.followings.length >= (initLimit + initOffset)){
+                                console.log('get some moar followins');
+                                console.log('length: ' + $scope.followings.length);
+                                console.log('limit + offset: ' + (initLimit + initOffset));
+                                initOffset = initOffset + 200;
+                                getF();
+                              };                              
+                            });
+                          });
+                        };
+                        getF();
+                        
+      },
+      
       like:   function($scope, trackid){
                 SC.put('/me/favorites/' + trackid, function(){
                   console.log('liked' + trackid);
@@ -155,12 +180,12 @@ angular.module('scat.services', [])
     
   })
   
-  .factory('player', function(audio, $rootScope, soundcloud) {
+  .factory('player', function(audio, $rootScope, soundcloud, $location) {
     var player,
         playing = false,
         paused = false,
         pausedTrack = null,
-        current = { track: null, title: null, time: 0 },
+        current = { i: null, title: null, time: 0 },
         tracks = {},
         clientId = soundcloud.clientId,
         urlParams,
@@ -183,29 +208,35 @@ angular.module('scat.services', [])
           
         if (angular.isDefined(tracks)) { 
           current.tracks = tracks;
-          current.track = i;
+          current.i = i;
         };
           
         // using this as an id for controller
-        current.title = current.tracks[current.track].title; 
+        current.title = current.tracks[current.i].title; 
           
         // Check if track is streamable
         // to-do -- Provide visual cues for disabled tracks
-        if (current.tracks[current.track].streamable == false) {
+        if (current.tracks[current.i].streamable == false) {
           console.log('not streamable - wtf');
-          current.track = current.track + 1;
-          current.title = current.tracks[current.track].title;
+          current.i = current.i + 1;
+          current.title = current.tracks[current.i].title;
         };
           
-        if (!paused || (pausedTrack != current.tracks[current.track])) {
-          audio.src = current.tracks[current.track].stream_url + urlParams;  
+        if (!paused || (pausedTrack != current.tracks[current.i])) {
+          audio.src = current.tracks[current.i].stream_url + urlParams;  
         };
           
         audio.play();
         playing = true;
         paused = false;
+        current.URL = $location.path();
+        
+        // Need to get scrolling working for this
+        //current.URL = $location.path() + '#' + current.tracks[current.i].permalink;
       },
       
+      
+      // Testing for Track Detail View
       playSingle: function(track) {
         
         // Should define this more globally
@@ -240,9 +271,9 @@ angular.module('scat.services', [])
       
       next: function() {
         console.log(current.tracks);
-        console.log(current.track);
-        if (current.tracks.length > (current.track + 1)) {
-          current.track = current.track+1;
+        console.log(current.i);
+        if (current.tracks.length > (current.i + 1)) {
+          current.i = current.i+1;
           if (playing) player.play();
         }    
       },
@@ -251,7 +282,7 @@ angular.module('scat.services', [])
         if (!current.tracks.length) return;
         paused = false;
         // this is really janky with iphone system prev control
-        current.track-1;
+        current.i-1;
         if (playing) player.play();
       },
       
@@ -269,6 +300,7 @@ angular.module('scat.services', [])
       $rootScope.$apply(player.next());
     }, false);
     
+    // testing for system pause button control
     //audio.addEventListener('pause', function() {
       //$rootScope.$apply(player.pause());
     //}, false);

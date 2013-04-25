@@ -1,4 +1,7 @@
-$font-family: "myriad-pro-semi-condensed", "source-sans-pro", "proxima-nova-condensed", "urbana", Helvetica, sans-serif;
+//$font-family: "source-sans-pro", Helvetica, sans-serif;
+//$font-family: "open-sans", Helvetica, sans-serif;
+
+$font-family: "freight-sans-pro", Helvetica, sans-serif;
 body {
   font-family: $font-family;
 }
@@ -8,7 +11,9 @@ $m-5:    8px;
 $m-675: 10px;
 $m-75:  12px;
 $m1:    16px;
+$m1-25: 20px;
 $m1-5:  24px;
+    $m1-75: 28px;
 $m2:    32px;
 $m3:    48px;
 $m4:    64px;
@@ -31,13 +36,28 @@ $m20:  320px;
 //$f8: 8px;
 //$f9: 4px;
 
-.h1 { font-size: $m4; }
-.h2 { font-size: $m3; }
-.h3 { font-size: $m2; }
-.h4 { font-size: $m1-5; }
-.h5 { font-size: $m1; }
-.h6 { font-size: $m-75; }
-.sm { font-size: $m-75; }
+h1, .h1 { font-size: $m4; }
+h2, .h2 { font-size: $m3; }
+h3, .h3 { font-size: $m2; }
+h4, .h4 { font-size: $m1-5; }
+h5, .h5 { font-size: $m1; }
+h6, .h6 { font-size: $m-75; }
+small, .sm { font-size: $m-75; }
 .tiny { font-size: $m-675; }
+
+@media screen and (max-width: 448px) {
+  .h1mo { font-size: $m2; }
+  .h2mo { font-size: $m1-75; }
+  .h3mo { font-size: $m1-5; }
+  .h4mo { font-size: $m1-25; }
+  .h5mo { font-size: $m1; }
+  .h6mo { font-size: $m-75; }
+  .smmo { font-size: $m-75; }
+  .tinymo { font-size: $m-675; }
+}
+  
+
+h1, h2, h3, h4, h5, h6 { font-weight: 400; }
 .b  { font-weight: 700; }
+.reg { font-weight: 400; }
 

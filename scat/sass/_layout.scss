@@ -1,3 +1,43 @@
+
+// LYT
+
+.fl { float: left; }
+
+.pad   { padding: $m1; }
+.padto { padding-top: $m1; }
+.padr  { padding-right: $m1; }
+.padbo { padding-bottom: $m1; }
+.padl  { padding-left: $m1; }
+
+.tappad {
+  display: block;
+  line-height: $m3;
+  padding: 0 $m1;
+}
+
+.mar   { margin: $m1; }
+.marto { margin-top: $m1; }
+.marr  { margin-right: $m1; }
+.marbo { margin-bottom: $m1; }
+.marl  { margin-left: $m1; }
+
+.mar2   { margin: $m2; }
+.marto2 { margin-top: $m2; }
+.marr2  { margin-right: $m2; }
+.marbo2 { margin-bottom: $m2; }
+.marl2  { margin-left: $m2; }
+
+.center { margin: 0 auto; }
+
+.disb { display: block; }
+
+
+//.posrel { position: relative; }
+
+
+
+// Get rid of this junk
+
 .topbar {
   position: fixed;
   top: 0;
@@ -5,26 +45,23 @@
   left: 0;
   height: $m3;
   line-height: $m3;
-  padding: 0 $m-5 0 $m1;
+  //padding: 0 $m-5;
   z-index: 1024;
 }
 
+
+
 .logo {
-  float: left;
+  //float: left;
   margin-right: $m1;
   height: $m3;
-  i {
-    position: relative;
-    //top: .49px;
-    //-webkit-font-smoothing: none;
-  }
 }
 
 .nav {
   height: $m3;
   float: right;
   a {
-    font-weight: 700;
+    //font-weight: 700;
     display: block;
     padding: 0 $m-5;
     float: left;
@@ -76,9 +113,9 @@ input[type="text"] {
   -webkit-overflow-scrolling: touch;
 }
 
-.view-heading {
-  padding: 0 5%;
-}
+
+
+
 
 
 
@@ -99,8 +136,3 @@ input[type="text"] {
   }
 }
 
-.tap-pad {
-  display: block;
-  line-height: $m3;
-  padding: 0 $m1;
-}
