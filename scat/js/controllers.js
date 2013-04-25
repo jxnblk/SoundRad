@@ -135,6 +135,16 @@ angular.module('scat.controllers', [])
     $scope.viewUser = $scope.$routeParams.viewUser;
     console.log('FollowingCtrl');
     soundcloud.getFollowings($scope, $scope.viewUser);
+    
+    // Need to account for expiration?? or compare to sc.get data before replacing??
+    //$scope.followings = JSON.parse(localStorage.getItem($scope.viewUser + '-followings'));
+    //if ($scope.followings != null){
+      //console.log('got it from localstorage, ma!');
+      //soundcloud.getFollowings($scope, $scope.viewUser);
+    //} else {
+      //soundcloud.getFollowings($scope, $scope.viewUser);
+    //};
+      
   }])
   
   .controller('TrackDetailCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
@@ -224,6 +234,15 @@ angular.module('scat.controllers', [])
     // Track Actions
     $scope.showActions = function(){
       $scope.viewActions = true;
+    };
+    
+    // Loop
+    $scope.toggleLoop = function(track){
+      if (!track.loop) {
+        track.loop = true;  
+      } else {
+        track.loop = false;
+      };
     };
     
     

@@ -133,24 +133,29 @@ angular.module('scat.services', [])
       getFollowings:  function($scope, user){
                         var initLimit = 200,
                             initOffset = 0;
-                        $scope.followings = [];
+                            
+                        // Check against localStorage variations    
+                        
+                        var followings = [];
                         var getF = function(){
                           SC.get('/users/' + user + '/followings', {limit: initLimit, offset: initOffset}, function(data){
                             console.log('offset: ' + initOffset);
                             $scope.$apply(function () {
                               console.log('getting followings');
-                              $scope.followings = $scope.followings.concat(data);
-                              if ($scope.followings.length >= (initLimit + initOffset)){
+                              followings = followings.concat(data);
+                              var dataString = JSON.stringify(data);
+                              localStorage.setItem(user + '-followings', dataString);                              
+                              if (followings.length >= (initLimit + initOffset)){
                                 console.log('get some moar followins');
-                                console.log('length: ' + $scope.followings.length);
-                                console.log('limit + offset: ' + (initLimit + initOffset));
                                 initOffset = initOffset + 200;
                                 getF();
-                              };                              
+                              };
+                              $scope.followings = followings;                             
                             });
                           });
                         };
                         getF();
+                        
                         
       },
       
@@ -213,7 +218,7 @@ angular.module('scat.services', [])
           
         // using this as an id for controller
         current.title = current.tracks[current.i].title; 
-          
+        console.log('current.title: ' + current.title);
         // Check if track is streamable
         // to-do -- Provide visual cues for disabled tracks
         if (current.tracks[current.i].streamable == false) {
@@ -272,7 +277,10 @@ angular.module('scat.services', [])
       next: function() {
         console.log(current.tracks);
         console.log(current.i);
-        if (current.tracks.length > (current.i + 1)) {
+        if(current.tracks[current.i].loop){
+          console.log('loop it');
+          if (playing) player.play();
+        } else if (current.tracks.length > (current.i + 1)) {
           current.i = current.i+1;
           if (playing) player.play();
         }    

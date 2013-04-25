@@ -23,6 +23,7 @@
         <div class="jx-toggle-actions" ng-show="viewActions" ng-click="viewActions = false"><i class="h4 icon i-jxn-close"></i></div>
         <div class="jx-actions" style="display:none" ng-cloak ng-hide="!viewActions" ng-animate="'slideleft'">
           <a ng-href="{{track.permalink_url}}" target="_blank"><i class="icon i-jxn-link"></i></a>
+          <a href="" ng-click="toggleLoop(track)" ng-class="{active: track.loop}"><i class="icon i-jxn-loop"></i></a>
           <a href="" ng-click="like(track.id)" ng-hide="liked"><i class="icon i-jxn-heart"></i></a>
           <a href="" ng-click="unlike(track.id)" ng-show="liked" class="active"><i class="icon i-jxn-heart"></i></a>
         </div>
@@ -31,12 +32,11 @@
     </div>
     
     <div class="set"  ng-switch-when="playlist">
-      
-      <h2>{{track.title}}</h2>  
+      <!-- <p>{{track.user.username}}</p> -->
+      <h4>{{track.title}}</h4>  
       
       <div class="track track-{{track.title}}" ng-repeat="setTrack in track.tracks">
-        
-        <div class="jx-player media" ng-class="{playing: player.current.title == track.title}">
+        <div class="jx-player media" ng-class="{playing: player.current.title == setTrack.title}" ng-controller="TrackCtrl">
         
           <a href="" class="jx-play no-touch-color" ng-click="playTracks(track.tracks, $index)" ng-hide="player.current.title == setTrack.title"><i class="i-jxn-play"></i></a>
           <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(setTrack)" ng-show="player.current.title == setTrack.title"><i class="i-jxn-pause"></i></a>
@@ -50,6 +50,13 @@
               <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
               <p class="jx-time tiny">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
             </div> <!-- /.jx-time-span -->
+            <div class="jx-toggle-actions" ng-hide="viewActions" ng-click="viewActions = true"><i class="icon i-jxn-carat"></i></div>
+            <div class="jx-toggle-actions" ng-show="viewActions" ng-click="viewActions = false"><i class="h4 icon i-jxn-close"></i></div>
+            <div class="jx-actions" style="display:none" ng-cloak ng-hide="!viewActions" ng-animate="'slideleft'">
+              <a ng-href="{{setTrack.permalink_url}}" target="_blank"><i class="icon i-jxn-link"></i></a>
+              <a href="" ng-click="like(setTrack.id)" ng-hide="liked"><i class="icon i-jxn-heart"></i></a>
+              <a href="" ng-click="unlike(setTrack.id)" ng-show="liked" class="active"><i class="icon i-jxn-heart"></i></a>
+            </div>
           </div> <!-- /.bd -->
           
         </div><!-- /.jx-player -->

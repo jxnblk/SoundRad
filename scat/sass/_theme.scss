@@ -59,7 +59,7 @@ $gray5: #999;
 .jx-pause:hover { background-color: lighten($prime, 5%);}
 //.sc-title { color: darken($prime, 50%); }
 .jx-artist { color: $gray5; }
-.jx-buffer { background-color: lighten($text, 5%); }
+.jx-buffer { background-color: darken($text, 5%); }
 
 .jx-played {
   background-color: $prime;

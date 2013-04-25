@@ -63,7 +63,7 @@
   color: #999999; }
 
 .jx-buffer {
-  background-color: #515151; }
+  background-color: #373737; }
 
 .jx-played {
   background-color: #ff6600; }
@@ -441,13 +441,13 @@ input[type="text"] {
   overflow: hidden;
   position: absolute;
   top: 6px;
-  left: 16px;
+  left: 8px;
   z-index: 256; }
 
 .jx-title {
   position: absolute;
   top: 26px;
-  left: 16px;
+  left: 8px;
   overflow: hidden;
   height: 32px;
   line-height: 32px;
