@@ -9,17 +9,30 @@ angular.module('scat.controllers', [])
     console.log('NavCtrl');
     // Get routeparams - probably don't need this if app.js handles routing
     $scope.$routeParams = $routeParams;
+    $scope.connectedUserIndex = localStorage.getItem('connectedUserIndex');
+    if(!$scope.connectedUserIndex) {
+      $scope.connectedUserIndex = 0;
+      $scope.connectedUsers = new Array();
+      localStorage.setItem('connectedUserIndex', $scope.connectedUserIndex);
+    } else {
+      $scope.connectedUserIndex = localStorage.getItem('connectedUserIndex');
+      $scope.connectedUsers = new Array(localStorage.getItem('username-0'));
+      var i = 1;
+      while (localStorage.getItem('username-' + i)){
+        $scope.connectedUsers[i] = localStorage.getItem('username-' + i);
+        i++;
+      };
+    };
     
     // Reconnect user
-    $scope.token = localStorage.getItem('token');
+    //$scope.token = localStorage.getItem('token');
+    $scope.token = localStorage.getItem('token-' + $scope.connectedUserIndex);  
     // Need better error states here
     if ($scope.token){
       $scope.connected = true;
       $scope.home = '/stream';
-      //$scope.token = localStorage['scat.token'];
-      $scope.username = localStorage.getItem('username');
-      //soundcloud.connect($scope);
-      
+      //$location.path('/stream');
+      $scope.username = localStorage.getItem('username-' + $scope.connectedUserIndex);      
       // Should probably do this in factory
       window.SC.storage().setItem('SC.accessToken', $scope.token); 
       soundcloud.token = $scope.token;
@@ -32,10 +45,21 @@ angular.module('scat.controllers', [])
     $scope.connect = function() {
       soundcloud.connect($scope);
       $scope.home = '/stream';
-      
-      // For testing connect
-      //$scope.tokenUrl = $location.path();
-      //console.log($scope.tokenUrl);
+    };
+    
+    $scope.addConnectedUser = function() {
+      $scope.connectedUserIndex = $scope.connectedUserIndex + 1;
+      console.log('user index: ' + $scope.connectedUserIndex);
+      //$scope.connected = false;
+      //window.SC.storage().setItem('SC.accessToken', null); 
+      soundcloud.connect($scope);
+    };
+    
+    $scope.switchUser = function($index) {
+      $scope.username = localStorage.getItem('username-' + $index);
+      $scope.token = localStorage.getItem('token-' + $index);
+      localStorage.setItem('connectedUserIndex', $index);
+      $location.path('/stream');
     };
     
     $scope.current = player.current;

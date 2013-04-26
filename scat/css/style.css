@@ -82,6 +82,11 @@ body {
 a {
   text-decoration: none;
   color: #ff6600; }
+  a.active {
+    color: #444444; }
+
+ul {
+  list-style: none; }
 
 .btn {
   display: inline-block;
@@ -91,11 +96,17 @@ a {
   background-color: #ff6600;
   border-radius: .125rem;
   padding: 0 16px; }
-  .btn .small {
+  .btn.small {
     height: 2rem;
     line-height: 2rem; }
   .btn:hover {
     background-color: #ff751a; }
+
+.pill {
+  color: white;
+  background-color: #bbbbbb;
+  border-radius: .125rem;
+  padding: 0 16px; }
 
 nav a.btn.small {
   height: 2rem;

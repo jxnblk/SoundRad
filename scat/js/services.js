@@ -23,7 +23,7 @@ angular.module('scat.services', [])
       clientId: clientId,
       
       connect:  function($scope){
-                  if($scope.connected){
+                  if($scope.connected && $scope.connectedUserIndex < 1){
                     console.log('got local token & connecting...');
                     // this is factory stuff, right?
                     //window.SC.storage().setItem('SC.accessToken', $scope.token); 
@@ -38,15 +38,14 @@ angular.module('scat.services', [])
                             } else {
                               $scope.connected = true;
                               $scope.username = me.username;
-                              localStorage.setItem('username', $scope.username);
+                              localStorage.setItem('username-' + $scope.connectedUserIndex, $scope.username);
+                              $scope.connectedUsers[$scope.connectedUserIndex] = $scope.username;
                             }
                           });
                         });
                         
-                          $scope.token = SC.accessToken();
-                          //console.log($scope.token);
-                        
-                        localStorage.setItem('token', $scope.token);
+                          $scope.token = SC.accessToken();                        
+                        localStorage.setItem('token-' + $scope.connectedUserIndex, $scope.token);
                       });
                     });
                   };
@@ -143,8 +142,10 @@ angular.module('scat.services', [])
                             $scope.$apply(function () {
                               console.log('getting followings');
                               followings = followings.concat(data);
-                              var dataString = JSON.stringify(data);
-                              localStorage.setItem(user + '-followings', dataString);                              
+                              
+                              // This might be against API TOS
+                              //var dataString = JSON.stringify(data);
+                              //localStorage.setItem(user + '-followings', dataString);                              
                               if (followings.length >= (initLimit + initOffset)){
                                 console.log('get some moar followins');
                                 initOffset = initOffset + 200;

@@ -7,16 +7,21 @@ body {
 a {
   text-decoration: none;
   color: $prime;
+  &.active {
+    color: $text;
+  }
 }
 a:hover {
   //color: #0ac;
 }
 
+ul {
+  list-style: none;
+}
+
 //      Organize this
 
-.hide {
-  //visibility: hidden;
-}
+// rewrite the small extension to not overwrite
 
 .btn {
   display: inline-block;
@@ -27,13 +32,24 @@ a:hover {
   background-color: $prime;
   border-radius: .125rem;
   padding: 0 16px;
-  .small {
+  &.small {
     height: 2rem;
     line-height: 2rem;
   }
   &:hover {
     background-color: lighten($prime, 5%);
   }
+}
+
+// Need to work on this
+.pill {
+  //height: 2rem;
+  //line-height: 2rem;
+  //display: inline-block;
+  color: $white;
+  background-color: $gray4;
+  border-radius: .125rem;
+  padding: 0 16px;
 }
 
 

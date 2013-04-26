@@ -17,8 +17,19 @@
   <a ng-href="#/{{username}}/following" class="tappad">Following</a>
 </div>
 
+<!-- ng-show='connected' -->
+<div  class="tappad">
+  <!-- {{username}} Connected --> <!-- Make a sign out button -->
 
-<p ng-show='connected' class="tappad">
-  {{username}} Connected <!-- Make a sign out button --><br>
-  Powered by SoundCloud
-</p>
+
+  <p>Connected as:</p>
+  <ul>
+    <li ng-repeat="connectedUser in connectedUsers">
+      <a href="" ng-click="switchUser($index)" class="tappad" ng-class="{active: connectedUser == username}">
+        <i ng-show="connectedUser == username" class="icon i-jxn-check-circle"></i> {{connectedUser}}
+      </a>
+    </li>
+  </ul>
+  <a href="" ng-click="addConnectedUser()" class="btn small">Connect Another Account</a>
+  <p>Powered by SoundCloud</p>
+</div>
