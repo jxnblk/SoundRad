@@ -6,36 +6,33 @@
 angular.module('scat.controllers', [])
 
   .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$location', 'soundcloud', 'player', function($scope, $route, $routeParams, $location, soundcloud, player) {
-    console.log('NavCtrl');
+    //console.log('NavCtrl');
     // Get routeparams - probably don't need this if app.js handles routing
     $scope.$routeParams = $routeParams;
-    $scope.connectedUserIndex = localStorage.getItem('connectedUserIndex');
-    if(!$scope.connectedUserIndex) {
-      $scope.connectedUserIndex = 0;
-      $scope.connectedUsers = new Array();
-      localStorage.setItem('connectedUserIndex', $scope.connectedUserIndex);
-    } else {
-      $scope.connectedUserIndex = localStorage.getItem('connectedUserIndex');
+    //$scope.connectedUserIndex = localStorage.getItem('connectedUserIndex');
+    
+    if(localStorage.getItem('username-0')){
       $scope.connectedUsers = new Array(localStorage.getItem('username-0'));
       var i = 1;
       while (localStorage.getItem('username-' + i)){
         $scope.connectedUsers[i] = localStorage.getItem('username-' + i);
         i++;
       };
+    } else {
+      $scope.connectedUsers = new Array();
     };
+    // Sets currently connected user
+    $scope.connectedUserIndex = 0;
     
     // Reconnect user
-    //$scope.token = localStorage.getItem('token');
     $scope.token = localStorage.getItem('token-' + $scope.connectedUserIndex);  
     // Need better error states here
     if ($scope.token){
       $scope.connected = true;
       $scope.home = '/stream';
-      //$location.path('/stream');
       $scope.username = localStorage.getItem('username-' + $scope.connectedUserIndex);      
-      // Should probably do this in factory
-      window.SC.storage().setItem('SC.accessToken', $scope.token); 
-      soundcloud.token = $scope.token;
+      soundcloud.connect($scope);
+      player.setToken($scope);
     };
        
     $scope.pageSize = 32;
@@ -45,21 +42,24 @@ angular.module('scat.controllers', [])
     $scope.connect = function() {
       soundcloud.connect($scope);
       $scope.home = '/stream';
+      player.setToken($scope);
+      // too soon, can't do it here
+      //$location.path('/stream');
     };
     
     $scope.addConnectedUser = function() {
       $scope.connectedUserIndex = $scope.connectedUserIndex + 1;
-      console.log('user index: ' + $scope.connectedUserIndex);
       //$scope.connected = false;
-      //window.SC.storage().setItem('SC.accessToken', null); 
       soundcloud.connect($scope);
+      player.setToken($scope);
     };
     
     $scope.switchUser = function($index) {
       $scope.username = localStorage.getItem('username-' + $index);
       $scope.token = localStorage.getItem('token-' + $index);
-      localStorage.setItem('connectedUserIndex', $index);
+      window.SC.storage().setItem('SC.accessToken', $scope.token); 
       $location.path('/stream');
+      player.setToken($scope);
     };
     
     $scope.current = player.current;
@@ -68,7 +68,7 @@ angular.module('scat.controllers', [])
   }])
   
   .controller('HomeCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-    console.log('HomeCtrl');
+    //console.log('HomeCtrl');
     
     // should probs handle this with redirects??
     // Setting scget to home views
@@ -91,7 +91,7 @@ angular.module('scat.controllers', [])
   }])
 
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-    console.log('UserCtrl');
+    //console.log('UserCtrl');
     
     // Setting scget to user views  
     $scope.viewUser = $scope.$routeParams.viewUser;
@@ -114,7 +114,7 @@ angular.module('scat.controllers', [])
   }])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-    console.log('StreamCtrl');
+    //console.log('StreamCtrl');
     
     // Set scget to stream
     $scope.scget = '/me/activities/tracks';
@@ -133,31 +133,31 @@ angular.module('scat.controllers', [])
     }; 
     
     // Gimme some stream data
-    console.log('getting stream data');
+    //console.log('getting stream data');
     soundcloud.get($scope, {stream: true});
 
   }])
   
   .controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    console.log('UserTracksCtrl');
+    //console.log('UserTracksCtrl');
     $scope.getType = '/tracks';
   }])
   
   .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    console.log('SetsCtrl');
+    //console.log('SetsCtrl');
     $scope.pageSize = 4;
     $scope.getType = '/playlists';
   }])
   
   .controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    console.log('LikesCtrl');
+    //console.log('LikesCtrl');
     $scope.getType = '/favorites';
   }])
   
   .controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){  
     // Let's not do this on initial load
     $scope.viewUser = $scope.$routeParams.viewUser;
-    console.log('FollowingCtrl');
+    //console.log('FollowingCtrl');
     soundcloud.getFollowings($scope, $scope.viewUser);
     
     // Need to account for expiration?? or compare to sc.get data before replacing??
@@ -172,7 +172,7 @@ angular.module('scat.controllers', [])
   }])
   
   .controller('TrackDetailCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
-    console.log('TrackDetailCtrl');
+    //console.log('TrackDetailCtrl');
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.trackUrl = $scope.$routeParams.track;
     $scope.scget = '/tracks/' + $scope.trackUrl;
@@ -211,7 +211,7 @@ angular.module('scat.controllers', [])
   }])
   
   .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
-    console.log('PlayerCtrl');
+    //console.log('PlayerCtrl');
     $scope.player = player;
     $scope.audio = audio;
     $scope.viewActions = false;

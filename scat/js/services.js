@@ -12,40 +12,34 @@ angular.module('scat.services', [])
       redirect_uri: 'http://sndcmd.com/callback.html'
     });
     
-    var connected = false,
-        username = null,
-        token = null;
-    
     return {
-      connected: connected,
-      username: username,
-      token: token,
       clientId: clientId,
       
-      connect:  function($scope){
+      connect:  function($scope, $location){
+                  // may need to get rid of index # check
                   if($scope.connected && $scope.connectedUserIndex < 1){
-                    console.log('got local token & connecting...');
-                    // this is factory stuff, right?
-                    //window.SC.storage().setItem('SC.accessToken', $scope.token); 
+                    //console.log('got local token & connecting...');
+                    window.SC.storage().setItem('SC.accessToken', $scope.token); 
                   } else {
                     SC.connect(function() {
                       $scope.$apply(function () {
-                        console.log('connecting...');
+                        //console.log('connecting...');
                         SC.get('/me', function(me, error) { 
                           $scope.$apply(function () {
                             if (error){
-                              alert('Error Getting');
+                              alert('Error getting /me');
                             } else {
                               $scope.connected = true;
                               $scope.username = me.username;
                               localStorage.setItem('username-' + $scope.connectedUserIndex, $scope.username);
                               $scope.connectedUsers[$scope.connectedUserIndex] = $scope.username;
+                              
                             }
                           });
-                        });
-                        
-                          $scope.token = SC.accessToken();                        
+                        });   
+                        $scope.token = SC.accessToken();
                         localStorage.setItem('token-' + $scope.connectedUserIndex, $scope.token);
+                        //$location.path('/stream');
                       });
                     });
                   };
@@ -59,14 +53,14 @@ angular.module('scat.services', [])
                     if(params){
                       // Handle Streams
                       if(params.stream){
-                        console.log('getting stream...');
+                        //console.log('getting stream...');
                         //console.log(data);
                         // Iterate over stream data
                         tracks = [];
                         for (var i = 0; i < data.collection.length; i++) { 
                           
                           if (data.collection[i].type == 'favoriting') {
-                            console.log('favoriting? dont add this');
+                            //console.log('favoriting? dont add this');
                             //console.log(data.collection[i]);
                             //var track = data.collection[i].origin.track;
                             //tracks.push(track);
@@ -81,27 +75,27 @@ angular.module('scat.services', [])
                             var track = data.collection[i].origin.track;
                             tracks.push(track);
                           } else if (data.collection[i].type == 'playlist') {
-                            console.log('its a playlist - parse this later');
+                            //console.log('its a playlist - parse this later');
                           } else {
-                            console.log('Its something else');
-                            console.log(data.collection[i].type);
-                            console.log(data.collection[i]);
+                            //console.log('Its something else');
+                            //console.log(data.collection[i].type);
+                            //console.log(data.collection[i]);
                           }; 
                         };
                       
                         if(params.add){
-                          console.log('Adding to stream list');
+                          //console.log('Adding to stream list');
                           $scope.tracks = $scope.tracks.concat(tracks);  
                         } else {
                           $scope.tracks = tracks;  
                         };
                       } else if(params.track){
-                        console.log('Handle as track detail');
-                        $scope.track = data;
+                        //console.log('Handle as track detail');
+                        $scope.tracks[0] = data;
                       } else if(params.add){
                         // Add non-stream tracks
                         // to-do: account for sets
-                        console.log('Adding tracks to list');
+                        //console.log('Adding tracks to list');
                         tracks = data;
                         $scope.tracks = $scope.tracks.concat(tracks);
                       };
@@ -121,7 +115,7 @@ angular.module('scat.services', [])
       getUser:  function($scope, params){
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
-                      console.log('getting user');
+                      //console.log('getting user');
                       //console.log(data);
                       $scope.userData = data;
                     });
@@ -138,16 +132,16 @@ angular.module('scat.services', [])
                         var followings = [];
                         var getF = function(){
                           SC.get('/users/' + user + '/followings', {limit: initLimit, offset: initOffset}, function(data){
-                            console.log('offset: ' + initOffset);
+                            //console.log('offset: ' + initOffset);
                             $scope.$apply(function () {
-                              console.log('getting followings');
+                              //console.log('getting followings');
                               followings = followings.concat(data);
                               
                               // This might be against API TOS
                               //var dataString = JSON.stringify(data);
                               //localStorage.setItem(user + '-followings', dataString);                              
                               if (followings.length >= (initLimit + initOffset)){
-                                console.log('get some moar followins');
+                                //console.log('get some moar followins');
                                 initOffset = initOffset + 200;
                                 getF();
                               };
@@ -162,7 +156,7 @@ angular.module('scat.services', [])
       
       like:   function($scope, trackid){
                 SC.put('/me/favorites/' + trackid, function(){
-                  console.log('liked' + trackid);
+                  //console.log('liked' + trackid);
                   $scope.liked = true;
                   $scope.track.user_favorite = true;
                 });
@@ -170,7 +164,7 @@ angular.module('scat.services', [])
       
       unlike: function($scope, trackid){
                 SC.delete('/me/favorites/' + trackid, function(){
-                  console.log('unliked' + trackid);  
+                  //console.log('unliked' + trackid);  
                   $scope.liked = false;
                   $scope.track.user_favorite = false;
                 });
@@ -195,23 +189,20 @@ angular.module('scat.services', [])
         tracks = {},
         clientId = soundcloud.clientId,
         urlParams,
-        token = soundcloud.token,
+        token,
         currentTimePercentage = audio.currentTime;
-
+        
     player = {
       current: current,
       tracks: tracks,
       playing: false,
+      
+      setToken: function($scope) {
+        token = $scope.token;
+      },
 
       play: function(tracks, i) {
         
-        // Should define this more globally
-        if (token){
-          urlParams = '?oauth_token=' + token;
-        } else {
-          urlParams =  '?client_id=' + clientId;
-        };
-          
         if (angular.isDefined(tracks)) { 
           current.tracks = tracks;
           current.i = i;
@@ -227,9 +218,17 @@ angular.module('scat.services', [])
           current.i = current.i + 1;
           current.title = current.tracks[current.i].title;
         };
+        
+        // Should define this more globally
+        if (token && current.tracks[current.i].sharing == 'private'){
+          urlParams = '?oauth_token=' + token;
+        } else {
+          urlParams =  '?client_id=' + clientId;
+        };
           
         if (!paused || (pausedTrack != current.tracks[current.i])) {
           audio.src = current.tracks[current.i].stream_url + urlParams;  
+          console.log('src: ' + audio.src);
         };
           
         audio.play();
@@ -276,10 +275,10 @@ angular.module('scat.services', [])
       },
       
       next: function() {
-        console.log(current.tracks);
-        console.log(current.i);
+        //console.log(current.tracks);
+        //console.log(current.i);
         if(current.tracks[current.i].loop){
-          console.log('loop it');
+          //console.log('loop it');
           if (playing) player.play();
         } else if (current.tracks.length > (current.i + 1)) {
           current.i = current.i+1;
