@@ -30,9 +30,9 @@ $gray5: #999;
   color: $gray5;
 }
 
-.bobo {
-  border-bottom: 1px solid $gray2;
-}
+.boto { border-top: 1px solid $gray2; }
+.bor { border-right: 1px solid $gray2; }
+.bobo { border-bottom: 1px solid $gray2; }
 
 .view {
   background-color: $white;
@@ -40,6 +40,10 @@ $gray5: #999;
 
 .loading-indicator {
   color: $gray4;
+}
+
+a.tappad:hover {
+  background-color: $gray1;
 }
 
 .track { border-bottom: 1px solid $gray2; }

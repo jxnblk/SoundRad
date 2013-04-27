@@ -11,7 +11,7 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
     $routeProvider.when('/:viewUser/following', {templateUrl: 'partials/following.html', controller: 'FollowingCtrl'});
     
     // Need to work on this - rename to TrackDetail
-    //$routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackCtrl'});
+    $routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackDetailCtrl'});
     
     $routeProvider.otherwise({ redirectTo: '/' });
     //$locationProvider.html5Mode(true);

@@ -9,7 +9,7 @@
       <a href="" class="jx-play no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
       <div class="bd">
-        <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span></p> <!-- &mdash; {{track.id}} -->
+        <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span> <span ng-hide="track.streamable">[Not Streamable]</span></p> <!-- &mdash; {{track.id}} -->
         <p class="h4 h4mo marr2 jx-title">{{track.title}}</p>
         <!-- To do: find a way to show progress on paused tracks -->
         <div class="jx-time-span" ng-show="player.current.title == track.title">
@@ -19,7 +19,10 @@
           <p class="jx-time tiny" ng-cloak>{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
         </div>
         
-        <div class="jx-toggle-actions" ng-hide="viewActions" ng-click="viewActions = true"><i class="icon i-jxn-carat"></i></div>
+        <a class="jx-toggle-actions" ng-hide="viewActions" ng-href="#/{{track.user.permalink}}/{{track.permalink}}"><i class="icon i-jxn-carat"></i></a>
+        
+        <!--
+<div class="jx-toggle-actions" ng-hide="viewActions" ng-click="viewActions = true"><i class="icon i-jxn-carat"></i></div>
         <div class="jx-toggle-actions" ng-show="viewActions" ng-click="viewActions = false"><i class="h4 icon i-jxn-close"></i></div>
         <div class="jx-actions" style="display:none" ng-cloak ng-hide="!viewActions" ng-animate="'slideleft'">
           <a ng-href="{{track.permalink_url}}" target="_blank"><i class="icon i-jxn-link"></i></a>
@@ -27,6 +30,7 @@
           <a href="" ng-click="like(track.id)" ng-hide="liked"><i class="icon i-jxn-heart"></i></a>
           <a href="" ng-click="unlike(track.id)" ng-show="liked" class="active"><i class="icon i-jxn-heart"></i></a>
         </div>
+-->
         
       </div>
     </div>

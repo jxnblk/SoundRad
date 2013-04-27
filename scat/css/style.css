@@ -18,6 +18,12 @@
 .gry {
   color: #999999; }
 
+.boto {
+  border-top: 1px solid #eeeeee; }
+
+.bor {
+  border-right: 1px solid #eeeeee; }
+
 .bobo {
   border-bottom: 1px solid #eeeeee; }
 
@@ -26,6 +32,9 @@
 
 .loading-indicator {
   color: #bbbbbb; }
+
+a.tappad:hover {
+  background-color: #f6f6f6; }
 
 .track {
   border-bottom: 1px solid #eeeeee; }
@@ -564,7 +573,12 @@ you can use the generic selector below, but it's slower:
 .tappad {
   display: block;
   line-height: 48px;
-  padding: 0 16px; }
+  padding: 0 16px;
+  position: relative; }
+
+.tappad .icon {
+  position: relative;
+  top: 3px; }
 
 .lrpad {
   padding: 0 16px; }
@@ -622,6 +636,12 @@ you can use the generic selector below, but it's slower:
 
 .maxw320 {
   max-width: 320px; }
+
+.maxw640 {
+  max-width: 640px; }
+
+.posrel {
+  position: relative; }
 
 .topbar {
   position: fixed;

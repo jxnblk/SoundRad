@@ -133,35 +133,18 @@ angular.module('scat.controllers', [])
   .controller('TrackDetailCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.trackUrl = $scope.$routeParams.track;
-    $scope.scget = '/tracks/' + $scope.trackUrl;
-    
-    $scope.playTrack = function(track) {
-      player.play(track);
-    };
-    
-    soundcloud.get($scope, {track: true});
+    $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.trackUrl;
+    $scope.pageOffset = 1; // hiding pagination from tracklist partial
+    soundcloud.getTrack($scope);
+    //$scope.tracks = $scope.resolveData    
+
+    //$scope.scget = '/users/' + $scope.viewUser + '/tracks/' + $scope.trackUrl;
+    //soundcloud.get($scope, {track: true});
     
   }])
   
   .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
       
-  }])
-  
-  .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-  
-    if ($scope.connected) {
-      // Init liked from track object
-      $scope.liked = $scope.track.user_favorite;
-      
-      $scope.like = function(trackid) {
-        soundcloud.like($scope, trackid);
-      };
-      
-      $scope.unlike = function(trackid) {
-        soundcloud.unlike($scope, trackid);
-      };
-      
-    };
   }])
   
   .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
@@ -209,13 +192,9 @@ angular.module('scat.controllers', [])
       player.seek(xpos * audio.duration);
     };
     
-    // Track Actions
-    $scope.showActions = function(){
-      $scope.viewActions = true;
-    };
-    
     // Loop
     $scope.toggleLoop = function(track){
+      console.log('toggle loop');
       if (!track.loop) {
         track.loop = true;  
       } else {
@@ -223,9 +202,21 @@ angular.module('scat.controllers', [])
       };
     };
     
-    
-    
-    
+
+  }])
+  
+  .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    //if ($scope.connected) {
+      $scope.liked = $scope.track.user_favorite;
+      $scope.like = function(trackid) {
+        console.log('like ' + trackid);
+        soundcloud.like($scope, trackid);
+      };
+      $scope.unlike = function(trackid) {
+        console.log('unlike ' + trackid);
+        soundcloud.unlike($scope, trackid);
+      };
+    //}; // Else conditions for non-connected users
   }]);
   
   

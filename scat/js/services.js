@@ -87,7 +87,7 @@ angular.module('scat.services', [])
                         };
                       } else if(params.track){
                         //console.log('Handle as track detail');
-                        $scope.tracks[0] = data;
+                        $scope.tracks = new Array(data);
                       } else if(params.add){
                         // Add non-stream tracks
                         // to-do: account for sets
@@ -111,39 +111,36 @@ angular.module('scat.services', [])
       getUser:  function($scope, params){
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
-                      //console.log('getting user');
-                      //console.log(data);
                       $scope.userData = data;
                     });
                   });
       },
       
-      //{limit: 200, offset: $scope.pageOffset}
+      getTrack: function($scope, params){
+                SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
+                  $scope.$apply(function () {
+                    $scope.tracks = new Array(data);
+                    $scope.tracksLoading = false;
+                  });
+                });
+      },
+      
+
       getFollowings:  function($scope, user){
                         var initLimit = 200,
-                            initOffset = 0;
-                            
-                        // Check against localStorage variations    
-                        
-                        var followings = [];
-                        var getF = function(){
-                          SC.get('/users/' + user + '/followings', {limit: initLimit, offset: initOffset}, function(data){
-                            //console.log('offset: ' + initOffset);
-                            $scope.$apply(function () {
-                              //console.log('getting followings');
-                              followings = followings.concat(data);
-                              
-                              // This might be against API TOS
-                              //var dataString = JSON.stringify(data);
-                              //localStorage.setItem(user + '-followings', dataString);                              
-                              if (followings.length >= (initLimit + initOffset)){
-                                //console.log('get some moar followins');
-                                initOffset = initOffset + 200;
-                                getF();
-                              };
-                              $scope.followings = followings;
-                            });
-                          });
+                            initOffset = 0,                        
+                            followings = [],
+                            getF = function(){
+                              SC.get('/users/' + user + '/followings', {limit: initLimit, offset: initOffset}, function(data){
+                                $scope.$apply(function () {
+                                  followings = followings.concat(data);
+                                  if (followings.length >= (initLimit + initOffset)){
+                                    initOffset = initOffset + 200;
+                                    getF();
+                                  };
+                                  $scope.followings = followings;
+                                });
+                              });
                         };
                         getF();
                         
@@ -153,16 +150,31 @@ angular.module('scat.services', [])
       like:   function($scope, trackid){
                 SC.put('/me/favorites/' + trackid, function(){
                   //console.log('liked' + trackid);
-                  $scope.liked = true;
-                  $scope.track.user_favorite = true;
+                  $scope.$apply(function () {
+                    $scope.liked = true;
+                    $scope.track.user_favorite = true;
+                  });
                 });
       },
       
       unlike: function($scope, trackid){
                 SC.delete('/me/favorites/' + trackid, function(){
                   //console.log('unliked' + trackid);  
-                  $scope.liked = false;
-                  $scope.track.user_favorite = false;
+                  $scope.$apply(function () {
+                    $scope.liked = false;
+                    $scope.track.user_favorite = false;
+                  });
+                });
+      },
+      
+      resolve: function($scope, params){
+                // http://api.soundcloud.com/resolve.json?url=http://soundcloud.com/matas/hobnotropic&client_id=YOUR_CLIENT_ID
+                SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
+                  $scope.$apply(function () {
+                    console.log('resolved data');
+                    console.log(data);
+                    $scope.resolveData = data;
+                  });
                 });
       },
 
