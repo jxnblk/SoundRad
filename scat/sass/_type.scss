@@ -45,6 +45,8 @@ h6, .h6 { font-size: $m-75; }
 small, .sm { font-size: $m-75; }
 .tiny { font-size: $m-675; }
 
+.lh1 { line-height: 1; }
+
 @media screen and (max-width: 448px) {
   .h1mo { font-size: $m2; }
   .h2mo { font-size: $m1-75; }

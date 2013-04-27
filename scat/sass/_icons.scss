@@ -1,0 +1,288 @@
+@font-face {
+	font-family: 'jxn';
+	src:url('/icons/jxn.eot');
+	src:url('/icons/jxn.eot?#iefix') format('embedded-opentype'),
+		url('/icons/jxn.woff') format('woff'),
+		url('/icons/jxn.ttf') format('truetype'),
+		url('/icons/jxn.svg#jxn') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'jxn';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	//line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="i-jxn-"] {
+*/
+.i-jxn-scat, .i-jxn-carat, .i-jxn-close, .i-jxn-loading, .i-jxn-link, .i-jxn-skip, .i-jxn-forward, .i-jxn-pause, .i-jxn-play, .i-jxn-cog, .i-jxn-comments, .i-jxn-action, .i-jxn-repost, .i-jxn-loop, .i-jxn-show-more, .i-jxn-items, .i-jxn-heart, .i-jxn-spades, .i-jxn-dashboard, .i-jxn-badge, .i-jxn-star, .i-jxn-sun, .i-jxn-tag, .i-jxn-thumbs-up, .i-jxn-trash, .i-jxn-shirt, .i-jxn-unlocked, .i-jxn-volume-off, .i-jxn-wifi, .i-jxn-windows, .i-jxn-wrench, .i-jxn-waveform, .i-jxn-user, .i-jxn-skull, .i-jxn-shuffle, .i-jxn-cog-fat, .i-jxn-search, .i-jxn-search-fat, .i-jxn-scissors, .i-jxn-plug-in, .i-jxn-print, .i-jxn-pin, .i-jxn-phone, .i-jxn-people, .i-jxn-pencil, .i-jxn-compose, .i-jxn-paint-brush, .i-jxn-paint-roller, .i-jxn-brush, .i-jxn-eject, .i-jxn-expand, .i-jxn-gift, .i-jxn-pop-out, .i-jxn-compass-arrow, .i-jxn-music, .i-jxn-minimize, .i-jxn-map, .i-jxn-key, .i-jxn-info, .i-jxn-home, .i-jxn-home-box, .i-jxn-presentation, .i-jxn-food, .i-jxn-flower, .i-jxn-facebook, .i-jxn-download, .i-jxn-no, .i-jxn-crosshairs, .i-jxn-history, .i-jxn-contrast, .i-jxn-burn, .i-jxn-check-square, .i-jxn-check-circle, .i-jxn-cat, .i-jxn-box, .i-jxn-categories, .i-jxn-bone, .i-jxn-twitter-bird, .i-jxn-bird-simple, .i-jxn-bar-graph, .i-jxn-add-square, .i-jxn-add-circle, .i-jxn-add {
+	font-family: 'jxn';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.i-jxn-scat:before {
+	content: "\53";
+}
+.i-jxn-carat:before {
+	content: "\21";
+}
+.i-jxn-close:before {
+	content: "\e072";
+}
+.i-jxn-loading:before {
+	content: "\e000";
+}
+.i-jxn-link:before {
+	content: "\e001";
+}
+.i-jxn-skip:before {
+	content: "\e002";
+}
+.i-jxn-forward:before {
+	content: "\e003";
+}
+.i-jxn-pause:before {
+	content: "\e004";
+}
+.i-jxn-play:before {
+	content: "\e005";
+}
+.i-jxn-cog:before {
+	content: "\e006";
+}
+.i-jxn-comments:before {
+	content: "\e007";
+}
+.i-jxn-action:before {
+	content: "\e008";
+}
+.i-jxn-repost:before {
+	content: "\e009";
+}
+.i-jxn-loop:before {
+	content: "\e00a";
+}
+.i-jxn-show-more:before {
+	content: "\e00b";
+}
+.i-jxn-items:before {
+	content: "\e00c";
+}
+.i-jxn-heart:before {
+	content: "\e00d";
+}
+.i-jxn-spades:before {
+	content: "\e00e";
+}
+.i-jxn-dashboard:before {
+	content: "\e00f";
+}
+.i-jxn-badge:before {
+	content: "\e010";
+}
+.i-jxn-star:before {
+	content: "\e011";
+}
+.i-jxn-sun:before {
+	content: "\e012";
+}
+.i-jxn-tag:before {
+	content: "\e013";
+}
+.i-jxn-thumbs-up:before {
+	content: "\e014";
+}
+.i-jxn-trash:before {
+	content: "\e015";
+}
+.i-jxn-shirt:before {
+	content: "\e016";
+}
+.i-jxn-unlocked:before {
+	content: "\e017";
+}
+.i-jxn-volume-off:before {
+	content: "\e018";
+}
+.i-jxn-wifi:before {
+	content: "\e019";
+}
+.i-jxn-windows:before {
+	content: "\e01a";
+}
+.i-jxn-wrench:before {
+	content: "\e01b";
+}
+.i-jxn-waveform:before {
+	content: "\e01c";
+}
+.i-jxn-user:before {
+	content: "\e01d";
+}
+.i-jxn-skull:before {
+	content: "\e01e";
+}
+.i-jxn-shuffle:before {
+	content: "\e01f";
+}
+.i-jxn-cog-fat:before {
+	content: "\e020";
+}
+.i-jxn-search:before {
+	content: "\e021";
+}
+.i-jxn-search-fat:before {
+	content: "\e022";
+}
+.i-jxn-scissors:before {
+	content: "\e023";
+}
+.i-jxn-plug-in:before {
+	content: "\e024";
+}
+.i-jxn-print:before {
+	content: "\e025";
+}
+.i-jxn-pin:before {
+	content: "\e026";
+}
+.i-jxn-phone:before {
+	content: "\e027";
+}
+.i-jxn-people:before {
+	content: "\e028";
+}
+.i-jxn-pencil:before {
+	content: "\e029";
+}
+.i-jxn-compose:before {
+	content: "\e02a";
+}
+.i-jxn-paint-brush:before {
+	content: "\e02b";
+}
+.i-jxn-paint-roller:before {
+	content: "\e02c";
+}
+.i-jxn-brush:before {
+	content: "\e02d";
+}
+.i-jxn-eject:before {
+	content: "\e02e";
+}
+.i-jxn-expand:before {
+	content: "\e02f";
+}
+.i-jxn-gift:before {
+	content: "\e030";
+}
+.i-jxn-pop-out:before {
+	content: "\e031";
+}
+.i-jxn-compass-arrow:before {
+	content: "\e032";
+}
+.i-jxn-music:before {
+	content: "\e033";
+}
+.i-jxn-minimize:before {
+	content: "\e034";
+}
+.i-jxn-map:before {
+	content: "\e035";
+}
+.i-jxn-key:before {
+	content: "\e036";
+}
+.i-jxn-info:before {
+	content: "\e037";
+}
+.i-jxn-home:before {
+	content: "\e038";
+}
+.i-jxn-home-box:before {
+	content: "\e039";
+}
+.i-jxn-presentation:before {
+	content: "\e03a";
+}
+.i-jxn-food:before {
+	content: "\e03b";
+}
+.i-jxn-flower:before {
+	content: "\e03c";
+}
+.i-jxn-facebook:before {
+	content: "\e03d";
+}
+.i-jxn-download:before {
+	content: "\e03e";
+}
+.i-jxn-no:before {
+	content: "\e03f";
+}
+.i-jxn-crosshairs:before {
+	content: "\e040";
+}
+.i-jxn-history:before {
+	content: "\e041";
+}
+.i-jxn-contrast:before {
+	content: "\e042";
+}
+.i-jxn-burn:before {
+	content: "\e043";
+}
+.i-jxn-check-square:before {
+	content: "\e044";
+}
+.i-jxn-check-circle:before {
+	content: "\e045";
+}
+.i-jxn-cat:before {
+	content: "\e046";
+}
+.i-jxn-box:before {
+	content: "\e047";
+}
+.i-jxn-categories:before {
+	content: "\e048";
+}
+.i-jxn-bone:before {
+	content: "\e049";
+}
+.i-jxn-twitter-bird:before {
+	content: "\e04a";
+}
+.i-jxn-bird-simple:before {
+	content: "\e04b";
+}
+.i-jxn-bar-graph:before {
+	content: "\e04c";
+}
+.i-jxn-add-square:before {
+	content: "\e04d";
+}
+.i-jxn-add-circle:before {
+	content: "\e04e";
+}
+.i-jxn-add:before {
+	content: "\e04f";
+}

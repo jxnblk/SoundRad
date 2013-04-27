@@ -2,6 +2,7 @@
 // LYT
 
 .fl { float: left; }
+.fr { float: right; }
 
 .pad   { padding: $m1; }
 .padto { padding-top: $m1; }
@@ -12,6 +13,10 @@
 .tappad {
   display: block;
   line-height: $m3;
+  padding: 0 $m1;
+}
+
+.lrpad {
   padding: 0 $m1;
 }
 
@@ -30,11 +35,16 @@
 .center { margin: 0 auto; }
 
 .disb { display: block; }
+.disib { display: inline-block; }
 
+.w100 { width: 100%; }
+.w80  { width:  80%; }
+.w60  { width:  60%; }
+.w40  { width:  40%; }
+
+.maxw320 { max-width: 320px; }
 
 //.posrel { position: relative; }
-
-
 
 // Get rid of this junk
 
@@ -112,12 +122,6 @@ input[type="text"] {
   //overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
-
-
-
-
-
-
 
 .loading-indicator {
   position: absolute;

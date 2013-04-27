@@ -1,35 +1,36 @@
-<div class="currently-playing bobo" ng-show="current.title">
-  <a ng-href="#{{current.URL}}" class="tappad">Now Playing: {{current.title}}</a>
-  <!-- Use this once there's better URL structures in place -->
-  <!-- {{current.tracks[current.i].user.permalink}} -- {{current.tracks[current.i].permalink}} -->
-</div>
+<div class="w100 maxw320 fr">
 
-
-<h5 class="tappad">Bookmarks</h5>
-<ul class="bobo">
-  <li><a href="#/mrsjxn" class="h4 tappad">Mrsjxn</a></li>
-  <li><a href="#/mrsjxn/likes" class="h4 tappad">Mrsjxn's Likes</a></li>
-  <li><a href="#/xlr8r" class="h4 tappad">XLR8R</a></li>
-  <li><a href="#/ghostly" class="h4 tappad">Ghostly</a></li>
-</ul>
-
-<div ng-show='connected' class="currently-playing bobo">
-  <a ng-href="#/{{username}}/following" class="tappad">Following</a>
-</div>
-
-<!-- ng-show='connected' -->
-<div  class="tappad">
-  <!-- {{username}} Connected --> <!-- Make a sign out button -->
-
-
-  <p>Connected as:</p>
-  <ul>
-    <li ng-repeat="connectedUser in connectedUsers">
-      <a href="" ng-click="switchUser($index)" class="tappad" ng-class="{active: connectedUser == username}">
-        <i ng-show="connectedUser == username" class="icon i-jxn-check-circle"></i> {{connectedUser}}
-      </a>
-    </li>
+  <div class="currently-playing bobo" ng-show="current.title">
+    <a ng-href="#{{current.URL}}" class="tappad">Now Playing: {{current.title}}</a>
+    <!-- Use this once there's better URL structures in place -->
+    <!-- {{current.tracks[current.i].user.permalink}} -- {{current.tracks[current.i].permalink}} -->
+  </div>
+  
+  
+  <h5 class="lrpad marto">Bookmarks</h5>
+  <ul class="bobo">
+    <li><a href="#/mrsjxn" class="h4 tappad">Mrsjxn</a></li>
+    <li><a href="#/mrsjxn/likes" class="h4 tappad">Mrsjxn's Likes</a></li>
+    <li><a href="#/xlr8r" class="h4 tappad">XLR8R</a></li>
+    <li><a href="#/ghostly" class="h4 tappad">Ghostly</a></li>
   </ul>
-  <a href="" ng-click="addConnectedUser()" class="btn small">Connect Another Account</a>
-  <p>Powered by SoundCloud</p>
+  
+  <div ng-show='connected' class="currently-playing bobo">
+    <a ng-href="#/{{username}}/following" class="h4 tappad">Following</a>
+  </div>
+  
+  <div ng-show='connected'>
+  
+    <p class="lrpad marto">Accounts:</p>
+    <ul>
+      <li ng-repeat="connectedUser in connectedUsers">
+        <a href="" ng-click="switchUser($index)" class="h4 tappad" ng-class="{active: connectedUser == username}">
+          {{connectedUser}}
+        </a>
+      </li>
+    </ul>
+    <a href="" ng-click="addConnectedUser()" class="tappad">Connect Another Account</a>
+    <p class="lrpad gry">Powered by SoundCloud</p>
+  </div>
+
 </div>

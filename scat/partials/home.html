@@ -1,9 +1,22 @@
-<div ng-controller="HomeCtrl">
+<div ng-controller="HomeCtrl" ng-switch on="!!connected">
 
-  <div class="bobo subhead">
-    <h3>All Tracks</h3>
+  <div class="w80 center" ng-switch-when="false">
+    <h1 class="lh1 padto"><i class="i-jxn-scat icon prime"></i></h1>
+    <h1 class="lh1">SoundRad</h1>
+    <h3 class="marbo">Hey, you. Connect n' shit:</h3>
+    <a href="" class="sc-connect btn" ng-click="connect();" ng-hide="connected">Connect</a>
+  </div>
+  
+  <div ng-switch-when="true" ng-controller="StreamCtrl">
+  
+    <div class="bobo subhead">
+      <h3>Stream</h3>
+    </div>
+      
+    <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+    
   </div>
 
-  <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+  
 
 </div>

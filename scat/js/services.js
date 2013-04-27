@@ -16,14 +16,11 @@ angular.module('scat.services', [])
       clientId: clientId,
       
       connect:  function($scope, $location){
-                  // may need to get rid of index # check
                   if($scope.connected && $scope.connectedUserIndex < 1){
-                    //console.log('got local token & connecting...');
                     window.SC.storage().setItem('SC.accessToken', $scope.token); 
                   } else {
                     SC.connect(function() {
                       $scope.$apply(function () {
-                        //console.log('connecting...');
                         SC.get('/me', function(me, error) { 
                           $scope.$apply(function () {
                             if (error){
@@ -39,7 +36,6 @@ angular.module('scat.services', [])
                         });   
                         $scope.token = SC.accessToken();
                         localStorage.setItem('token-' + $scope.connectedUserIndex, $scope.token);
-                        //$location.path('/stream');
                       });
                     });
                   };
@@ -145,7 +141,7 @@ angular.module('scat.services', [])
                                 initOffset = initOffset + 200;
                                 getF();
                               };
-                              $scope.followings = followings;                             
+                              $scope.followings = followings;
                             });
                           });
                         };

@@ -1,9 +1,17 @@
 <div class="bobo subhead">
-  <h3>Following ({{followings.length}})</h3>
+  <h3 class="disib">Following <span ng-show="followings">({{followings.length}})</span></h3>
+
+  <select class="fr marto" ng-model="sortFollowings" ng-options="sort as sort.human for sort in sorts"></select>
+
 </div>
 <ul>
-  <li ng-repeat="following in followings | orderBy: 'username' ">
-    <a ng-href="#/{{following.permalink}}" class="h4 tappad">{{following.username}}</a>
+  <!-- orderBy: 'username' -->
+  
+  <li ng-repeat="following in followings | orderBy: sortFollowings.json :sortFollowings.reverse" ng-model="sortFollowings">
+  
+    <a ng-href="#/{{following.permalink}}" class="h4 tappad">{{following.username}} ({{following.followers_count}})</a>
+    <!-- {{following | json }} -->
+    
   </li>
 </ul>
 <div class="show-more padto" ng-hide="followings.length"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div>
