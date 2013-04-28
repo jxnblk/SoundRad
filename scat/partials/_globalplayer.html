@@ -1,0 +1,28 @@
+
+<div ng-controller="GlobalPlayerCtrl">
+
+  <div ng-controller="PlayerCtrl" ng-switch on="isPlaying(current.tracks[current.i])"> <!-- ng-switch-when="true" -->
+
+      <div class="jx-player media bobo" id="{{track.permalink}}" ng-class="{playing: isPlaying(current.tracks[current.i])}">
+        <a href="" class="jx-play no-touch-color" ng-click="playTracks(current.tracks, current.i)" ng-hide="isPlaying(current.tracks[current.i])"><i class="i-jxn-play"></i></a>
+        <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(current.tracks[current.i])" ng-show="isPlaying(current.tracks[current.i])"><i class="i-jxn-pause"></i></a>
+        <div class="bd">
+          <p class="jx-artist">{{current.tracks[current.i].user.username}}</p>
+          <p class="h4 h4mo marr2 jx-title">{{current.tracks[current.i].title}}</p>
+          <!-- To do: find a way to show progress on paused tracks -->
+          <div class="jx-time-span" ng-switch-when="true">
+            <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
+            <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
+            <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
+            <p class="jx-time sm" ng-cloak>{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+          </div>
+          <a class="jx-toggle-actions" ng-href="#{{current.URL}}" ng-switch-when="true"><i class="icon i-jxn-carat"></i></a>
+        </div>
+      </div>
+            
+  </div> <!-- TrackCtrl -->
+    
+</div> <!-- GlobalPlayerCtrl -->
+
+
+  

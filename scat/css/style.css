@@ -27,6 +27,9 @@
 .bobo {
   border-bottom: 1px solid #eeeeee; }
 
+.bol {
+  border-left: 1px solid #eeeeee; }
+
 .view {
   background-color: white; }
 
@@ -115,7 +118,7 @@ ul {
   color: white;
   background-color: #bbbbbb;
   border-radius: .125rem;
-  padding: 0 16px; }
+  padding: 0 4px; }
 
 nav a.btn.small {
   height: 2rem;
@@ -202,6 +205,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .reg {
   font-weight: 400; }
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: .1em; }
 
 @font-face {
   font-family: 'jxn';
@@ -583,6 +590,12 @@ you can use the generic selector below, but it's slower:
 .lrpad {
   padding: 0 16px; }
 
+.lrpadout4 {
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-left: -4px;
+  margin-right: -4px; }
+
 .mar {
   margin: 16px; }
 
@@ -634,14 +647,38 @@ you can use the generic selector below, but it's slower:
 .w40 {
   width: 40%; }
 
+.maxw32 {
+  max-width: 32px; }
+
+.maxw48 {
+  max-width: 48px; }
+
+.maxw64 {
+  max-width: 64px; }
+
 .maxw320 {
   max-width: 320px; }
 
 .maxw640 {
   max-width: 640px; }
 
+.htap {
+  height: 48px; }
+
+.overhide {
+  overflow: hidden; }
+
 .posrel {
   position: relative; }
+
+.rightcol {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 320px; }
 
 .topbar {
   position: fixed;
@@ -651,6 +688,17 @@ you can use the generic selector below, but it's slower:
   height: 48px;
   line-height: 48px;
   z-index: 1024; }
+
+.view {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
+  .view.leftcol {
+    margin-right: 320px; }
 
 .logo {
   margin-right: 16px;
@@ -669,21 +717,6 @@ you can use the generic selector below, but it's slower:
     .nav a i {
       font-size: 24px; }
 
-.js-more-nav {
-  background-color: #eeeeee;
-  padding: 16px;
-  position: absolute;
-  top: 48px;
-  right: 0;
-  z-index: 512;
-  display: none; }
-  .js-more-nav ul {
-    list-style: none; }
-  .js-more-nav label {
-    display: block;
-    font-size: 12px;
-    line-height: 12px; }
-
 input[type="text"] {
   height: 40px;
   line-height: 40px;
@@ -692,14 +725,6 @@ input[type="text"] {
   font-family: Helvetica, sans-serif;
   border: 1px solid #dddddd;
   border-radius: 4px; }
-
-.view {
-  position: relative;
-  top: 48px;
-  right: 0;
-  bottom: 48px;
-  left: 0;
-  -webkit-overflow-scrolling: touch; }
 
 .loading-indicator {
   position: absolute;
@@ -782,6 +807,7 @@ input[type="text"] {
   position: absolute;
   top: 6px;
   left: 8px;
+  height: 24px;
   z-index: 256; }
 
 .jx-title {
@@ -798,7 +824,7 @@ input[type="text"] {
 
 .jx-time {
   position: absolute;
-  top: 4px;
+  top: 2px;
   right: 8px;
   z-index: 256; }
 
@@ -813,27 +839,6 @@ input[type="text"] {
   cursor: pointer; }
   .jx-toggle-actions i {
     line-height: 64px; }
-
-.jx-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding-right: 48px;
-  text-align: right;
-  z-index: 480;
-  line-height: 64px;
-  color: white;
-  background: rgba(68, 68, 68, 0.8); }
-  .jx-actions a {
-    font-size: 24px;
-    line-height: 64px;
-    padding: 0 8px;
-    margin: 0 8px;
-    color: #bbbbbb; }
-    .jx-actions a.active {
-      color: #ff6600; }
 
 .jx-buffer,
 .jx-played {

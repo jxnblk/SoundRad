@@ -21,9 +21,8 @@
   top: 3px;
 }
 
-.lrpad {
-  padding: 0 $m1;
-}
+.lrpad { padding: 0 $m1; }
+.lrpadout4 { padding-left: 4px; padding-right: 4px; margin-left: -4px; margin-right: -4px; }
 
 .mar   { margin: $m1; }
 .marto { margin-top: $m1; }
@@ -47,11 +46,28 @@
 .w60  { width:  60%; }
 .w40  { width:  40%; }
 
+.maxw32  { max-width: 32px; }
+.maxw48  { max-width: 48px; }
+.maxw64  { max-width: 64px; }
 .maxw320 { max-width: 320px; }
 .maxw640 { max-width: 640px; }
 
+.htap { height: 48px; }
+
+.overhide { overflow: hidden; }
+
 .posrel { position: relative; }
 
+
+.rightcol {
+  position: absolute;
+  top: $m3;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 320px;
+}
 
 
 // Get rid of this junk
@@ -67,6 +83,18 @@
   z-index: 1024;
 }
 
+.view {
+  position: absolute;
+  top: $m3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  &.leftcol {
+    margin-right: 320px;
+  }
+}
 
 
 .logo {
@@ -93,24 +121,6 @@
   }
 }
 
-.js-more-nav {
-  background-color: $gray2;
-  padding: 16px;
-  position: absolute;
-  top: $m3;
-  right: 0;
-  z-index: 512;
-  display: none;
-  ul {
-    list-style: none;
-  }
-  label {
-    display: block;
-    font-size: 12px;
-    line-height: 12px;
-  }
-}
-
 input[type="text"] {
   height: 40px;
   line-height: 40px;
@@ -121,15 +131,8 @@ input[type="text"] {
   border-radius: 4px;
 }
 
-.view {
-  position: relative;
-  top: $m3;
-  right: 0;
-  bottom: $m3;
-  left: 0;
-  //overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
+
+
 
 .loading-indicator {
   position: absolute;

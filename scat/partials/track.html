@@ -1,40 +1,39 @@
 <div ng-repeat="track in tracks" ng-controller="PlayerCtrl">
-  
+
+  <div ng-controller="TrackCtrl">
+
     <div class="track track-{{track.permalink}}">
-      <div class="jx-player media" id="{{track.permalink}}" ng-class="{playing: player.current.title == track.title}">
+      <div class="jx-player media" id="{{track.permalink}}" ng-class="{playing: isPlaying(track)}" ng-switch on="isPlaying(track)">
     
-      <a href="" class="jx-play no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="player.current.title == track.title"><i class="i-jxn-play"></i></a>
-      <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="player.current.title == track.title"><i class="i-jxn-pause"></i></a>
+      <a href="" class="jx-play no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play"></i></a>
+      <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="isPlaying(track)"><i class="i-jxn-pause"></i></a>
       <div class="bd">
         <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span></p> <!-- &mdash; {{track.id}} -->
         <p class="h4 h4mo marr2 jx-title">{{track.title}}</p>
         <!-- To do: find a way to show progress on paused tracks -->
-        <div class="jx-time-span" ng-show="player.current.title == track.title">
+        <div class="jx-time-span" ng-switch-when="true">
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
           <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
           <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
-          <p class="jx-time tiny" ng-cloak>{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+          <p class="jx-time sm" ng-cloak>{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
         </div>
       </div>
     </div>
     </div>
       
-  <div ng-controller="TrackCtrl">
+  
           
       <div class="tappad bobo">
         <a href="" ng-click="like(track.id)" ng-hide="liked" class="gry h4 marr"><i class="icon i-jxn-heart"></i></a>
-        
-        <a href="" ng-click="unlike(track.id)" ng-show="liked" class="prime h4 marr"><i class="icon i-jxn-heart"></i></a>
-        
-        <!-- <div ng-show="liked == null && connected" class="disib h4 marr"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div> -->
-        
-        <a href="" ng-click="toggleLoop(track)" ng-class="{gry: !track.loop}" class="h4 marr"><i class="icon i-jxn-loop"></i></a>      
+        <a href="" ng-click="unlike(track.id)" ng-show="liked" class="prime h4 marr"><i class="icon i-jxn-heart"></i></a>        
+        <!-- <a href="" ng-click="toggleLoop(track)" ng-class="{gry: !track.loop}" class="h4 marr"><i class="icon i-jxn-loop"></i></a>       -->
         <a ng-href="{{track.permalink_url}}" target="_blank" class="gry h4 marr"><i class="icon i-jxn-link"></i></a>
         <span class="gry h6 fr">{{track.playback_count}} Plays | {{track.favoritings_count}} Likes</span>
       </div>
     
       <div class="pad maxw640" ng-show="track.description">
-        {{track.description}}
+        <h6 class="gry">{{track.created_at}}</h6> <!-- don't think this is standard datetime format -->
+        <p>{{track.description}}</p>
       </div>
     
       <a ng-href="#/{{track.user.permalink}}" class="tappad boto bobo gry h4">{{track.user.username}} <span class="fr h5"><i class="icon i-jxn-carat"></i></span></a>

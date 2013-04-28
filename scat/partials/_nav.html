@@ -1,14 +1,14 @@
 <header class="topbar">
     <a href="#/"><h1 class="fl prime h3 bold"><i class="i-jxn-scat icon tappad"></i></h1></a>
       
-    <nav class="nav padr">
+    <nav class="nav padr" ng-switch on="layout">
       
       <a href="#/{{username}}/likes" class="" ng-show="connected">Likes</a>
       <a href="#/{{username}}/sets" class="" ng-show="connected">Sets</a>
       <a href="#/{{username}}" class="" ng-show="connected">{{username}}</a>
       <a href="" class="sc-connect btn small" ng-click="connect();" ng-hide="connected">Connect</a>
       
-      <a href="#/more">More</a>
+      <a href="#/more" ng-switch-when="mobile">More</a>
     
     </nav>
-  </header>
+</header>

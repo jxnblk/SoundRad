@@ -1,9 +1,26 @@
 <div ng-controller="UserCtrl">
 
-  <div class="bobo subhead">
-    <h3>{{userData.username}} <span ng-show="getType == '/favorites'">Likes</span><span ng-show="getType == '/playlists'">Sets</span></h3>
+  <div class="bobo overhide">
+    <!-- <img ng-src="{{userData.avatar_url}}" class="maxw64 fl marr" /> -->
+    <h3 class="lrpad overhide">{{userData.username}}</h3>
+    <div class="tappad">
+      <a ng-href="#/{{userData.permalink}}" class="marr lrpadout4" ng-class="{pill: getType == '/tracks'}">Tracks</a>
+      <a ng-href="#/{{userData.permalink}}/sets" class="marr lrpadout4" ng-class="{pill: getType == '/playlists'}">Sets</a>
+      <a ng-href="#/{{userData.permalink}}/likes" class="marr lrpadout4" ng-class="{pill: getType == '/favorites'}">Likes</a>
+      <a ng-href="#/{{userData.permalink}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a>
+    </div>
   </div>
+  
+  <!--
+<div class="bobo pad">
+    <pre>{{userData | json}}</pre>
+  </div>
+-->
 
-  <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+  <div ng-switch on="getType != null">
+    <div ng-switch-when="true" ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+    <div ng-switch-when="false" ng-include src="'partials/_following.html'"></div>
+    
+  </div>
 
 </div>

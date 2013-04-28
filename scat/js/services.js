@@ -27,10 +27,10 @@ angular.module('scat.services', [])
                               alert('Error getting /me');
                             } else {
                               $scope.connected = true;
+                              $scope.me = me;
                               $scope.username = me.username;
                               localStorage.setItem('username-' + $scope.connectedUserIndex, $scope.username);
                               $scope.connectedUsers[$scope.connectedUserIndex] = $scope.username;
-                              
                             }
                           });
                         });   
@@ -40,8 +40,25 @@ angular.module('scat.services', [])
                     });
                   };
       },
+      
+      getMe:  function($scope){
+                SC.get('/me', function(me, error) { 
+                  $scope.$apply(function () {
+                    if (error){
+                      alert('Error getting /me');
+                    } else {
+                      $scope.connected = true;
+                      $scope.me = me;
+                      $scope.username = me.username;
+                      //localStorage.setItem('username-' + $scope.connectedUserIndex, $scope.username);
+                      //$scope.connectedUsers[$scope.connectedUserIndex] = $scope.username;
+                    }
+                  });
+                });
+      },
     
       get:    function($scope, params){
+                //console.log('scget ' + $scope.scget);
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
                   $scope.$apply(function () {
                     
@@ -137,8 +154,9 @@ angular.module('scat.services', [])
                                   if (followings.length >= (initLimit + initOffset)){
                                     initOffset = initOffset + 200;
                                     getF();
-                                  };
+                                  }; 
                                   $scope.followings = followings;
+                                  $scope.tracksLoading = false;
                                 });
                               });
                         };
@@ -146,6 +164,32 @@ angular.module('scat.services', [])
                         
                         
       },
+      
+//      /users/{id}/followings/{id}
+      checkFollowing:
+              function(userid){
+                SC.get('/me/followings/' + userid , function(data){
+                  //$apply(function () {
+                    //console.log('resolved data');
+                    console.log(data);
+                    //$scope.resolveData = data;
+                  //});
+                });
+      },
+
+
+// work on this
+      follow:
+              function(userid){
+                SC.put('/me/favorites/' + trackid, function(){
+                  //console.log('liked' + trackid);
+                  $scope.$apply(function () {
+                    $scope.liked = true;
+                    $scope.track.user_favorite = true;
+                  });
+                });
+      },
+      
       
       like:   function($scope, trackid){
                 SC.put('/me/favorites/' + trackid, function(){
@@ -171,8 +215,8 @@ angular.module('scat.services', [])
                 // http://api.soundcloud.com/resolve.json?url=http://soundcloud.com/matas/hobnotropic&client_id=YOUR_CLIENT_ID
                 SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
                   $scope.$apply(function () {
-                    console.log('resolved data');
-                    console.log(data);
+                    //console.log('resolved data');
+                    //console.log(data);
                     $scope.resolveData = data;
                   });
                 });
@@ -218,7 +262,7 @@ angular.module('scat.services', [])
           
         // using this as an id for controller
         current.title = current.tracks[current.i].title; 
-        console.log('current.title: ' + current.title);
+        //console.log('current.title: ' + current.title);
         // Check if track is streamable
         // to-do -- Provide visual cues for disabled tracks
         if (current.tracks[current.i].streamable == false) {
@@ -236,7 +280,7 @@ angular.module('scat.services', [])
           
         if (!paused || (pausedTrack != current.tracks[current.i])) {
           audio.src = current.tracks[current.i].stream_url + urlParams;  
-          console.log('src: ' + audio.src);
+          //console.log('src: ' + audio.src);
         };
           
         audio.play();
@@ -246,29 +290,6 @@ angular.module('scat.services', [])
         
         // Need to get scrolling working for this
         //current.URL = $location.path() + '#' + current.tracks[current.i].permalink;
-      },
-      
-      
-      // Testing for Track Detail View
-      playSingle: function(track) {
-        
-        // Should define this more globally
-        if (token){
-          urlParams = '?oauth_token=' + token;
-        } else {
-          urlParams =  '?client_id=' + clientId;
-        };
-           
-        // using this as an id for controller
-        current.title = track.title; 
-          
-        if (!paused || (pausedTrack != track)) {
-          audio.src = track.stream_url + urlParams;  
-        };
-          
-        audio.play();
-        playing = true;
-        paused = false;
       },
 
       pause: function(track) {
@@ -315,12 +336,6 @@ angular.module('scat.services', [])
     audio.addEventListener('ended', function() {
       $rootScope.$apply(player.next());
     }, false);
-    
-    // testing for system pause button control
-    //audio.addEventListener('pause', function() {
-      //$rootScope.$apply(player.pause());
-    //}, false);
-    
 
     return player;
   })

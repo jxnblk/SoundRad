@@ -84,6 +84,7 @@
   position: absolute;
   top: 6px;
   left: 8px;
+  height: 24px;
   z-index: 256;
 }
 
@@ -102,7 +103,7 @@
 
 .jx-time {
   position: absolute;
-  top: 4px;
+  top: 2px;
   right: 8px;
   z-index: 256;
 }
@@ -123,29 +124,7 @@
   }
 }
 
-.jx-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding-right: 48px;
-  text-align: right;
-  z-index: 480;
-  line-height: 64px;
-  color: $white;
-  background: rgba($text, .8);
-  a {
-    font-size: 24px;
-    line-height: 64px;
-    padding: 0 8px;
-    margin: 0 8px;
-    color: $gray4;
-    &.active {
-      color: $prime;
-    }
-  }
-}
+
 
 .jx-buffer,
 .jx-played {

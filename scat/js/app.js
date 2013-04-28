@@ -7,8 +7,9 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
 
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserTracksCtrl'});
     $routeProvider.when('/:viewUser/sets', {templateUrl: 'partials/user.html', controller: 'SetsCtrl'});
+    $routeProvider.when('/:viewUser/sets/:set', {templateUrl: 'partials/set.html', controller: 'SetCtrl'});
     $routeProvider.when('/:viewUser/likes', {templateUrl: 'partials/user.html', controller: 'LikesCtrl'});
-    $routeProvider.when('/:viewUser/following', {templateUrl: 'partials/following.html', controller: 'FollowingCtrl'});
+    $routeProvider.when('/:viewUser/following', {templateUrl: 'partials/user.html', controller: 'FollowingCtrl'});
     
     // Need to work on this - rename to TrackDetail
     $routeProvider.when('/:viewUser/:track', {templateUrl: 'partials/track.html', controller: 'TrackDetailCtrl'});

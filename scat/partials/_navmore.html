@@ -1,36 +1,43 @@
 <div class="w100 maxw320 fr">
 
+  <!-- <div ng-include ng-show="current.tracks" src="'partials/_globalplayer.html'"></div> -->
+
   <div class="currently-playing bobo" ng-show="current.title">
-    <a ng-href="#{{current.URL}}" class="tappad">Now Playing: {{current.title}}</a>
+    <a ng-href="#{{current.URL}}" class="tappad htap overhide">Now Playing: {{current.title}}</a>
     <!-- Use this once there's better URL structures in place -->
     <!-- {{current.tracks[current.i].user.permalink}} -- {{current.tracks[current.i].permalink}} -->
   </div>
   
   
-  <h5 class="lrpad marto">Bookmarks</h5>
+  <h6 class="caps lrpad marto gry">Bookmarks</h6>
   <ul class="bobo">
-    <li><a href="#/mrsjxn" class="h4 tappad">Mrsjxn</a></li>
-    <li><a href="#/mrsjxn/likes" class="h4 tappad">Mrsjxn's Likes</a></li>
-    <li><a href="#/xlr8r" class="h4 tappad">XLR8R</a></li>
-    <li><a href="#/ghostly" class="h4 tappad">Ghostly</a></li>
+    <li><a href="#/mrsjxn" class="tappad">Mrsjxn</a></li>
+    <li><a href="#/mrsjxn/likes" class="tappad">Mrsjxn's Likes</a></li>
+    <li><a href="#/xlr8r" class="tappad">XLR8R</a></li>
+    <li><a href="#/ghostly" class="tappad">Ghostly</a></li>
   </ul>
-  
-  <div ng-show='connected' class="currently-playing bobo">
-    <a ng-href="#/{{username}}/following" class="h4 tappad">Following</a>
-  </div>
   
   <div ng-show='connected'>
   
-    <p class="lrpad marto">Accounts:</p>
+    <h6 class="caps lrpad marto gry">Accounts:</h6>
     <ul>
       <li ng-repeat="connectedUser in connectedUsers">
-        <a href="" ng-click="switchUser($index)" class="h4 tappad" ng-class="{active: connectedUser == username}">
-          {{connectedUser}}
+        <a href="" ng-click="switchUser($index)" class="tappad" ng-class="{active: connectedUser == username}">
+          {{connectedUser}} <span class="fr" ng-show="connectedUser == username"><i class="icon i-jxn-check-circle"></i></span>
         </a>
       </li>
     </ul>
-    <a href="" ng-click="addConnectedUser()" class="tappad">Connect Another Account</a>
-    <p class="lrpad gry">Powered by SoundCloud</p>
+    <a href="" ng-click="addConnectedUser()" class="tappad bobo">Add Account</a>
+    
+    <!--
+<div class="pad bobo">
+      <pre>{{me | json}}</pre>
+    </div>
+-->
+    
   </div>
+
+  
+  <p class="h6 lrpad gry tappad">Powered by SoundCloud</p>
 
 </div>
