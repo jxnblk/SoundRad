@@ -40,7 +40,8 @@ angular.module('scat.services', [])
                     });
                   };
       },
-      
+
+   // Don't think I'm using this ATM  
       getMe:  function($scope){
                 SC.get('/me', function(me, error) { 
                   $scope.$apply(function () {
@@ -56,76 +57,6 @@ angular.module('scat.services', [])
                   });
                 });
       },
-    
-      get:    function($scope, params){
-                
-                //console.log('scope tracks ' + $scope.tracks);
-                
-                SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
-                  $scope.$apply(function () {
-                    
-                    var tracks = [];
-                    if(params){
-                      // Handle Streams
-                      if(params.stream){
-                        //console.log('getting stream...');
-                        //console.log(data);
-                        // Iterate over stream data
-                        tracks = [];
-                        for (var i = 0; i < data.collection.length; i++) { 
-                          
-                          if (data.collection[i].type == 'favoriting') {
-                            //console.log('favoriting? dont add this');
-                            //console.log(data.collection[i]);
-                            //var track = data.collection[i].origin.track;
-                            //tracks.push(track);
-                          } else if (data.collection[i].type == 'track') {
-                            //console.log('Its a track (type)!');
-                            //console.log(data.collection[i].origin);
-                            var track = data.collection[i].origin;
-                            tracks.push(track);
-                          } else if (data.collection[i].type == 'track-sharing') {
-                            //console.log('its a private track');
-                            //console.log(data.collection[i]);
-                            var track = data.collection[i].origin.track;
-                            tracks.push(track);
-                          } else if (data.collection[i].type == 'playlist') {
-                            //console.log('its a playlist - parse this later');
-                          } else {
-                            //console.log('Its something else');
-                            //console.log(data.collection[i].type);
-                            //console.log(data.collection[i]);
-                          }; 
-                        };
-                      
-                        if(params.add){
-                          //console.log('Adding to stream list');
-                          $scope.tracks = $scope.tracks.concat(tracks);  
-                        } else {
-                          $scope.tracks = tracks;  
-                        };
-                      } else if(params.track){
-                        //console.log('Handle as track detail');
-                        $scope.tracks = new Array(data);
-                      } else if(params.add){
-                        // Add non-stream tracks
-                        // to-do: account for sets
-                        //console.log('Adding tracks to list');
-                        tracks = data;
-                        $scope.tracks = $scope.tracks.concat(tracks);
-                      };
-                      // Set next pagination link for stream
-                      $scope.streamNextPage = data.next_href;                                 
-                    } else {
-                      // Handle default get 
-                      tracks = data;
-                      //console.log(data);
-                      $scope.tracks = tracks;
-                    };
-                    $scope.tracksLoading = false;
-                  });      
-                });
-      },
       
       getUser:  function($scope, params){
                   SC.get('/users/' + $scope.viewUser, function(data){
@@ -134,17 +65,73 @@ angular.module('scat.services', [])
                     });
                   });
       },
-      
-      getTrack: function($scope, params){
-                SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
-                  $scope.$apply(function () {
-                    $scope.tracks = new Array(data);
-                    $scope.tracksLoading = false;
-                  });
-                });
+    
+      getTracks:      function($scope, params){                
+                        SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
+                          $scope.$apply(function () {
+                            $scope.tracks = data;
+                            $scope.tracksLoading = false;
+                          });      
+                        });
       },
       
-
+      addTracks:      function($scope){
+                        SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
+                          $scope.$apply(function(){
+                            $scope.tracks = $scope.tracks.concat(data);
+                            $scope.tracksLoading = false;
+                          });
+                        });
+      },    
+      
+      getStream:      function($scope, params){
+                        SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
+                          $scope.$apply(function () {
+                            tracks = [];
+                            for (var i = 0; i < data.collection.length; i++) {                               
+                              if (data.collection[i].type == 'favoriting') {
+                                console.log('favoriting? dont add this');
+                                console.log(data.collection[i]);
+                                //var track = data.collection[i].origin.track;
+                                //tracks.push(track);
+                              } else if (data.collection[i].type == 'track') {
+                                var track = data.collection[i].origin;
+                                tracks.push(track);
+                              } else if (data.collection[i].type == 'track-sharing') {
+                                var track = data.collection[i].origin.track;
+                                tracks.push(track);
+                              } else if (data.collection[i].type == 'playlist') {
+                                console.log('its a playlist - parse this later');
+                              } else {
+                                console.log('Its something else');
+                                console.log(data.collection[i].type);
+                                console.log(data.collection[i]);
+                              }; 
+                            };
+                            if (params){
+                              if (params.add){
+                                $scope.tracks = $scope.tracks.concat(tracks);
+                              } else {
+                                console.log('unknown param');
+                              };
+                            } else {
+                              $scope.tracks = tracks;  
+                            };
+                            $scope.tracksLoading = false;
+                            $scope.streamNextPage = data.next_href;
+                          });
+                        });
+      },
+      
+      getTrack:       function($scope, params){
+                        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
+                          $scope.$apply(function () {
+                            $scope.tracks = new Array(data);
+                            $scope.tracksLoading = false;
+                          });
+                        });
+      },
+      
       getFollowings:  function($scope, user){
                         var initLimit = 200,
                             initOffset = 0,                        
@@ -166,6 +153,8 @@ angular.module('scat.services', [])
                         
                         
       },
+
+////////////////////////////////
       
 //      /users/{id}/followings/{id}
       checkFollowing:
@@ -192,6 +181,7 @@ angular.module('scat.services', [])
                 });
       },
       
+////////////////////////////////
       
       like:   function($scope, trackid){
                 SC.put('/me/favorites/' + trackid, function(){

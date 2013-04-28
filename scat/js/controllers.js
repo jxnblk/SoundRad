@@ -6,9 +6,8 @@
 angular.module('scat.controllers', [])
 
   .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$location', '$window', 'soundcloud', 'player', function($scope, $route, $routeParams, $location, $window, soundcloud, player) {
-    // Get routeparams - probably don't need this if app.js handles routing
+    
     $scope.$routeParams = $routeParams;
-    //$scope.connectedUserIndex = localStorage.getItem('connectedUserIndex');
     
     if(localStorage.getItem('username-0')){
       $scope.connectedUsers = new Array(localStorage.getItem('username-0'));
@@ -32,10 +31,8 @@ angular.module('scat.controllers', [])
       player.setToken($scope);
       soundcloud.getMe($scope);
     };
-       
-    $scope.pageSize = 32;
-    $scope.pageOffset = 0;
-    $scope.tracksLoading = true;
+    
+//// Figure out getMe - where is this being used and is it necessary?    
     
     $scope.connect = function() {
       soundcloud.connect($scope);
@@ -44,7 +41,6 @@ angular.module('scat.controllers', [])
     
     $scope.addConnectedUser = function() {
       $scope.connectedUserIndex = $scope.connectedUserIndex + 1;
-      //$scope.connected = false;
       soundcloud.connect($scope);
       player.setToken($scope);
     };
@@ -57,9 +53,13 @@ angular.module('scat.controllers', [])
       player.setToken($scope);
     };
     
+       
+    $scope.pageSize = 32;
+    $scope.pageOffset = 0;
+    $scope.tracksLoading = true;
+
     $scope.current = player.current;
-    
-    
+        
     // Window Size
     $scope.updateWidth = function() {
       $scope.width = $window.innerWidth;
@@ -75,11 +75,21 @@ angular.module('scat.controllers', [])
       $scope.$apply();
     }
     
-
   }])
   
-  .controller('HomeCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-
+  .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+    $scope.scget = '/me/activities/tracks';
+    // Pagination for stream view
+    $scope.showMore = function() {
+      $scope.tracksLoading = true;
+      if ($scope.streamNextPage) {
+        $scope.scget = $scope.streamNextPage;
+        soundcloud.getStream($scope, {add: true});
+      } else {
+        soundcloud.getStream($scope, {add: true});
+      };   
+    }; 
+    soundcloud.getStream($scope);
   }])
 
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {    
@@ -91,54 +101,26 @@ angular.module('scat.controllers', [])
     $scope.showMore = function() {
       $scope.tracksLoading = true;
       $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-      soundcloud.get($scope, {add: true});  
+      soundcloud.addTracks($scope);  
     }; 
     
+    // maybe this needs to not be called all the time?
     soundcloud.getUser($scope);
     if ($scope.getType){
-      soundcloud.get($scope);  
+      soundcloud.getTracks($scope);  
     };
     
-    
-    /*
-$scope.isFollowing = function(){
-      soundcloud.checkFollowing($scope.userData.id);
-    }
-*/
- 
-  }])
-  
-  .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-    $scope.scget = '/me/activities/tracks';
-    
-    // Pagination for stream view
-    $scope.showMore = function() {
-      $scope.tracksLoading = true;
-      if ($scope.streamNextPage) {
-        $scope.scget = $scope.streamNextPage;
-        soundcloud.get($scope, {add: true, stream: true});
-      } else {
-        soundcloud.get($scope, {add: true, stream: true});
-      };   
-      soundcloud.get($scope, {add: true, stream: true});
-    }; 
-
-    soundcloud.get($scope, {stream: true});
   }])
   
   .controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    //console.log('UserTracksCtrl');
     $scope.getType = '/tracks';
   }])
   
   .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    //console.log('SetsCtrl');
-    //$scope.pageSize = 4;
     $scope.getType = '/playlists';
   }])
   
   .controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    //console.log('LikesCtrl');
     $scope.getType = '/favorites';
   }])
   
@@ -168,11 +150,7 @@ $scope.isFollowing = function(){
     //$scope.pageOffset = 1; // hiding pagination from tracklist partial
     soundcloud.getTrack($scope);    
   }])
-  
-  .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
-    
-  }])
-  
+ 
   .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
     //console.log('PlayerCtrl');
     // Do I need these?
@@ -188,13 +166,10 @@ $scope.isFollowing = function(){
       player.pause(track);
     };
     
-    /*$scope.playNextTrack = function() {
-      player.next();
-    };
-    
-    $scope.playPreviousTrack = function() {
-      player.previous();
-    };*/
+                /* // Could use this for global player
+                $scope.playNextTrack = function() { player.next(); };
+                $scope.playPreviousTrack = function() { player.previous(); };
+                */
     
     $scope.isPlaying = function(track){
         if (track && player.current.title == track.title){
@@ -223,13 +198,7 @@ $scope.isFollowing = function(){
 
   }])
   
-  .controller('GlobalPlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
-    
-    //$scope.playingtrack = player.current.tracks[player.current.i]
-    
-    
-  }])
-  
+
   .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
     //if ($scope.connected) {
 
@@ -258,6 +227,20 @@ $scope.isFollowing = function(){
       };
     //}; // Else conditions for non-connected users
   }]);
+  
+  
+////////////////////////////////  
+  /*
+  .controller('GlobalPlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
+    
+  }])
+  */
+  
+  /*
+  .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
+    
+  }])
+  */
   
   
   

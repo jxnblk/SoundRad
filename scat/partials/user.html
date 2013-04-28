@@ -17,8 +17,10 @@
   </div>
 -->
 
+<!-- Or put controller calls here instead of in app.js -->
+
   <div ng-switch on="getType != null">
-    <div ng-switch-when="true" ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+    <div ng-switch-when="true" ng-include src="'partials/_tracklist.html'"></div>
     <div ng-switch-when="false" ng-include src="'partials/_following.html'"></div>
     
   </div>
