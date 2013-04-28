@@ -95,10 +95,16 @@ angular.module('scat.controllers', [])
     }; 
     
     soundcloud.getUser($scope);
+    if ($scope.getType){
+      soundcloud.get($scope);  
+    };
     
-    $scope.isFollowing = function(){
+    
+    /*
+$scope.isFollowing = function(){
       soundcloud.checkFollowing($scope.userData.id);
     }
+*/
  
   }])
   
@@ -164,7 +170,7 @@ angular.module('scat.controllers', [])
   }])
   
   .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
-    soundcloud.get($scope);
+    
   }])
   
   .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {

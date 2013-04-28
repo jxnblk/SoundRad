@@ -58,7 +58,9 @@ angular.module('scat.services', [])
       },
     
       get:    function($scope, params){
-                //console.log('scget ' + $scope.scget);
+                
+                //console.log('scope tracks ' + $scope.tracks);
+                
                 SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
                   $scope.$apply(function () {
                     
