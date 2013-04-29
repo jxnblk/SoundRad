@@ -88,7 +88,7 @@ angular.module('scat.services', [])
       getStream:      function($scope, params){
                         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
                           $scope.$apply(function () {
-                            tracks = [];
+                            var tracks = [];
                             for (var i = 0; i < data.collection.length; i++) {                               
                               if (data.collection[i].type == 'favoriting') {
                                 console.log('favoriting? dont add this');
