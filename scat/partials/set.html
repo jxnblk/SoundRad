@@ -12,7 +12,7 @@
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(setTrack)" ng-show="isPlaying(setTrack)"><i class="i-jxn-pause"></i></a>
       <div class="bd">
         <p class="jx-artist">{{setTrack.user.username}}</p>
-        <p class="h4 h4mo marr2 jx-title">{{setTrack.title}}</p>
+        <p class="h4 h4mo marr2 jx-title b">{{setTrack.title}}</p>
         <div class="jx-time-span" ng-switch-when="true">
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
           <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>

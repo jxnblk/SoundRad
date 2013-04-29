@@ -10,7 +10,7 @@
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="isPlaying(track)"><i class="i-jxn-pause"></i></a>
       <div class="bd">
         <p class="jx-artist">{{track.user.username}} <span ng-show="track.sharing == 'private'"> [private]</span> <span ng-hide="track.streamable">[Not Streamable]</span></p> <!-- &mdash; {{track.id}} -->
-        <p class="h4 h4mo marr2 jx-title">{{track.title}}</p>
+        <p class="h4 h4mo marr2 jx-title b">{{track.title}}</p>
         <!-- To do: find a way to show progress on paused tracks -->
         
         <div class="jx-time-span" ng-switch-when="true">
@@ -28,7 +28,7 @@
     <div class="set"  ng-switch-when="playlist">
       <a href="" ng-href="#/{{track.user.permalink}}/sets/{{track.permalink}}" class="disb active overhide pad">
         <p class="lh1">{{track.user.username}}</p>
-        <h4 class="disib">{{track.title}}</h4>
+        <h4 class="disib b">{{track.title}}</h4>
         <span class="fr h5 gry"><i class="icon i-jxn-carat"></i></span>
       </a>
       

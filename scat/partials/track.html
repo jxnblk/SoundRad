@@ -9,7 +9,7 @@
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="isPlaying(track)"><i class="i-jxn-pause"></i></a>
       <div class="bd">
         <p class="jx-artist">{{track.user.username}}<span ng-show="track.sharing == 'private'"> [private]</span></p> <!-- &mdash; {{track.id}} -->
-        <p class="h4 h4mo marr2 jx-title">{{track.title}}</p>
+        <p class="h4 h4mo marr2 jx-title b">{{track.title}}</p>
         <!-- To do: find a way to show progress on paused tracks -->
         <div class="jx-time-span" ng-switch-when="true">
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
