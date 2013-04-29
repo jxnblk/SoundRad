@@ -58,6 +58,16 @@
 
 .posrel { position: relative; }
 
+.right-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 8px;
+  z-index: 512;
+  cursor: pointer;
+  //background: rgba(255,0,0,0.2);
+}
 
 .rightcol {
   position: absolute;

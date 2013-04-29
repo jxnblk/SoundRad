@@ -57,8 +57,19 @@ angular.module('scat.controllers', [])
     $scope.pageSize = 32;
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
-
+      
     $scope.current = player.current;
+    
+    // Loop
+    $scope.toggleLoop = function(track){
+      console.log('toggle loop');
+      if (!track.loop) {
+        track.loop = true;  
+      } else {
+        track.loop = false;
+      };
+    };
+    
         
     // Window Size
     $scope.updateWidth = function() {
@@ -93,10 +104,10 @@ angular.module('scat.controllers', [])
   }])
 
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {    
-    // Setting scget to user views  
+
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
-    
+        
     // Pagination
     $scope.showMore = function() {
       $scope.tracksLoading = true;
@@ -104,27 +115,32 @@ angular.module('scat.controllers', [])
       soundcloud.addTracks($scope);  
     }; 
     
-    // maybe this needs to not be called all the time?
-    soundcloud.getUser($scope);
-    if ($scope.getType){
+    if ($scope.contentType == 'tracks'){
       soundcloud.getTracks($scope);  
     };
+    
+    // Need to figure out how not to call this every time the routeparams change
+    soundcloud.getUser($scope);
     
   }])
   
   .controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentType = 'tracks';
     $scope.getType = '/tracks';
   }])
   
   .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentType = 'tracks';
     $scope.getType = '/playlists';
   }])
   
   .controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentType = 'tracks';
     $scope.getType = '/favorites';
   }])
   
   .controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){  
+    $scope.contentType = 'users';
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.tracksLoading = true;
     soundcloud.getFollowings($scope, $scope.viewUser);
@@ -151,7 +167,7 @@ angular.module('scat.controllers', [])
     soundcloud.getTrack($scope);    
   }])
  
-  .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
+  .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', '$location', function($scope, soundcloud, player, audio, $location) {
     //console.log('PlayerCtrl');
     // Do I need these?
     $scope.player = player;
@@ -160,6 +176,7 @@ angular.module('scat.controllers', [])
     // Jxn Player (Based on Peepcode Tunes)
     $scope.playTracks = function(tracks, i) {
       player.play(tracks, i);
+      $scope.current.URL = $location.path();
     };
   
     $scope.pauseTrack = function(track) {
@@ -201,16 +218,6 @@ angular.module('scat.controllers', [])
 
   .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
     //if ($scope.connected) {
-
-      // Loop
-      $scope.toggleLoop = function(track){
-        console.log('toggle loop');
-        if (!track.loop) {
-          track.loop = true;  
-        } else {
-          track.loop = false;
-        };
-      };
     
       //$scope.liked = $scope.track.user_favorite;
       $scope.like = function(trackid) {

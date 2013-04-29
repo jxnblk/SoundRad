@@ -2,8 +2,10 @@
 
   <!-- <div ng-include ng-show="current.tracks" src="'partials/_globalplayer.html'"></div> -->
 
-  <div class="currently-playing bobo" ng-show="current.title">
-    <a ng-href="#{{current.URL}}" class="tappad htap overhide">Now Playing: {{current.title}}</a>
+  <div class="currently-playing posrel bobo overhide" ng-show="current.title">
+    <a ng-href="#{{current.URL}}" class="tappad overhide htap"><i class="icon i-jxn-play"></i> {{current.title}}</a>
+    
+    <a href="" ng-click="toggleLoop(current.tracks[current.i])" ng-class="{gry: !current.tracks[current.i].loop}" class="right-icon tappad h4"><i class="icon i-jxn-loop"></i></a>
     <!-- Use this once there's better URL structures in place -->
     <!-- {{current.tracks[current.i].user.permalink}} -- {{current.tracks[current.i].permalink}} -->
   </div>

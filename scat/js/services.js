@@ -15,7 +15,7 @@ angular.module('scat.services', [])
     return {
       clientId: clientId,
       
-      connect:  function($scope, $location){
+      connect:  function($scope){
                   if($scope.connected && $scope.connectedUserIndex < 1){
                     window.SC.storage().setItem('SC.accessToken', $scope.token); 
                   } else {
@@ -59,6 +59,7 @@ angular.module('scat.services', [])
       },
       
       getUser:  function($scope, params){
+                  //console.log('get user');
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
                       $scope.userData = data;
@@ -224,7 +225,7 @@ angular.module('scat.services', [])
     
   })
   
-  .factory('player', function(audio, $rootScope, soundcloud, $location) {
+  .factory('player', function(audio, $rootScope, soundcloud) {
     var player,
         playing = false,
         paused = false,
@@ -278,10 +279,7 @@ angular.module('scat.services', [])
         audio.play();
         playing = true;
         paused = false;
-        current.URL = $location.path();
-        
-        // Need to get scrolling working for this
-        //current.URL = $location.path() + '#' + current.tracks[current.i].permalink;
+
       },
 
       pause: function(track) {

@@ -671,6 +671,15 @@ you can use the generic selector below, but it's slower:
 .posrel {
   position: relative; }
 
+.right-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 8px;
+  z-index: 512;
+  cursor: pointer; }
+
 .rightcol {
   position: absolute;
   top: 48px;
