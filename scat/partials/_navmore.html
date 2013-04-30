@@ -17,11 +17,15 @@
     <li><a href="#/mrsjxn" class="tappad">Mrsjxn</a></li>
     <li><a href="#/xlr8r" class="tappad">XLR8R</a></li>
     <li><a href="#/ghostly" class="tappad">Ghostly</a></li>
+    
+    <li><a href="#/ssense" class="tappad">SSENSE</a></li>
+    <li><a href="#/factmag" class="tappad">FACT magazine</a></li>
+    
   </ul>
   
   <div ng-show='connected'>
   
-    <h6 class="caps lrpad marto gry">Accounts:</h6>
+    <h6 class="caps tappad gry">Accounts: <a href="" ng-click="addConnectedUser()" class="fr">Add Account</a></h6>
     <ul>
       <li ng-repeat="connectedUser in connectedUsers">
         <a href="" ng-click="switchUser($index)" class="tappad" ng-class="{active: connectedUser == username}">
@@ -29,7 +33,7 @@
         </a>
       </li>
     </ul>
-    <a href="" ng-click="addConnectedUser()" class="tappad bobo">Add Account</a>
+    
     
     <!--
 <div class="pad bobo">

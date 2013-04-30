@@ -18,9 +18,11 @@
 
 /* Play/Pause Button */
 
+/*
 .jx-play i, .jx-pause i {
   -webkit-animation: popin .2s linear;
 }
+*/
 
 .jx-play,
 .jx-pause {
@@ -113,15 +115,22 @@
   top: 0;
   right: 0;
   bottom: 0;
-  padding: 0 8px;
+  padding: 0 12px;
   z-index: 512;
-  color: rgba($gray4, .5);
   cursor: pointer;
-  //background: rgba(255,0,0,0.2);
   i {
     //font-size: 24px;
     line-height: 64px;
   }
+}
+
+.jx-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding-right: 48px;
+  z-index: 384;
 }
 
 

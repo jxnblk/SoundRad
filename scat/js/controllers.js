@@ -218,6 +218,17 @@ angular.module('scat.controllers', [])
         };
       };
       
+
+      // Actions
+      $scope.toggleActions = function(){
+        console.log('toggle actions');
+        $scope.viewActions = !$scope.viewActions;
+      };
+      
+
+  }])
+  
+  .controller('ScrubberCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
       // Scrubbers
       function updateView() {
         $scope.$apply(function() {
@@ -227,21 +238,23 @@ angular.module('scat.controllers', [])
           $scope.durationMS = (audio.duration * 1000).toFixed();
         });
       };
-      audio.addEventListener('timeupdate', updateView);
+      
+      audio.addEventListener('timeupdate', updateView, false);
     
       // Seeking
       $scope.seekTo = function($event){
         var xpos = $event.offsetX / $event.target.offsetWidth;
         player.seek(xpos * audio.duration);
       };
-
   }])
   
 
   .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
     //if ($scope.connected) {
-    
-      //$scope.liked = $scope.track.user_favorite;
+      
+        //$scope.liked = $scope.track.user_favorite;  
+      
+      
       $scope.like = function(trackid) {
         if($scope.connected){
           console.log('like ' + trackid);
@@ -254,6 +267,7 @@ angular.module('scat.controllers', [])
         console.log('unlike ' + trackid);
         soundcloud.unlike($scope, trackid);
       };
+      
     //}; // Else conditions for non-connected users
   }]);
   

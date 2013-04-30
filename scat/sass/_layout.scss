@@ -10,12 +10,15 @@
 .padbo { padding-bottom: $m1; }
 .padl  { padding-left: $m1; }
 
+.pad-  { padding: 8px; }
+
 .tappad {
   display: block;
   line-height: $m3;
   padding: 0 $m1;
   position: relative;
 }
+
 .tappad .icon {
   position: relative;
   top: 3px;

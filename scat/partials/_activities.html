@@ -4,7 +4,7 @@
 
   <div class="activity bobo pad" ng-repeat="activity in activities">
     <!-- <pre>{{activity | json}}</pre> -->
-    <small class="lrpad gry">{{activity.created_at | date:'medium'}}</small>
+    <small class="lrpad gry">{{activity.created_at | fromNow}}</small>
     <p class="h4"><a class="tappad" ng-href="#/{{activity.origin.user.permalink}}/likes">{{activity.origin.user.username}} liked: {{activity.origin.track.title}}</a></p>
 
     

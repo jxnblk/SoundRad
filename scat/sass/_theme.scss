@@ -23,11 +23,17 @@ $gray5: #999;
 }
 
 .prime { color: $prime; }
-.gry { color: $gray5; }
+.gry   { color: $gray5; }
+.mdgry { color: $gray4; }
+.ltgry { color: $gray1; }
+.wht   { color: $white; }
 
 .bg-prime { background-color: $prime; }
-.bg-ltgry { background-color: $gray1; }
+.bg-text  { background-color: $text; }
 .bg-gry   { background-color: $gray5; }
+.bg-mdgry { background-color: $gray4; }
+.bg-ltgry { background-color: $gray1; }
+
 
 .boto { border-top: 1px solid $gray2; }
 .bor { border-right: 1px solid $gray2; }
@@ -54,28 +60,22 @@ a.tappad:hover {
 
 
 .jx-player {}
-.jx-play { color: $gray4; /* background-color: $gray4; */ }
+//.jx-play { color: $gray4; /* background-color: $gray4; */ }
 .jx-play:hover { background-color: $gray1; }
 .jx-pause { color: $white; background-color: $prime; }
 .jx-pause:hover { background-color: lighten($prime, 5%);}
 //.sc-title { color: darken($prime, 50%); }
 .jx-artist { color: $gray5; }
 
-.playing.jx-player { background-color: $text; }
+//.playing.jx-player { background-color: $text; }
 .playing .jx-artist { color: $white; }
 .playing .jx-title { color: $white; }
 .playing .jx-time { color: $white; }
-.jx-buffer { background-color: darken($text, 5%); }
-.jx-played {
-  background-color: $prime;
+//.jx-buffer { background-color: darken($text, 5%); }
+//.jx-played {
+  //background-color: $prime;
   //opacity: .1;
-}
+//}
 
-/*
-.playing .jx-played {
-  border-right: 1px solid $prime;
-  opacity: .4;
-}
-*/
 
 

@@ -1,48 +1,49 @@
-<div class="set" ng-repeat="track in tracks" ng-controller="PlayerCtrl">
+<div class="set" ng-repeat="track in tracks">
 
   <div class="overhide bobo pad">  <!--  -->
     <p class="">{{track.user.username}}</p>
     <h3 class="">{{track.title}}</h3>
   </div>
 
-  <div class="track track-{{track.title}}" ng-repeat="setTrack in track.tracks">
-    <div class="jx-player media" ng-class="{playing: isPlaying(setTrack)}" ng-controller="TrackCtrl" ng-switch on="isPlaying(setTrack)">
-    
-      <a href="" class="jx-play no-touch-color" ng-click="playTracks(track.tracks, $index)" ng-hide="isPlaying(setTrack)"><i class="i-jxn-play"></i></a>
-      <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(setTrack)" ng-show="isPlaying(setTrack)"><i class="i-jxn-pause"></i></a>
+  <div class="track track-{{track.permalink}}" ng-repeat="setTrack in track.tracks" ng-controller="PlayerCtrl">    
+    <div class="jx-player media" id="{{setTrack.permalink}}" ng-class="{'playing bg-gry': isPlaying(setTrack)}" ng-controller="TrackCtrl" ng-switch on="isPlaying(setTrack)">
+      <a href="" class="jx-play gry no-touch-color" ng-click="playTracks(track.tracks, $index)" ng-hide="isPlaying(setTrack)"><i class="i-jxn-play anim-popin anim-hack"></i></a>
+      <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(setTrack)" ng-show="isPlaying(setTrack)"><i class="i-jxn-pause anim-popin anim-hack"></i></a>
       <div class="bd">
-        <p class="jx-artist">{{setTrack.user.username}}</p>
-        <p class="h4 h4mo marr2 jx-title b">{{setTrack.title}}</p>
-        <div class="jx-time-span" ng-switch-when="true">
+        <p class="jx-artist">{{setTrack.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small> <small class="" ng-hide="track.streamable">[Not Streamable]</small></p>
+        <p class="h4 h4mo marr2 jx-title b">{{setTrack.title}}</p>    
+        <div class="jx-time-span" ng-switch-when="true" ng-controller="ScrubberCtrl">
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
-          <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
-          <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
-          <p class="jx-time sm">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+          <div class="jx-buffer bg-text" style="width: {{currentBufferPercentage}}%"></div>
+          <div class="jx-played bg-prime" style="width: {{currentTimePercentage}}%"></div>
+          <p class="jx-time sm" ng-show="durationMS">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
         </div>  
-        <a class="jx-toggle-actions" ng-href="#/{{setTrack.user.permalink}}/{{setTrack.permalink}}"><i class="icon i-jxn-carat"></i></a>
-      </div>     
+        <a href="" class="jx-toggle-actions gry" ng-class="{wht: isPlaying(setTrack) && !viewActions}" ng-click="toggleActions()"><i class="icon i-jxn-carat"></i></a>
+        <div class="jx-actions pad- bg-ltgry anim-hack" style="display:none" ng-show="viewActions" ng-animate="'slideleft'">
+          <a href="" ng-click="toggleLoop(setTrack)" ng-class="{gry: !track.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
+          <a ng-href="#/{{setTrack.user.permalink}}/{{setTrack.permalink}}" class="tappad fl gry h4"><i class="icon i-jxn-link"></i></a>
+          <a href="" ng-click="like(setTrack.id)" ng-hide="liked" class="tappad fl gry h4"><i class="icon i-jxn-heart"></i></a>
+          <a href="" ng-click="unlike(setTrack.id)" ng-show="liked" class="tappad fl prime h4"><i class="icon i-jxn-heart"></i></a>        
+        </div>
+      </div>
     </div>
-  </div>
+  </div><!-- .track -->
+
+
   
   <div class="tappad bobo" ng-controller="TrackCtrl">
-    <a href="" ng-click="like(track.id)" ng-hide="liked" class="gry h4 marr"><i class="icon i-jxn-heart"></i></a>
-    <a href="" ng-click="unlike(track.id)" ng-show="liked" class="prime h4 marr"><i class="icon i-jxn-heart"></i></a>
+    <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite" class="gry h4 marr"><i class="icon i-jxn-heart"></i></a>
+    <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite" class="prime h4 marr"><i class="icon i-jxn-heart"></i></a>
     <!-- Put repost and Add to Set buttons here -->
-    <a ng-href="{{track.permalink_url}}" target="_blank" class="gry h4 marr"><i class="icon i-jxn-link"></i></a>
+    <!-- <a ng-href="{{track.permalink_url}}" target="_blank" class="gry h4 marr"><i class="icon i-jxn-link"></i></a> -->
     <span class="gry h6 fr">{{track.playback_count}} Plays | {{track.favoritings_count}} Likes</span>
   </div>
 
   <a ng-href="#/{{track.user.permalink}}" class="tappad bobo gry h4">{{track.user.username}} <span class="fr h5"><i class="icon i-jxn-carat"></i></span></a>
 
+  <a ng-href="{{track.permalink_url}}" target="_blank" class="tappad gry">View on SoundCloud <span class="fr h5"><i class="icon gry i-jxn-carat"></i></span></a>
 </div><!-- /.set -->
 
-    
-    
-<!--
-      <div class="pad maxw640" ng-show="track.description">
-        <h6 class="gry">{{track.created_at}}</h6>
-        <p>{{track.description}}</p>
-      </div>
--->
+
     
     
