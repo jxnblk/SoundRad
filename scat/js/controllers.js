@@ -97,7 +97,8 @@ angular.module('scat.controllers', [])
         $scope.scget = $scope.streamNextPage;
         soundcloud.getStream($scope, {add: true});
       } else {
-        soundcloud.getStream($scope, {add: true});
+        console.log('why is stream being added without nextpage link?');
+        //soundcloud.addTracks($scope);
       };   
     }; 
     soundcloud.getStream($scope);
@@ -105,7 +106,15 @@ angular.module('scat.controllers', [])
 
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {    
 
+    /* // maybe try this for getuser
+    var lastRoute = $route.current;
+    if ($route.current.$route.templateUrl.indexOf('mycurrentpath') > 0) {
+        $route.current = lastRoute;         
+    }
+    */
+  
     $scope.viewUser = $scope.$routeParams.viewUser;
+    $scope.viewUsername = $scope.viewUser;
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
         
     // Pagination
@@ -165,6 +174,19 @@ angular.module('scat.controllers', [])
     $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.setUrl;
     //$scope.pageOffset = 1; // hiding pagination from tracklist partial
     soundcloud.getTrack($scope);    
+  }])
+  
+  .controller('ActivitiesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.tracksLoading = true;
+    $scope.scget = '/me/activities';
+    soundcloud.getActivities($scope);
+    
+    $scope.showMore = function() {
+      $scope.tracksLoading = true;
+      $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+      soundcloud.getActivities($scope, {add: true});  
+    };
+    
   }])
  
   .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', '$location', function($scope, soundcloud, player, audio, $location) {

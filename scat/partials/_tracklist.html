@@ -3,15 +3,16 @@
   <div ng-hide="tracks.length || tracksLoading" class="pad show-more">No content</div>
 
   <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-switch on="track.kind">
+    <!-- <pre>{{track | json}} - {{track.kind}}</pre> -->
     
     <div class="jx-player media" id="{{track.permalink}}" ng-class="{playing: isPlaying(track)}" ng-switch-when="track" ng-controller="TrackCtrl" ng-switch on="isPlaying(track)">
     
       <a href="" class="jx-play no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play"></i></a>
       <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="isPlaying(track)"><i class="i-jxn-pause"></i></a>
       <div class="bd">
-        <p class="jx-artist">{{track.user.username}} <span ng-show="track.sharing == 'private'"> [private]</span> <span ng-hide="track.streamable">[Not Streamable]</span></p> <!-- &mdash; {{track.id}} -->
+        <p class="jx-artist">{{track.user.username}} <span ng-show="track.sharing == 'private'"> [private]</span> <span ng-hide="track.streamable">[Not Streamable]</span></p>
         <p class="h4 h4mo marr2 jx-title b">{{track.title}}</p>
-        <!-- To do: find a way to show progress on paused tracks -->
+    
         
         <div class="jx-time-span" ng-switch-when="true">
           <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>

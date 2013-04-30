@@ -1,13 +1,13 @@
 <div ng-controller="UserCtrl">
 
   <div class="bobo overhide">
-    <!-- <img ng-src="{{userData.avatar_url}}" class="maxw64 fl marr" /> -->
-    <h3 class="lrpad overhide">{{userData.username}}</h3>
+    <img ng-src="{{userData.avatar_url}}" class="padto padl disib img32" />
+    <h3 class="disib lrpad overhide">{{viewUsername}}</h3>
     <div class="tappad">
-      <a ng-href="#/{{userData.permalink}}" class="marr lrpadout4" ng-class="{pill: getType == '/tracks'}">Tracks</a>
-      <a ng-href="#/{{userData.permalink}}/sets" class="marr lrpadout4" ng-class="{pill: getType == '/playlists'}">Sets</a>
-      <a ng-href="#/{{userData.permalink}}/likes" class="marr lrpadout4" ng-class="{pill: getType == '/favorites'}">Likes</a>
-      <a ng-href="#/{{userData.permalink}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a>
+      <a ng-href="#/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: getType == '/tracks'}">Tracks</a>
+      <a ng-href="#/{{viewUser}}/sets" class="marr lrpadout4" ng-class="{pill: getType == '/playlists'}">Sets</a>
+      <a ng-href="#/{{viewUser}}/likes" class="marr lrpadout4" ng-class="{pill: getType == '/favorites'}">Likes</a>
+      <a ng-href="#/{{viewUser}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a>
     </div>
   </div>
   
@@ -17,12 +17,9 @@
   </div>
 -->
 
-<!-- Or put controller calls here instead of in app.js -->
-
   <div ng-switch on="contentType">
     <div ng-switch-when="tracks" ng-include src="'partials/_tracklist.html'"></div>
-    <div ng-switch-when="users" ng-include src="'partials/_following.html'"></div>
-    
+    <div ng-switch-when="users" ng-include src="'partials/_following.html'"></div> 
   </div>
 
 </div>

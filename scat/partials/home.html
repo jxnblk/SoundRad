@@ -10,8 +10,14 @@
   <div ng-switch-when="true" ng-controller="StreamCtrl">
   
     <div class="bobo overhide">
-      <h3>Stream</h3>
+    <h3 class="disib lrpad overhide">Stream</h3>
+    <div class="tappad">
+      <a ng-href="#/" class="marr lrpadout4" ng-class="{pill: }">Tracks</a>
+      <a ng-href="#/reposts" class="marr lrpadout4" ng-class="{pill: }">Reposts</a>
+      <a ng-href="#/activity" class="marr lrpadout4" ng-class="{pill: }">Activity</a>
+      <!-- <a ng-href="#/{{viewUser}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a> -->
     </div>
+  </div>
       
     <div ng-include src="'partials/_tracklist.html'"></div>
     

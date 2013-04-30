@@ -22,13 +22,12 @@ $gray5: #999;
   }
 }
 
-.prime {
-  color: $prime;
-}
+.prime { color: $prime; }
+.gry { color: $gray5; }
 
-.gry {
-  color: $gray5;
-}
+.bg-prime { background-color: $prime; }
+.bg-ltgry { background-color: $gray1; }
+.bg-gry   { background-color: $gray5; }
 
 .boto { border-top: 1px solid $gray2; }
 .bor { border-right: 1px solid $gray2; }

@@ -63,6 +63,8 @@ angular.module('scat.services', [])
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
                       $scope.userData = data;
+                      // replace viewUser once loaded
+                      $scope.viewUsername = $scope.userData.username;
                     });
                   });
       },
@@ -90,22 +92,14 @@ angular.module('scat.services', [])
                           $scope.$apply(function () {
                             var tracks = [];
                             for (var i = 0; i < data.collection.length; i++) {                               
-                              if (data.collection[i].type == 'favoriting') {
-                                console.log('favoriting? dont add this');
-                                console.log(data.collection[i]);
-                                //var track = data.collection[i].origin.track;
-                                //tracks.push(track);
-                              } else if (data.collection[i].type == 'track') {
+                              if (data.collection[i].type == 'track') {
                                 var track = data.collection[i].origin;
                                 tracks.push(track);
                               } else if (data.collection[i].type == 'track-sharing') {
                                 var track = data.collection[i].origin.track;
                                 tracks.push(track);
-                              } else if (data.collection[i].type == 'playlist') {
-                                console.log('its a playlist - parse this later');
                               } else {
                                 console.log('Its something else');
-                                console.log(data.collection[i].type);
                                 console.log(data.collection[i]);
                               }; 
                             };
@@ -120,6 +114,30 @@ angular.module('scat.services', [])
                             };
                             $scope.tracksLoading = false;
                             $scope.streamNextPage = data.next_href;
+                          });
+                        });
+      },
+      
+      getActivities:  function($scope, params) {
+                        SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data) {
+                          $scope.$apply(function(){
+                            var activities = [];
+                            for (var i = 0; i < data.collection.length; i++) {
+                              if (data.collection[i].type == 'favoriting') {
+                                activities.push(data.collection[i]);
+                              } else {
+                                //console.log('not a favoriting');
+                                //console.log(data.collection[i]);
+                              };
+                            };
+                            if (params) {
+                              if (params.add) {
+                                $scope.activities = $scope.activities.concat(activities);  
+                              };
+                            } else {
+                              $scope.activities = activities;
+                            };
+                            $scope.tracksLoading = false;
                           });
                         });
       },

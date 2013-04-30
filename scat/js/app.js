@@ -4,6 +4,7 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     $routeProvider.when('/more', {templateUrl: 'partials/_navmore.html'});
+    $routeProvider.when('/activity', {templateUrl: 'partials/_activities.html'});
 
     // User Views
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html', controller: 'UserTracksCtrl'});

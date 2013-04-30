@@ -18,6 +18,15 @@
 .gry {
   color: #999999; }
 
+.bg-prime {
+  background-color: #ff6600; }
+
+.bg-ltgry {
+  background-color: #f6f6f6; }
+
+.bg-gry {
+  background-color: #999999; }
+
 .boto {
   border-top: 1px solid #eeeeee; }
 
@@ -664,6 +673,30 @@ you can use the generic selector below, but it's slower:
 
 .htap {
   height: 48px; }
+
+.img24 {
+  width: 24px;
+  height: 24px; }
+
+.img32 {
+  width: 32px;
+  height: 32px; }
+
+.img48 {
+  width: 48px;
+  height: 48px; }
+
+.img64 {
+  width: 64px;
+  height: 64px; }
+
+.img96 {
+  width: 96px;
+  height: 96px; }
+
+.img128 {
+  width: 128px;
+  height: 128px; }
 
 .overhide {
   overflow: hidden; }
