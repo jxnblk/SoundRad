@@ -316,7 +316,7 @@ angular.module('scat.services', [])
         //console.log(current.i);
         if(current.tracks[current.i].loop){
           //console.log('loop it');
-          if (playing) player.play();
+          if (playing) audio.currentTime = 0;
         } else if (current.tracks.length > (current.i + 1)) {
           current.i = current.i+1;
           if (playing) player.play();
