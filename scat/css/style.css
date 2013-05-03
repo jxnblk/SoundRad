@@ -33,6 +33,9 @@
 .bg-text {
   background-color: #444444; }
 
+.bg-text2 {
+  background-color: #5e5e5e; }
+
 .bg-gry {
   background-color: #999999; }
 
@@ -62,34 +65,6 @@
 
 a.tappad:hover {
   background-color: #f6f6f6; }
-
-.track {
-  border-bottom: 1px solid #eeeeee; }
-
-.track:first-child {
-  border-top: 1px solid #eeeeee; }
-
-.jx-play:hover {
-  background-color: #f6f6f6; }
-
-.jx-pause {
-  color: white;
-  background-color: #ff6600; }
-
-.jx-pause:hover {
-  background-color: #ff751a; }
-
-.jx-artist {
-  color: #999999; }
-
-.playing .jx-artist {
-  color: white; }
-
-.playing .jx-title {
-  color: white; }
-
-.playing .jx-time {
-  color: white; }
 
 body {
   font-size: 100%;
@@ -177,6 +152,9 @@ small, .sm {
 
 .lh1 {
   line-height: 1; }
+
+.lh1-25 {
+  line-height: 1.25; }
 
 @media screen and (max-width: 448px) {
   .h1mo {
@@ -594,10 +572,9 @@ you can use the generic selector below, but it's slower:
   line-height: 48px;
   padding: 0 16px;
   position: relative; }
-
-.tappad .icon {
-  position: relative;
-  top: 3px; }
+  .tappad .icon {
+    position: relative;
+    top: 3px; }
 
 .lrpad {
   padding: 0 16px; }
@@ -607,6 +584,21 @@ you can use the generic selector below, but it's slower:
   padding-right: 4px;
   margin-left: -4px;
   margin-right: -4px; }
+
+.mar- {
+  margin: 8px; }
+
+.marto- {
+  margin-top: 8px; }
+
+.marr- {
+  margin-right: 8px; }
+
+.marbo- {
+  margin-bottom: 8px; }
+
+.marl- {
+  margin-left: 8px; }
 
 .mar {
   margin: 16px; }
@@ -641,11 +633,17 @@ you can use the generic selector below, but it's slower:
 .center {
   margin: 0 auto; }
 
+.text-center {
+  text-align: center; }
+
 .disb {
   display: block; }
 
 .disib {
   display: inline-block; }
+
+.overhide {
+  overflow: hidden; }
 
 .w100 {
   width: 100%; }
@@ -701,11 +699,61 @@ you can use the generic selector below, but it's slower:
   width: 128px;
   height: 128px; }
 
-.overhide {
-  overflow: hidden; }
+.sq48 {
+  width: 48px;
+  height: 48px; }
+
+.sq64 {
+  width: 64px;
+  height: 64px; }
+
+.hi48 {
+  height: 48px; }
+
+.hi64 {
+  height: 64px; }
+
+.lh16 {
+  line-height: 16px; }
+
+.lh24 {
+  line-height: 24px; }
+
+.lh32 {
+  line-height: 32px; }
+
+.lh48 {
+  line-height: 48px; }
+
+.lh64 {
+  line-height: 64px; }
+
+.z64 {
+  z-index: 64; }
+
+.z128 {
+  z-index: 128; }
+
+.z256 {
+  z-index: 256; }
 
 .posrel {
   position: relative; }
+
+.posabs {
+  position: absolute; }
+
+.to0 {
+  top: 0; }
+
+.r0 {
+  right: 0; }
+
+.bo0 {
+  bottom: 0; }
+
+.l0 {
+  left: 0; }
 
 .right-icon {
   position: absolute;
@@ -793,62 +841,6 @@ input[type="text"] {
 
 .player .bd {
   overflow: hidden; }
-
-.sq48 {
-  width: 48px;
-  height: 48px; }
-
-.sq64 {
-  width: 64px;
-  height: 64px; }
-
-.hi48 {
-  height: 48px; }
-
-.hi64 {
-  height: 64px; }
-
-.w100 {
-  width: 100%; }
-
-.lh48 {
-  line-height: 48px; }
-
-.lh64 {
-  line-height: 64px; }
-
-.center {
-  text-align: center; }
-
-.disb {
-  display: block; }
-
-.z64 {
-  z-index: 64; }
-
-.z128 {
-  z-index: 128; }
-
-.z256 {
-  z-index: 256; }
-
-.posrel {
-  position: relative; }
-
-.posabs {
-  position: absolute; }
-
-.to0 {
-  top: 0; }
-
-.r0 {
-  right: 0; }
-
-.bo0 {
-  bottom: 0; }
-
-.l0 {
-  left: 0; }
 
 /*
 .jx-player {

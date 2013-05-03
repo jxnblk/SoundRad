@@ -30,6 +30,7 @@ $gray5: #999;
 
 .bg-prime { background-color: $prime; }
 .bg-text  { background-color: $text; }
+.bg-text2 { background-color: lighten($text, 10%); }
 .bg-gry   { background-color: $gray5; }
 .bg-mdgry { background-color: $gray4; }
 .bg-ltgry { background-color: $gray1; }
@@ -52,15 +53,14 @@ a.tappad:hover {
   background-color: $gray1;
 }
 
-.track { border-bottom: 1px solid $gray2; }
-.track:first-child { border-top: 1px solid $gray2; }
 
 // Amazing JxPlayer
 
 
 
+/*
 .jx-player {}
-//.jx-play { color: $gray4; /* background-color: $gray4; */ }
+//.jx-play { color: $gray4; background-color: $gray4; }
 .jx-play:hover { background-color: $gray1; }
 .jx-pause { color: $white; background-color: $prime; }
 .jx-pause:hover { background-color: lighten($prime, 5%);}
@@ -76,6 +76,7 @@ a.tappad:hover {
   //background-color: $prime;
   //opacity: .1;
 //}
+*/
 
 
 

@@ -3,7 +3,7 @@
   <div ng-hide="tracks.length || tracksLoading" class="pad show-more">No content</div>
     
   <!-- Player Partial Here -->
-  <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-switch on="track.kind" ng-include src="'partials/_player.html'"></div>
+  <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-show="tracks.length" ng-include src="'partials/_player.html'"></div>
     
   <a href="" class="show-more" ng-click="showMore()" ng-hide="tracks.length <= pageOffset || tracksLoading">Show More</a>  
   <div class="show-more padto" ng-show="tracksLoading"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div>
