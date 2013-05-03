@@ -47,6 +47,9 @@
 .center { margin: 0 auto; }
 .text-center { text-align: center; }
 
+.vermid { vertical-align: middle; }
+.vertop { vertical-align: top; }
+
 .disb { display: block; }
 .disib { display: inline-block; }
 
@@ -87,6 +90,7 @@
 .z64  { z-index: 64; }
 .z128 { z-index: 128; }
 .z256 { z-index: 256; }
+.z512 { z-index: 512; }
 .posrel { position: relative; }
 .posabs { position: absolute; }
 
@@ -95,6 +99,8 @@
 .bo0 { bottom: 0; }
 .l0  { left: 0; }
 
+.to6 { top: 6px; }
+.to26 { top: 26px; }
 
 .right-icon {
   position: absolute;

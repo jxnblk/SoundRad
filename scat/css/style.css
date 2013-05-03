@@ -636,6 +636,12 @@ you can use the generic selector below, but it's slower:
 .text-center {
   text-align: center; }
 
+.vermid {
+  vertical-align: middle; }
+
+.vertop {
+  vertical-align: top; }
+
 .disb {
   display: block; }
 
@@ -737,6 +743,9 @@ you can use the generic selector below, but it's slower:
 .z256 {
   z-index: 256; }
 
+.z512 {
+  z-index: 512; }
+
 .posrel {
   position: relative; }
 
@@ -754,6 +763,12 @@ you can use the generic selector below, but it's slower:
 
 .l0 {
   left: 0; }
+
+.to6 {
+  top: 6px; }
+
+.to26 {
+  top: 26px; }
 
 .right-icon {
   position: absolute;
