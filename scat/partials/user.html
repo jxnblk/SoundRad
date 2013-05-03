@@ -2,17 +2,26 @@
 
   <div class="bobo overhide">
     <!-- <img ng-src="{{userData.avatar_url}}" class="padto padl disib img32" /> -->
-    <h3 class="disib lrpad overhide">{{viewUsername}}</h3>
+    <h2 class="disib lrpad overhide marr2">{{viewUsername}}</h2>
+    <a ng-href="#/{{viewUser}}/following" class="gry disib marto- marr">
+      <div class="h4 lh1">{{userData.followings_count || 0}}</div>
+      <small class="lh1">Following</small>
+    </a>
+    <div class="gry disib marto- marr">
+      <div class="h4 lh1">{{userData.followers_count || 0}}</div>
+      <small class="lh1">Followers</small>
+    </div>
+
     <div class="tappad">
       <a ng-href="#/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: getType == '/tracks'}">Tracks</a>
       <a ng-href="#/{{viewUser}}/sets" class="marr lrpadout4" ng-class="{pill: getType == '/playlists'}">Sets</a>
       <a ng-href="#/{{viewUser}}/likes" class="marr lrpadout4" ng-class="{pill: getType == '/favorites'}">Likes</a>
-      <a ng-href="#/{{viewUser}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a>
+      <!-- <a ng-href="#/{{viewUser}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a> -->
     </div>
   </div>
   
-  <!--
-<div class="bobo pad">
+<!--
+  <div class="bobo pad">
     <pre>{{userData | json}}</pre>
   </div>
 -->

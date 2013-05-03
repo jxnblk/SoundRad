@@ -51,19 +51,15 @@ angular.module('scat.services', [])
                       $scope.connected = true;
                       $scope.me = me;
                       $scope.username = me.username;
-                      //localStorage.setItem('username-' + $scope.connectedUserIndex, $scope.username);
-                      //$scope.connectedUsers[$scope.connectedUserIndex] = $scope.username;
                     }
                   });
                 });
       },
       
       getUser:  function($scope, params){
-                  //console.log('get user');
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
                       $scope.userData = data;
-                      // replace viewUser once loaded
                       $scope.viewUsername = $scope.userData.username;
                     });
                   });
@@ -323,10 +319,6 @@ angular.module('scat.services', [])
         // this is really janky with iphone system prev control
         current.i-1;
         if (player.playing) player.play();
-      },
-      
-      seek: function(time) {
-        audio.currentTime = time;
       },
       
       reset: function() {

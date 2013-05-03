@@ -179,7 +179,7 @@ angular.module('scat.controllers', [])
       
   }])
   
-  .controller('ScrubberCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
+  .controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio){
       // Scrubbers
       function updateView() {
         $scope.$apply(function() {
@@ -195,7 +195,7 @@ angular.module('scat.controllers', [])
       // Seeking
       $scope.seekTo = function($event){
         var xpos = $event.offsetX / $event.target.offsetWidth;
-        player.seek(xpos * audio.duration);
+        audio.currentTime = (xpos * audio.duration);
       };
   }])
   

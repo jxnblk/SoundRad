@@ -12,14 +12,14 @@
         <span class="gry h6 fr">{{track.playback_count}} Plays | {{track.favoritings_count}} Likes</span>
       </div>
       
-      <a ng-href="#/{{track.user.permalink}}" class="tappad bobo gry h4">{{track.user.username}} <span class="fr h5"><i class="icon i-jxn-carat"></i></span></a>
+      <a ng-href="#/{{track.user.permalink}}" class="tappad bobo gry h4">{{track.user.username}} <i class="fr h6 i-jxn-carat"></i></a>
       
       <div class="pad bobo">
         <h6 class="gry">{{track.created_at | fromNow}}</h6> <!-- don't think this is standard datetime format -->
         <p class="maxw640">{{track.description}}</p>
       </div>
       
-      <a ng-href="{{track.permalink_url}}" target="_blank" class="tappad bobo gry">View on SoundCloud <span class="fr h5"><i class="icon gry i-jxn-carat"></i></span></a>
+      <a ng-href="{{track.permalink_url}}" target="_blank" class="tappad bobo gry">View on SoundCloud <i class="fr h6 i-jxn-carat"></i></a>
 
       <!-- <pre class="pad">{{tracks | json}}</pre> -->
       

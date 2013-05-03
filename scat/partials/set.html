@@ -14,15 +14,18 @@
     <a href="" ng-click="like(set.id)" ng-hide="set.user_favorite" class="gry h4 marr"><i class="icon i-jxn-heart"></i></a>
     <a href="" ng-click="unlike(set.id)" ng-show="set.user_favorite" class="prime h4 marr"><i class="icon i-jxn-heart"></i></a>
     <!-- Put repost and Add to Set buttons here -->
-    <!-- <a ng-href="{{track.permalink_url}}" target="_blank" class="gry h4 marr"><i class="icon i-jxn-link"></i></a> -->
-    <span class="gry h6 fr">{{set.playback_count}} Plays | {{set.favoritings_count}} Likes</span>
   </div>
 
-  <a ng-href="#/{{set.user.permalink}}" class="tappad bobo gry h4" ng-show="set.user">{{set.user.username}} <i class="fr h6 icon i-jxn-carat"></i></a>
+  <a ng-href="#/{{set.user.permalink}}" class="tappad bobo gry h4" ng-show="set.user">{{set.user.username}} <i class="fr h6 i-jxn-carat"></i></a>
 
-  <a ng-href="{{set.permalink_url}}" target="_blank" class="tappad gry">View on SoundCloud <i class="fr h6 icon i-jxn-carat"></i></a>
+  <div class="pad bobo">
+    <h6 class="gry">{{set.created_at | fromNow}}</h6> <!-- don't think this is standard datetime format -->
+    <p class="maxw640">{{set.description}}</p>
+  </div>
 
+  <a ng-href="{{set.permalink_url}}" target="_blank" class="tappad gry">View on SoundCloud <i class="fr h6 i-jxn-carat"></i></a>
 
+<!-- <pre>{{set | json}}</pre> -->
 
 
 
