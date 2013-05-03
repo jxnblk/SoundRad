@@ -2,16 +2,16 @@
 
   <!-- <div ng-include ng-show="current.tracks" src="'partials/_globalplayer.html'"></div> -->
 
-  <div class="currently-playing posrel bobo overhide" ng-show="current.title">
-    <a ng-href="#{{current.URL}}" class="tappad overhide htap marr2"><i class="icon i-jxn-play"></i> {{current.title}}</a>
+  <div class="currently-playing posrel bobo overhide" ng-controller="PlayerCtrl" ng-show="player.playing">
+    <a ng-href="#{{player.playing.user.username}}/{{player.playing.permalink}}" class="tappad overhide htap marr2"><i class="icon i-jxn-play"></i> {{player.playing.title}}</a>
     
-    <a href="" ng-click="toggleLoop(current.tracks[current.i])" ng-class="{gry: !current.tracks[current.i].loop}" class="right-icon tappad h4"><i class="icon i-jxn-loop"></i></a>
+    <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="right-icon tappad h4"><i class="icon i-jxn-loop"></i></a>
     <!-- Use this once there's better URL structures in place -->
     <!-- {{current.tracks[current.i].user.permalink}} -- {{current.tracks[current.i].permalink}} -->
   </div>
   
   
-  <h6 class="caps lrpad marto gry">Bookmarks</h6>
+  <h6 class="sm caps lrpad marto gry">Bookmarks</h6>
   <ul class="bobo">
     <li><a href="#/jxnblk" class="tappad">Jxnblk</a></li>
     <li><a href="#/mrsjxn" class="tappad">Mrsjxn</a></li>
@@ -25,7 +25,7 @@
   
   <div ng-show='connected'>
   
-    <h6 class="caps tappad gry">Accounts: <a href="" ng-click="addConnectedUser()" class="fr">Add Account</a></h6>
+    <h6 class="sm caps tappad gry">Accounts: <a href="" ng-click="addConnectedUser()" class="fr">Add Account</a></h6>
     <ul>
       <li ng-repeat="connectedUser in connectedUsers">
         <a href="" ng-click="switchUser($index)" class="tappad" ng-class="{active: connectedUser == username}">
@@ -44,6 +44,6 @@
   </div>
 
   
-  <p class="h6 lrpad gry tappad">Powered by SoundCloud</p>
+  <p class="sm lrpad gry tappad">Powered by SoundCloud</p>
 
 </div>

@@ -1,27 +1,13 @@
 <div ng-repeat="track in tracks">
 
+  <div ng-include src="'partials/_player.html'"></div>
+
   <div ng-controller="TrackCtrl">
-  
-    <div class="track track-{{track.permalink}}" ng-controller="PlayerCtrl">    
-      <div class="jx-player bobo media" id="{{track.permalink}}" ng-class="{'playing bg-gry': isPlaying(track)}" ng-switch on="isPlaying(track)">
-        <a href="" class="jx-play gry no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play anim-popin anim-hack"></i></a>
-        <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="isPlaying(track)"><i class="i-jxn-pause anim-popin anim-hack"></i></a>
-        <div class="bd">
-          <p class="jx-artist">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small> <small class="" ng-hide="track.streamable">[Not Streamable]</small></p>
-          <p class="h4 h4mo marr2 jx-title b">{{track.title}}</p>    
-          <div class="jx-time-span" ng-switch-when="true" ng-controller="ScrubberCtrl">
-            <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
-            <div class="jx-buffer bg-text" style="width: {{currentBufferPercentage}}%"></div>
-            <div class="jx-played bg-prime" style="width: {{currentTimePercentage}}%"></div>
-            <p class="jx-time sm" ng-show="durationMS">{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
-          </div>
-        </div>
-      </div>
-          
+            
       <div class="tappad bobo">
         <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite" class="gry h4 marr"><i class="icon i-jxn-heart"></i></a>
         <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite" class="prime h4 marr"><i class="icon i-jxn-heart"></i></a>        
-        <a href="" ng-click="toggleLoop(track)" ng-class="{gry: !track.loop}" class="h4 marr"><i class="icon i-jxn-loop"></i></a>      
+        <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="h4 marr"><i class="icon i-jxn-loop"></i></a>      
         <!-- <a ng-href="{{track.permalink_url}}" target="_blank" class="gry h4 marr"><i class="icon i-jxn-link"></i></a> -->
         <span class="gry h6 fr">{{track.playback_count}} Plays | {{track.favoritings_count}} Likes</span>
       </div>
@@ -34,15 +20,9 @@
       </div>
       
       <a ng-href="{{track.permalink_url}}" target="_blank" class="tappad bobo gry">View on SoundCloud <span class="fr h5"><i class="icon gry i-jxn-carat"></i></span></a>
-    
-      
-
 
       <!-- <pre class="pad">{{tracks | json}}</pre> -->
       
   </div> <!-- TrackCtrl -->
-    
-</div> <!-- PlayerCtrl -->
 
-
-  
+</div>

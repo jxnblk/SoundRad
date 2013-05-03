@@ -1,0 +1,49 @@
+<!-- TO DO -->
+<!-- Need to account for sets i.e. nested arrays --> <!-- {{!!track.tracks}} -->
+
+<!-- Clean up services -->
+
+<!-- Better private track design -->
+<!-- Account for unstreamable tracks -->
+
+<!-- Better actions design -->
+<!-- Build player queue factory -->
+
+  <div class="player" id="{{track.permalink}}" ng-class="{'playing bg-gry': player.playing.id == track.id || player.paused.id == track.id, 'unstreamable bg-mdgry': !track.streamable}" ng-switch on="!!track.tracks" ng-controller="PlayerCtrl">
+    <!-- Track -->
+    <div ng-switch-when="false">    
+      <a href="" class="play sq64 lh64 center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': player.paused.id == track.id}" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
+      <a href="" class="pause sq64 lh64 center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing.id == track.id"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
+      <div class="bd posrel hi64">
+        <h2 class="artist posrel z128 marl h6 gry lh5 marto- reg" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
+        <h3 class="title posrel z128 marl h4 lh4 b" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.title}}</h3>
+        <div ng-switch on="player.playing.id == track.id || player.paused.id == track.id">      
+          <div class="time-span posabs to0 r0 bo0 l0 bg-dkgry2" ng-switch-when="true" ng-controller="ScrubberCtrl">
+            <div class="scrubber posabs to0 r0 bo0 l0 z256 no-touch-color" ng-click="seekTo($event)"></div>
+            <div class="buffer posabs to0 bo0 l0 bg-text" style="width: {{currentBufferPercentage}}%"></div>
+            <div class="played posabs to0 bo0 l0 bg-prime" style="width: {{currentTimePercentage}}%"></div>
+            <p class="time wht marto- marr posabs to0 r0 sm anim-hack anim-slideleft" ng-show="durationMS">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
+            <!-- ng-show="audio.readyState == 4" -->
+          </div>
+        </div>
+        <a href="" class="jx-toggle-actions gry" ng-class="{wht: (player.playing.id == track.id || player.paused.id == track.id) && !viewActions}" ng-click="toggleActions()"><i class="icon i-jxn-carat"></i></a>
+        <div class="jx-actions pad- bg-ltgry anim-hack" style="display:none" ng-show="viewActions" ng-animate="'slideleft'" ng-controller="TrackCtrl">
+          <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
+          <a ng-href="#/{{track.user.permalink}}/{{track.permalink}}" class="tappad fl gry h4"><i class="icon i-jxn-link"></i></a>
+          <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite" class="tappad fl gry h4"><i class="icon i-jxn-heart"></i></a>
+          <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite" class="tappad fl prime h4"><i class="icon i-jxn-heart"></i></a>        
+        </div>
+      </div>
+    </div>
+    
+    <!-- Set -->
+    <div ng-switch-when="true">
+      <a href="" ng-href="#/{{track.user.permalink}}/sets/{{track.permalink}}" class="disb active overhide pad">
+        <p class="lh1">{{track.user.username}}</p>
+        <h4 class="disib b">{{track.title}}</h4>
+      </a>
+     
+    </div>
+    
+
+  </div> 

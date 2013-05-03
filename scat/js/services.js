@@ -2,18 +2,18 @@
 
 /* Services */
 
+var clientId = '66828e9e2042e682190d1fde4b02e265';
+
 angular.module('scat.services', [])
   
   .factory('soundcloud', function() {
-    // SoundCloud Init
-    var clientId = '66828e9e2042e682190d1fde4b02e265';
+
     SC.initialize({
       client_id: clientId,
       redirect_uri: 'http://sndcmd.com/callback.html'
     });
     
     return {
-      clientId: clientId,
       
       connect:  function($scope){
                   if($scope.connected && $scope.connectedUserIndex < 1){
@@ -151,6 +151,16 @@ angular.module('scat.services', [])
                         });
       },
       
+      getSet:         function($scope, params){
+                        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
+                          $scope.$apply(function () {
+                            $scope.set = data;
+                            $scope.tracks = data.tracks;
+                            $scope.tracksLoading = false;
+                          });
+                        });
+      },
+      
       getFollowings:  function($scope, user){
                         var initLimit = 200,
                             initOffset = 0,                        
@@ -223,7 +233,6 @@ angular.module('scat.services', [])
       },
       
       resolve: function($scope, params){
-                // http://api.soundcloud.com/resolve.json?url=http://soundcloud.com/matas/hobnotropic&client_id=YOUR_CLIENT_ID
                 SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
                   $scope.$apply(function () {
                     //console.log('resolved data');
@@ -245,90 +254,75 @@ angular.module('scat.services', [])
   
   .factory('player', function(audio, $rootScope, soundcloud) {
     var player,
-        playing = false,
-        paused = false,
-        pausedTrack = null,
-        current = { i: null, title: null, time: 0 },
+        
+        //pausedTrack = null,
+        //current = { i: null, title: null, time: 0 },
         tracks = {},
-        clientId = soundcloud.clientId,
+        i,
         urlParams,
         token,
-        currentTimePercentage = audio.currentTime;
+        
+        //currentTimePercentage = audio.currentTime;
         
     player = {
-      current: current,
+      //current: current,
       tracks: tracks,
+      i: i,
       playing: false,
+      paused: false,
+      loop: false,
       
       setToken: function($scope) {
         token = $scope.token;
       },
 
       play: function(tracks, i) {
-        
-        if (angular.isDefined(tracks)) { 
-          current.tracks = tracks;
-          current.i = i;
-        };
-          
-        // using this as an id for controller
-        current.title = current.tracks[current.i].title; 
-        //console.log('current.title: ' + current.title);
-        // Check if track is streamable
-        // to-do -- Provide visual cues for disabled tracks
-        if (current.tracks[current.i].streamable == false) {
-          console.log('not streamable - wtf');
-          current.i = current.i + 1;
-          current.title = current.tracks[current.i].title;
-        };
+        player.tracks = tracks;
         
         // Should define this more globally
-        if (token && current.tracks[current.i].sharing == 'private'){
-          urlParams = '?oauth_token=' + token;
-        } else {
-          urlParams =  '?client_id=' + clientId;
-        };
+        if (token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + token;
+        } else { urlParams =  '?client_id=' + clientId; };
           
-        if (!paused || (pausedTrack != current.tracks[current.i])) {
-          audio.src = current.tracks[current.i].stream_url + urlParams;  
-          //console.log('src: ' + audio.src);
+        if (!player.paused || (player.paused != tracks[i])) {
+          audio.src = tracks[i].stream_url + urlParams;  
         };
           
         audio.play();
-        playing = true;
-        paused = false;
+        player.playing = tracks[i];
+        player.i = i;
+        player.paused = false;
 
       },
 
       pause: function(track) {
-        if (playing) {
+        if (player.playing) {
           audio.pause();
-          playing = false;
-          // using this to show/hide play/pause buttons - probs a better way to do this
-          current.title = null;
-          paused = true;
-          pausedTrack = track;
+          player.playing = false;
+          player.paused = track;
         }
       },
       
+      stop: function(track) {
+        audio.pause();
+        player.playing = false;
+        player.paused = false;
+      },
+      
       next: function() {
-        //console.log(current.tracks);
-        //console.log(current.i);
-        if(current.tracks[current.i].loop){
-          //console.log('loop it');
-          if (playing) audio.currentTime = 0;
-        } else if (current.tracks.length > (current.i + 1)) {
-          current.i = current.i+1;
-          if (playing) player.play();
-        }    
+        if(player.loop){
+          audio.currentTime = 0;
+        } else {
+          player.i = player.i+1;
+        } 
+        if (player.tracks.length > (player.i + 1) || player.loop) player.play(player.tracks, player.i);   
       },
       
       previous: function() {
         if (!current.tracks.length) return;
-        paused = false;
+        player.paused = false;
         // this is really janky with iphone system prev control
         current.i-1;
-        if (playing) player.play();
+        if (player.playing) player.play();
       },
       
       seek: function(time) {
@@ -360,7 +354,7 @@ angular.module('scat.services', [])
     };
   })
   
-  .filter('playerTime', function() {
+  .filter('playTime', function() {
     return function(ms) {
       var hours = Math.floor(ms / 36e5),
           mins = '0' + Math.floor((ms % 36e5) / 6e4),

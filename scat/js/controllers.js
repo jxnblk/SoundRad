@@ -52,26 +52,14 @@ angular.module('scat.controllers', [])
       $location.path('/');
       player.setToken($scope);
     };
-    
-       
+        
     $scope.pageSize = 32;
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
       
     $scope.current = player.current;
-    
-    // Loop
-    $scope.toggleLoop = function(track){
-      console.log('toggle loop');
-      if (!track.loop) {
-        track.loop = true;  
-      } else {
-        track.loop = false;
-      };
-    };
-    
-        
-    // Window Size
+           
+    // Window Size - probs should be a different scope
     $scope.updateWidth = function() {
       $scope.width = $window.innerWidth;
       if ($scope.width > 640){
@@ -96,23 +84,14 @@ angular.module('scat.controllers', [])
       if ($scope.streamNextPage) {
         $scope.scget = $scope.streamNextPage;
         soundcloud.getStream($scope, {add: true});
-      } else {
-        console.log('why is stream being added without nextpage link?');
-        //soundcloud.addTracks($scope);
       };   
     }; 
     soundcloud.getStream($scope);
   }])
 
+
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {    
 
-    /* // maybe try this for getuser
-    var lastRoute = $route.current;
-    if ($route.current.$route.templateUrl.indexOf('mycurrentpath') > 0) {
-        $route.current = lastRoute;         
-    }
-    */
-  
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.viewUsername = $scope.viewUser;
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
@@ -162,18 +141,17 @@ angular.module('scat.controllers', [])
   
   .controller('TrackDetailCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
     $scope.viewUser = $scope.$routeParams.viewUser;
-    $scope.trackUrl = $scope.$routeParams.track;
+      $scope.trackUrl = $scope.$routeParams.track;
     $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.trackUrl;
-    $scope.pageOffset = 1; // hiding pagination from tracklist partial
-    soundcloud.getTrack($scope);    
+//    $scope.pageOffset = 1; // hiding pagination from tracklist partial
+    soundcloud.getTrack($scope);
   }])
   
   .controller('SetCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player){
     $scope.viewUser = $scope.$routeParams.viewUser;
     $scope.setUrl = $scope.$routeParams.set;
     $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.setUrl;
-    //$scope.pageOffset = 1; // hiding pagination from tracklist partial
-    soundcloud.getTrack($scope);    
+    soundcloud.getSet($scope);
   }])
   
   .controller('ActivitiesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
@@ -189,43 +167,16 @@ angular.module('scat.controllers', [])
     
   }])
  
-  .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', '$location', function($scope, soundcloud, player, audio, $location) {
+  .controller('PlayerCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
     //console.log('PlayerCtrl');
     // Do I need these?
     $scope.player = player;
     $scope.audio = audio;
     
-    // Jxn Player (Based on Peepcode Tunes)
-    $scope.playTracks = function(tracks, i) {
-      player.play(tracks, i);
-      $scope.current.URL = $location.path();
-    };
-  
-    $scope.pauseTrack = function(track) {
-      player.pause(track);
-    };
+    $scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
     
-                /* // Could use this for global player
-                $scope.playNextTrack = function() { player.next(); };
-                $scope.playPreviousTrack = function() { player.previous(); };
-                */
-    
-    $scope.isPlaying = function(track){
-        if (track && player.current.title == track.title){
-          return true;
-        } else {
-          return false;
-        };
-      };
+    $scope.toggleLoop = function(){ player.loop = !player.loop; };
       
-
-      // Actions
-      $scope.toggleActions = function(){
-        console.log('toggle actions');
-        $scope.viewActions = !$scope.viewActions;
-      };
-      
-
   }])
   
   .controller('ScrubberCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
@@ -250,9 +201,9 @@ angular.module('scat.controllers', [])
   
 
   .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
-    //if ($scope.connected) {
-      
-        //$scope.liked = $scope.track.user_favorite;  
+    if ($scope.connected) {
+      //$scope.liked = $scope.track.user_favorite;
+    };
       
       
       $scope.like = function(trackid) {
@@ -272,19 +223,12 @@ angular.module('scat.controllers', [])
   }]);
   
   
-////////////////////////////////  
-  /*
-  .controller('GlobalPlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
-    
-  }])
-  */
-  
-  /*
-  .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio) {
-    
-  }])
-  */
   
   
   
-
+      /* // maybe try this for getuser
+    var lastRoute = $route.current;
+    if ($route.current.$route.templateUrl.indexOf('mycurrentpath') > 0) {
+        $route.current = lastRoute;         
+    }
+    */

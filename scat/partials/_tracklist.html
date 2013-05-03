@@ -1,45 +1,11 @@
 <div class="sc-tracklist">
 
   <div ng-hide="tracks.length || tracksLoading" class="pad show-more">No content</div>
-
-  <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-switch on="track.kind" ng-controller="PlayerCtrl">    
-    <div class="jx-player media" id="{{track.permalink}}" ng-class="{'playing bg-gry': isPlaying(track)}" ng-switch-when="track" ng-controller="TrackCtrl" ng-switch on="isPlaying(track)">
-      <a href="" class="jx-play gry no-touch-color" ng-click="playTracks(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play anim-popin anim-hack"></i></a>
-      <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(track)" ng-show="isPlaying(track)"><i class="i-jxn-pause anim-popin anim-hack"></i></a>
-      <div class="bd">
-        <p class="jx-artist">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small> <small class="" ng-hide="track.streamable">[Not Streamable]</small></p>
-        <p class="h4 h4mo marr2 jx-title b">{{track.title}}</p>    
-        <div class="jx-time-span" ng-switch-when="true" ng-controller="ScrubberCtrl">
-          <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
-          <div class="jx-buffer bg-text" style="width: {{currentBufferPercentage}}%"></div>
-          <div class="jx-played bg-prime" style="width: {{currentTimePercentage}}%"></div>
-          <p class="jx-time sm" ng-cloak ng-show="audio.duration">{{currentTimeMS | playerTime}} | {{durationMS | playerTime}}</p>
-        </div>
-            
-        <a href="" class="jx-toggle-actions gry" ng-class="{wht: isPlaying(track) && !viewActions}" ng-click="toggleActions()"><i class="icon i-jxn-carat"></i></a>
-        <div class="jx-actions pad- bg-ltgry anim-hack" style="display:none" ng-show="viewActions" ng-animate="'slideleft'">
-          <a href="" ng-click="toggleLoop(track)" ng-class="{gry: !track.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
-          <a ng-href="#/{{track.user.permalink}}/{{track.permalink}}" class="tappad fl gry h4"><i class="icon i-jxn-link"></i></a>
-          <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite" class="tappad fl gry h4"><i class="icon i-jxn-heart"></i></a>
-          <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite" class="tappad fl prime h4"><i class="icon i-jxn-heart"></i></a>        
-        </div>
-        
-      </div>
-    </div>
     
-    <div class="set"  ng-switch-when="playlist">
-      <a href="" ng-href="#/{{track.user.permalink}}/sets/{{track.permalink}}" class="disb active overhide pad">
-        <p class="lh1">{{track.user.username}}</p>
-        <h4 class="disib b">{{track.title}}</h4>
-        <span class="fr h5 gry"><i class="icon i-jxn-carat"></i></span>
-      </a>
-    </div><!-- /.set -->
+  <!-- Player Partial Here -->
+  <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-switch on="track.kind" ng-include src="'partials/_player.html'"></div>
     
-
-  </div><!-- Track -->
-  
   <a href="" class="show-more" ng-click="showMore()" ng-hide="tracks.length <= pageOffset || tracksLoading">Show More</a>  
   <div class="show-more padto" ng-show="tracksLoading"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div>
-  
-  
+   
 </div><!-- end sc-tracklist -->
