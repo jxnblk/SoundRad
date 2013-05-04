@@ -11,13 +11,17 @@
 </head>
 <body>
 
-<div ng-controller="GlobalCtrl" ng-switch on="layout">
+<div ng-controller="NavCtrl" ng-switch on="layout">
 
   <div ng-include src="'partials/_nav.html'" ></div>
 
-  <div class="view" ng-class="{leftcol: layout == 'desktop'}" ng-view></div>
+
+
+    <div class="view" ng-class="{leftcol: layout == 'desktop'}" ng-view></div>
   
-  <div ng-switch-when="desktop" class="rightcol bol" ng-include src="'partials/_navmore.html'"></div>
+    <div ng-switch-when="desktop" class="rightcol bol" ng-include src="'partials/_navmore.html'"></div>
+    
+
   
 </div><!-- NavCtrl -->
 

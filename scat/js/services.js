@@ -3,6 +3,7 @@
 /* Services */
 
 var clientId = '66828e9e2042e682190d1fde4b02e265';
+var Token;
 
 angular.module('scat.services', [])
   
@@ -16,8 +17,9 @@ angular.module('scat.services', [])
     return {
       
       connect:  function($scope){
-                  if($scope.connected && $scope.connectedUserIndex < 1){
-                    window.SC.storage().setItem('SC.accessToken', $scope.token); 
+                  if($scope.connected){
+                    window.SC.storage().setItem('SC.accessToken', $scope.token);
+                    Token = $scope.token;
                   } else {
                     SC.connect(function() {
                       $scope.$apply(function () {
@@ -35,6 +37,7 @@ angular.module('scat.services', [])
                           });
                         });   
                         $scope.token = SC.accessToken();
+                        Token = $scope.token;
                         localStorage.setItem('token-' + $scope.connectedUserIndex, $scope.token);
                       });
                     });
@@ -57,7 +60,7 @@ angular.module('scat.services', [])
       },
       
       getUser:  function($scope, params){
-                  console.log('getting user');
+                  //console.log('getting user');
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
                       $scope.userData = data;
@@ -257,7 +260,7 @@ angular.module('scat.services', [])
         tracks = {},
         i,
         urlParams,
-        token,
+        //token,
         
         //currentTimePercentage = audio.currentTime;
         
@@ -269,15 +272,15 @@ angular.module('scat.services', [])
       paused: false,
       loop: false,
       
-      setToken: function($scope) {
-        token = $scope.token;
-      },
+      //setToken: function($scope) {
+        //token = $scope.token;
+      //},
 
       play: function(tracks, i) {
         player.tracks = tracks;
         
         // Should define this more globally
-        if (token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + token;
+        if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
         } else { urlParams =  '?client_id=' + clientId; };
           
         if (!player.paused || (player.paused != tracks[i])) {

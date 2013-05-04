@@ -81,6 +81,8 @@
 .hi48 { height: 48px; }
 .hi64 { height: 64px; }
 
+.hi128 { height: 128px; }
+
 .lh16 { line-height: 16px;}
 .lh24 { line-height: 24px;}
 .lh32 { line-height: 32px;}
@@ -137,8 +139,14 @@
   z-index: 1024;
 }
 
+.viewcontainer {
+  margin-top: $m3;
+}
+
 .view {
-  position: absolute;
+  //position: absolute;
+        //margin-top: $m3;
+        //margin-bottom: $m3;
   top: $m3;
   right: 0;
   bottom: 0;

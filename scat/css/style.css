@@ -719,6 +719,9 @@ you can use the generic selector below, but it's slower:
 .hi64 {
   height: 64px; }
 
+.hi128 {
+  height: 128px; }
+
 .lh16 {
   line-height: 16px; }
 
@@ -797,8 +800,10 @@ you can use the generic selector below, but it's slower:
   line-height: 48px;
   z-index: 1024; }
 
+.viewcontainer {
+  margin-top: 48px; }
+
 .view {
-  position: absolute;
   top: 48px;
   right: 0;
   bottom: 0;
