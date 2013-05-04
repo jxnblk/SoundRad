@@ -57,6 +57,7 @@ angular.module('scat.services', [])
       },
       
       getUser:  function($scope, params){
+                  console.log('getting user');
                   SC.get('/users/' + $scope.viewUser, function(data){
                     $scope.$apply(function () {
                       $scope.userData = data;

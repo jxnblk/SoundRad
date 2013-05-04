@@ -11,15 +11,11 @@
       <div class="h5 lh1">{{userData.followers_count || 0}}</div>
       <small class="tiny caps lh1">Followers</small>
     </div>
-    
-    <div class="boto bobo pad">
-      {{viewType}} / {{viewDetail}}
-    </div>
 
     <div class="tappad">
-      <a ng-href="#/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: getType == '/tracks'}">Tracks</a>
-      <a ng-href="#/{{viewUser}}/sets" class="marr lrpadout4" ng-class="{pill: getType == '/playlists'}">Sets</a>
-      <a ng-href="#/{{viewUser}}/likes" class="marr lrpadout4" ng-class="{pill: getType == '/favorites'}">Likes</a>
+      <a ng-href="#/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: !viewType}">Tracks</a>
+      <a ng-href="#/{{viewUser}}/sets" class="marr lrpadout4" ng-class="{pill: viewType == '/sets'}">Sets</a>
+      <a ng-href="#/{{viewUser}}/likes" class="marr lrpadout4" ng-class="{pill: viewType == '/likes'}">Likes</a>
       <!-- <a ng-href="#/{{viewUser}}/following" class="marr lrpadout4" ng-class="{pill: getType == null}">Following</a> -->
     </div>
   </div>
@@ -33,6 +29,8 @@
   <div ng-switch on="contentType">
     <div ng-switch-when="tracks" ng-include src="'partials/_tracklist.html'"></div>
     <div ng-switch-when="users" ng-include src="'partials/_following.html'"></div> 
+    <div ng-switch-when="track" ng-include src="'partials/track.html'"></div> 
+    <div ng-switch-when="set" ng-include src="'partials/set.html'"></div> 
   </div>
 
 </div>

@@ -98,8 +98,11 @@ angular.module('scat.controllers', [])
     $scope.viewType = $scope.$routeParams.type;
     $scope.viewDetail = $scope.$routeParams.detail;
     
+    
+      soundcloud.getUser($scope);
+    
     //$scope.viewUsername = $scope.viewUser;
-    $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
+    //$scope.scget = '/users/' + $scope.viewUser + $scope.getType;
         
     // Pagination
     $scope.showMore = function() {
@@ -108,21 +111,40 @@ angular.module('scat.controllers', [])
       soundcloud.addTracks($scope);  
     }; 
     
-    if ($scope.contentType == 'tracks'){
+    if ($scope.viewDetail) {
+      $scope.contentType = 'set';
+      $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
+      soundcloud.getSet($scope);
+    } else if ($scope.viewType == 'sets') {
+      $scope.contentType = 'tracks';
+      $scope.scget = '/users/' + $scope.viewUser + '/playlists';
       soundcloud.getTracks($scope);  
+    } else if ($scope.viewType == 'likes') {
+      $scope.contentType = 'tracks';
+      $scope.scget = '/users/' + $scope.viewUser + '/favorites';
+      soundcloud.getTracks($scope);
+    } else if ($scope.viewType == 'following') {
+      $scope.contentType = 'users';
+      soundcloud.getFollowings($scope, $scope.viewUser);
+      $scope.sorts = [
+        { json: 'followers_count', human: 'Popularity', reverse: true },
+        { json: 'username', human: 'Alphabetical', reverse: false }
+      ];
+      $scope.sortFollowings = $scope.sorts[0];
+    } else if ($scope.viewType) {
+      $scope.contentType = 'track';
+      $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
+      soundcloud.getTrack($scope);
+    } else {
+      $scope.contentType = 'tracks';
+      $scope.scget = '/users/' + $scope.viewUser + '/tracks';
+      soundcloud.getTracks($scope);
     };
-    
-    // Need to figure out how not to call this every time the routeparams change
-    soundcloud.getUser($scope);
-    
-    
-    
-    
-    
-    
+     
   }])
   
-  .controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+  /*
+.controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.contentType = 'tracks';
     $scope.getType = '/tracks';
   }])
@@ -163,6 +185,7 @@ angular.module('scat.controllers', [])
     $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.setUrl;
     soundcloud.getSet($scope);
   }])
+*/
   
   .controller('ActivitiesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.tracksLoading = true;
