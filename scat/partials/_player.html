@@ -24,7 +24,10 @@
             <!-- ng-show="audio.readyState == 4" -->
           </div>
         </div>
-        <a href="" class="jx-toggle-actions gry" ng-class="{wht: (player.playing.id == track.id || player.paused.id == track.id) && !viewActions}" ng-click="toggleActions()"><i class="icon i-jxn-carat"></i></a>
+        
+<!--         ng-class="{wht: (player.playing.id == track.id || player.paused.id == track.id) && !viewActions}" -->
+        
+        <a href="" class="jx-toggle-actions gry"  ng-click="toggleActions()"><i class="icon i-jxn-carat"></i></a>
         <div class="jx-actions pad- bg-ltgry anim-hack" style="display:none" ng-show="viewActions" ng-animate="'slideleft'" ng-controller="TrackCtrl">
           <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
           <a ng-href="#/{{track.user.permalink}}/{{track.permalink}}" class="tappad fl gry h4"><i class="icon i-jxn-link"></i></a>

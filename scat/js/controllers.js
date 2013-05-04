@@ -5,9 +5,32 @@
 
 angular.module('scat.controllers', [])
 
-  .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$location', '$window', 'soundcloud', 'player', function($scope, $route, $routeParams, $location, $window, soundcloud, player) {
+  .controller('GlobalCtrl', ['$scope', '$routeParams', '$window', function($scope, $routeParams, $window){
     
     $scope.$routeParams = $routeParams;
+    
+    $scope.pageSize = 32;
+    $scope.pageOffset = 0;
+    $scope.tracksLoading = true;
+    
+    // Window Size - probs should be a different scope
+    $scope.updateWidth = function() {
+      $scope.width = $window.innerWidth;
+      if ($scope.width > 640){
+        $scope.layout = 'desktop';
+      } else {
+        $scope.layout = 'mobile';
+      }
+    };
+    $scope.updateWidth();
+    $window.onresize = function () {
+      $scope.updateWidth();
+      $scope.$apply();
+    }
+    
+  }])
+
+  .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$location', 'soundcloud', 'player', function($scope, $route, $routeParams, $location, soundcloud, player) {
     
     if(localStorage.getItem('username-0')){
       $scope.connectedUsers = new Array(localStorage.getItem('username-0'));
@@ -52,27 +75,6 @@ angular.module('scat.controllers', [])
       $location.path('/');
       player.setToken($scope);
     };
-        
-    $scope.pageSize = 32;
-    $scope.pageOffset = 0;
-    $scope.tracksLoading = true;
-      
-    $scope.current = player.current;
-           
-    // Window Size - probs should be a different scope
-    $scope.updateWidth = function() {
-      $scope.width = $window.innerWidth;
-      if ($scope.width > 640){
-        $scope.layout = 'desktop';
-      } else {
-        $scope.layout = 'mobile';
-      }
-    };
-    $scope.updateWidth();
-    $window.onresize = function () {
-      $scope.updateWidth();
-      $scope.$apply();
-    }
     
   }])
   
@@ -93,7 +95,10 @@ angular.module('scat.controllers', [])
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {    
 
     $scope.viewUser = $scope.$routeParams.viewUser;
-    $scope.viewUsername = $scope.viewUser;
+    $scope.viewType = $scope.$routeParams.type;
+    $scope.viewDetail = $scope.$routeParams.detail;
+    
+    //$scope.viewUsername = $scope.viewUser;
     $scope.scget = '/users/' + $scope.viewUser + $scope.getType;
         
     // Pagination
@@ -109,6 +114,11 @@ angular.module('scat.controllers', [])
     
     // Need to figure out how not to call this every time the routeparams change
     soundcloud.getUser($scope);
+    
+    
+    
+    
+    
     
   }])
   
@@ -189,6 +199,8 @@ angular.module('scat.controllers', [])
           $scope.durationMS = (audio.duration * 1000).toFixed();
         });
       };
+      
+
       
       audio.addEventListener('timeupdate', updateView, false);
     

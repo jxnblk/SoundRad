@@ -11,6 +11,10 @@
       <div class="h5 lh1">{{userData.followers_count || 0}}</div>
       <small class="tiny caps lh1">Followers</small>
     </div>
+    
+    <div class="boto bobo pad">
+      {{viewType}} / {{viewDetail}}
+    </div>
 
     <div class="tappad">
       <a ng-href="#/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: getType == '/tracks'}">Tracks</a>
