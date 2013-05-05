@@ -84,6 +84,33 @@ angular.module('scat.controllers', [])
 //    $('.contentWrapper').css('min-height', $(window).height() - 55 + 'px');
     $scope.winhi = $window.innerHeight + 12 + 'px';
     
+    $scope.viewStyle = function(){
+      if($scope.layout == 'mobile'){
+        return { minHeight: $scope.winhi };
+      };
+    };
+    
+    
+    // Global Modal Testing
+    $scope.modal = {}
+
+    $scope.openModal = function(content){
+      $scope.modal.content = content;
+    };
+
+    $scope.closeModal = function(){
+      $scope.modal.content = null;
+    };
+    
+
+    // Preload detail view content testing
+    $scope.openTrack = function(track) {
+      $scope.trackContent = track;
+      $location.path('/' + track.user.permalink + '/' + track.permalink);
+    };    
+    
+    
+    
   }])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
@@ -137,8 +164,17 @@ angular.module('scat.controllers', [])
       $scope.sortFollowings = $scope.sorts[0];
     } else if ($scope.viewType) {
       $scope.contentType = 'track';
+      
+      // Trying to preload content on viewing detail page
+      if($scope.trackContent){
+        console.log('got track content');
+        $scope.tracks = new Array($scope.trackContent);
+      };
+
+      console.log('looking up track content');
       $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
       soundcloud.getTrack($scope);
+
     } else {
       $scope.contentType = 'tracks';
       $scope.scget = '/users/' + $scope.viewUser + '/tracks';
@@ -173,7 +209,6 @@ angular.module('scat.controllers', [])
     $scope.toggleLoop = function(){ player.loop = !player.loop; };
     
     $scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
-
       
   }])
   
@@ -200,7 +235,9 @@ angular.module('scat.controllers', [])
   
 
   .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
+            
       //console.log('trackctrl');
+      
       $scope.like = function(trackid) {
         if($scope.connected){
           console.log('like ' + trackid);
@@ -214,6 +251,10 @@ angular.module('scat.controllers', [])
         soundcloud.unlike($scope, trackid);
       };
       
+  }])
+  
+  .controller('ModalCtrl', ['$scope', function($scope){
+    
   }])
   
   .controller('GlobalPlayerCtrl', ['$scope', 'player', function($scope, soundcloud, player, audio){

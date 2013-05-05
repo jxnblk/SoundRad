@@ -15,9 +15,9 @@
 
   <div ng-include src="'partials/_nav.html'"></div>
 
-  <div ng-include src="'partials/_globalplayer.html'"></div>
-
-  <div class="view" style="min-height: {{winhi}}" ng-class="{leftcol: layout == 'desktop'}" ng-class="winhi" ng-view></div>
+  <div class="view" ng-style="viewStyle()" ng-class="{'leftcol': layout == 'desktop'}" ng-view></div>
+  
+  <div ng-include src="'partials/_modal.html'" class="modal" style="display:none" ng-class="{'leftcol': layout == 'desktop'}" ng-show="modal.content" ng-animate="{show: 'view-enter', hide: 'view-leave'}" ng-controller="ModalCtrl"></div>
   
       <!-- ng-animate="{enter: 'view-enter', leave: 'view-leave'}" -->
   

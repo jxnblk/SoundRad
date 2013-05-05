@@ -2,14 +2,17 @@
 
   <div class="bobo overhide">
     <!-- <img ng-src="{{userData.avatar_url}}" class="padto padl disib img32" /> -->
-    <h2 class="h3 disib lrpad overhide marr2">{{viewUsername}}</h2>
-    <a ng-href="#/{{viewUser}}/following" class="gry disib vermid marl">
-      <div class="h5 lh1">{{userData.followings_count || 0}}</div>
-      <small class="tiny caps lh1">Following</small>
-    </a>
-    <div class="gry disib vermid marl">
-      <div class="h5 lh1">{{userData.followers_count || 0}}</div>
-      <small class="tiny caps lh1">Followers</small>
+    <h2 class="h3 lrpad overhide">{{viewUsername}}</h2>
+
+    <div class="lrpad">    
+      <a ng-href="#/{{viewUser}}/following" class="gry disib vermid marr">
+        <div class="h5 lh1">{{userData.followings_count || 0}}</div>
+        <small class="tiny caps lh1">Following</small>
+      </a>
+      <div class="gry disib vermid marr">
+        <div class="h5 lh1">{{userData.followers_count || 0}}</div>
+        <small class="tiny caps lh1">Followers</small>
+      </div>
     </div>
 
     <div class="tappad">

@@ -570,7 +570,7 @@ you can use the generic selector below, but it's slower:
   max-height: 0; }
 
 .view-enter-setup, .view-leave-setup {
-  -webkit-transition: all .2s linear; }
+  -webkit-transition: all .1s linear; }
 
 .view-enter-setup {
   -webkit-transform: translate(100%, 0); }
@@ -845,13 +845,15 @@ you can use the generic selector below, but it's slower:
   line-height: 48px;
   z-index: 1024; }
 
+/*
 .globalplayer {
   top: 48px;
-  height: 64px; }
-
+  height: 64px;
+}
+*/
 .view {
   position: absolute;
-  top: 113px;
+  top: 48px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -862,12 +864,26 @@ you can use the generic selector below, but it's slower:
 
 .rightcol {
   position: absolute;
-  top: 112px;
+  top: 48px;
   right: 0;
   bottom: 0;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   width: 320px; }
+
+.modal {
+  background-color: #fff;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1024;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
+  .modal.leftcol {
+    margin-right: 320px; }
 
 .logo {
   margin-right: 16px;
@@ -1031,7 +1047,15 @@ input[type="text"] {
 
 */
 .jx-toggle-actions {
-  padding: 0 12px; }
+  padding: 0 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  line-height: 64px;
+  text-align: center;
+  z-index: 512; }
 
 .jx-actions {
   position: absolute;

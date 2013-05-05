@@ -13,11 +13,11 @@
       <div class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-show="player.playing.id == track.id && audio.readyState != 4"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></div>
       <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing.id == track.id && audio.readyState == 4"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
       <div class="bd posrel hi64">
-        <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg overhide marr2" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
-        <h3 class="title posabs to26 z128 marl h4 lh1-25 b overhide marr2" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.title}}</h3>
+        <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg truncate overhide padr" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
+        <h3 class="title posabs to26 z128 marl h4 lh1-25 b truncate overhide padr" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.title}}</h3>
         <div ng-switch on="player.playing.id == track.id || player.paused.id == track.id">      
           <div class="time-span w100 hi64" ng-switch-when="true" ng-controller="ScrubberCtrl">
-            <!-- <div class="scrubber w100 hi64 posabs z256 no-touch-color" ng-click="seekTo($event)"></div> -->
+            <div class="scrubber w100 hi64 posabs z256 no-touch-color" ng-click="seekTo($event)"></div>
             <div class="buffer posabs to0 bo0 l0 bg-text" style="width: {{currentBufferPercentage}}%"></div>
             <div class="played posabs to0 bo0 l0 bg-prime" style="width: {{currentTimePercentage}}%"></div>
             <p class="time wht marr posabs to0 r0 sm lh24 anim-hack anim-slideleft" ng-show="player.playing.id == track.id && audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
@@ -26,7 +26,8 @@
         
 <!--         ng-class="{wht: (player.playing.id == track.id || player.paused.id == track.id) && !viewActions}" -->
         
-        <!-- <a href="" class="jx-toggle-actions gry"  ng-click="toggleActions()"><i class="icon i-jxn-carat"></i></a> -->
+        <!-- <a href="" class="jx-toggle-actions gry"  ng-click="openModal(track)"><i class="icon i-jxn-carat"></i></a> -->
+        <a href="" class="jx-toggle-actions gry" ng-click="openTrack(track)"><i class="icon i-jxn-carat"></i></a>
 <!--
           <div class="jx-actions pad- bg-ltgry anim-hack" style="display:none" ng-show="viewActions" ng-animate="'slideleft'" ng-controller="TrackCtrl">
             <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
