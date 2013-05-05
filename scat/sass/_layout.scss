@@ -55,6 +55,11 @@
 
 .overhide { overflow: hidden; }
 
+.scroll-y {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
 .w100 { width: 100%; }
 .w80  { width:  80%; }
 .w60  { width:  60%; }
@@ -83,6 +88,10 @@
 
 .hi128 { height: 128px; }
 
+.maxhi64 { max-height: 64px; }
+
+.maxhi1024 { max-height: 1024px; }
+
 .lh16 { line-height: 16px;}
 .lh24 { line-height: 24px;}
 .lh32 { line-height: 32px;}
@@ -92,6 +101,7 @@
 .z64  { z-index: 64; }
 .z128 { z-index: 128; }
 .z256 { z-index: 256; }
+.z384 { z-index: 384; }
 .z512 { z-index: 512; }
 .posrel { position: relative; }
 .posabs { position: absolute; }
@@ -115,39 +125,29 @@
   //background: rgba(255,0,0,0.2);
 }
 
-.rightcol {
-  position: absolute;
-  top: $m3;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  width: 320px;
-}
 
 
 // Get rid of this junk
 
 .topbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
   height: $m3;
   line-height: $m3;
-  //padding: 0 $m-5;
+
   z-index: 1024;
 }
 
-.viewcontainer {
-  margin-top: $m3;
+.globalplayer {
+  top: 48px;
+  height: 64px;
 }
 
 .view {
-  //position: absolute;
-        //margin-top: $m3;
-        //margin-bottom: $m3;
-  top: $m3;
+  position: absolute;
+  top: 113px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -156,6 +156,16 @@
   &.leftcol {
     margin-right: 320px;
   }
+}
+
+.rightcol {
+  position: absolute;
+  top: 112px;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 320px;
 }
 
 

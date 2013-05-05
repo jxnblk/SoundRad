@@ -46,7 +46,16 @@
   -webkit-animation: transpulse 2s infinite;
 }
 
+.trans-all {
+  -webkit-transition: all .4s linear;
+}
+
+
+
+////////////////////////////////////////////////////////////////
 // Angular ng-animate animations
+
+// Slide Left
 .slideleft-show-setup, .slideleft-hide-setup {
   -webkit-transition: all .2s linear;
 }
@@ -64,3 +73,46 @@
 .slideleft-hide-setup.slideleft-hide-start {
   -webkit-transform: translate(100%, 0);
 }
+
+
+// Slide Left
+.expandy-show-setup, .epxandy-hide-setup {
+  -webkit-transition: all .2s linear;
+}
+
+.expandy-show-setup {
+  max-height: 0;
+}
+.slideleft-show-setup.slideleft-show-start {
+  max-height: 256px;
+}
+
+.slideleft-hide-setup {
+  max-height: 256px;
+}
+.slideleft-hide-setup.slideleft-hide-start {
+  max-height: 0;
+}
+
+
+
+
+// Slide left view enter
+.view-enter-setup, .view-leave-setup {
+  -webkit-transition: all .2s linear;
+}
+
+.view-enter-setup {
+  -webkit-transform: translate(100%, 0);
+}
+.view-enter-setup.view-enter-start {
+  -webkit-transform: translate(0, 0);
+}
+
+.view-leave-setup {
+  -webkit-transform: translate(0, 0);
+}
+.view-leave-setup.view-leave-start {
+  -webkit-transform: translate(-100%, 0);
+}
+

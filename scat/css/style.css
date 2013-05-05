@@ -193,6 +193,14 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: .1em; }
 
+.truncate {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 @font-face {
   font-family: 'jxn';
   src: url("../icons/jxn.eot");
@@ -528,6 +536,9 @@ you can use the generic selector below, but it's slower:
 .loading {
   -webkit-animation: transpulse 2s infinite; }
 
+.trans-all {
+  -webkit-transition: all .4s linear; }
+
 .slideleft-show-setup, .slideleft-hide-setup {
   -webkit-transition: all .2s linear; }
 
@@ -542,6 +553,36 @@ you can use the generic selector below, but it's slower:
 
 .slideleft-hide-setup.slideleft-hide-start {
   -webkit-transform: translate(100%, 0); }
+
+.expandy-show-setup, .epxandy-hide-setup {
+  -webkit-transition: all .2s linear; }
+
+.expandy-show-setup {
+  max-height: 0; }
+
+.slideleft-show-setup.slideleft-show-start {
+  max-height: 256px; }
+
+.slideleft-hide-setup {
+  max-height: 256px; }
+
+.slideleft-hide-setup.slideleft-hide-start {
+  max-height: 0; }
+
+.view-enter-setup, .view-leave-setup {
+  -webkit-transition: all .2s linear; }
+
+.view-enter-setup {
+  -webkit-transform: translate(100%, 0); }
+
+.view-enter-setup.view-enter-start {
+  -webkit-transform: translate(0, 0); }
+
+.view-leave-setup {
+  -webkit-transform: translate(0, 0); }
+
+.view-leave-setup.view-leave-start {
+  -webkit-transform: translate(-100%, 0); }
 
 .fl {
   float: left; }
@@ -651,6 +692,10 @@ you can use the generic selector below, but it's slower:
 .overhide {
   overflow: hidden; }
 
+.scroll-y {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
+
 .w100 {
   width: 100%; }
 
@@ -722,6 +767,12 @@ you can use the generic selector below, but it's slower:
 .hi128 {
   height: 128px; }
 
+.maxhi64 {
+  max-height: 64px; }
+
+.maxhi1024 {
+  max-height: 1024px; }
+
 .lh16 {
   line-height: 16px; }
 
@@ -745,6 +796,9 @@ you can use the generic selector below, but it's slower:
 
 .z256 {
   z-index: 256; }
+
+.z384 {
+  z-index: 384; }
 
 .z512 {
   z-index: 512; }
@@ -782,17 +836,8 @@ you can use the generic selector below, but it's slower:
   z-index: 512;
   cursor: pointer; }
 
-.rightcol {
-  position: absolute;
-  top: 48px;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  width: 320px; }
-
 .topbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -800,11 +845,13 @@ you can use the generic selector below, but it's slower:
   line-height: 48px;
   z-index: 1024; }
 
-.viewcontainer {
-  margin-top: 48px; }
+.globalplayer {
+  top: 48px;
+  height: 64px; }
 
 .view {
-  top: 48px;
+  position: absolute;
+  top: 113px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -812,6 +859,15 @@ you can use the generic selector below, but it's slower:
   -webkit-overflow-scrolling: touch; }
   .view.leftcol {
     margin-right: 320px; }
+
+.rightcol {
+  position: absolute;
+  top: 112px;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 320px; }
 
 .logo {
   margin-right: 16px;
@@ -975,15 +1031,7 @@ input[type="text"] {
 
 */
 .jx-toggle-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 12px;
-  z-index: 512;
-  cursor: pointer; }
-  .jx-toggle-actions i {
-    line-height: 64px; }
+  padding: 0 12px; }
 
 .jx-actions {
   position: absolute;

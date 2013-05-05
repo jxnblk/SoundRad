@@ -79,6 +79,11 @@ angular.module('scat.controllers', [])
       $scope.$apply();
     };
     
+    
+    // iPhone Window Height
+//    $('.contentWrapper').css('min-height', $(window).height() - 55 + 'px');
+    $scope.winhi = $window.innerHeight + 12 + 'px';
+    
   }])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
@@ -156,12 +161,12 @@ angular.module('scat.controllers', [])
   }])
   
   .controller('TracklistCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
-    console.log('TracklistCtrl');
+    //console.log('TracklistCtrl');
 
   }])
  
   .controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
-    console.log('PlayerCtrl');
+    //console.log('PlayerCtrl');
 
     $scope.player = player;
     $scope.audio = audio;
@@ -174,7 +179,7 @@ angular.module('scat.controllers', [])
   
   .controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio){
       // Scrubbers
-      console.log('scrubberctrl');
+      //console.log('scrubberctrl');
       function updateView() {
         $scope.$apply(function() {
           $scope.currentBufferPercentage = ((audio.buffered.length && audio.buffered.end(0)) / audio.duration) * 100;
@@ -195,7 +200,7 @@ angular.module('scat.controllers', [])
   
 
   .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
-      console.log('trackctrl');
+      //console.log('trackctrl');
       $scope.like = function(trackid) {
         if($scope.connected){
           console.log('like ' + trackid);
@@ -209,6 +214,11 @@ angular.module('scat.controllers', [])
         soundcloud.unlike($scope, trackid);
       };
       
+  }])
+  
+  .controller('GlobalPlayerCtrl', ['$scope', 'player', function($scope, soundcloud, player, audio){
+    
+
   }]);
   
   

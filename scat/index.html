@@ -13,13 +13,15 @@
 
 <div ng-controller="NavCtrl" ng-switch on="layout">
 
-  <div ng-include src="'partials/_nav.html'" ></div>
+  <div ng-include src="'partials/_nav.html'"></div>
 
+  <div ng-include src="'partials/_globalplayer.html'"></div>
 
-
-    <div class="view" ng-class="{leftcol: layout == 'desktop'}" ng-view></div>
+  <div class="view" style="min-height: {{winhi}}" ng-class="{leftcol: layout == 'desktop'}" ng-class="winhi" ng-view></div>
   
-    <div ng-switch-when="desktop" class="rightcol bol" ng-include src="'partials/_navmore.html'"></div>
+      <!-- ng-animate="{enter: 'view-enter', leave: 'view-leave'}" -->
+  
+  <div ng-switch-when="desktop" class="rightcol bol" ng-include src="'partials/_navmore.html'"></div>
     
 
   

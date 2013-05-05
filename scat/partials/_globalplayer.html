@@ -1,28 +1,19 @@
+<div class="globalplayer player bobo posabs l0 r0" id="{{track.permalink}}" ng-class="{'playing bg-text2': player.playing || player.paused}" ng-controller="PlayerCtrl">
 
-<div>
-
-  <div ng-controller="PlayerCtrl" ng-switch on="isPlaying(current.tracks[current.i])"> <!-- ng-switch-when="true" -->
-
-      <div class="jx-player media bobo" id="{{track.permalink}}" ng-class="{playing: isPlaying(current.tracks[current.i])}">
-        <a href="" class="jx-play no-touch-color" ng-click="playTracks(current.tracks, current.i)" ng-hide="isPlaying(current.tracks[current.i])"><i class="i-jxn-play"></i></a>
-        <a href="" class="jx-pause no-touch-color" ng-click="pauseTrack(current.tracks[current.i])" ng-show="isPlaying(current.tracks[current.i])"><i class="i-jxn-pause"></i></a>
-        <div class="bd">
-          <p class="jx-artist">{{current.tracks[current.i].user.username}}</p>
-          <p class="h4 h4mo marr2 jx-title">{{current.tracks[current.i].title}}</p>
-          <!-- To do: find a way to show progress on paused tracks -->
-          <div class="jx-time-span" ng-switch-when="true">
-            <div class="jx-scrubber no-touch-color" ng-click="seekTo($event)"></div>
-            <div class="jx-buffer" style="width: {{currentBufferPercentage}}%"></div>
-            <div class="jx-played" style="width: {{currentTimePercentage}}%"></div>
-            <p class="jx-time sm" ng-cloak>{{currentTimeMS | date:'mm:ss'}} | {{durationMS | date:'mm:ss'}}</p>
+      <a href="" class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused, 'wht bg-prime': player.paused}" ng-click="player.play(tracks, $index)" ng-hide="player.playing"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
+      <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing && audio.readyState != 4"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></a>
+      <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing && audio.readyState == 4"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
+      <div class="bd posrel hi64">
+        <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg overhide marr2" ng-class="{wht: player.playing || player.paused}">{{player.playing.user.username}} [{{!!player.playing}}]<small class="" ng-show="player.playing.sharing == 'private'"> [private]</small></h2>
+        <h3 class="title posabs to26 z128 marl h4 lh1-25 b overhide marr2" ng-class="{wht: player.playing || player.paused}">{{player.playing.title}}</h3>
+        <div ng-switch="!!player.playing">      
+          <div class="time-span w100 hi64" ng-switch-when="true" ng-controller="ScrubberCtrl">
+            <div class="scrubber w100 hi64 posabs z256 no-touch-color" ng-click="seekTo($event)"></div>
+            <div class="buffer posabs to0 bo0 l0 bg-text" style="width: {{currentBufferPercentage}}%"></div>
+            <div class="played posabs to0 bo0 l0 bg-prime" style="width: {{currentTimePercentage}}%"></div>
+            <p class="time wht marr posabs to0 r0 sm lh24 anim-hack anim-slideleft" ng-show="(player.playing || player.paused) && audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
           </div>
-          <a class="jx-toggle-actions" ng-href="#{{current.URL}}" ng-switch-when="true"><i class="icon i-jxn-carat"></i></a>
         </div>
       </div>
-            
-  </div> <!-- TrackCtrl -->
-    
-</div> <!-- GlobalPlayerCtrl -->
-
-
-  
+      
+</div>

@@ -57,3 +57,11 @@ h1, h2, h3, h4, h5, h6 { font-weight: 400; }
   letter-spacing: .1em;
 }
 
+.truncate {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
