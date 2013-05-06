@@ -107,7 +107,12 @@ angular.module('scat.controllers', [])
     $scope.openTrack = function(track) {
       $scope.trackContent = track;
       $location.path('/' + track.user.permalink + '/' + track.permalink);
-    };    
+    };
+    
+    $scope.openSet = function(set) {
+      $scope.setContent = set;
+      $location.path('/' + set.user.permalink + '/sets/' + set.permalink);
+    }   
     
     
     
@@ -132,6 +137,8 @@ angular.module('scat.controllers', [])
     $scope.viewType = $scope.$routeParams.type;
     $scope.viewDetail = $scope.$routeParams.detail;
     
+    $scope.viewUsername = $scope.$routeParams.viewUser;
+    
     $scope.viewUser = $scope.$routeParams.viewUser;
     soundcloud.getUser($scope);
         
@@ -144,6 +151,12 @@ angular.module('scat.controllers', [])
     
     if ($scope.viewDetail) {
       $scope.contentType = 'set';
+      if($scope.setContent){
+        console.log('got set content');
+        $scope.set = $scope.setContent;
+        $scope.tracks = $scope.setContent.tracks;
+        //$scope.tracks = new Array($scope.trackContent);
+      };
       $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
       soundcloud.getSet($scope);
     } else if ($scope.viewType == 'sets') {

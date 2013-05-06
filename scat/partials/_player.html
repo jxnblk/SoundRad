@@ -25,7 +25,7 @@
           </div>
         </div>
 
-        <div class="jx-toggle-actions gry"><i class="icon i-jxn-carat"></i></div>
+        <i class="h6 posabs r0 to0 bo0 z256 gry lh64 marr i-jxn-carat" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}"></i>
 
       </a>
       
@@ -33,7 +33,7 @@
     
     <!-- Set -->
     <div ng-switch-when="true">
-      <a href="" ng-href="#/{{track.user.permalink}}/sets/{{track.permalink}}" class="disb active overhide pad">
+      <a href="" ng-click="openSet(track)" class="disb active overhide pad">
         <p class="lh1">{{track.user.username}}</p>
         <h4 class="disib b">{{track.title}}</h4>
       </a>
