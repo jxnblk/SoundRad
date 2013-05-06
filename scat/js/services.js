@@ -363,5 +363,11 @@ angular.module('scat.services', [])
         return mins+':'+secs;  
       }; 
     };
+  })
+  
+  .filter('richtext', function () {
+    return function(text) {
+        return text.replace(/\n/g, '<br/>');
+    };
   });
   

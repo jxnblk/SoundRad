@@ -162,24 +162,31 @@ angular.module('scat.controllers', [])
         { json: 'username', human: 'Alphabetical', reverse: false }
       ];
       $scope.sortFollowings = $scope.sorts[0];
-    } else if ($scope.viewType) {
-      $scope.contentType = 'track';
       
-      // Trying to preload content on viewing detail page
-      if($scope.trackContent){
-        console.log('got track content');
-        $scope.tracks = new Array($scope.trackContent);
-      };
-
-      console.log('looking up track content');
-      $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
-      soundcloud.getTrack($scope);
+    } else if ($scope.viewType == 'info') {
+      $scope.contentType = 'info';
+      //soundcloud.getFollowings($scope, $scope.viewUser);
+      
+      
+    } else if ($scope.viewType) {
+      $scope.contentType = 'track';      
+        // Trying to preload content on viewing detail page
+        if($scope.trackContent){
+          console.log('got track content');
+          $scope.tracks = new Array($scope.trackContent);
+        };
+        console.log('looking up track content');
+        $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
+        soundcloud.getTrack($scope);
 
     } else {
       $scope.contentType = 'tracks';
       $scope.scget = '/users/' + $scope.viewUser + '/tracks';
       soundcloud.getTracks($scope);
     };
+     
+     
+     $scope.testHTML = '<h1>Herro</h1><br><a href="http://jxnblk.com">jxnblk.com</a>';
      
   }])
   

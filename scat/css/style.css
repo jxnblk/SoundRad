@@ -5,6 +5,9 @@
 .no-touch-color {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
+.tap-dark:active {
+  background-color: #ff6600; }
+
 .topbar {
   color: #999999;
   background-color: white;
@@ -14,6 +17,9 @@
 
 .prime {
   color: #ff6600; }
+
+.text {
+  color: #444444; }
 
 .gry {
   color: #999999; }

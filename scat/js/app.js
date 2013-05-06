@@ -1,6 +1,6 @@
 'use strict';
 
-var scat = angular.module('scat', ['scat.services', 'scat.controllers']).
+var scat = angular.module('scat', ['scat.services', 'scat.controllers', 'ngSanitize']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     $routeProvider.when('/more', {templateUrl: 'partials/_navmore.html'});

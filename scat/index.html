@@ -15,9 +15,11 @@
 
   <div ng-include src="'partials/_nav.html'"></div>
 
-  <div class="view" ng-style="viewStyle()" ng-class="{'leftcol': layout == 'desktop'}" ng-view></div>
+<!--   ng-style="viewStyle()"  -->
+
+  <div class="view" ng-class="{'leftcol': layout == 'desktop'}" ng-view></div>
   
-  <div ng-include src="'partials/_modal.html'" class="modal" style="display:none" ng-class="{'leftcol': layout == 'desktop'}" ng-show="modal.content" ng-animate="{show: 'view-enter', hide: 'view-leave'}" ng-controller="ModalCtrl"></div>
+  <!-- <div ng-include src="'partials/_modal.html'" class="modal" style="display:none" ng-class="{'leftcol': layout == 'desktop'}" ng-show="modal.content" ng-animate="{show: 'view-enter', hide: 'view-leave'}" ng-controller="ModalCtrl"></div> -->
   
       <!-- ng-animate="{enter: 'view-enter', leave: 'view-leave'}" -->
   
@@ -31,6 +33,11 @@
   <script src="js/lib/moment.min.js"></script>
   
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+
+<!-- May not need this -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-sanitize.min.js"></script>
+
+
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
