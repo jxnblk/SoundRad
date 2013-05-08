@@ -2,6 +2,19 @@
     <a href="#/"><h1 class="fl prime h3 bold"><i class="i-jxn-scat icon tappad"></i></h1></a>
       
     <nav class="nav padr" ng-switch on="layout">
+
+<!--
+    <form ng-submit="run(text)">
+      <input type="text" ng-model="text">
+    </form>
+-->
+
+      <!-- Test for localStorage factory -->
+<!--
+      <form ng-submit="storeItem(store)">
+        <input ng-model="store">
+      </form>
+-->
       
       <a href="#/{{username}}/likes" class="" ng-show="connected">Likes</a>
       <a href="#/{{username}}/sets" class="" ng-show="connected">Sets</a>

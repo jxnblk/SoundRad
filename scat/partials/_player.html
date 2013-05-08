@@ -25,15 +25,15 @@
           </div>
         </div>
 
-        <div click-out="toggleActions()">
+        <div click-out="closeActions()">
           <a href="" ng-click="toggleActions()" class="posabs r0 to0 bo0 z256 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a>
           
-          <div class="jx-actions pad- bg-ltgry anim-hack" style="display:none" ng-show="viewActions" ng-animate="'slideleft'" ng-controller="TrackCtrl">
+          <div class="jx-actions posabs to0 r0 bo0 z384 pad- bg-text" style="display:none" ng-show="viewActions" ng-animate="'slideleft'" ng-controller="TrackCtrl">
             <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
   <!--           <a ng-href="#/{{track.user.permalink}}/{{track.permalink}}" class="tappad fl gry h4"><i class="icon i-jxn-link"></i></a> -->
             <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite" class="tappad fl gry h4"><i class="icon i-jxn-heart"></i></a>
             <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite" class="tappad fl prime h4"><i class="icon i-jxn-heart"></i></a>        
-            <!-- <a href="" ng-click="openTrack(track)" ng-show="viewActions" class="posabs r0 to0 bo0 z512 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a> -->
+            <a href="" ng-click="openTrack(track)" ng-show="viewActions" class="posabs r0 to0 bo0 z512 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a>
           </div>
         </div>
 

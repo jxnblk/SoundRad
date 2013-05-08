@@ -1064,12 +1064,7 @@ input[type="text"] {
   z-index: 512; }
 
 .jx-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  padding-right: 48px;
-  z-index: 384; }
+  padding-right: 48px; }
 
 .jx-buffer,
 .jx-played {

@@ -5,7 +5,7 @@
 
 angular.module('scat.controllers', [])
 
-  .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$window', '$location', 'soundcloud', function($scope, $route, $routeParams, $window, $location, soundcloud) {
+  .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$window', '$location', 'soundcloud', 'storage', function($scope, $route, $routeParams, $window, $location, soundcloud, storage) {
     
     if(localStorage.getItem('username-0')){
       $scope.connectedUsers = new Array(localStorage.getItem('username-0'));
@@ -33,7 +33,7 @@ angular.module('scat.controllers', [])
     
     $scope.connect = function() {
       soundcloud.connect($scope);
-      $location.path('/');
+      //$location.path('/');
     };
     
     $scope.addConnectedUser = function() {
@@ -112,7 +112,13 @@ angular.module('scat.controllers', [])
     $scope.openSet = function(set) {
       $scope.setContent = set;
       $location.path('/' + set.user.permalink + '/sets/' + set.permalink);
-    }   
+    };
+    
+    
+    // Local Storage
+    $scope.storeItem = function(store){
+      storage.set('test', store);
+    };  
     
     
     
@@ -238,6 +244,7 @@ angular.module('scat.controllers', [])
     $scope.viewActions = false;
     
     $scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
+    $scope.closeActions = function(){$scope.viewActions = false; };
       
   }])
   

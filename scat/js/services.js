@@ -16,10 +16,11 @@ angular.module('scat.services', [])
     
     return {
       
-      connect:  function($scope){
+      connect:  function($scope, $location, storage){
                   if($scope.connected){
                     window.SC.storage().setItem('SC.accessToken', $scope.token);
                     Token = $scope.token;
+                    $location.path('/');
                   } else {
                     SC.connect(function() {
                       $scope.$apply(function () {
@@ -33,12 +34,16 @@ angular.module('scat.services', [])
                               $scope.username = me.username;
                               localStorage.setItem('username-' + $scope.connectedUserIndex, $scope.username);
                               $scope.connectedUsers[$scope.connectedUserIndex] = $scope.username;
+                              
+                              storage.set('me', me);
+                              
                             }
                           });
                         });   
                         $scope.token = SC.accessToken();
                         Token = $scope.token;
                         localStorage.setItem('token-' + $scope.connectedUserIndex, $scope.token);
+                        $location.path('/');
                       });
                     });
                   };
@@ -342,6 +347,28 @@ angular.module('scat.services', [])
   .factory('audio', function($document, $rootScope) {
     var audio = $document[0].createElement('audio');  
     return audio;
+  })
+  
+  .factory('storage', function(){
+                        
+    return {
+      
+      set: function(key, obj){
+        var string = JSON.stringify(obj)
+        localStorage.setItem(key, string);
+        console.log('set: ' + key + ":" + string);
+      },
+      
+      get: function(key){
+        var data = localStorage.getItem(key);
+        var obj = JSON.parse(data);
+        console.log('get: ' + key + ":" + data);
+        console.log(data);
+        return data;
+      }
+      
+    }
+            
   })
   
   .filter('fromNow', function() {
