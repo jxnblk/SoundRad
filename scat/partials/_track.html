@@ -1,17 +1,18 @@
 <div ng-repeat="track in tracks" ng-controller="PlayerCtrl">
 
-  <!-- <div ng-include src="'partials/_player.html'"></div> -->
+  <div ng-include src="'partials/_player.html'"></div>
 
-  <div class="player bobo" id="{{track.permalink}}" ng-class="{'playing bg-text2': player.playing.id == track.id || player.paused.id == track.id, 'unstreamable bg-mdgry': !track.streamable}">
+  <!--
+<div class="player bobo" id="{{track.permalink}}" ng-class="{'playing bg-text2': isPlaying(track) || isPaused(track), 'unstreamable bg-mdgry': !track.streamable}">
 
-    <a href="" class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': player.paused.id == track.id}" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
-    <div class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-show="player.playing.id == track.id && audio.readyState != 4"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></div>
-    <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing.id == track.id && audio.readyState == 4"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
+    <a href="" class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: !isPaused(track), 'wht bg-prime': isPaused(track)}" ng-click="player.play(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
+    <div class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-show="isPlaying(track) && audio.readyState != 4"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></div>
+    <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="isPlaying(track) && audio.readyState == 4"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
     
-    <div class="bd disb posrel hi64 text" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">
-      <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg truncate overhide padr" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
-      <h3 class="title posabs to26 z128 marl h4 lh1-25 b truncate overhide padr" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.title}}</h3>
-      <div ng-switch on="player.playing.id == track.id || player.paused.id == track.id">      
+    <div class="bd disb posrel hi64 text" ng-class="{wht: isPlaying(track) || isPaused(track)}">
+      <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg truncate overhide padr" ng-class="{wht: isPlaying(track) || isPaused(track)}">{{track.user.username}} <small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
+      <h3 class="title posabs to26 z128 marl h4 lh1-25 b truncate overhide padr" ng-class="{wht: isPlaying(track) || isPaused(track)}">{{track.title}}</h3>
+      <div ng-switch on="isPlaying(track) || isPaused(track)">      
         <div class="time-span w100 hi64" ng-switch-when="true" ng-controller="ScrubberCtrl">
           <div class="scrubber w100 hi64 posabs z256 no-touch-color" ng-click="seekTo($event)"></div>
           <div class="buffer posabs to0 bo0 l0 bg-text" style="width: {{currentBufferPercentage}}%"></div>
@@ -22,6 +23,7 @@
     </div>
     
   </div>
+-->
 
   <div ng-controller="TrackCtrl">
             
@@ -39,7 +41,7 @@
         <p class="maxw640" ng-bind-html-unsafe="track.description | richtext"></p>
       </div>
       
-      <a ng-href="{{track.permalink_url}}" target="_blank" class="tappad bobo gry">View on SoundCloud <i class="fr h6 i-jxn-carat"></i></a>
+      <a ng-href="{{track.permalink_url}}" target="_blank" class="tappad tappad-gry bobo gry">View on SoundCloud <i class="fr h6 i-jxn-carat"></i></a>
 
       <!-- <pre class="pad">{{tracks | json}}</pre> -->
       

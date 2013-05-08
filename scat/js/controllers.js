@@ -228,6 +228,15 @@ angular.module('scat.controllers', [])
     $scope.audio = audio;
     $scope.toggleLoop = function(){ player.loop = !player.loop; };
     
+    $scope.isPlaying = function(track){ return player.playing.id == track.id };
+    $scope.isPaused = function(track){ return player.paused.id == track.id };
+    
+    $scope.audioReady = function(){
+      return audio.readyState == 4
+    };
+    
+    $scope.viewActions = false;
+    
     $scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
       
   }])
