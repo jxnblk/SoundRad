@@ -86,13 +86,14 @@ angular.module('scat.services', [])
         function(set, track){
           console.log(set.uri + ':: ' + track);
           //var newtracks = { track };
-          //set.tracks = set.tracks.concat(newtrack);
-          console.log(set.tracks);
-/*
-            SC.put(set.uri, { playlist: { tracks: set.tracks } }, function(){
+          //set.tracks = set.tracks.push(track);
+          
+//          console.log(tracks);
+           /*
+ SC.put(set.uri, { playlist: { tracks: tracks } }, function(){
               console.log('derp');
-            });  
-*/
+            });
+*/  
           
       },
       
