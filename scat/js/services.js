@@ -7,7 +7,7 @@ var Token;
 
 angular.module('scat.services', [])
   
-  .factory('soundcloud', function() {
+  .factory('soundcloud', function($location, storage) {
 
     SC.initialize({
       client_id: clientId,
@@ -16,11 +16,11 @@ angular.module('scat.services', [])
     
     return {
       
-      connect:  function($scope, $location, storage){
+      connect:  function($scope){
                   if($scope.connected){
                     window.SC.storage().setItem('SC.accessToken', $scope.token);
                     Token = $scope.token;
-                    $location.path('/');
+                    //$location.path('/');
                   } else {
                     SC.connect(function() {
                       $scope.$apply(function () {
@@ -63,6 +63,40 @@ angular.module('scat.services', [])
                   });
                 });
       },
+      
+      ////////////////////////////////////////////////////////////////
+      // Get me playlists
+      
+      getMeSets:
+              function($scope){
+                SC.get('/me/playlists', function(data, error) { 
+                  $scope.$apply(function () {
+                    if (error){
+                      alert('Error getting /me/playlists');
+                    } else {
+                      //$scope.connected = true;
+                      $scope.mysets = data;
+                      //$scope.username = me.username;
+                    }
+                  });
+                });
+      },
+      
+      putToSet:
+        function(set, track){
+          console.log(set.uri + ':: ' + track);
+          //var newtracks = { track };
+          //set.tracks = set.tracks.concat(newtrack);
+          console.log(set.tracks);
+/*
+            SC.put(set.uri, { playlist: { tracks: set.tracks } }, function(){
+              console.log('derp');
+            });  
+*/
+          
+      },
+      
+      
       
       getUser:  function($scope, params){
                   //console.log('getting user');

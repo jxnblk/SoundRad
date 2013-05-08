@@ -25,6 +25,14 @@
   
   <div ng-show='connected'>
   
+    <div class="bobo">
+      <h6 class="sm caps tappad gry">Sets: <a href="" class="fr">New Set</a></h6>
+      <ul>
+        <li ng-repeat="set in mysets" class=""><a href="" ng-click="openSet(set)" class="tappad">{{set.title}} <!-- [<pre>{{set | json}}</pre>] --></a></li>
+      </ul>    
+    </div>
+  
+  
     <h6 class="sm caps tappad gry">Accounts: <a href="" ng-click="addConnectedUser()" class="fr">Add Account</a></h6>
     <ul>
       <li ng-repeat="connectedUser in connectedUsers">

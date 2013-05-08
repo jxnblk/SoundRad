@@ -27,6 +27,8 @@ angular.module('scat.controllers', [])
       $scope.username = localStorage.getItem('username-' + $scope.connectedUserIndex);      
       soundcloud.connect($scope);
       soundcloud.getMe($scope);
+// Testing getting sets
+      soundcloud.getMeSets($scope);
     };
     
 //// Figure out getMe - where is this being used and is it necessary?    
@@ -91,11 +93,22 @@ angular.module('scat.controllers', [])
     };
     
     
+////////////////////////////////////////////////////////////////
+// for testing
+
+/* $scope.mysets = { name: 'test' } */
+
+
+////////////////////////////////////////////////////////////////    
+    
+    
     // Global Modal Testing
     $scope.modal = {}
 
-    $scope.openModal = function(content){
+    $scope.openModal = function(content, params){
+      console.log('modal' + content);
       $scope.modal.content = content;
+      $scope.modal.params = params;
     };
 
     $scope.closeModal = function(){
@@ -113,14 +126,7 @@ angular.module('scat.controllers', [])
       $scope.setContent = set;
       $location.path('/' + set.user.permalink + '/sets/' + set.permalink);
     };
-    
-    
-    // Local Storage
-    $scope.storeItem = function(store){
-      storage.set('test', store);
-    };  
-    
-    
+      
     
   }])
   
@@ -287,10 +293,20 @@ angular.module('scat.controllers', [])
         soundcloud.unlike($scope, trackid);
       };
       
+      
+      
+      
+      
+      
   }])
   
-  .controller('ModalCtrl', ['$scope', function($scope){
-    
+  .controller('ModalCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.addToSet = function(track, set){
+      console.log('add to set');
+      console.log(track);
+      console.log(set);
+      soundcloud.putToSet(set, track);
+    };
   }])
   
   .controller('GlobalPlayerCtrl', ['$scope', 'player', function($scope, soundcloud, player, audio){

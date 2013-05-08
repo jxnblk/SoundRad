@@ -2,6 +2,18 @@
 
 <a href="" ng-click="closeModal()" class="tappad disb bobo">Close</a>
 
-<h3 class="pad bobo">Modal Shit Here</h3>
+<div ng-switch="modal.params.type">
 
-<pre>{{modal.content | json}}</pre>
+  <div ng-switch-when="setlist">
+    <h3 class="pad bobo">Sets</h3>
+    
+    <ul>
+      <li ng-repeat="set in modal.content"><a href="" ng-click="{{modal.params.doThis}}({{modal.params.track.id}}, set)" class="tappad bobo">{{set.title}}</a></li>
+    </ul>
+  </div>
+
+
+
+</div>
+
+<!-- <pre>{{modal.content | json}}</pre> -->
