@@ -3,7 +3,7 @@
 /* Directives */
 
 
-angular.module('scat.directives', [])
+angular.module('soundrad.directives', [])
 
   .directive('clickOut', function($document){
     return {

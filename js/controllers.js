@@ -3,7 +3,7 @@
 // Controllers
 
 
-angular.module('scat.controllers', [])
+angular.module('soundrad.controllers', [])
 
   .controller('NavCtrl', ['$scope', '$route', '$routeParams', '$window', '$location', 'soundcloud', 'storage', function($scope, $route, $routeParams, $window, $location, soundcloud, storage) {
     

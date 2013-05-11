@@ -1,4 +1,4 @@
-sndcat
+SoundRad
 ======
 
-Lightweight SoundCloud player
+Lightweight SoundCloud Player
