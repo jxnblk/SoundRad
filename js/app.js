@@ -1,6 +1,6 @@
 'use strict';
 
-var scat = angular.module('scat', ['scat.services', 'scat.controllers', 'scat.directives']).
+var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'soundrad.directives']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     $routeProvider.when('/more', {templateUrl: 'partials/_navmore.html'});

@@ -5,7 +5,7 @@
 
 var Token;
 
-angular.module('scat.services', [])
+angular.module('soundrad.services', [])
   
   .factory('soundcloud', function($location, storage) {
 
