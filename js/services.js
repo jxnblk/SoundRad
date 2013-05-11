@@ -11,13 +11,13 @@ angular.module('soundrad.services', [])
 
     SC.initialize({
       client_id: clientId,
-      redirect_uri: 'http://sndcmd.com/callback.html'
+      redirect_uri: callbackUrl
     });
     
     return {
       
       connect:  function($scope){
-                  if($scope.connected){
+                  if($scope.connected && $scope.connectedUserIndex < 1){
                     window.SC.storage().setItem('SC.accessToken', $scope.token);
                     Token = $scope.token;
                     //$location.path('/');
@@ -27,7 +27,7 @@ angular.module('soundrad.services', [])
                         SC.get('/me', function(me, error) { 
                           $scope.$apply(function () {
                             if (error){
-                              alert('Error getting /me');
+                              console.log('Error getting /me');
                             } else {
                               $scope.connected = true;
                               $scope.me = me;
@@ -391,14 +391,14 @@ angular.module('soundrad.services', [])
       set: function(key, obj){
         var string = JSON.stringify(obj)
         localStorage.setItem(key, string);
-        console.log('set: ' + key + ":" + string);
+        //console.log('set: ' + key + ":" + string);
       },
       
       get: function(key){
         var data = localStorage.getItem(key);
         var obj = JSON.parse(data);
-        console.log('get: ' + key + ":" + data);
-        console.log(data);
+        //console.log('get: ' + key + ":" + data);
+        //console.log(data);
         return data;
       }
       

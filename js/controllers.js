@@ -36,9 +36,11 @@ angular.module('soundrad.controllers', [])
     $scope.connect = function() {
       soundcloud.connect($scope);
       //$location.path('/');
+      //soundcloud.getMeSets($scope);
     };
     
     $scope.addConnectedUser = function() {
+      //$scope.connected = false;
       $scope.connectedUserIndex = $scope.connectedUserIndex + 1;
       soundcloud.connect($scope);
     };
@@ -48,7 +50,10 @@ angular.module('soundrad.controllers', [])
       $scope.token = localStorage.getItem('token-' + $index);
       soundcloud.connect($scope);
       if ($location.path() == '/'){
-        $window.location.href = '/';  
+        // Handle reloading stream here
+        
+        // This method results in resetting to first connected user
+        //$window.location.href = '/';  
       } else {
         $location.path('/');  
       };
@@ -90,17 +95,7 @@ angular.module('soundrad.controllers', [])
       if($scope.layout == 'mobile'){
         return { minHeight: $scope.winhi };
       };
-    };
-    
-    
-////////////////////////////////////////////////////////////////
-// for testing
-
-/* $scope.mysets = { name: 'test' } */
-
-
-////////////////////////////////////////////////////////////////    
-    
+    };   
     
     // Global Modal Testing
     $scope.modal = {}
@@ -128,6 +123,13 @@ angular.module('soundrad.controllers', [])
     };
       
     
+  }])
+  
+  .controller('CallbackCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){
+      //SC.connectCallback;
+      $timeout($window.close, 400);
+      $window.opener.focus();
+      
   }])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
