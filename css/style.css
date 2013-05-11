@@ -79,7 +79,8 @@ body {
 
 a {
   text-decoration: none;
-  color: #ff6600; }
+  color: #ff6600;
+  cursor: pointer; }
   a.active {
     color: #444444; }
 

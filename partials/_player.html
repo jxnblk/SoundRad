@@ -9,9 +9,9 @@
   <div class="player bobo" id="{{track.permalink}}" ng-class="{'playing bg-text2': isPlaying(track) || isPaused(track), 'unstreamable bg-mdgry': !track.streamable}" ng-switch on="!!track.tracks" ng-controller="PlayerCtrl">
     <!-- Track -->
     <div ng-switch-when="false">    
-      <a href="" class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': isPaused(track)}" ng-click="player.play(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
-      <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="isPlaying(track) && !audioReady()"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></a>
-      <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="isPlaying(track) && audioReady()"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
+      <a class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': isPaused(track)}" ng-click="player.play(tracks, $index)" ng-hide="isPlaying(track)"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
+      <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="isPlaying(track) && !audioReady()"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></a>
+      <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="isPlaying(track) && audioReady()"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
       
       <div class="bd disb posrel hi64 text no-touch-color" ng-class="{wht: isPlaying(track) || isPaused(track)}">
         <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg truncate overhide padr" ng-class="{wht: isPlaying(track) || isPaused(track)}">{{track.user.username}}<small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
@@ -25,19 +25,19 @@
           </div>
         </div>
 
-        <a href="" ng-click="openTrack(track)" class="posabs r0 to0 bo0 z512 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a>
+        <a ng-click="openTrack(track)" class="posabs r0 to0 bo0 z512 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a>
 
 
 
         <!-- <div click-out="closeActions()"> -->
-          <!-- <a href="" ng-click="toggleActions()" class="posabs r0 to0 bo0 z256 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a> -->
+          <!-- <a ng-click="toggleActions()" class="posabs r0 to0 bo0 z256 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: isPlaying(track) || isPaused(track)}"></i></a> -->
           
           <!--
 <div class="jx-actions posabs to0 r0 bo0 z384 pad- bg-text" style="display:none" ng-show="viewActions" ng-animate="'slideleft'" ng-controller="TrackCtrl">
-            <a href="" ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
-            <a href="" ng-click="openModal(mysets, {type: 'setlist', doThis: 'addToSet', track: {{track}}})" class="tappad fl gry h4"><i class="icon i-jxn-add"></i></a>
-            <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite" class="tappad fl gry h4"><i class="icon i-jxn-heart"></i></a>
-            <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite" class="tappad fl prime h4"><i class="icon i-jxn-heart"></i></a>        
+            <a ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="tappad fl h4"><i class="icon i-jxn-loop"></i></a>
+            <a ng-click="openModal(mysets, {type: 'setlist', doThis: 'addToSet', track: {{track}}})" class="tappad fl gry h4"><i class="icon i-jxn-add"></i></a>
+            <a ng-click="like(track.id)" ng-hide="track.user_favorite" class="tappad fl gry h4"><i class="icon i-jxn-heart"></i></a>
+            <a ng-click="unlike(track.id)" ng-show="track.user_favorite" class="tappad fl prime h4"><i class="icon i-jxn-heart"></i></a>        
           </div>
 -->
         <!-- </div> -->
@@ -48,7 +48,7 @@
     
     <!-- Set -->
     <div ng-switch-when="true">
-      <a href="" ng-click="openSet(track)" class="disb active overhide pad">
+      <a ng-click="openSet(track)" class="disb active overhide pad">
         <p class="lh1">{{track.user.username}}</p>
         <h4 class="disib b">{{track.title}}</h4>
       </a>
