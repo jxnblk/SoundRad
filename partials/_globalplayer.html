@@ -1,8 +1,8 @@
 <div class="globalplayer player bobo posabs l0 r0" id="{{track.permalink}}" ng-class="{'playing bg-text2': player.playing || player.paused}" ng-controller="PlayerCtrl">
 
-      <a href="" class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused, 'wht bg-prime': player.paused}" ng-click="player.play(tracks, $index)" ng-hide="player.playing"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
-      <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing && audio.readyState != 4"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></a>
-      <a href="" class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing && audio.readyState == 4"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
+      <a class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused, 'wht bg-prime': player.paused}" ng-click="player.play(tracks, $index)" ng-hide="player.playing"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
+      <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing && audio.readyState != 4"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></a>
+      <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing && audio.readyState == 4"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
       <div class="bd posrel hi64">
         <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg overhide marr2" ng-class="{wht: player.playing || player.paused}">{{player.playing.user.username}} [{{!!player.playing}}]<small class="" ng-show="player.playing.sharing == 'private'"> [private]</small></h2>
         <h3 class="title posabs to26 z128 marl h4 lh1-25 b overhide marr2" ng-class="{wht: player.playing || player.paused}">{{player.playing.title}}</h3>

@@ -1,6 +1,6 @@
 <!-- Modal -->
 
-<a href="" ng-click="closeModal()" class="tappad disb bobo">Close</a>
+<a ng-click="closeModal()" class="tappad disb bobo">Close</a>
 
 <div ng-switch="modal.params.type">
 
@@ -8,7 +8,7 @@
     <h3 class="pad bobo">Sets</h3>
     
     <ul>
-      <li ng-repeat="set in modal.content"><a href="" ng-click="{{modal.params.doThis}}({{modal.params.track.id}}, set)" class="tappad bobo">{{set.title}}</a></li>
+      <li ng-repeat="set in modal.content"><a ng-click="{{modal.params.doThis}}({{modal.params.track.id}}, set)" class="tappad bobo">{{set.title}}</a></li>
     </ul>
   </div>
 

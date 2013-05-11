@@ -7,6 +7,7 @@ body {
 a {
   text-decoration: none;
   color: $prime;
+  cursor: pointer;
   &.active {
     color: $text;
   }
