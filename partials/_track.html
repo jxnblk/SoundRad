@@ -1,6 +1,6 @@
 <div ng-repeat="track in tracks" ng-controller="PlayerCtrl">
 
-  <div ng-include src="'partials/_player.html'"></div>
+  <div ng-include src="'/partials/_player.html'"></div>
 
 
   <div ng-controller="TrackCtrl">
@@ -13,7 +13,7 @@
         <span class="gry h6 fr">{{track.playback_count}} Plays | {{track.favoritings_count}} Likes</span>
       </div>
       
-      <!-- <a ng-href="#/{{track.user.permalink}}" class="tappad bobo gry h4">{{track.user.username}} <i class="fr h6 i-jxn-carat"></i></a> -->
+      <!-- <a ng-href="/{{track.user.permalink}}" class="tappad bobo gry h4">{{track.user.username}} <i class="fr h6 i-jxn-carat"></i></a> -->
       
       <div class="pad bobo">
         <h6 class="gry">{{track.created_at | fromNow}}</h6> <!-- don't think this is standard datetime format -->

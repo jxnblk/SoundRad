@@ -210,9 +210,6 @@ angular.module('scat.controllers', [])
       soundcloud.getTracks($scope);
     };
      
-     
-     $scope.testHTML = '<h1>Herro</h1><br><a href="http://jxnblk.com">jxnblk.com</a>';
-     
   }])
   
   .controller('ActivitiesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
@@ -293,11 +290,7 @@ angular.module('scat.controllers', [])
         soundcloud.unlike($scope, trackid);
       };
       
-      
-      
-      
-      
-      
+   
   }])
   
   .controller('ModalCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){

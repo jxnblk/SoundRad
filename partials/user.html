@@ -8,24 +8,24 @@
       <h2 class="h3 lrpad overhide">{{viewUsername}}</h2>
   
       <div class="tappad">
-        <a ng-href="#/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: !viewType}">Tracks</a> <!-- ({{userData.track_count || 0}}) -->
-        <a ng-href="#/{{viewUser}}/sets" class="marr lrpadout4" ng-class="{pill: viewType == 'sets'}">Sets</a>  <!-- ({{userData.playlist_count || 0}}) -->
-        <a ng-href="#/{{viewUser}}/likes" class="marr lrpadout4" ng-class="{pill: viewType == 'likes'}">Likes</a> <!-- ({{userData.public_favorites_count || 0}}) -->
-        <a ng-href="#/{{viewUser}}/info" class="marr lrpadout4" ng-class="{pill: viewType == 'info'}">Info</a>
+        <a ng-href="/{{viewUser}}" class="marr lrpadout4" ng-class="{pill: !viewType}">Tracks</a> <!-- ({{userData.track_count || 0}}) -->
+        <a ng-href="/{{viewUser}}/sets" class="marr lrpadout4" ng-class="{pill: viewType == 'sets'}">Sets</a>  <!-- ({{userData.playlist_count || 0}}) -->
+        <a ng-href="/{{viewUser}}/likes" class="marr lrpadout4" ng-class="{pill: viewType == 'likes'}">Likes</a> <!-- ({{userData.public_favorites_count || 0}}) -->
+        <a ng-href="/{{viewUser}}/info" class="marr lrpadout4" ng-class="{pill: viewType == 'info'}">Info</a>
       </div>
     </div>
   </div>
 
   <div ng-switch="contentType">
   
-    <div ng-switch-when="tracks" ng-include src="'partials/_tracklist.html'"></div>
-    <div ng-switch-when="users" ng-include src="'partials/_following.html'"></div> 
-    <div ng-switch-when="track" ng-include src="'partials/_track.html'"></div> 
-    <div ng-switch-when="set" ng-include src="'partials/set.html'"></div>
+    <div ng-switch-when="tracks" ng-include src="'/partials/_tracklist.html'"></div>
+    <div ng-switch-when="users" ng-include src="'/partials/_following.html'"></div> 
+    <div ng-switch-when="track" ng-include src="'/partials/_track.html'"></div> 
+    <div ng-switch-when="set" ng-include src="'/partials/set.html'"></div>
     
     <div ng-switch-when="info">
       <div class="pad bobo">    
-        <a ng-href="#/{{viewUser}}/following" class="gry disib vermid marr">
+        <a ng-href="/{{viewUser}}/following" class="gry disib vermid marr">
           <div class="h5 lh1">{{userData.followings_count || 0}}</div>
           <small class="tiny caps lh1">Following</small>
         </a>

@@ -12,7 +12,7 @@
   
   <li ng-repeat="following in followings | orderBy: sortFollowings.json :sortFollowings.reverse" ng-model="sortFollowings">
   
-    <a ng-href="#/{{following.permalink}}" class="h4 tappad">{{following.username}} ({{following.followers_count}})</a>
+    <a ng-href="/{{following.permalink}}" class="h4 tappad">{{following.username}} ({{following.followers_count}})</a>
     <!-- <pre>{{following | json }}</pre> -->
     
   </li>

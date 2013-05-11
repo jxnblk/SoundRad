@@ -4,7 +4,7 @@
   <h3 class="">{{set.title}}</h3>
 </div>
 
-    <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-include src="'partials/_player.html'"></div>    
+    <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-include src="'/partials/_player.html'"></div>    
 
   
   <div class="show-more padto" ng-show="tracksLoading"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div>
@@ -15,7 +15,7 @@
     <!-- Put repost and Add to Set buttons here -->
   </div>
 
-  <a ng-href="#/{{set.user.permalink}}" class="tappad bobo gry h4" ng-show="set.user">{{set.user.username}} <i class="fr h6 i-jxn-carat"></i></a>
+  <a ng-href="/{{set.user.permalink}}" class="tappad bobo gry h4" ng-show="set.user">{{set.user.username}} <i class="fr h6 i-jxn-carat"></i></a>
 
   <div class="pad bobo">
     <h6 class="gry">{{set.created_at | fromNow}}</h6> <!-- don't think this is standard datetime format -->

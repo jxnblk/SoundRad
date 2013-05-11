@@ -22,7 +22,8 @@ var scat = angular.module('scat', ['scat.services', 'scat.controllers', 'scat.di
 //    $routeProvider.when('/:viewUser/sets/:set', {templateUrl: 'partials/set.html', controller: 'SetCtrl'});
     
     $routeProvider.otherwise({ redirectTo: '/' });
-    //$locationProvider.html5Mode(true);
+    
+    $locationProvider.html5Mode(true);
     
   }]);
 
