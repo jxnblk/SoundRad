@@ -122,6 +122,12 @@ angular.module('soundrad.services', [])
                         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
                           $scope.$apply(function(){
                             $scope.tracks = $scope.tracks.concat(data);
+                            if($scope.tracks.length > ($scope.pageSize * 2)){
+                              // Remove the first page
+                              $scope.tracks.splice(0, $scope.pageSize);
+                              console.log('splicing');
+                              console.log($scope.tracks.length);
+                            };
                             $scope.tracksLoading = false;
                           });
                         });

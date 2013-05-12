@@ -9,7 +9,7 @@
   <div class="player bobo" id="{{track.permalink}}" ng-class="{'playing bg-text2': player.playing.id == track.id || player.paused.id == track.id, 'unstreamable bg-mdgry': !track.streamable}" ng-switch on="!!track.tracks" ng-controller="PlayerCtrl">
     <!-- Track -->
     <div ng-switch-when="false">    
-      <a class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': player.paused.id == track.id}" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
+      <a class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': player.paused.id == track.id}" ng-click="playTrack(tracks, $index)" ng-hide="player.playing.id == track.id"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
 <!--       <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing.id == track.id && !audioReady()"><i class="icon i-jxn-loading h4 wht disb center anim-spin"></i></a> -->
       <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing.id == track.id"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
       

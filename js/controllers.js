@@ -67,9 +67,10 @@ angular.module('soundrad.controllers', [])
     
     $scope.$routeParams = $routeParams;
     
-    $scope.pageSize = 16;
+    $scope.pageSize = 32;
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
+    $scope.page = 1;
     
     // Window Size - probs should be a different scope
     $scope.updateWidth = function() {
@@ -78,6 +79,7 @@ angular.module('soundrad.controllers', [])
         $scope.layout = 'desktop';
       } else {
         $scope.layout = 'mobile';
+        $scope.pageSize = 16;
       }
     };
     $scope.updateWidth();
@@ -160,7 +162,8 @@ angular.module('soundrad.controllers', [])
     $scope.showMore = function() {
       $scope.tracksLoading = true;
       $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-      soundcloud.addTracks($scope);  
+      soundcloud.addTracks($scope); 
+      $scope.page = $scope.page + 1;
     }; 
     
     if ($scope.viewDetail) {
@@ -226,19 +229,16 @@ angular.module('soundrad.controllers', [])
     };
     
   }])
-  
-  .controller('TracklistCtrl', ['$scope', 'player', function($scope, player){
-    //console.log('TracklistCtrl');
-    
-    
-  }])
  
   .controller('PlayerCtrl', ['$scope', 'player', function($scope, player) {
     //console.log('PlayerCtrl');
 
     $scope.player = player;
-
     $scope.toggleLoop = function(){ player.loop = !player.loop; };
+    
+    $scope.playTrack = function(tracks, i){
+      player.play(tracks, i);
+    };
     
     //$scope.viewActions = false;
     //$scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
@@ -311,24 +311,23 @@ angular.module('soundrad.controllers', [])
       soundcloud.getTracks($scope);
       
       // Pagination
-      $scope.showMore = function() {
+      $scope.showMore = function(event) {
+        event.preventDefault();
         $scope.tracksLoading = true;
         $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-        soundcloud.addTracks($scope);  
+        soundcloud.addTracks($scope);
       };
       
   }])
   
-  .controller('GlobalPlayerCtrl', ['$scope', 'player', function($scope, soundcloud, player, audio){
-    
 
-  }]);
   
   
   
   
   
-  
+////////////////////////////////////////////////////////////////  
+////////////////////////////////////////////////////////////////
   
       /* // maybe try this for getuser
     var lastRoute = $route.current;
@@ -336,3 +335,4 @@ angular.module('soundrad.controllers', [])
         $route.current = lastRoute;         
     }
     */
+    

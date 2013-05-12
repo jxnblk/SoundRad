@@ -5,7 +5,10 @@
   <!-- Player Partial Here -->
   <div class="track track-{{track.permalink}}" ng-repeat="track in tracks" ng-show="tracks.length" ng-include src="'/partials/_player.html'"></div>
     
-  <a class="show-more tappad tappad-gry" ng-click="showMore()" ng-hide="tracks.length <= pageOffset || tracksLoading">Show More</a>  
+    <!-- Need a better way of hiding show more link -->
+    <!-- tracks.length <= pageOffset ||  -->
+    
+  <a class="show-more tappad tappad-gry" ng-click="showMore()" ng-hide="tracksLoading">Show More</a>  
   <div class="show-more padto" ng-show="tracksLoading"><i class="icon i-jxn-loading h3 gry disb center anim-spin"></i></div>
    
 </div><!-- end sc-tracklist -->
