@@ -321,11 +321,9 @@ angular.module('soundrad.services', [])
       //setToken: function($scope) {
         //token = $scope.token;
       //},
-
-      play: function(tracks, i) {
+      
+      newPlay: function(tracks, i) {
         // Attempting to build queue
-        
-        
         var newtracks = [];
         for (var index = i; index < tracks.length; index++) {
           newtracks.push(tracks[index]);
@@ -334,7 +332,14 @@ angular.module('soundrad.services', [])
         player.tracks = newtracks;
         //player.tracks = newtracks.concat(player.tracks);
         //console.log(player.tracks.length);
-  
+        player.i = 0;
+        player.play(player.tracks, player.i);
+        
+      },
+
+      play: function(tracks, i) {
+        
+        player.tracks = tracks;
         
         // Should define this more globally
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
