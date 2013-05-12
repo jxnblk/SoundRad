@@ -7,6 +7,8 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $routeProvider.when('/activity', {templateUrl: 'partials/_activities.html'});
     $routeProvider.when('/callback', {templateUrl: 'partials/callback.html'});
     
+    $routeProvider.when('/debug', {templateUrl: 'partials/debug.html'});
+    
     
     $routeProvider.when('/:viewUser', {templateUrl: 'partials/user.html'});
     $routeProvider.when('/:viewUser/:type', {templateUrl: 'partials/user.html'});

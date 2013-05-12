@@ -2,8 +2,14 @@
 
   <!-- <div ng-include ng-show="current.tracks" src="'/partials/_globalplayer.html'"></div> -->
 
-  <div class="currently-playing posrel bobo overhide" ng-controller="PlayerCtrl" ng-show="player.playing">
+<!-- ng-show="player.playing" -->
+
+  <div class="currently-playing posrel bobo overhide" ng-controller="PlayerCtrl" >
     <a ng-href="/{{player.playing.user.permalink}}/{{player.playing.permalink}}" class="tappad overhide htap marr2"><i class="icon i-jxn-play"></i> {{player.playing.title}}</a>
+    
+    <ul>
+      <li class="tappad" ng-repeat="track in player.tracks">{{track.user.username}} - {{track.title}}</li>
+    </ul>
     
     <a ng-click="toggleLoop()" ng-class="{gry: !player.loop}" class="right-icon tappad h4"><i class="icon i-jxn-loop"></i></a>
     <!-- Use this once there's better URL structures in place -->

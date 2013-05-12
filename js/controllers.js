@@ -67,7 +67,7 @@ angular.module('soundrad.controllers', [])
     
     $scope.$routeParams = $routeParams;
     
-    $scope.pageSize = 32;
+    $scope.pageSize = 16;
     $scope.pageOffset = 0;
     $scope.tracksLoading = true;
     
@@ -227,35 +227,33 @@ angular.module('soundrad.controllers', [])
     
   }])
   
-  .controller('TracklistCtrl', ['$scope', 'player', 'audio', function($scope, player, audio){
+  .controller('TracklistCtrl', ['$scope', 'player', function($scope, player){
     //console.log('TracklistCtrl');
-
+    
+    
   }])
  
-  .controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
+  .controller('PlayerCtrl', ['$scope', 'player', function($scope, player) {
     //console.log('PlayerCtrl');
 
     $scope.player = player;
-    $scope.audio = audio;
+
     $scope.toggleLoop = function(){ player.loop = !player.loop; };
     
-    $scope.isPlaying = function(track){ return player.playing.id == track.id };
-    $scope.isPaused = function(track){ return player.paused.id == track.id };
-    
-    $scope.audioReady = function(){
-      return audio.readyState == 4
-    };
-    
-    $scope.viewActions = false;
-    
-    $scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
-    $scope.closeActions = function(){$scope.viewActions = false; };
+    //$scope.viewActions = false;
+    //$scope.toggleActions = function(){ $scope.viewActions = !$scope.viewActions; };
+    //$scope.closeActions = function(){$scope.viewActions = false; };
       
   }])
   
   .controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio){
       // Scrubbers
       //console.log('scrubberctrl');
+      
+      $scope.audioReady = function(){
+        return audio.readyState == 4
+      };
+      
       function updateView() {
         $scope.$apply(function() {
           $scope.currentBufferPercentage = ((audio.buffered.length && audio.buffered.end(0)) / audio.duration) * 100;
@@ -275,7 +273,7 @@ angular.module('soundrad.controllers', [])
   }])
   
 
-  .controller('TrackCtrl', ['$scope', 'soundcloud', 'player', 'audio', function($scope, soundcloud, player, audio){
+  .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
             
       //console.log('trackctrl');
       
@@ -304,10 +302,29 @@ angular.module('soundrad.controllers', [])
     };
   }])
   
+  .controller('DebugCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+      
+      $scope.title = 'Debug';
+      
+      $scope.pageSize = 16;
+      $scope.scget = '/users/jxnblk/tracks';
+      soundcloud.getTracks($scope);
+      
+      // Pagination
+      $scope.showMore = function() {
+        $scope.tracksLoading = true;
+        $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
+        soundcloud.addTracks($scope);  
+      };
+      
+  }])
+  
   .controller('GlobalPlayerCtrl', ['$scope', 'player', function($scope, soundcloud, player, audio){
     
 
   }]);
+  
+  
   
   
   

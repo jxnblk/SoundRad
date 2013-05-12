@@ -297,7 +297,7 @@ angular.module('soundrad.services', [])
         
         //pausedTrack = null,
         //current = { i: null, title: null, time: 0 },
-        tracks = {},
+        tracks = [],
         i,
         urlParams,
         //token,
@@ -317,7 +317,18 @@ angular.module('soundrad.services', [])
       //},
 
       play: function(tracks, i) {
-        player.tracks = tracks;
+        // Attempting to build queue
+        
+        
+        var newtracks = [];
+        for (var index = i; index < tracks.length; index++) {
+          newtracks.push(tracks[index]);
+        };  
+        // Need to check if it's the same tracklist
+        player.tracks = newtracks;
+        //player.tracks = newtracks.concat(player.tracks);
+        //console.log(player.tracks.length);
+  
         
         // Should define this more globally
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
