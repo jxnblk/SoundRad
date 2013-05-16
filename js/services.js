@@ -311,7 +311,7 @@ angular.module('soundrad.services', [])
         //currentTimePercentage = audio.currentTime;
         
     player = {
-      //current: current,
+      current: null,
       tracks: tracks,
       i: i,
       playing: false,
@@ -350,6 +350,7 @@ angular.module('soundrad.services', [])
         };
           
         audio.play();
+        player.current = tracks[i];
         player.playing = tracks[i];
         player.i = i;
         player.paused = false;

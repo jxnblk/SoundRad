@@ -87,17 +87,7 @@ angular.module('soundrad.controllers', [])
       $scope.updateWidth();
       $scope.$apply();
     };
-    
-    
-    // iPhone Window Height
-//    $('.contentWrapper').css('min-height', $(window).height() - 55 + 'px');
-    $scope.winhi = $window.innerHeight + 12 + 'px';
-    
-    $scope.viewStyle = function(){
-      if($scope.layout == 'mobile'){
-        return { minHeight: $scope.winhi };
-      };
-    };   
+       
     
     // Global Modal Testing
     $scope.modal = {}

@@ -5,7 +5,7 @@
   <title>SoundRad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   
-  <base href="http://soundrad.com/" />
+  <base href="http://beta.soundrad.com/" />
 
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
   <script type="text/javascript" src="//use.typekit.net/ppq8bhu.js"></script>
@@ -17,16 +17,15 @@
 <div ng-controller="NavCtrl" ng-switch on="layout">
 
   <div ng-include src="'partials/_nav.html'"></div>
+  
+  <div ng-include src="'partials/_globalplayer.html'"></div>
 
-<!--   ng-style="viewStyle()"  -->
 
-  <div class="view" ng-class="{'leftcol': layout == 'desktop'}" ng-view></div>
+  <div class="view" ng-view></div>
   
-  <div ng-include src="'partials/_modal.html'" class="modal bg-gry" style="display:none" ng-class="{'leftcol': layout == 'desktop'}" ng-show="modal.content" ng-animate="{show: 'view-enter', hide: 'view-leave'}" ng-controller="ModalCtrl"></div>
-  
-      <!-- ng-animate="{enter: 'view-enter', leave: 'view-leave'}" -->
-  
-  <div ng-switch-when="desktop" class="rightcol bol" ng-include src="'partials/_navmore.html'"></div>
+<!--   <div ng-include src="'partials/_modal.html'" class="modal bg-gry" style="display:none" ng-class="{'leftcol': layout == 'desktop'}" ng-show="modal.content" ng-animate="{show: 'view-enter', hide: 'view-leave'}" ng-controller="ModalCtrl"></div> -->
+    
+  <!-- <div ng-switch-when="desktop" class="rightcol bol" ng-include src="'partials/_navmore.html'"></div> -->
     
 
   
