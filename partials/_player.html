@@ -1,5 +1,5 @@
 
-  <div class="player bobo" id="{{track.permalink}}" ng-class="{'playing': player.playing, 'paused': player.paused, 'unstreamable bg-mdgry': !track.streamable}" ng-switch on="!!track.tracks" ng-controller="PlayerCtrl">
+  <div class="player bobo" id="{{track.permalink}}" ng-class="{'playing bg-text2': player.playing.id == track.id, 'paused': player.paused.id == track.id, 'unstreamable bg-mdgry': !track.streamable}" ng-switch on="!!track.tracks" ng-controller="PlayerCtrl">
     <!-- Track -->
     <div ng-switch-when="false">    
       <a class="play sq64 lh64 text-center no-touch-color" ng-class="{mdgry: player.paused.id != track.id, 'wht bg-prime': player.paused.id == track.id}" ng-click="playTrack(tracks, $index)" ng-hide="player.playing.id == track.id"><i class="i-jxn-play h5 disb anim-hack anim-popin"></i></a>
@@ -7,10 +7,9 @@
       <a class="pause sq64 lh64 text-center wht bg-prime no-touch-color" ng-click="player.pause(track)" ng-show="player.playing.id == track.id"><i class="i-jxn-pause h5 disb anim-hack anim-popin"></i></a>    
       
       <div class="bd disb posrel hi64 text no-touch-color">
-        <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg truncate overhide padr">{{track.user.username}}<small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
-        <h3 class="title posabs to26 z128 marl h4 lh1-25 b truncate overhide padr">{{track.title}}</h3>
+        <h2 class="artist posabs to0 z128 marl h6 lh1-25 gry marto- reg truncate overhide padr" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.user.username}}<small class="" ng-show="track.sharing == 'private'"> [private]</small></h2>
+        <h3 class="title posabs to26 z128 marl h4 lh1-25 b truncate overhide padr" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}">{{track.title}}</h3>
         
-<!--
         <div ng-show="player.playing.id == track.id || player.paused.id == track.id" ng-switch on="player.playing.id == track.id || player.paused.id == track.id">      
           <div class="time-span w100 hi64" ng-switch-when="true" ng-controller="ScrubberCtrl">
             <div class="scrubber w100 hi64 posabs z256 no-touch-color" ng-click="seekTo($event)"></div>
@@ -19,7 +18,6 @@
             <p class="time wht marr posabs to0 r0 sm lh24 anim-hack anim-slideleft" ng-show="player.playing.id == track.id && audioReady()">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
           </div>
         </div>
--->
 
         <a ng-click="openTrack(track)" class="posabs r0 to0 bo0 z512 gry lh64 tappad"><i class="h6 i-jxn-carat" ng-class="{wht: player.playing.id == track.id || player.paused.id == track.id}"></i></a>
 
