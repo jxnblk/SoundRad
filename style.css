@@ -514,6 +514,12 @@ strong,
 .ml0, .mar-left0 {
   margin-left: 0; }
 
+.mt-25 {
+  margin-top: .25rem; }
+
+.mt-75 {
+  margin-top: .75rem; }
+
 .m-5 {
   margin: .5rem; }
 

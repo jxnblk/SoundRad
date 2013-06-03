@@ -1,24 +1,29 @@
 
+<div class="borbot bor-gray2 overhide">
+  <h2 class="reg pad">{{viewUsername}}</h2>
 
-  <h1>{{viewUsername}}</h1>
+  <a ng-href="/{{viewUser}}" class="tappad fl">Tracks</a>
+  <a ng-href="/{{viewUser}}/sets" class="tappad fl">Sets</a>
+  <a ng-href="/{{viewUser}}/likes" class="tappad fl">Likes</a>
+  <a ng-href="/{{viewUser}}/info" class="tappad fl">Info</a>
 
-  <a ng-href="/{{viewUser}}">Tracks</a>
-  <a ng-href="/{{viewUser}}/sets">Sets</a>
-  <a ng-href="/{{viewUser}}/likes">Likes</a>
-  <a ng-href="/{{viewUser}}/info">Info</a>
 
+<!--
   <dl>
     <dt>following:</dt>
     <dd>{{userData.followings_count}}</dd>
     <dt>followers:</dt>
     <dd>{{userData.followers_count}}</dd>
   </dl>
+-->
 
-  <div ng-switch="!viewType || viewType == 'sets' || viewType == 'likes'">
-    <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
-  </div>
-  
-  <div ng-switch="viewType == 'info' && !!userData">
-    <p ng-switch-when="true" class="" ng-bind-html-unsafe="userData.description | richtext"></p>
-  </div>
+</div>
+
+<div ng-switch="!viewType || viewType == 'sets' || viewType == 'likes'">
+  <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+</div>
+
+<div ng-switch="viewType == 'info' && !!userData">
+  <p ng-switch-when="true" class="" ng-bind-html-unsafe="userData.description | richtext"></p>
+</div>
 
