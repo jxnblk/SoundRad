@@ -2,11 +2,12 @@
 <div class="borbot bor-gray2 overhide">
   <h2 class="reg pad">{{viewUsername}}</h2>
 
-  <a ng-href="/{{viewUser}}" class="tappad fl">Tracks</a>
-  <a ng-href="/{{viewUser}}/sets" class="tappad fl">Sets</a>
-  <a ng-href="/{{viewUser}}/likes" class="tappad fl">Likes</a>
-  <a ng-href="/{{viewUser}}/info" class="tappad fl">Info</a>
-
+  <div class="tappad">
+    <a ng-href="/{{viewUser}}" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': !viewType}">Tracks</a>
+    <a ng-href="/{{viewUser}}/sets" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': viewType == 'sets'}">Sets</a>
+    <a ng-href="/{{viewUser}}/likes" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': viewType == 'likes'}">Likes</a>
+    <a ng-href="/{{viewUser}}/info" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': viewType == 'info'}">Info</a>
+  </div>
 
 <!--
   <dl>
@@ -23,7 +24,7 @@
   <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
 </div>
 
-<div ng-switch="viewType == 'info' && !!userData">
+<div ng-switch="viewType == 'info' && !!userData" class="pad2">
   <p ng-switch-when="true" class="" ng-bind-html-unsafe="userData.description | richtext"></p>
 </div>
 

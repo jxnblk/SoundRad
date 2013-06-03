@@ -1,21 +1,24 @@
 
-<div class="media wht" ng-switch="!!player.playing || !!player.paused">
+<div class="media wht bg-gray2" ng-switch="!!player.playing || !!player.paused">
 
-  <div class="img">
-    <a class="db sq4 lh4 txtcen btn-prime" href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.playing"><i class="icon icon-geo-play h2-s"></i></a>
-    <a class="db sq4 lh4 txtcen btn-prime" href="" ng-click="player.pause(player.playing)" ng-show="player.playing"><i class="icon icon-geo-pause h2-s"></i></a>
+  <div class="img overhide lh4 bg-gray2">
+    
+    <!-- <a href="" ng-click="player.prev()" class="fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-geo-skip sm db rotate-180"></i></a> -->
+    <a class="fl sq4 lh4 txtcen wht" ng-class="{'btn-prime': player.paused}" href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.playing"><i class="icon icon-geo-play h2-s"></i></a>
+    <a class="fl sq4 lh4 txtcen btn-prime" href="" ng-click="player.pause(player.playing)" ng-show="player.playing"><i class="icon icon-geo-pause h2-s"></i></a>
+    <!-- <a href="" ng-click="player.next()" class="fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-geo-skip sm db"></i></a> -->
   </div>
   
-  <div class="bd posrel minhi4 bg-text2">
+  <div class="bd posrel minhi4" ng-class="{'bg-text2': player.playing || player.paused}">
     
     <div class="posabs fill" ng-switch-when="true" ng-controller="ScrubberCtrl">
       <div class="posabs top0 bot0 left0 bg-text" style="width: {{currentBufferPercentage}}%"></div>
       <div class="posabs top0 bot0 left0 bg-prime" style="width: {{currentTimePercentage}}%"></div>
-      <p class="posabs top0 right1 small" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
+      <p class="posabs top0 right1 sm mt-5" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
       <div class="posabs fill z2" ng-click="seekTo($event)"></div>
     </div>
     
-    <p class="posrel sm truncate lh1-25 mt-5 ml-5 mr">{{player.tracks[player.i].user.username}}</p>
+    <span class="db posrel truncate lh1-25 mt-5 ml-5 mr">{{player.tracks[player.i].user.username}}</span>
     <h1 class="posrel h2-m truncate ml-5 mr">{{player.tracks[player.i].title}}</h1>
     
   </div>

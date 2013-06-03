@@ -94,8 +94,8 @@
 
 // Generic tappable padding (for links, etc.)
 .tappad {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
   line-height: 3rem;
 }
 
@@ -303,5 +303,10 @@
 @include break(small) {
   // alternative collapse method
   .grid .col { width: 100%; }
+}
+
+.rotate-180 {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 

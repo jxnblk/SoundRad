@@ -38,10 +38,10 @@ h2, .h2 {
   font-size: 1.25rem;
   line-height: 1.25;
   @include break(medium) {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   @include break(large) {
-    font-size: 2rem;
+    font-size: 3rem;
   }
 }
   .h2-s {
@@ -82,7 +82,7 @@ ol,
 small,
 .small,
 .sm {
-  font-size: 1rem;
+  font-size: .75rem;
   -webkit-text-size-adjust: 100%;
 }
 

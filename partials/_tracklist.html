@@ -1,30 +1,34 @@
 <!-- Tracklist -->
 
 <div ng-show="contentLoading" class="tappad gray5 txtcen">Loading...</div>
-<div>
+<div ng-hide="contentLoading">
 
   <div ng-repeat="track in tracks" ng-switch="!!track.tracks">
-    <div ng-switch-when="false" class="media borbot bor-gray2">
+    <div ng-switch-when="false" class="media maxhi4 borbot bor-gray2">
       <div class="img mr">
         <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
         <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
       </div>
-      <div class="bd">
-        <a ng-href="/{{track.user.permalink}}" class="db sm mt-75 lh1 gray5 truncate pr">{{track.user.username}}</a>
+      <div class="bd posrel minhi4">
+        <a ng-href="/{{track.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{track.user.username}}</a>
         <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db p b text truncate pr">{{track.title}}</a>
-      
-        <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
+        <div class="posabs right0 top0 bot0 pr lh4" ng-controller="TrackCtrl">  
+          
+          <div class="dib lh4 bg-gray2" ng-show="showActions" ng-include src="'/partials/_trackactions.html'"></div>
+          <a href="" class="gray5 sm lh4" ng-click="toggleActions()"><i class="icon icon-geo-lines"></i></a>
+        </div>
       </div>
     </div>
 
-    <div ng-switch-when="true" class="mb2">
-      <div class="media borbot bor-gray2">
+    <div ng-switch-when="true" class="">
+      <div class="media pt pb borbot bor-gray2">
         <div class="img mr">
-          <a href="" ng-click="player.play(track.tracks, 0)" ng-hide="player.tracks == track.tracks" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
-          <a href="" ng-click="player.pause(player.playing)" ng-show="player.tracks == track.tracks" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
+          <a href="" ng-click="player.play(track.tracks, 0)" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+          <a href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.tracks != track.tracks || player.playing" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+          <a href="" ng-click="player.pause(player.playing)" ng-show="player.tracks == track.tracks && player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
         </div>
         <div class="bd">
-          <a ng-href="/{{track.user.permalink}}" class="db sm mt-75 lh1 gray5 truncate pr">{{track.user.username}}</a>
+          <a ng-href="/{{track.user.permalink}}" class="db lh1 gray5 truncate pr">{{track.user.username}}</a>
           <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db h2 b text truncate pr">{{track.title}}</a>
           <!-- <pre>player.tracks: {{player.tracks}}</pre> -->
           <!-- <pre>track.tracks.id: {{track.tracks.id}}</pre> -->
@@ -32,14 +36,15 @@
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
         </div>
       </div>
-      <div ng-repeat="setTrack in track.tracks" class="media borbot bor-gray2">
+      <div ng-show="player.tracks == track.tracks" ng-repeat="setTrack in track.tracks" class="media borbot bor-gray2">
         <div class="img mr">
           <a href="" ng-click="player.play(track.tracks, $index)" ng-hide="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.pause(setTrack)" ng-show="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
         </div>
         <div class="bd">
-          <a ng-href="/{{setTrack.user.permalink}}" class="db sm mt-75 lh1 gray5 truncate pr">{{setTrack.user.username}}</a>
+          <a ng-href="/{{setTrack.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{setTrack.user.username}}</a>
           <a ng-href="/{{setTrack.user.permalink}}/{{setTrack.permalink}}" class="db p b text truncate pr">{{setTrack.title}}</a>
+          
           
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
       </div>

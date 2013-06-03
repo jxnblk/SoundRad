@@ -134,12 +134,16 @@ angular.module('soundrad.controllers', [])
       };
       $scope.page = $scope.page + 1;
     }; 
-    
-    
-    
+        
   }])
   
   .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+    
+      $scope.showActions = false;
+      $scope.toggleActions = function() {
+        $scope.showActions = !$scope.showActions;
+      };
+    
     
       $scope.like = function(trackid, params) {        
         if(params == 'isSetTrack') {
@@ -161,6 +165,7 @@ angular.module('soundrad.controllers', [])
         };
         soundcloud.unlike($scope, trackid);
       };
+      
       
   }])
   
