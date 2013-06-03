@@ -1,33 +1,42 @@
 <!-- Tracklist -->
 
 <div ng-show="contentLoading">Loading...</div>
-<ul>
+<div>
 
-  <li ng-repeat="track in tracks" ng-switch="!!track.tracks">
-    <div ng-switch-when="false">
-      <p>{{track.user.username}}</p>
-      <h2>{{track.title}}</h2>
-      <a href="" ng-click="player.play(tracks, $index)">Play</a> | <a href="" ng-click="player.pause(track)">Pause</a>
-      <div ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
+  <div ng-repeat="track in tracks" ng-switch="!!track.tracks">
+    <div ng-switch-when="false" class="media borbot bor-gray2">
+      <div class="img mr">
+        <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+        <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
+      </div>
+      <div class="bd">
+        <a ng-href="/{{track.user.permalink}}" class="db sm mt-5 lh1 gray5 truncate pr">{{track.user.username}}</a>
+        <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db p b lh2 text truncate pr">{{track.title}}</a>
+      
+        <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
+      </div>
     </div>
 
-    <ul ng-switch-when="true">
-      <li>
+    <div ng-switch-when="true" class="ul">
+      <div>
         <p>{{track.user.username}}</p>
         <h2>{{track.title}}</h2>
         <div ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
-      </li>
-      <li ng-repeat="setTrack in track.tracks">
+      </div>
+      <div ng-repeat="setTrack in track.tracks">
         <p>{{setTrack.user.username}}</p>
         <h3>{{setTrack.title}}</h3>
         <a href="" ng-click="player.play(track.tracks, $index)">Play</a> | <a href="" ng-click="player.pause(setTrack)">Pause</a>
         <div ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
-      </li>
-    </ul>
+      </div>
+    </div>
 
-  </li>
+  </div>
 
 
-</ul>
+</div>
 
-<a href="" ng-click="showMore()">Next Page</a>
+<div class="tappad mb overhide">
+  <a href="" ng-click="prevPage()" class="tappad fl">Previous</a>
+  <a href="" ng-click="showMore()" class="tappad fr">Next</a>
+</div>

@@ -81,7 +81,6 @@
 .pb2, .pad-bot2   { padding-bottom: 2rem; }
 .pl2, .pad-left2  { padding-left:   2rem; }
 
-/*
 @include break(medium) {
   .p2,  .pad2       { padding:        4rem; }
   .pt2, .pad-top2   { padding-top:    4rem; }
@@ -89,7 +88,6 @@
   .pb2, .pad-bot2   { padding-bottom: 4rem; }
   .pl2, .pad-left2  { padding-left:   4rem; }
 }
-*/
 
 // Generic tappable padding (for links, etc.)
 .tappad {

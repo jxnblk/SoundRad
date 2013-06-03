@@ -17,10 +17,10 @@ h1, .h1 {
   font-size: 2rem;
   line-height: 1.25;
   @include break(medium) {
-    //font-size: 4rem;
+    font-size: 4rem;
   }
   @include break(large) {
-    //font-size: 6rem;
+    font-size: 6rem;
   }
 }
   /* Use these classes to limit font sizes from enlarging at specific breakpoints
@@ -82,11 +82,8 @@ ol,
 small,
 .small,
 .sm {
-  font-size: .875rem;
+  font-size: 1rem;
   -webkit-text-size-adjust: 100%;
-  @include break(medium) {
-    font-size: 1rem;
-  }
 }
 
 h1, .h1, .h1-s, h2, .h2, .h2-s, h3, h4, h5, h6,

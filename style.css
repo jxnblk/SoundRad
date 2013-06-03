@@ -368,6 +368,15 @@ h1, h2, h3, h4, h5, h6, p, ul, ol, dl {
   margin-bottom: 1rem;
   padding: .5rem; }
 
+.ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.li {
+  margin: 0;
+  padding: 0; }
+
 /*
 
         Variables
@@ -390,6 +399,12 @@ body {
 h1, .h1 {
   font-size: 2rem;
   line-height: 1.25; }
+  @media screen and (min-width: 640px) {
+    h1, .h1 {
+      font-size: 4rem; } }
+  @media screen and (min-width: 1024px) {
+    h1, .h1 {
+      font-size: 6rem; } }
 
 /* Use these classes to limit font sizes from enlarging at specific breakpoints
 */
@@ -443,13 +458,8 @@ ol,
 small,
 .small,
 .sm {
-  font-size: .875rem;
+  font-size: 1rem;
   -webkit-text-size-adjust: 100%; }
-  @media screen and (min-width: 640px) {
-    small,
-    .small,
-    .sm {
-      font-size: 1rem; } }
 
 h1, .h1, .h1-s, h2, .h2, .h2-s, h3, h4, h5, h6,
 strong,
@@ -620,15 +630,21 @@ strong,
 .pl2, .pad-left2 {
   padding-left: 2rem; }
 
-/*
-@include break(medium) {
-  .p2,  .pad2       { padding:        4rem; }
-  .pt2, .pad-top2   { padding-top:    4rem; }
-  .pr2, .pad-right2 { padding-right:  4rem; }
-  .pb2, .pad-bot2   { padding-bottom: 4rem; }
-  .pl2, .pad-left2  { padding-left:   4rem; }
-}
-*/
+@media screen and (min-width: 640px) {
+  .p2, .pad2 {
+    padding: 4rem; }
+
+  .pt2, .pad-top2 {
+    padding-top: 4rem; }
+
+  .pr2, .pad-right2 {
+    padding-right: 4rem; }
+
+  .pb2, .pad-bot2 {
+    padding-bottom: 4rem; }
+
+  .pl2, .pad-left2 {
+    padding-left: 4rem; } }
 .tappad {
   padding-left: 1rem;
   padding-right: 1rem;
