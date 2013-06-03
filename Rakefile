@@ -13,5 +13,5 @@ end # task :sass
 
 desc "Start Sass so that is compiles to css upon file save"
 task :minify do
-  system "sass --watch sass:. --style compressed"
+  system "rm style.css && sass --watch sass:. --style compressed"
 end # task :minify
