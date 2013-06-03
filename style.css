@@ -435,7 +435,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 1.25rem; }
+  font-size: 1.25rem;
+  font-weight: 600; }
 
 p,
 ul,
@@ -454,10 +455,11 @@ small,
     .sm {
       font-size: 1rem; } }
 
+h1, .h1, .h1-s, h2, .h2, .h2-s, h3, h4, h5, h6,
 strong,
 .bold,
 .b {
-  font-weight: 700; }
+  font-weight: 600; }
 
 .reg {
   font-weight: normal; }
@@ -1055,7 +1057,7 @@ strong,
 body {
   color: #444444;
   background-color: #fff;
-  font-family: "skolar", Georgia, serif; }
+  font-family: "freight-sans-pro", Helvetica, sans-serif; }
 
 a {
   color: #ff6600;

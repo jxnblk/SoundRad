@@ -68,6 +68,7 @@ h4,
 h5,
 h6 {
   font-size: 1.25rem; // Used to be 1.125rem for xsmall
+  font-weight: 600;
 }
 
 p,
@@ -87,9 +88,10 @@ small,
   }
 }
 
+h1, .h1, .h1-s, h2, .h2, .h2-s, h3, h4, h5, h6,
 strong,
 .bold,
-.b   { font-weight: 700; }
+.b   { font-weight: 600; }
 .reg { font-weight: normal; }
 .i   { font-style: italic; }
 
