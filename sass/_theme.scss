@@ -46,11 +46,11 @@ a {
 .bg-prime {  background-color: $prime; }
 
 
-.bor   { border:        1px solid; }
-.borto { border-top:    1px solid; }
-.borri { border-right:  1px solid; }
-.borbo { border-bottom: 1px solid; }
-.borle { border-left:   1px solid; }
+.bor      { border-width: 1px; border-style: solid; }
+.bortop   { border-top-width: 1px; border-top-style: solid; }
+.borright { border-right-width: 1px; border-right-style: solid; }
+.borbot   { border-bottom-width: 1px; border-bottom-style: solid; }
+.borleft  { border-left-width: 1px; border-bottom-style: solid; }
 
 .bor-text { border-color: $text; }
 .bor-gray5 { border-color: $gray5; }

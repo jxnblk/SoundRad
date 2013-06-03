@@ -711,6 +711,30 @@ strong,
 .left2 {
   left: 2rem; }
 
+.top3 {
+  top: 3rem; }
+
+.right3 {
+  right: 3rem; }
+
+.bot3 {
+  bottom: 3rem; }
+
+.left3 {
+  left: 3rem; }
+
+.top4 {
+  top: 4rem; }
+
+.right4 {
+  right: 4rem; }
+
+.bot4 {
+  bottom: 4rem; }
+
+.left4 {
+  left: 4rem; }
+
 .fill {
   top: 0;
   right: 0;
@@ -1093,19 +1117,24 @@ a {
   background-color: #ff6600; }
 
 .bor {
-  border: 1px solid; }
+  border-width: 1px;
+  border-style: solid; }
 
-.borto {
-  border-top: 1px solid; }
+.bortop {
+  border-top-width: 1px;
+  border-top-style: solid; }
 
-.borri {
-  border-right: 1px solid; }
+.borright {
+  border-right-width: 1px;
+  border-right-style: solid; }
 
-.borbo {
-  border-bottom: 1px solid; }
+.borbot {
+  border-bottom-width: 1px;
+  border-bottom-style: solid; }
 
-.borle {
-  border-left: 1px solid; }
+.borleft {
+  border-left-width: 1px;
+  border-bottom-style: solid; }
 
 .bor-text {
   border-color: #444444; }
