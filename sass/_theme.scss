@@ -1,0 +1,78 @@
+/*
+
+        Mathematical Theme
+
+
+*/
+
+$dkgry: #444;
+$mdgry: #999;
+$ltgry: #eee;
+$link:  #0bf;
+
+
+
+body {
+  color: $dkgry;
+  background-color: #fff;
+  font-family: "skolar", Georgia, serif;
+}
+
+
+a {
+  color: $link;
+  text-decoration: none;
+  &:hover {
+    color: darken($link, 10%);
+  }
+}
+
+.dkgry { color: $dkgry; }
+.mdgry { color: $mdgry; }
+.ltgry { color: $ltgry; }
+.wht {   color: #fff; }
+.link {  color: $link; }
+
+.bg-dkgry { background-color: $dkgry; }
+.bg-mdgry { background-color: $mdgry; }
+.bg-ltgry { background-color: $ltgry; }
+.bg-link {  background-color: $link; }
+
+
+.bor   { border:        1px solid; }
+.borto { border-top:    1px solid; }
+.borri { border-right:  1px solid; }
+.borbo { border-bottom: 1px solid; }
+.borle { border-left:   1px solid; }
+
+.bor-dkgry { border-color: $dkgry; }
+.bor-mdgry { border-color: $mdgry; }
+.bor-ltgry { border-color: $ltgry; }
+.bor-wht {   border-color: #fff; }
+
+
+.rc {   border-radius: .25rem; }
+.circ { border-radius: 50%; }
+
+
+.btn-link {
+  color: #fff;
+  background-color: $link;
+  border-radius: .25rem;
+  border: none;
+  &:hover {
+    color: #fff;
+    background-color: lighten($link, 5%);
+  }
+  &:active {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+  }
+}
+
+.input:focus {
+//  appearance: none;
+  outline: none;
+  border-color: $link;
+  //outline-color: lighten($link, 20%); 
+  //outline-width: 4px;
+}

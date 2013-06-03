@@ -1,0 +1,332 @@
+/*
+
+        Structure
+
+
+*/
+/*
+
+mar
+mart
+marr
+marb
+marl
+
+mar
+martop
+marright
+marbot
+marleft
+
+mar-t
+mar-r
+mar-b
+mar-l
+
+
+
+
+*/
+
+
+
+/* Margins
+*/
+.m0,  .mar0       { margin:        0; }
+.mt0, .mar-top0   { margin-top:    0; }
+.mr0, .mar-right0 { margin-right:  0; }
+.mb0, .mar-bot0   { margin-bottom: 0; }
+.ml0, .mar-left0  { margin-left:   0; }
+
+.m,   .mar        { margin:        1rem; }
+.mt,  .mar-top    { margin-top:    1rem; }
+.mr,  .mar-right  { margin-right:  1rem; }
+.mb,  .mar-bot    { margin-bottom: 1rem; }
+.ml,  .mar-left   { margin-left:   1rem; }
+
+@include break(medium) {
+  .m,   .mar        { margin:        2rem; }
+  .mt,  .mar-top    { margin-top:    2rem; }
+  .mr,  .mar-right  { margin-right:  2rem; }
+  .mb,  .mar-bot    { margin-bottom: 2rem; }
+  .ml,  .mar-left   { margin-left:   2rem; } 
+}
+
+.m2,  .mar2       { margin:        2rem; }
+.mt2, .mar-top2   { margin-top:    2rem; }
+.mr2, .mar-right2 { margin-right:  2rem; }
+.mb2, .mar-bot2   { margin-bottom: 2rem; }
+.ml2, .mar-left2  { margin-left:   2rem; }
+
+@include break(medium) {
+  .m2,  .mar2       { margin:        4rem; }
+  .mt2, .mar-top2   { margin-top:    4rem; }
+  .mr2, .mar-right2 { margin-right:  4rem; }
+  .mb2, .mar-bot2   { margin-bottom: 4rem; }
+  .ml2, .mar-left2  { margin-left:   4rem; }
+}
+
+/* Padding
+*/
+.p0,  .pad0       { padding:        0; }
+.pt0, .pad-top0   { padding-top:    0; }
+.pr0, .pad-right0 { padding-right:  0; }
+.pb0, .pad-bot0   { padding-bottom: 0; }
+.pl0, .pad-left0  { padding-left:   0; }
+
+.p1,  .pad        { padding:        1rem; }
+.pt,  .pad-top    { padding-top:    1rem; }
+.pr,  .pad-right  { padding-right:  1rem; }
+.pb,  .pad-bot    { padding-bottom: 1rem; }
+.pl,  .pad-left   { padding-left:   1rem; }
+
+@include break(medium) {
+  .p1,  .pad        { padding:        2rem; }
+  .pt,  .pad-top    { padding-top:    2rem; }
+  .pr,  .pad-right  { padding-right:  2rem; }
+  .pb,  .pad-bot    { padding-bottom: 2rem; }
+  .pl,  .pad-left   { padding-left:   2rem; }
+}
+
+.p2,  .pad2       { padding:        2rem; }
+.pt2, .pad-top2   { padding-top:    2rem; }
+.pr2, .pad-right2 { padding-right:  2rem; }
+.pb2, .pad-bot2   { padding-bottom: 2rem; }
+.pl2, .pad-left2  { padding-left:   2rem; }
+
+@include break(medium) {
+  .p2,  .pad2       { padding:        4rem; }
+  .pt2, .pad-top2   { padding-top:    4rem; }
+  .pr2, .pad-right2 { padding-right:  4rem; }
+  .pb2, .pad-bot2   { padding-bottom: 4rem; }
+  .pl2, .pad-left2  { padding-left:   4rem; }
+}
+
+// Generic tappable padding (for links, etc.)
+.tappad {
+  line-height: 3rem;
+}
+
+
+// Mobile style full-width list item
+.tappad-s {
+  display: block;
+  padding: 0 1rem;
+  line-height: 3rem;
+}
+
+.borbox { box-sizing: border-box; }
+
+
+.db,  .disblo   { display: block; }
+.dib, .disinblo { display: inline-block; }
+
+.fl,
+.floleft { float: left; }
+.fr,
+.floright { float: right; }
+
+.wrap { margin: 0 auto; }
+
+
+.posrel { position: relative; }
+.posabs { position: absolute; }
+
+.top0 { top:    0; }
+.right0 { right:  0; }
+.bot0 { bottom: 0; }
+.left0 { left:   0; }
+
+.top,
+.top1 { top:    1rem; }
+.right,
+.right1 { right:  1rem; }
+.bot,
+.bot1 { bottom: 1rem; }
+.left,
+.left1 { left:   1rem; }
+
+.top2 { top:    2rem; }
+.right2 { right:  2rem; }
+.bot2 { bottom: 2rem; }
+.left2 { left:   2rem; }
+
+.fill {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.z1 { z-index: 100; }
+.z2 { z-index: 200; }
+.z3 { z-index: 300; }
+.z4 { z-index: 400; }
+.z5 { z-index: 500; }
+
+.overhide { overflow: hidden; }
+
+.scroll-y {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Useful for icons, tiles, circles, etc.
+.sq1 { width:  1rem; height:  1rem; } //  16px
+.sq2 { width:  2rem; height:  2rem; } //  32px
+.sq3 { width:  3rem; height:  3rem; } //  48px
+.sq4 { width:  4rem; height:  4rem; } //  64px
+.sq5 { width:  6rem; height:  6rem; } //  96px
+.sq6 { width:  8rem; height:  8rem; } // 128px
+.sq7 { width: 16rem; height: 16rem; } // 256px
+
+.minhi1 { min-height:  1rem; }
+.minhi2 { min-height:  2rem; }
+.minhi3 { min-height:  3rem; }
+.minhi4 { min-height:  4rem; }
+.minhi5 { min-height:  6rem; }
+.minhi6 { min-height:  8rem; }
+.minhi7 { min-height: 16rem; }
+
+.maxhi1 { max-height:  1rem; }
+.maxhi2 { max-height:  2rem; }
+.maxhi3 { max-height:  3rem; }
+.maxhi4 { max-height:  4rem; }
+.maxhi5 { max-height:  6rem; }
+.maxhi6 { max-height:  8rem; }
+.maxhi7 { max-height: 16rem; }
+
+.lh1 { line-height:  1rem; }
+.lh2 { line-height:  2rem; }
+.lh3 { line-height:  3rem; }
+.lh4 { line-height:  4rem; }
+.lh5 { line-height:  6rem; }
+.lh6 { line-height:  8rem; }
+.lh7 { line-height: 16rem; }
+
+// Max-widths to use for controlling typographic measure
+.maxwi1 { max-width: 24rem; } // 384px
+.maxwi2 { max-width: 32rem; } // 512px
+.maxwi3 { max-width: 40rem; } // 640px
+.maxwi4 { max-width: 48rem; } // 768px
+.maxwi5 { max-width: 56rem; } // 896px
+
+
+// min/max widths
+
+
+
+// Aspect ratio classes are useful for things like fluid-width background images
+// These fill the width of parent elements
+.asp-sq {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;  
+}
+
+.asp-4o3 {
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
+}
+
+.asp-16o9 {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+
+// Combine these with grid classes
+// ditch fraction syntax for explicit widths
+// include breakpoint options
+
+// Halves
+.wi100  { width: 100%;   }
+.wi87p5 { width:  87.5%; }
+.wi75   { width:  75%;   }
+.wi62p5 { width:  62.5%; }
+.wi50   { width:  50%;   }
+.wi37p5 { width:  37.5%; }
+.wi25   { width:  25%;   }
+
+// Thirds
+.wi66   { width:  66.66667%; }
+.wi33   { width:  33.33333%; }
+
+@include break(medium) {
+  .wi100-m  { width: 100%;   }
+  .wi87p5-m { width:  87.5%; }
+  .wi75-m   { width:  75%;   }
+  .wi62p5-m { width:  62.5%; }
+  .wi50-m   { width:  50%;   }
+  .wi37p5-m { width:  37.5%; }
+  .wi25-m   { width:  25%;   }
+}
+
+
+
+/*
+
+        Grids
+        
+*/
+
+.g, .grid {
+    letter-spacing: -0.31em;
+    *letter-spacing: normal;
+    *word-spacing: -0.43em;
+    text-rendering: optimizespeed;
+}
+
+// do i want to support opera?
+.opera-only :-o-prefocus,
+.g, .grid {
+    word-spacing: -0.43em;
+}
+
+.c, .col {
+    display: inline-block;
+    zoom: 1; *display: inline;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+
+// Gutters
+.g-gut, .grid-gut {
+  margin-left: -2rem;
+  > .c, > .col {
+    box-sizing: border-box;
+    padding-left: 2rem;
+  }
+}
+
+
+@include break(small) {
+  // alternative collapse method
+  //.col { width: 100%; }
+
+/*
+  .c-1o8, .c-1o4, .c-2o8, .c-3o8, .c-1o2, .c-2o4, .c-4o8, .c-5o8, .c-3o4, .c-6o8, .c-7o8,
+  .col-1o8, .col-1o4, .col-2o8, .col-3o8, .col-1o2, .col-2o4, .col-4o8, .col-5o8, .col-5o8, .col-3o4, .col-6o8, .col-7o8 {
+    width: 100%;
+  }
+*/
+}
+
+  
+
+
+    
+// To Add:
+// Centering
+// Vertical Centering
+// Push/Pull classes?
+
+
+
+
+

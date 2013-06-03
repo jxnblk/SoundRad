@@ -1,0 +1,34 @@
+/*
+
+        Mathematical Animations
+
+
+*/
+
+
+.anim-speed-1 {
+  -webkit-transition-duration: .5s;
+  transition-duration: .5s;
+}
+
+.anim-speed-2 {
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+}
+
+.anim-speed-3 {
+  -webkit-transition-duration: .1s;
+  transition-duration: .1s;
+}
+
+.anim-speed-4 {
+  -webkit-transition-duration: .05s;
+  transition-duration: .05s;
+}
+
+.trans-all {
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+}

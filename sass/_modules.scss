@@ -1,0 +1,41 @@
+/*
+
+        Modules
+
+
+*/
+
+
+.btn {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.btn-med {
+  line-height: 48px;
+  padding: 0 16px;
+}
+
+.btn-big {
+  line-height: 64px;
+  padding: 0 16px;
+}
+
+// Media
+.media {
+  overflow: hidden;
+  .img {
+    float: left;
+  }
+  .bd {
+    overflow: hidden;
+  }
+}
+// Extension to stack media object at small sizes
+.media-fold-s {
+  @include break(small) {
+    & .img {
+      float: none;
+    }
+  }  
+}
