@@ -16,6 +16,9 @@ body {
 h1, .h1 {
   font-size: 2rem;
   line-height: 1.25;
+}
+
+.h1-res {
   @include break(medium) {
     font-size: 4rem;
   }
@@ -23,20 +26,14 @@ h1, .h1 {
     font-size: 6rem;
   }
 }
-  /* Use these classes to limit font sizes from enlarging at specific breakpoints
-  */
-  .h1-s {
-    font-size: 2rem;
-  }
-  .h1-m {
-    @include break(medium) {
-      font-size: 4rem;
-    }
-  }
+
 
 h2, .h2 {
   font-size: 1.25rem;
   line-height: 1.25;
+}
+
+.h2-res {
   @include break(medium) {
     font-size: 2rem;
   }
@@ -44,15 +41,6 @@ h2, .h2 {
     font-size: 3rem;
   }
 }
-  .h2-s {
-    font-size: 1.25rem;
-  }
-  .h2-m {
-    font-size: 1.25rem;
-    @include break(medium) {
-      font-size: 1.5rem;
-    }
-  }
 
 
     /* Use these for more complex type scales

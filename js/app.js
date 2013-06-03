@@ -11,6 +11,7 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $routeProvider.when('/:viewUser/:type/:detail', {templateUrl: '/partials/user.html', controller: 'UserCtrl'});
     
     $routeProvider.otherwise({redirectTo: '/'});
-    
+
+    $locationProvider.hashPrefix('!')
     $locationProvider.html5Mode(true);
   }]);

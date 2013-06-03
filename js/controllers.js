@@ -114,7 +114,7 @@ angular.module('soundrad.controllers', [])
     
   }])
   
-  .controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
+  .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
         //$scope.audio = audio;
     $scope.player = player;
     
@@ -133,7 +133,32 @@ angular.module('soundrad.controllers', [])
         soundcloud.getTracks($scope);  
       };
       $scope.page = $scope.page + 1;
-    }; 
+    };
+    
+    $scope.prevPage = function(){
+      if($scope.pageOffset >= $scope.pageSize) {
+        $scope.contentLoading = true;
+        $scope.pageOffset = $scope.pageOffset - $scope.pageSize;
+        //$scope.updatePage();
+        if($scope.streamPrevPage){
+          ////////////////////////////////////////////////////////////////
+        } else {
+          soundcloud.getTracks($scope);  
+        };  
+      };      
+    };
+    
+    ////////////////////////////////////////////////////////////////
+    // For Scrolling when opening/closing sets
+    // $location.hash();
+    // $anchorScroll();
+    
+    $scope.playScroll = function(tracks, i){
+      player.play(tracks, i);
+      $location.hash(tracks[i].id);
+      //$location.hash();
+      $anchorScroll();
+    };
         
   }])
   

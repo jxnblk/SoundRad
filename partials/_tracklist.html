@@ -21,15 +21,20 @@
     </div>
 
     <div ng-switch-when="true" class="">
-      <div class="media pt pb borbot bor-gray2">
+      <div id="{{track.id}}" class="media pt pb borbot bor-gray2">
         <div class="img mr">
+<!--
+          <a href="" ng-click="playScroll(track.tracks, 0)" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+          <a href="" ng-click="playScroll(player.tracks, player.i)" ng-hide="player.tracks != track.tracks || player.playing" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+          <a href="" ng-click="player.pause(player.playing)" ng-show="player.tracks == track.tracks && player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
+-->
           <a href="" ng-click="player.play(track.tracks, 0)" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.tracks != track.tracks || player.playing" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.pause(player.playing)" ng-show="player.tracks == track.tracks && player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
         </div>
         <div class="bd">
           <a ng-href="/{{track.user.permalink}}" class="db lh1 gray5 truncate pr">{{track.user.username}}</a>
-          <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db h2 b text truncate pr">{{track.title}}</a>
+          <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db h1 b text truncate pr">{{track.title}}</a>
           <!-- <pre>player.tracks: {{player.tracks}}</pre> -->
           <!-- <pre>track.tracks.id: {{track.tracks.id}}</pre> -->
           
