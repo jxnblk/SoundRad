@@ -1,0 +1,15 @@
+
+<div ng-switch="!!setTrack">
+
+  <div ng-switch-when="false">
+    <a href="" ng-click="like(track.id)" ng-hide="track.user_favorite">Like</a>
+    <a href="" ng-click="unlike(track.id)" ng-show="track.user_favorite">Unlike</a>
+  </div>
+  
+  <div ng-switch-when="true">
+    <a href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite">Like</a>
+    <a href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite">Unlike</a>
+  </div>
+
+
+</div>

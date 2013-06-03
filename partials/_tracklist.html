@@ -1,0 +1,33 @@
+<!-- Tracklist -->
+
+<div ng-show="contentLoading">Loading...</div>
+<ul>
+
+  <li ng-repeat="track in tracks" ng-switch="!!track.tracks">
+    <div ng-switch-when="false">
+      <p>{{track.user.username}}</p>
+      <h2>{{track.title}}</h2>
+      <a href="" ng-click="player.play(tracks, $index)">Play</a> | <a href="" ng-click="player.pause(track)">Pause</a>
+      <div ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
+    </div>
+
+    <ul ng-switch-when="true">
+      <li>
+        <p>{{track.user.username}}</p>
+        <h2>{{track.title}}</h2>
+        <div ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
+      </li>
+      <li ng-repeat="setTrack in track.tracks">
+        <p>{{setTrack.user.username}}</p>
+        <h3>{{setTrack.title}}</h3>
+        <a href="" ng-click="player.play(track.tracks, $index)">Play</a> | <a href="" ng-click="player.pause(setTrack)">Pause</a>
+        <div ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
+      </li>
+    </ul>
+
+  </li>
+
+
+</ul>
+
+<a href="" ng-click="showMore()">Next Page</a>

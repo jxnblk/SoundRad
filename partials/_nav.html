@@ -1,0 +1,14 @@
+<nav>
+  
+  <!-- Remove Hashed URLs in Production -->
+  <a href="/">Stream</a>
+    
+  <a href="/{{me.permalink}}" class="" ng-show="token">{{me.username}}</a>
+  <a href="/{{me.permalink}}/sets" class="" ng-show="token">Sets</a>
+  <a href="/{{me.permalink}}/likes" class="" ng-show="token">Likes</a>
+  <a href="#" class="" ng-click="connect();" ng-hide="token">Connect</a>
+  <a href="/settings">Settings</a>
+  
+</nav>
+
+<hr>

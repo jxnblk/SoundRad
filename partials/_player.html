@@ -1,0 +1,16 @@
+
+<div ng-switch="!!player.playing || !!player.paused">
+  <a href="" ng-click="player.play(player.tracks, player.i)">Play</a>
+  <a href="" ng-click="player.pause(player.playing)">Pause</a>
+
+  <div class="" ng-switch-when="true" ng-controller="ScrubberCtrl">
+    <div class="" style="height: 32px; background: gray;" ng-click="seekTo($event)"></div>
+    <div class="" style="width: {{currentBufferPercentage}}%"></div>
+    <div class="" style="background: pink; height: 64px; width: {{currentTimePercentage}}%"></div>
+    <p class="" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
+  </div>
+
+</div>
+
+<hr>
+

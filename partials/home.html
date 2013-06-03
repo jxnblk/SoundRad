@@ -1,0 +1,26 @@
+
+<div ng-switch="!!me">
+
+  <div ng-switch-when="true" ng-controller="StreamCtrl">
+    <h1>Stream</h1>
+    <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+  </div>
+  
+  <div ng-switch-when="false">
+    <h1>SoundRad</h1>
+    <p>A radically simpler & faster SoundCloud player</p>
+    <a href="#" ng-click="connect()">Connect to SoundCloud</a>
+    
+    <h2>Recommended Listening:</h2>
+    <a href="/jxnblk">Jxnblk</a>
+    <a href="/mrsjxn">Mrsjxn</a>
+    <a href="/mr_mrs">Mr Mrs</a>
+    <a href="/xlr8r">XLR8R</a>
+    <a href="/ghostly">Ghostly</a>
+    <a href="/ssense">SSENSE</a>
+    <a href="/factmag">FACT magazine</a>
+  </div>
+  
+  
+  
+</div>
