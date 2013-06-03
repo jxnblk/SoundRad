@@ -75,7 +75,6 @@ ul,
 ol,
 .p {
   font-size: 1.25rem; // Used to be 1.125rem for xsmall
-  //font-weight: 400;
 }
 
 small,
@@ -90,15 +89,9 @@ small,
 
 strong,
 .bold,
-.b {
-  font-weight: 700;
-}
-.reg {
-  font-weight: normal;
-}
-.i {
-  font-style: italic;
-}
+.b   { font-weight: 700; }
+.reg { font-weight: normal; }
+.i   { font-style: italic; }
 
 .caps { 
   text-transform: uppercase;
@@ -108,8 +101,6 @@ strong,
 .mono {
   font-family: "Source Code Pro", monospace;
 }
-
-.salome { font-family: "salomeitalic", serif; }
 
 .txtcen { text-align: center; }
 .txtri  { text-align: right; }
