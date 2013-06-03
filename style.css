@@ -390,12 +390,6 @@ body {
 h1, .h1 {
   font-size: 2rem;
   line-height: 1.25; }
-  @media screen and (min-width: 640px) {
-    h1, .h1 {
-      font-size: 4rem; } }
-  @media screen and (min-width: 1024px) {
-    h1, .h1 {
-      font-size: 6rem; } }
 
 /* Use these classes to limit font sizes from enlarging at specific breakpoints
 */
@@ -411,17 +405,19 @@ h2, .h2 {
   line-height: 1.25; }
   @media screen and (min-width: 640px) {
     h2, .h2 {
-      font-size: 2rem; } }
+      font-size: 1.5rem; } }
   @media screen and (min-width: 1024px) {
     h2, .h2 {
-      font-size: 3rem; } }
+      font-size: 2rem; } }
 
 .h2-s {
   font-size: 1.25rem; }
 
-@media screen and (min-width: 640px) {
-  .h2-m {
-    font-size: 2rem; } }
+.h2-m {
+  font-size: 1.25rem; }
+  @media screen and (min-width: 640px) {
+    .h2-m {
+      font-size: 1.5rem; } }
 
 /* Use these for more complex type scales
 h3, .h3 {}
@@ -480,6 +476,11 @@ strong,
 .txtri {
   text-align: right; }
 
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 /*
 
         Structure
@@ -503,6 +504,18 @@ strong,
 .ml0, .mar-left0 {
   margin-left: 0; }
 
+.m-5 {
+  margin: .5rem; }
+
+.mt-5 {
+  margin-top: .5rem; }
+
+.mb-5 {
+  margin-bottom: .5rem; }
+
+.ml-5 {
+  margin-left: .5rem; }
+
 .m1, .mar {
   margin: 1rem; }
 
@@ -518,21 +531,15 @@ strong,
 .ml, .mar-left {
   margin-left: 1rem; }
 
-@media screen and (min-width: 640px) {
-  .m, .mar {
-    margin: 2rem; }
-
-  .mt, .mar-top {
-    margin-top: 2rem; }
-
-  .mr, .mar-right {
-    margin-right: 2rem; }
-
-  .mb, .mar-bot {
-    margin-bottom: 2rem; }
-
-  .ml, .mar-left {
-    margin-left: 2rem; } }
+/*
+@include break(medium) {
+  .m,   .mar        { margin:        2rem; }
+  .mt,  .mar-top    { margin-top:    2rem; }
+  .mr,  .mar-right  { margin-right:  2rem; }
+  .mb,  .mar-bot    { margin-bottom: 2rem; }
+  .ml,  .mar-left   { margin-left:   2rem; } 
+}
+*/
 .m2, .mar2 {
   margin: 2rem; }
 
@@ -548,21 +555,15 @@ strong,
 .ml2, .mar-left2 {
   margin-left: 2rem; }
 
-@media screen and (min-width: 640px) {
-  .m2, .mar2 {
-    margin: 4rem; }
-
-  .mt2, .mar-top2 {
-    margin-top: 4rem; }
-
-  .mr2, .mar-right2 {
-    margin-right: 4rem; }
-
-  .mb2, .mar-bot2 {
-    margin-bottom: 4rem; }
-
-  .ml2, .mar-left2 {
-    margin-left: 4rem; } }
+/*
+@include break(medium) {
+  .m2,  .mar2       { margin:        4rem; }
+  .mt2, .mar-top2   { margin-top:    4rem; }
+  .mr2, .mar-right2 { margin-right:  4rem; }
+  .mb2, .mar-bot2   { margin-bottom: 4rem; }
+  .ml2, .mar-left2  { margin-left:   4rem; }
+}
+*/
 /* Padding
 */
 .p0, .pad0 {
@@ -595,21 +596,15 @@ strong,
 .pl, .pad-left {
   padding-left: 1rem; }
 
-@media screen and (min-width: 640px) {
-  .p1, .pad {
-    padding: 2rem; }
-
-  .pt, .pad-top {
-    padding-top: 2rem; }
-
-  .pr, .pad-right {
-    padding-right: 2rem; }
-
-  .pb, .pad-bot {
-    padding-bottom: 2rem; }
-
-  .pl, .pad-left {
-    padding-left: 2rem; } }
+/*
+@include break(medium) {
+  .p1,  .pad        { padding:        2rem; }
+  .pt,  .pad-top    { padding-top:    2rem; }
+  .pr,  .pad-right  { padding-right:  2rem; }
+  .pb,  .pad-bot    { padding-bottom: 2rem; }
+  .pl,  .pad-left   { padding-left:   2rem; }
+}
+*/
 .p2, .pad2 {
   padding: 2rem; }
 
@@ -625,22 +620,18 @@ strong,
 .pl2, .pad-left2 {
   padding-left: 2rem; }
 
-@media screen and (min-width: 640px) {
-  .p2, .pad2 {
-    padding: 4rem; }
-
-  .pt2, .pad-top2 {
-    padding-top: 4rem; }
-
-  .pr2, .pad-right2 {
-    padding-right: 4rem; }
-
-  .pb2, .pad-bot2 {
-    padding-bottom: 4rem; }
-
-  .pl2, .pad-left2 {
-    padding-left: 4rem; } }
+/*
+@include break(medium) {
+  .p2,  .pad2       { padding:        4rem; }
+  .pt2, .pad-top2   { padding-top:    4rem; }
+  .pr2, .pad-right2 { padding-right:  4rem; }
+  .pb2, .pad-bot2   { padding-bottom: 4rem; }
+  .pl2, .pad-left2  { padding-left:   4rem; }
+}
+*/
 .tappad {
+  padding-left: 1rem;
+  padding-right: 1rem;
   line-height: 3rem; }
 
 .tappad-s {
@@ -837,6 +828,9 @@ strong,
 .lh1 {
   line-height: 1rem; }
 
+.lh1-25 {
+  line-height: 1.25rem; }
+
 .lh2 {
   line-height: 2rem; }
 
@@ -974,15 +968,20 @@ strong,
 */
 .btn {
   display: inline-block;
-  overflow: hidden; }
+  overflow: hidden;
+  border-radius: .25rem; }
+
+.btn-sm {
+  line-height: 2rem;
+  padding: 0 .75rem; }
 
 .btn-med {
-  line-height: 48px;
-  padding: 0 16px; }
+  line-height: 3rem;
+  padding: 0 1rem; }
 
 .btn-big {
-  line-height: 64px;
-  padding: 0 16px; }
+  line-height: 4rem;
+  padding: 0 1rem; }
 
 .media {
   overflow: hidden; }
@@ -1092,6 +1091,9 @@ a {
 .text {
   color: #444444; }
 
+.text2 {
+  color: #515151; }
+
 .gray5 {
   color: #999999; }
 
@@ -1106,6 +1108,9 @@ a {
 
 .bg-text {
   background-color: #444444; }
+
+.bg-text2 {
+  background-color: #515151; }
 
 .bg-gray5 {
   background-color: #999999; }
@@ -1157,7 +1162,6 @@ a {
 .btn-prime {
   color: #fff;
   background-color: #ff6600;
-  border-radius: .25rem;
   border: none; }
   .btn-prime:hover {
     color: #fff;

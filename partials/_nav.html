@@ -1,14 +1,13 @@
-<nav>
+<div class="m0 p0 borbot bor-gray2 overhide b">
   
   <!-- Remove Hashed URLs in Production -->
-  <a href="/">Stream</a>
-    
-  <a href="/{{me.permalink}}" class="" ng-show="token">{{me.username}}</a>
-  <a href="/{{me.permalink}}/sets" class="" ng-show="token">Sets</a>
-  <a href="/{{me.permalink}}/likes" class="" ng-show="token">Likes</a>
-  <a href="#" class="" ng-click="connect();" ng-hide="token">Connect</a>
-  <a href="/settings">Settings</a>
-  
-</nav>
+  <a href="/" class="tappad fl gray5">Stream</a>    
+  <a href="/{{me.permalink}}" class="tappad fl gray5" ng-show="token">{{me.username}}</a>
+  <a href="/{{me.permalink}}/sets" class="tappad fl gray5" ng-show="token">Sets</a>
+  <a href="/{{me.permalink}}/likes" class="tappad fl gray5" ng-show="token">Likes</a>
 
-<hr>
+  <a href="#" class="btn btn-sm btn-prime mt-5" ng-click="connect();" ng-hide="token">Connect</a>
+  
+  <a href="/settings" class="gray5"><i class="tappad fr icon h2-s icon-geo-settings"></i></a>
+  
+</div>

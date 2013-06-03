@@ -1,13 +1,23 @@
 
-<div class="" ng-switch="!!player.playing || !!player.paused">
-  <a href="" ng-click="player.play(player.tracks, player.i)">Play</a>
-  <a href="" ng-click="player.pause(player.playing)">Pause</a>
+<div class="media wht" ng-switch="!!player.playing || !!player.paused">
 
-  <div class="" ng-switch-when="true" ng-controller="ScrubberCtrl">
-    <div class="" style="height: 32px; background: gray;" ng-click="seekTo($event)"></div>
-    <div class="" style="width: {{currentBufferPercentage}}%"></div>
-    <div class="" style="background: pink; height: 64px; width: {{currentTimePercentage}}%"></div>
-    <p class="" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
+  <div class="img">
+    <a class="db sq4 lh4 txtcen btn-prime" href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.playing"><i class="icon icon-geo-play h2-s"></i></a>
+    <a class="db sq4 lh4 txtcen btn-prime" href="" ng-click="player.pause(player.playing)" ng-show="player.playing"><i class="icon icon-geo-pause h2-s"></i></a>
+  </div>
+  
+  <div class="bd posrel minhi4 bg-text2">
+    
+    <div class="posabs fill" ng-switch-when="true" ng-controller="ScrubberCtrl">
+      <div class="posabs top0 bot0 left0 bg-text" style="width: {{currentBufferPercentage}}%"></div>
+      <div class="posabs top0 bot0 left0 bg-prime" style="width: {{currentTimePercentage}}%"></div>
+      <p class="posabs top0 right1 small" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
+      <div class="posabs fill z2" ng-click="seekTo($event)"></div>
+    </div>
+    
+    <p class="posrel sm truncate lh1-25 mt-5 ml-5 mr">{{player.tracks[player.i].user.username}}</p>
+    <h1 class="posrel h2-m truncate ml-5 mr">{{player.tracks[player.i].title}}</h1>
+    
   </div>
 
 </div>

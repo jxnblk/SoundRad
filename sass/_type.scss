@@ -17,10 +17,10 @@ h1, .h1 {
   font-size: 2rem;
   line-height: 1.25;
   @include break(medium) {
-    font-size: 4rem;
+    //font-size: 4rem;
   }
   @include break(large) {
-    font-size: 6rem;
+    //font-size: 6rem;
   }
 }
   /* Use these classes to limit font sizes from enlarging at specific breakpoints
@@ -38,18 +38,19 @@ h2, .h2 {
   font-size: 1.25rem;
   line-height: 1.25;
   @include break(medium) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   @include break(large) {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
   .h2-s {
     font-size: 1.25rem;
   }
   .h2-m {
+    font-size: 1.25rem;
     @include break(medium) {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 
@@ -106,3 +107,9 @@ strong,
 
 .txtcen { text-align: center; }
 .txtri  { text-align: right; }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -35,12 +35,14 @@ a {
 }
 
 .text { color: $text; }
+.text2 { color: lighten($text, 5%); }
 .gray5 { color: $gray5; }
 .gray2 { color: $gray2; }
 .wht {   color: #fff; }
 .prime {  color: $prime; }
 
 .bg-text { background-color: $text; }
+.bg-text2 { background-color: lighten($text, 5%); }
 .bg-gray5 { background-color: $gray5; }
 .bg-gray2 { background-color: $gray2; }
 .bg-prime {  background-color: $prime; }
@@ -65,7 +67,6 @@ a {
 .btn-prime {
   color: #fff;
   background-color: $prime;
-  border-radius: .25rem;
   border: none;
   &:hover {
     color: #fff;

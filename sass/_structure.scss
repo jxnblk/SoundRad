@@ -14,12 +14,18 @@
 .mb0, .mar-bot0   { margin-bottom: 0; }
 .ml0, .mar-left0  { margin-left:   0; }
 
+.m-5  { margin: .5rem; }
+.mt-5 { margin-top: .5rem; }
+.mb-5 { margin-bottom: .5rem; }
+.ml-5 { margin-left: .5rem; }
+
 .m1,   .mar        { margin:        1rem; }
 .mt,  .mar-top    { margin-top:    1rem; }
 .mr,  .mar-right  { margin-right:  1rem; }
 .mb,  .mar-bot    { margin-bottom: 1rem; }
 .ml,  .mar-left   { margin-left:   1rem; }
 
+/*
 @include break(medium) {
   .m,   .mar        { margin:        2rem; }
   .mt,  .mar-top    { margin-top:    2rem; }
@@ -27,6 +33,7 @@
   .mb,  .mar-bot    { margin-bottom: 2rem; }
   .ml,  .mar-left   { margin-left:   2rem; } 
 }
+*/
 
 .m2,  .mar2       { margin:        2rem; }
 .mt2, .mar-top2   { margin-top:    2rem; }
@@ -34,6 +41,7 @@
 .mb2, .mar-bot2   { margin-bottom: 2rem; }
 .ml2, .mar-left2  { margin-left:   2rem; }
 
+/*
 @include break(medium) {
   .m2,  .mar2       { margin:        4rem; }
   .mt2, .mar-top2   { margin-top:    4rem; }
@@ -41,6 +49,7 @@
   .mb2, .mar-bot2   { margin-bottom: 4rem; }
   .ml2, .mar-left2  { margin-left:   4rem; }
 }
+*/
 
 /* Padding
 */
@@ -56,6 +65,7 @@
 .pb,  .pad-bot    { padding-bottom: 1rem; }
 .pl,  .pad-left   { padding-left:   1rem; }
 
+/*
 @include break(medium) {
   .p1,  .pad        { padding:        2rem; }
   .pt,  .pad-top    { padding-top:    2rem; }
@@ -63,6 +73,7 @@
   .pb,  .pad-bot    { padding-bottom: 2rem; }
   .pl,  .pad-left   { padding-left:   2rem; }
 }
+*/
 
 .p2,  .pad2       { padding:        2rem; }
 .pt2, .pad-top2   { padding-top:    2rem; }
@@ -70,6 +81,7 @@
 .pb2, .pad-bot2   { padding-bottom: 2rem; }
 .pl2, .pad-left2  { padding-left:   2rem; }
 
+/*
 @include break(medium) {
   .p2,  .pad2       { padding:        4rem; }
   .pt2, .pad-top2   { padding-top:    4rem; }
@@ -77,9 +89,12 @@
   .pb2, .pad-bot2   { padding-bottom: 4rem; }
   .pl2, .pad-left2  { padding-left:   4rem; }
 }
+*/
 
 // Generic tappable padding (for links, etc.)
 .tappad {
+  padding-left: 1rem;
+  padding-right: 1rem;
   line-height: 3rem;
 }
 
@@ -177,6 +192,7 @@
 .maxhi7 { max-height: 16rem; }
 
 .lh1 { line-height:  1rem; }
+.lh1-25 { line-height: 1.25rem; }
 .lh2 { line-height:  2rem; }
 .lh3 { line-height:  3rem; }
 .lh4 { line-height:  4rem; }
