@@ -1058,37 +1058,37 @@ body {
   font-family: "skolar", Georgia, serif; }
 
 a {
-  color: #00bbff;
+  color: #ff6600;
   text-decoration: none; }
   a:hover {
-    color: #0096cc; }
+    color: #cc5200; }
 
-.dkgry {
+.text {
   color: #444444; }
 
-.mdgry {
+.gray5 {
   color: #999999; }
 
-.ltgry {
+.gray2 {
   color: #eeeeee; }
 
 .wht {
   color: #fff; }
 
-.link {
-  color: #00bbff; }
+.prime {
+  color: #ff6600; }
 
-.bg-dkgry {
+.bg-text {
   background-color: #444444; }
 
-.bg-mdgry {
+.bg-gray5 {
   background-color: #999999; }
 
-.bg-ltgry {
+.bg-gray2 {
   background-color: #eeeeee; }
 
-.bg-link {
-  background-color: #00bbff; }
+.bg-prime {
+  background-color: #ff6600; }
 
 .bor {
   border: 1px solid; }
@@ -1105,13 +1105,13 @@ a {
 .borle {
   border-left: 1px solid; }
 
-.bor-dkgry {
+.bor-text {
   border-color: #444444; }
 
-.bor-mdgry {
+.bor-gray5 {
   border-color: #999999; }
 
-.bor-ltgry {
+.bor-gray2 {
   border-color: #eeeeee; }
 
 .bor-wht {
@@ -1123,17 +1123,17 @@ a {
 .circ {
   border-radius: 50%; }
 
-.btn-link {
+.btn-prime {
   color: #fff;
-  background-color: #00bbff;
+  background-color: #ff6600;
   border-radius: .25rem;
   border: none; }
-  .btn-link:hover {
+  .btn-prime:hover {
     color: #fff;
-    background-color: #1ac2ff; }
-  .btn-link:active {
+    background-color: #ff751a; }
+  .btn-prime:active {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); }
 
 .input:focus {
   outline: none;
-  border-color: #00bbff; }
+  border-color: #ff6600; }

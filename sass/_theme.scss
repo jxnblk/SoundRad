@@ -5,38 +5,45 @@
 
 */
 
-$dkgry: #444;
-$mdgry: #999;
-$ltgry: #eee;
-$link:  #0bf;
+
+$prime: #f60;
+
+$white: #fff;
+$text: #444;
+
+$gray1: #f6f6f6;
+$gray2: #eee;
+$gray3: #ddd;
+$gray4: #bbb;
+$gray5: #999;
 
 
 
 body {
-  color: $dkgry;
+  color: $text;
   background-color: #fff;
   font-family: "skolar", Georgia, serif;
 }
 
 
 a {
-  color: $link;
+  color: $prime;
   text-decoration: none;
   &:hover {
-    color: darken($link, 10%);
+    color: darken($prime, 10%);
   }
 }
 
-.dkgry { color: $dkgry; }
-.mdgry { color: $mdgry; }
-.ltgry { color: $ltgry; }
+.text { color: $text; }
+.gray5 { color: $gray5; }
+.gray2 { color: $gray2; }
 .wht {   color: #fff; }
-.link {  color: $link; }
+.prime {  color: $prime; }
 
-.bg-dkgry { background-color: $dkgry; }
-.bg-mdgry { background-color: $mdgry; }
-.bg-ltgry { background-color: $ltgry; }
-.bg-link {  background-color: $link; }
+.bg-text { background-color: $text; }
+.bg-gray5 { background-color: $gray5; }
+.bg-gray2 { background-color: $gray2; }
+.bg-prime {  background-color: $prime; }
 
 
 .bor   { border:        1px solid; }
@@ -45,9 +52,9 @@ a {
 .borbo { border-bottom: 1px solid; }
 .borle { border-left:   1px solid; }
 
-.bor-dkgry { border-color: $dkgry; }
-.bor-mdgry { border-color: $mdgry; }
-.bor-ltgry { border-color: $ltgry; }
+.bor-text { border-color: $text; }
+.bor-gray5 { border-color: $gray5; }
+.bor-gray2 { border-color: $gray2; }
 .bor-wht {   border-color: #fff; }
 
 
@@ -55,14 +62,14 @@ a {
 .circ { border-radius: 50%; }
 
 
-.btn-link {
+.btn-prime {
   color: #fff;
-  background-color: $link;
+  background-color: $prime;
   border-radius: .25rem;
   border: none;
   &:hover {
     color: #fff;
-    background-color: lighten($link, 5%);
+    background-color: lighten($prime, 5%);
   }
   &:active {
     box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
@@ -70,9 +77,6 @@ a {
 }
 
 .input:focus {
-//  appearance: none;
   outline: none;
-  border-color: $link;
-  //outline-color: lighten($link, 20%); 
-  //outline-width: 4px;
+  border-color: $prime;
 }
