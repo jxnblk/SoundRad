@@ -83,7 +83,10 @@ angular.module('soundrad.controllers', [])
       //$scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
       //soundcloud.getTracks($scope);
       
-      console.log('need to setup get playlist functionality for set detail views');
+      console.log('getting set');
+
+      $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
+      soundcloud.getSet($scope);
       
     } else if ($scope.viewType == 'sets') {
       $scope.scget = '/users/' + $scope.viewUser + '/playlists';
@@ -105,8 +108,8 @@ angular.module('soundrad.controllers', [])
     } else if ($scope.viewType) {
         console.log('track detail view');
         // To-do plug in resolve call to get track details
-        //$scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
-        //soundcloud.getTrack($scope);
+        $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
+        soundcloud.getTrack($scope);
     } else {
       $scope.scget = '/users/' + $scope.viewUser + '/tracks';
       soundcloud.getTracks($scope);

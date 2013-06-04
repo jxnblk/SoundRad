@@ -61,6 +61,25 @@ angular.module('soundrad.services', [])
         });
       },
       
+      getTrack: function($scope, params){
+        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
+          $scope.$apply(function () {
+            $scope.tracks = new Array(data);
+            $scope.contentLoading = false;
+          });
+        });
+      },
+      
+      getSet: function($scope, params){
+        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
+          $scope.$apply(function () {
+            $scope.set = data;
+            $scope.tracks = data.tracks;
+            $scope.contentLoading = false;
+          });
+        });
+      },
+      
       getStream: function($scope){
         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
           $scope.$apply(function () {

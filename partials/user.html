@@ -1,5 +1,6 @@
 
 <div class="borbot bor-gray2 overhide">
+  
   <h2 class="reg pad">{{viewUsername}}</h2>
 
   <div class="tappad">
@@ -9,22 +10,20 @@
     <a ng-href="/{{viewUser}}/info" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': viewType == 'info'}">Info</a>
   </div>
 
-<!--
-  <dl>
-    <dt>following:</dt>
-    <dd>{{userData.followings_count}}</dd>
-    <dt>followers:</dt>
-    <dd>{{userData.followers_count}}</dd>
-  </dl>
--->
-
 </div>
 
-<div ng-switch="!viewType || viewType == 'sets' || viewType == 'likes'">
+
+<!-- <div ng-switch="!viewType || viewType == 'sets' || viewType == 'likes'"> -->
+<div ng-switch="viewType != 'info'">
   <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
 </div>
 
-<div ng-switch="viewType == 'info' && !!userData" class="pad2">
-  <p ng-switch-when="true" class="" ng-bind-html-unsafe="userData.description | richtext"></p>
+<div ng-switch="viewType == 'info' && !!userData" class="">
+  <div ng-switch-when="true">
+    <a href="" class="db tappad-s borbot bor-gray2">{{userData.followers_count}} Followers</a>
+    <a href="" class="db tappad-s borbot bor-gray2">{{userData.followings_count}} Following</a>
+  
+    <p class="pad2" ng-bind-html-unsafe="userData.description | richtext"></p>
+  </div>
 </div>
 
