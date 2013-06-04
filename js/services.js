@@ -56,6 +56,8 @@ angular.module('soundrad.services', [])
         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
           $scope.$apply(function () {
             $scope.tracks = data;
+            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
             $scope.contentLoading = false;
           });      
         });
@@ -65,6 +67,8 @@ angular.module('soundrad.services', [])
         SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
           $scope.$apply(function () {
             $scope.tracks = new Array(data);
+            $scope.hasPrevPage = false;
+            $scope.hasNextPage = false;
             $scope.contentLoading = false;
           });
         });
@@ -75,6 +79,8 @@ angular.module('soundrad.services', [])
           $scope.$apply(function () {
             $scope.set = data;
             $scope.tracks = data.tracks;
+            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
             $scope.contentLoading = false;
           });
         });
@@ -96,9 +102,12 @@ angular.module('soundrad.services', [])
                 console.log(data.collection[i]);
               }; 
             };
-            $scope.tracks = tracks;  
+            $scope.tracks = tracks;
+            $scope.hasPrevPage = false;
+            $scope.hasNextPage = false;  
             $scope.contentLoading = false;
             $scope.streamNextPage = data.next_href;
+            //$scope.streamPrevPage = data.future_href;
           });
         });
       },

@@ -31,6 +31,15 @@ angular.module('soundrad.controllers', [])
   
   .controller('NavCtrl', ['$scope', '$routeParams', '$window', 'soundcloud', 'storage', function($scope, $routeParams, $window, soundcloud, storage) {
     
+    $scope.version = storage.get('version');
+    
+    if(!$scope.version){
+      console.log('Reseting localStorage - version 16');
+      storage.clearAll();
+      $scope.version = 16;
+      storage.set('version', $scope.version);
+    };
+    
     $scope.token = storage.get('token');
     $scope.me = storage.get('me');
     
@@ -73,7 +82,7 @@ angular.module('soundrad.controllers', [])
       // This is called for each subnav change
       // To do: Find a better way to handle this
       soundcloud.getUser($scope);
-
+    $scope.isDetail = false;
     $scope.contentLoading = true;
     $scope.pageSize = 16;
       
@@ -84,6 +93,8 @@ angular.module('soundrad.controllers', [])
       //soundcloud.getTracks($scope);
       
       console.log('getting set');
+      // to-do: handle set detail views
+      //$scope.isDetail = true;
 
       $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
       soundcloud.getSet($scope);
@@ -106,10 +117,11 @@ angular.module('soundrad.controllers', [])
     } else if ($scope.viewType == 'info') {
       //console.log('info view');
     } else if ($scope.viewType) {
-        console.log('track detail view');
+        //console.log('track detail view');
         // To-do plug in resolve call to get track details
         $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
         soundcloud.getTrack($scope);
+        $scope.isDetail = true;
     } else {
       $scope.scget = '/users/' + $scope.viewUser + '/tracks';
       soundcloud.getTracks($scope);
@@ -125,29 +137,36 @@ angular.module('soundrad.controllers', [])
     $scope.page = 1;
     
     // Pagination
-    $scope.showMore = function() {
-      $scope.contentLoading = true;
-      $scope.pageOffset = $scope.pageSize + $scope.pageOffset;
-        // Make sure this isn't persistent when navigation away from stream
-      if ($scope.streamNextPage) {
-        $scope.scget = $scope.streamNextPage;
-        soundcloud.getStream($scope);
-      } else {
-        soundcloud.getTracks($scope);  
+    // Stream Pagination
+    $scope.showMoreStream = function() {
+      $scope.contentLoading = true;    
+      $scope.scget = $scope.streamNextPage;
+      soundcloud.getStream($scope);
+    };
+    
+    // New Pagination
+    $scope.updatePage = function(){
+      $scope.page = ($scope.pageOffset + $scope.pageSize) / $scope.pageSize;
+    };
+    
+    $scope.nextPage = function(){
+      if($scope.hasNextPage){
+        $scope.contentLoading = true;
+          // Trying this to clear content when changing pages
+          $scope.tracks = null;
+        $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
+        $scope.updatePage();
+        soundcloud.getTracks($scope);
       };
-      $scope.page = $scope.page + 1;
     };
     
     $scope.prevPage = function(){
       if($scope.pageOffset >= $scope.pageSize) {
         $scope.contentLoading = true;
-        $scope.pageOffset = $scope.pageOffset - $scope.pageSize;
-        //$scope.updatePage();
-        if($scope.streamPrevPage){
-          ////////////////////////////////////////////////////////////////
-        } else {
-          soundcloud.getTracks($scope);  
-        };  
+        $scope.tracks = null;
+        $scope.pageOffset = $scope.pageOffset - $scope.pageSize;        
+        soundcloud.getTracks($scope);  
+        $scope.updatePage(); 
       };      
     };
     

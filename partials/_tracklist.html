@@ -16,7 +16,28 @@
           
           <div class="dib lh4 bg-gray2" ng-show="showActions" ng-include src="'/partials/_trackactions.html'"></div>
           <!-- <a href="" class="gray5 sm lh4" ng-click="toggleActions()"><i class="icon icon-geo-lines"></i></a> -->
+          
         </div>
+      </div>
+    </div>
+    
+    <div ng-switch="isDetail">
+      <div ng-switch-when="true" ng-controller="TrackCtrl">
+        
+        <div ng-switch="!!setTrack" class="tappad-s borbot bor-gray2">
+    
+          <div ng-switch-when="false" class="overhide">
+            <a class="fl tappad gray5" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+            <a class="fl tappad" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+          </div>
+          
+          <div ng-switch-when="true" class="overhide">
+            <a class="fl tappad gray5" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite">Like</a>
+            <a class="fl tappad" href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite">Unlike</a>
+          </div>
+        
+        </div> 
+        <a ng-href="{{track.permalink_url}}" target="_blank" class="db tappad-s gray5 borbot bor-gray2">View on SoundCloud</a>
       </div>
     </div>
 
@@ -53,7 +74,9 @@
 
 </div>
 
-<div class="tappad mb overhide">
-  <a href="" ng-click="prevPage()" class="tappad fl">Previous</a>
-  <a href="" ng-click="showMore()" class="tappad fr">Next</a>
+<div class="tappad mb txtcen overhide">
+  <a href="" ng-show="hasPrevPage" ng-click="prevPage()" class="tappad fl">Previous</a>
+  <a href="" ng-show="hasNextPage" ng-click="nextPage()" class="tappad fr">Next</a>
+  
+  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="tappad">Show More</a>
 </div>
