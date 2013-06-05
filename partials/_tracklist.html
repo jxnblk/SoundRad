@@ -11,7 +11,9 @@
       </div>
       <div class="bd posrel minhi4">
         <a ng-href="/{{track.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{track.user.username}}</a>
-        <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db h3 b text truncate pr">{{track.title}}</a>
+        <!-- <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db h3 b text truncate pr">{{track.title}}</a> -->
+        <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class="db h3 b text truncate pr">{{track.title}}</a>
+        <!-- preload('/' + track.user.permalink + '/' + track.permalink) -->
         <div class="posabs right0 top0 bot0 pr lh4" ng-controller="TrackCtrl">  
           
           <div class="dib lh4 bg-gray2" ng-show="showActions" ng-include src="'/partials/_trackactions.html'"></div>
@@ -42,19 +44,25 @@
     </div>
 
     <div ng-switch-when="true" class="">
-      <div id="{{track.id}}" class="media pt pb borbot bor-gray2">
+      <div id="{{track.id}}" class="media borbot bor-gray2">
         <div class="img">
+          <a href="" ng-click="[preload('/' + track.user.permalink + '/sets/' + track.permalink, track.tracks), player.play(track.tracks, 0)]" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+
+<!--
           <a href="" ng-click="player.play(track.tracks, 0)" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.tracks != track.tracks || player.playing" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.pause(player.playing)" ng-show="player.tracks == track.tracks && player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
+-->
         </div>
         <div class="bd">
-          <a ng-href="/{{track.user.permalink}}" class="db lh1 gray5 truncate pr">{{track.user.username}}</a>
-          <a ng-href="/{{track.user.permalink}}/sets/{{track.permalink}}" class="db h2 b text truncate pr">{{track.title}}</a>
+          <a ng-href="/{{track.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{track.user.username}}</a>
+          <!-- <a ng-href="/{{track.user.permalink}}/sets/{{track.permalink}}" class="db h3 b text truncate pr">{{track.title}}</a> -->
+          <a href="" ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track.tracks)" class="db h3 b text truncate pr">{{track.title}}</a>
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
         </div>
       </div>
         <!-- ng-show="player.tracks == track.tracks" -->
+<!--
       <div ng-repeat="setTrack in track.tracks" class="media borbot bor-gray2">
         <div class="img">
           <a href="" ng-click="player.play(track.tracks, $index)" ng-hide="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
@@ -67,6 +75,7 @@
           
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
       </div>
+-->
     </div>
 
   </div>

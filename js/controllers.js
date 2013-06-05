@@ -29,7 +29,7 @@ angular.module('soundrad.controllers', [])
       };
   }])
   
-  .controller('NavCtrl', ['$scope', '$routeParams', '$window', 'soundcloud', 'storage', function($scope, $routeParams, $window, soundcloud, storage) {
+  .controller('NavCtrl', ['$scope', '$routeParams', '$window', '$location', 'soundcloud', 'storage', function($scope, $routeParams, $window, $location, soundcloud, storage) {
     
     $scope.version = storage.get('version');
     
@@ -59,6 +59,12 @@ angular.module('soundrad.controllers', [])
     $scope.$routeParams = $routeParams;
     
     $scope.modalContent = null;
+
+    $scope.preloadContent = null;
+    $scope.preload = function(url, data) {
+      $location.path(url);      
+      $scope.preloadContent = data;
+    };
     
   }])
   
@@ -92,10 +98,11 @@ angular.module('soundrad.controllers', [])
       //$scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
       //soundcloud.getTracks($scope);
       
-      console.log('getting set');
-      // to-do: handle set detail views
-      //$scope.isDetail = true;
-
+      if ($scope.preloadContent) {
+        $scope.tracks = $scope.preloadContent;
+        $scope.preloadContent = null;
+        $scope.contentLoading = false;
+      };
       $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
       soundcloud.getSet($scope);
       
@@ -119,6 +126,11 @@ angular.module('soundrad.controllers', [])
     } else if ($scope.viewType) {
         //console.log('track detail view');
         // To-do plug in resolve call to get track details
+        if ($scope.preloadContent) {
+          $scope.tracks = new Array($scope.preloadContent);
+          $scope.preloadContent = null;
+          $scope.contentLoading = false;
+        };
         $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
         soundcloud.getTrack($scope);
         $scope.isDetail = true;
@@ -169,18 +181,19 @@ angular.module('soundrad.controllers', [])
         $scope.updatePage(); 
       };      
     };
-    
-    ////////////////////////////////////////////////////////////////
-    // For Scrolling when opening/closing sets
-    // $location.hash();
-    // $anchorScroll();
-    
-    $scope.playScroll = function(tracks, i){
-      player.play(tracks, i);
-      $location.hash(tracks[i].id);
-      //$location.hash();
-      $anchorScroll();
+
+/*
+    $scope.preloadSet = function(tracks) {
+      $scope.preload(tracks);
     };
+*/
+    
+/*
+    $scope.playSet = function(track) {
+      $location.path('/' + track.user.permalink + '/sets/' + track.permalink);
+      player.play(track.tracks, 0);
+    };
+*/
         
   }])
   
