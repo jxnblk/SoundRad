@@ -30,7 +30,7 @@ a {
   color: $prime;
   text-decoration: none;
   &:hover {
-    color: darken($prime, 10%);
+    color: lighten($prime, 5%);
   }
 }
 
