@@ -32,3 +32,42 @@
   -webkit-transition-timing-function: linear;
   transition-timing-function: linear;
 }
+
+@-webkit-keyframes slide-down {
+  from { -webkit-transform: translate(0, -100%); }
+  to   { -webkit-transform: translate(0, 0); }
+}
+
+.anim-slide-down {
+  -webkit-animation: slide-down .2s ease;
+}
+
+
+////////////////////////////////////////////////////////////////
+// Angular animations
+
+/*
+.slide-down-enter, .slide-down-leave {
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+}
+
+.slide-down-enter {
+  -webkit-transform: translate(0, -100%);
+}
+
+.slide-down-enter-active {
+  -webkit-transform: translate(0,0);
+}
+
+.slide-down-leave {
+  position: absolute;
+  top: 0;
+}
+
+.slide-down-leave-active {
+  top: -100%;
+}
+*/
+
+

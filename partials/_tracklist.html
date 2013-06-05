@@ -5,7 +5,7 @@
 
   <div ng-repeat="track in tracks" ng-switch="!!track.tracks">
     <div ng-switch-when="false" class="media maxhi4 borbot bor-gray2">
-      <div class="img mr">
+      <div class="img">
         <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
         <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
       </div>
@@ -43,7 +43,7 @@
 
     <div ng-switch-when="true" class="">
       <div id="{{track.id}}" class="media pt pb borbot bor-gray2">
-        <div class="img mr">
+        <div class="img">
           <a href="" ng-click="player.play(track.tracks, 0)" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.tracks != track.tracks || player.playing" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.pause(player.playing)" ng-show="player.tracks == track.tracks && player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
@@ -56,7 +56,7 @@
       </div>
         <!-- ng-show="player.tracks == track.tracks" -->
       <div ng-repeat="setTrack in track.tracks" class="media borbot bor-gray2">
-        <div class="img mr">
+        <div class="img">
           <a href="" ng-click="player.play(track.tracks, $index)" ng-hide="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
           <a href="" ng-click="player.pause(setTrack)" ng-show="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
         </div>
@@ -78,5 +78,5 @@
   <a href="" ng-show="hasPrevPage" ng-click="prevPage()" class="tappad fl">Previous</a>
   <a href="" ng-show="hasNextPage" ng-click="nextPage()" class="tappad fr">Next</a>
   
-  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="tappad">Show More</a>
+  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="db tappad">Show More</a>
 </div>
