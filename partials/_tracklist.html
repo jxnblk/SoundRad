@@ -11,7 +11,7 @@
       </div>
       <div class="bd posrel minhi4">
         <a ng-href="/{{track.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{track.user.username}}</a>
-        <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db p b text truncate pr">{{track.title}}</a>
+        <a ng-href="/{{track.user.permalink}}/{{track.permalink}}" class="db h3 b text truncate pr">{{track.title}}</a>
         <div class="posabs right0 top0 bot0 pr lh4" ng-controller="TrackCtrl">  
           
           <div class="dib lh4 bg-gray2" ng-show="showActions" ng-include src="'/partials/_trackactions.html'"></div>
@@ -50,7 +50,7 @@
         </div>
         <div class="bd">
           <a ng-href="/{{track.user.permalink}}" class="db lh1 gray5 truncate pr">{{track.user.username}}</a>
-          <a ng-href="/{{track.user.permalink}}/sets/{{track.permalink}}" class="db h1 b text truncate pr">{{track.title}}</a>
+          <a ng-href="/{{track.user.permalink}}/sets/{{track.permalink}}" class="db h2 b text truncate pr">{{track.title}}</a>
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
         </div>
       </div>
@@ -62,7 +62,7 @@
         </div>
         <div class="bd">
           <a ng-href="/{{setTrack.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{setTrack.user.username}}</a>
-          <a ng-href="/{{setTrack.user.permalink}}/{{setTrack.permalink}}" class="db p b text truncate pr">{{setTrack.title}}</a>
+          <a ng-href="/{{setTrack.user.permalink}}/{{setTrack.permalink}}" class="db h3 b text truncate pr">{{setTrack.title}}</a>
           
           
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>

@@ -408,25 +408,27 @@ h1, .h1 {
     font-size: 6rem; } }
 
 h2, .h2 {
-  font-size: 1.25rem;
+  font-size: 2rem;
   line-height: 1.25; }
 
 @media screen and (min-width: 640px) {
   .h2-res {
-    font-size: 2rem; } }
+    font-size: 3rem; } }
 @media screen and (min-width: 1024px) {
   .h2-res {
-    font-size: 3rem; } }
+    font-size: 4rem; } }
+
+h3, .h3 {
+  font-size: 1.25rem; }
 
 /* Use these for more complex type scales
-h3, .h3 {}
+
 h4, .h4 {}
 h5, .h5 {}
 h6, .h6 {}
 */
 /* Use this for simpler type scales
 */
-h3,
 h4,
 h5,
 h6 {
@@ -437,7 +439,7 @@ p,
 ul,
 ol,
 .p {
-  font-size: 1.25rem; }
+  font-size: 1rem; }
 
 small,
 .small,

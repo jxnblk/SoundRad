@@ -29,22 +29,24 @@ h1, .h1 {
 
 
 h2, .h2 {
-  font-size: 1.25rem;
+  font-size: 2rem;
   line-height: 1.25;
 }
 
 .h2-res {
   @include break(medium) {
-    font-size: 2rem;
-  }
-  @include break(large) {
     font-size: 3rem;
   }
+  @include break(large) {
+    font-size: 4rem;
+  }
+}
+h3, .h3 {
+  font-size: 1.25rem; 
 }
 
-
     /* Use these for more complex type scales
-    h3, .h3 {}
+    
     h4, .h4 {}
     h5, .h5 {}
     h6, .h6 {}
@@ -52,7 +54,6 @@ h2, .h2 {
 
 /* Use this for simpler type scales
 */
-h3,
 h4,
 h5,
 h6 {
@@ -64,7 +65,8 @@ p,
 ul,
 ol,
 .p {
-  font-size: 1.25rem; // Used to be 1.125rem for xsmall
+  //font-size: 1.25rem; // Used to be 1.125rem for xsmall
+  font-size: 1rem;
 }
 
 small,
