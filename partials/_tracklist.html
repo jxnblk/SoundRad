@@ -61,21 +61,7 @@
           <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
         </div>
       </div>
-        <!-- ng-show="player.tracks == track.tracks" -->
-<!--
-      <div ng-repeat="setTrack in track.tracks" class="media borbot bor-gray2">
-        <div class="img">
-          <a href="" ng-click="player.play(track.tracks, $index)" ng-hide="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
-          <a href="" ng-click="player.pause(setTrack)" ng-show="player.playing.id == setTrack.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
-        </div>
-        <div class="bd">
-          <a ng-href="/{{setTrack.user.permalink}}" class="db mt-75 lh1 gray5 truncate pr">{{setTrack.user.username}}</a>
-          <a ng-href="/{{setTrack.user.permalink}}/{{setTrack.permalink}}" class="db h3 b text truncate pr">{{setTrack.title}}</a>
-          
-          
-          <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div>
-      </div>
--->
+      
     </div>
 
   </div>
