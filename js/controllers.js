@@ -151,9 +151,9 @@ angular.module('soundrad.controllers', [])
     // Pagination
     // Stream Pagination
     $scope.showMoreStream = function() {
-      $scope.contentLoading = true;    
+      //$scope.contentLoading = true;    
       $scope.scget = $scope.streamNextPage;
-      soundcloud.getStream($scope);
+      soundcloud.getStream($scope, true);
     };
     
     // New Pagination
@@ -181,19 +181,6 @@ angular.module('soundrad.controllers', [])
         $scope.updatePage(); 
       };      
     };
-
-/*
-    $scope.preloadSet = function(tracks) {
-      $scope.preload(tracks);
-    };
-*/
-    
-/*
-    $scope.playSet = function(track) {
-      $location.path('/' + track.user.permalink + '/sets/' + track.permalink);
-      player.play(track.tracks, 0);
-    };
-*/
         
   }])
   
@@ -203,7 +190,6 @@ angular.module('soundrad.controllers', [])
       $scope.toggleActions = function() {
         $scope.showActions = !$scope.showActions;
       };
-    
     
       $scope.like = function(trackid, params) {        
         if(params == 'isSetTrack') {

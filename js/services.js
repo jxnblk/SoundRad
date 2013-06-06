@@ -86,7 +86,7 @@ angular.module('soundrad.services', [])
         });
       },
       
-      getStream: function($scope){
+      getStream: function($scope, add){
         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
           $scope.$apply(function () {
             var tracks = [];
@@ -102,7 +102,12 @@ angular.module('soundrad.services', [])
                 console.log(data.collection[i]);
               }; 
             };
-            $scope.tracks = tracks;
+            if (add == true) {
+              console.log('add tracks');
+              $scope.tracks = $scope.tracks.concat(tracks);
+            } else {
+              $scope.tracks = tracks;
+            };
             $scope.hasPrevPage = false;
             $scope.hasNextPage = false;  
             $scope.contentLoading = false;
