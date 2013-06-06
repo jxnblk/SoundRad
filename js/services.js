@@ -103,7 +103,6 @@ angular.module('soundrad.services', [])
               }; 
             };
             if (add == true) {
-              console.log('add tracks');
               $scope.tracks = $scope.tracks.concat(tracks);
             } else {
               $scope.tracks = tracks;
