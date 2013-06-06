@@ -40,16 +40,21 @@
         <div ng-switch="!!setTrack" class="tappad-s borbot bor-gray2">
     
           <div ng-switch-when="false" class="overhide">
-            <a class="fl tappad gray5" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
-            <a class="fl tappad" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+            <a class="fl tappad gray5" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart db lh3 h3"></i></a>
+            <a class="fl tappad" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-geo-heart db lh3 h3"></i></a>
           </div>
           
           <div ng-switch-when="true" class="overhide">
-            <a class="fl tappad gray5" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite">Like</a>
-            <a class="fl tappad" href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite">Unlike</a>
+            <a class="fl tappad gray5" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite db lh3 h3">Like</a>
+            <a class="fl tappad" href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite db lh3 h3">Unlike</a>
           </div>
         
-        </div> 
+        </div>
+        
+        <div class="pad borbot bor-gray2" ng-show="track.description">
+          <p class="maxw640" ng-bind-html-unsafe="track.description | richtext"></p>
+        </div>
+         
         <a ng-href="{{track.permalink_url}}" target="_blank" class="db tappad-s gray5 borbot bor-gray2">View on SoundCloud</a>
       </div>
     </div>
