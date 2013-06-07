@@ -2,6 +2,14 @@
 <div class="pad2">
   <h1 class="reg mb2">Settings</h1>
   
+  <h2>Themes</h2>
+  
+  <div class="tappad mb2 overhide">
+    <a href="" ng-click="changeTheme('Default')" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': theme == 'theme-default'}">Default</a>
+    <a href="" ng-click="changeTheme('Science')" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': theme == 'theme-science'}">Science</a>
+    <a href="" ng-click="changeTheme('BLK')" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': theme == 'theme-blk'}">BLK</a>
+  </div>
+  
   <div ng-show="token" class="mb2">
     <p>Connected as: {{me.username}}</p>
     <a href="#" ng-click="logOut()" class="p btn btn-sm btn-prime">Sign Out</a>
