@@ -215,6 +215,24 @@ angular.module('soundrad.controllers', [])
       
   }])
   
+  .controller('ThemeCtrl', ['$scope', function($scope) {
+    
+    $scope.themes = {
+      'Default': 'theme-default',
+      'Science': 'theme-science',
+      'BLK': 'theme-blk'
+    };
+    
+    //$scope.theme = ($scope.themes['Default']);
+    
+    $scope.changeTheme = function(name) {
+      $scope.theme = $scope.themes[name];
+    };
+    
+    $scope.changeTheme('Default');
+    
+  }])
+  
   .controller('ModalCtrl', ['$scope', function($scope) {
     
   }])

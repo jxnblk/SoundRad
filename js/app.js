@@ -13,5 +13,6 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $routeProvider.otherwise({redirectTo: '/'});
 
     $locationProvider.hashPrefix('!')
-    $locationProvider.html5Mode(true);
+    // Re-enable in production
+    //$locationProvider.html5Mode(true);
   }]);
