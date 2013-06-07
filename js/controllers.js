@@ -215,7 +215,7 @@ angular.module('soundrad.controllers', [])
       
   }])
   
-  .controller('ThemeCtrl', ['$scope', function($scope) {
+  .controller('ThemeCtrl', ['$scope', 'storage', function($scope, storage) {
     
     $scope.themes = {
       'Default': 'theme-default',
@@ -227,9 +227,15 @@ angular.module('soundrad.controllers', [])
     
     $scope.changeTheme = function(name) {
       $scope.theme = $scope.themes[name];
+      storage.set('theme', name);
     };
     
-    $scope.changeTheme('Default');
+    $scope.savedTheme = storage.get('theme');
+    if ($scope.savedTheme) {
+      $scope.changeTheme($scope.savedTheme);
+    } else {
+      $scope.changeTheme('Default');  
+    };
     
   }])
   
