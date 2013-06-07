@@ -1,5 +1,5 @@
 
-<div ng-switch="!!setTrack">
+<div ng-switch="!!setTrack" class="dib h3 ">
 
   <div ng-switch-when="false">
     <a class="pl pr gray5" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
@@ -7,8 +7,12 @@
   </div>
   
   <div ng-switch-when="true">
-    <a class="pl pr" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite">Like</a>
+    <a class="pl pr gray5" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite">Like</a>
     <a class="pl pr" href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite">Unlike</a>
   </div>
+  
+  
 
 </div>
+
+<a href="" ng-click="toggleActions()" class="pl pr gray5 h3">✖</a>
