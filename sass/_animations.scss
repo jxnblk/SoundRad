@@ -37,11 +37,17 @@
   from { -webkit-transform: translate(0, -100%); }
   to   { -webkit-transform: translate(0, 0); }
 }
-
 .anim-slide-down {
   -webkit-animation: slide-down .2s ease;
 }
 
+@-webkit-keyframes slide-up {
+  from { -webkit-transform: translate(0, 100%); }
+  to   { -webkit-transform: translate(0, 0); }
+}
+.anim-slide-up {
+  -webkit-animation: slide-up .2s ease;
+}
 
 ////////////////////////////////////////////////////////////////
 // Angular animations
