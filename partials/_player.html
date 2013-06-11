@@ -19,12 +19,19 @@
       <div class="posabs fill" ng-controller="ScrubberCtrl">
         <div class="posabs top0 bot0 left0 player-buffer" style="width: {{currentBufferPercentage}}%"></div>
         <div class="posabs top0 bot0 left0 player-played" style="width: {{currentTimePercentage}}%"></div>
-        <p class="posabs top0 right1 sm mt-5" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
         <div class="posabs fill z2" ng-click="seekTo($event)"></div>
+
+        <div class="posabs top0 right0 bot0 z3 lh4">
+          <p class="dib sm lh4 hide-s" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</p>
+          <a href="/playing" class="dib bg-darken"><i class="icon icon-geo-list_alt gray5 sm pad"></i></a>
+        </div>
+
       </div>
       
       <span class="db posrel truncate mt-5 mr">{{player.tracks[player.i].user.username}}</span>
       <h1 class="posrel h3 truncate mr">{{player.tracks[player.i].title}}</h1>
+      
+      
       
     </div>
   

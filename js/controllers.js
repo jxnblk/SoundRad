@@ -239,6 +239,12 @@ angular.module('soundrad.controllers', [])
     
   }])
   
+  .controller('QueueCtrl', ['$scope', 'player', function($scope, player) {
+    
+    $scope.tracks = player.tracks;
+    
+  }])
+  
   .controller('ModalCtrl', ['$scope', function($scope) {
     
   }])
