@@ -65,6 +65,9 @@ angular.module('soundrad.controllers', [])
       $location.path(url);      
       $scope.preloadContent = data;
     };
+
+    // Trying to prevent username flickering
+    $scope.viewUsername = null;
     
   }])
   
@@ -83,11 +86,17 @@ angular.module('soundrad.controllers', [])
     $scope.viewType = $scope.$routeParams.type;
     $scope.viewDetail = $scope.$routeParams.detail;
       // Temporarily sets username before scget call finishes
-      $scope.viewUsername = $scope.$routeParams.viewUser;
+      if (!$scope.viewUsername){
+        $scope.viewUsername = $scope.$routeParams.viewUser;  
+      };
+      
     $scope.viewUser = $scope.$routeParams.viewUser;
+    soundcloud.getUser($scope);
+    
+    
       // This is called for each subnav change
       // To do: Find a better way to handle this
-      soundcloud.getUser($scope);
+      //soundcloud.getUser($scope);
     $scope.isDetail = false;
     $scope.contentLoading = true;
     $scope.pageSize = 16;

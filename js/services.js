@@ -47,7 +47,7 @@ angular.module('soundrad.services', [])
         SC.get('/users/' + $scope.viewUser, function(data){
           $scope.$apply(function () {
             $scope.userData = data;
-            $scope.viewUsername = $scope.userData.username;
+            $scope.viewUsername = data.username;
           });
         });
       },
