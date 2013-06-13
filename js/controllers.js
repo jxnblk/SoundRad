@@ -66,8 +66,14 @@ angular.module('soundrad.controllers', [])
       $scope.preloadContent = data;
     };
 
-    // Trying to prevent username flickering
-    $scope.viewUsername = null;
+/*
+    $scope.preloadSetContent = null;
+    $scope.preloadSet = function(url, data) {
+      $location.path(url);
+      $scope.preloadSetContent = data;
+    };
+*/
+
     
   }])
   
@@ -85,30 +91,25 @@ angular.module('soundrad.controllers', [])
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     $scope.viewType = $scope.$routeParams.type;
     $scope.viewDetail = $scope.$routeParams.detail;
+
       // Temporarily sets username before scget call finishes
-      if (!$scope.viewUsername){
-        $scope.viewUsername = $scope.$routeParams.viewUser;  
-      };
+        $scope.viewUsername = $scope.$routeParams.viewUser;
       
     $scope.viewUser = $scope.$routeParams.viewUser;
     soundcloud.getUser($scope);
-    
-    
-      // This is called for each subnav change
-      // To do: Find a better way to handle this
-      //soundcloud.getUser($scope);
+
+    $scope.showTracklist = true;
     $scope.isDetail = false;
     $scope.contentLoading = true;
     $scope.pageSize = 16;
       
     if ($scope.viewDetail) {
-      //Need to get the playlist ID first
-      //$scope.scget = '/users/' + $scope.viewUser + '/playlists/';
-      //$scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
-      //soundcloud.getTracks($scope);
       
+      // Set
       if ($scope.preloadContent) {
-        $scope.tracks = $scope.preloadContent;
+        $scope.set = {};
+        $scope.set.title = $scope.preloadContent.title;
+        $scope.tracks = $scope.preloadContent.tracks;
         $scope.preloadContent = null;
         $scope.contentLoading = false;
       };
@@ -124,6 +125,7 @@ angular.module('soundrad.controllers', [])
       $scope.scget = '/users/' + $scope.viewUser + '/favorites';
       soundcloud.getTracks($scope);
     } else if ($scope.viewType == 'following') {
+      $scope.showTracklist = false;
       soundcloud.getFollowings($scope, $scope.viewUser);
         $scope.sorts = [
           { json: 'followers_count', human: 'Popularity', reverse: true },
@@ -131,18 +133,18 @@ angular.module('soundrad.controllers', [])
         ];
         $scope.sortFollowings = $scope.sorts[0];      
     } else if ($scope.viewType == 'info') {
-      //console.log('info view');
+      $scope.showTracklist = false;
+      // Info View
     } else if ($scope.viewType) {
-        //console.log('track detail view');
-        // To-do plug in resolve call to get track details
-        if ($scope.preloadContent) {
-          $scope.tracks = new Array($scope.preloadContent);
-          $scope.preloadContent = null;
-          $scope.contentLoading = false;
-        };
-        $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
-        soundcloud.getTrack($scope);
-        $scope.isDetail = true;
+      // Track detail view
+      if ($scope.preloadContent) {
+        $scope.tracks = new Array($scope.preloadContent);
+        $scope.preloadContent = null;
+        $scope.contentLoading = false;
+      };
+      $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
+      soundcloud.getTrack($scope);
+      $scope.isDetail = true;
     } else {
       $scope.scget = '/users/' + $scope.viewUser + '/tracks';
       soundcloud.getTracks($scope);
@@ -151,16 +153,13 @@ angular.module('soundrad.controllers', [])
   }])
   
   .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
-        //$scope.audio = audio;
-    $scope.player = player;
-    
+
+    $scope.player = player;    
     $scope.pageOffset = 0;
     $scope.page = 1;
     
-    // Pagination
     // Stream Pagination
     $scope.showMoreStream = function() {
-      //$scope.contentLoading = true;    
       $scope.scget = $scope.streamNextPage;
       soundcloud.getStream($scope, true);
     };
@@ -231,8 +230,6 @@ angular.module('soundrad.controllers', [])
       'Science': 'theme-science',
       'BLK': 'theme-blk'
     };
-    
-    //$scope.theme = ($scope.themes['Default']);
     
     $scope.changeTheme = function(name) {
       $scope.theme = $scope.themes[name];

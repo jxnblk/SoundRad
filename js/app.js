@@ -15,5 +15,5 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
 
     $locationProvider.hashPrefix('!')
     // Re-enable in production
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
   }]);

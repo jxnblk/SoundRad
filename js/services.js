@@ -79,8 +79,8 @@ angular.module('soundrad.services', [])
           $scope.$apply(function () {
             $scope.set = data;
             $scope.tracks = data.tracks;
-            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+            $scope.hasPrevPage = false;
+            $scope.hasNextPage = false;
             $scope.contentLoading = false;
           });
         });
