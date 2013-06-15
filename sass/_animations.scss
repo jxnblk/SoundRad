@@ -49,6 +49,15 @@
   -webkit-animation: slide-up .2s ease;
 }
 
+@-webkit-keyframes pop-in {
+  0%   { -webkit-transform: scale(.8); }
+  80%  { -webkit-transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); }
+}
+.anim-pop-in {
+  -webkit-animation: pop-in .1s linear;
+}
+
 ////////////////////////////////////////////////////////////////
 // Angular animations
 
@@ -75,5 +84,28 @@
   top: -100%;
 }
 */
+
+.view-enter, .view-leave {
+  -webkit-transition: all linear .1s;
+}
+
+.view-enter {
+  -webkit-transform: scale(.5);
+  opacity:0;
+  
+}
+.view-enter.view-enter-active {
+  -webkit-transform: scale(1);
+  opacity:1;
+}
+
+.view-leave {
+  -webkit-transform: scale(1);
+  opacity:.5;
+}
+.view-leave.view-leave-active {
+  -webkit-transform: scale(1.2);
+  opacity:0;
+}
 
 

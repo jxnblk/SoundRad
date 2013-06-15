@@ -44,6 +44,8 @@
 .mb2, .mar-bot2   { margin-bottom: 2rem; }
 .ml2, .mar-left2  { margin-left:   2rem; }
 
+.mt4 { margin-top: 4rem; }
+
 /*
 @include break(medium) {
   .m2,  .mar2       { margin:        4rem; }
@@ -131,6 +133,8 @@
 
 .posrel { position: relative; }
 .posabs { position: absolute; }
+
+.posfix { position: fixed; }
 
 .top0   { top:    0; }
 .right0 { right:  0; }

@@ -7,13 +7,12 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $routeProvider.when('/settings', {templateUrl: '/partials/settings.html'});
     $routeProvider.when('/playing', {templateUrl: '/partials/playing.html'});
 
-    $routeProvider.when('/:viewUser', {templateUrl: '/partials/user.html', controller: 'UserCtrl'});
-    $routeProvider.when('/:viewUser/:type', {templateUrl: '/partials/user.html', controller: 'UserCtrl'});
-    $routeProvider.when('/:viewUser/:type/:detail', {templateUrl: '/partials/user.html', controller: 'UserCtrl'});
+    $routeProvider.when('/:viewUser', {templateUrl: '/partials/user.html', controller: 'RouteCtrl'});
+    $routeProvider.when('/:viewUser/:type', {templateUrl: '/partials/user.html', controller: 'RouteCtrl'});
+    $routeProvider.when('/:viewUser/:type/:detail', {templateUrl: '/partials/user.html', controller: 'RouteCtrl'});
     
     $routeProvider.otherwise({redirectTo: '/'});
 
     $locationProvider.hashPrefix('!')
-    // Re-enable in production
     $locationProvider.html5Mode(true);
   }]);

@@ -5,49 +5,40 @@
 
   <div ng-show="set" class="media borbot bor-gray2">
     <div class="img">
-      <a href="" ng-click="player.play(tracks, 0)" ng-hide="player.playing || player.paused" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
-      <a href="" ng-click="player.play(tracks, player.i)" ng-show="player.paused" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
-      <a href="" ng-click="player.pause(player.playing)" ng-show="player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
+      <a href="" ng-click="player.play(tracks, 0)" ng-hide="player.playing || player.paused" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
+      <a href="" ng-click="player.play(tracks, player.i)" ng-show="player.paused" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
+      <a href="" ng-click="player.pause(player.playing)" ng-show="player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause db anim-pop-in"></i></a>
     </div>
     <div class="bd">
       <h2 class="lh4">{{set.title}}</h2>
     </div>
   </div>
 
-  <div ng-repeat="track in tracks" ng-switch="!!track.tracks" class="posrel" ng-controller="TrackCtrl">
-    <div ng-switch-when="false" class="media maxhi4 borbot bor-gray2">
+  <div ng-repeat="track in tracks" ng-switch="!!track.tracks" ng-controller="TrackCtrl">
+    <div ng-switch-when="false" class="posrel media maxhi4 borbot bor-gray2">
       <div class="img">
-        <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
-        <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause"></i></a>
+        <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
+        <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause db anim-pop-in"></i></a>
       </div>
       <div class="bd posrel minhi4">
         <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate pr">{{track.user.username}}</a>
         <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class="db h3 b text truncate pr">{{track.title}}</a>
 
-        <!-- <a href="" class="posabs right1 top1 db sq2 lh2 txtcen gray5 h1 bold" ng-click="toggleActions()">+</i></a> -->
-        
-        <!-- Lower right placement -->
 <!--
-        <div
-          ng-include src="'/partials/_trackactions.html'"
-          class="posabs bot0 right0 bg-gray2 lh1 sm">
+        <div ng-switch="!!setTrack" class="posabs right1 top1">
+          <div ng-switch-when="false">
+            <a class="dib lh2 gray5" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+            <a class="dib lh2" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+          </div>  
+          <div ng-switch-when="true">
+            <a class="dib lh2 gray5" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite"><i class="icon icon-geo-heart"></i></a>
+            <a class="dib lh2" href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite"><i class="icon icon-geo-heart"></i></a>
+          </div>
         </div>
 -->
-        
       </div>
     </div>
 
-    <!-- Outside Placement -->    
-<!--
-    <div
-      ng-show="showActions"
-      ng-include src="'/partials/_trackactions.html'"
-      class="posabs top1 right1 z1 pad-5 bg-gray2 rc">
-    </div>
--->
-
-
-    
     <div ng-switch="isDetail">
       <div ng-switch-when="true" ng-controller="TrackCtrl">
         
