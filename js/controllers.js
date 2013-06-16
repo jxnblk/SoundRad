@@ -71,7 +71,6 @@ angular.module('soundrad.controllers', [])
     $scope.connectDebug = storage.get('connectDebug');
     
     if(!$scope.connectDebug){
-      console.log('storing connectDebug');
       $scope.connectDebug = false;
       storage.set('connectDebug', $scope.connectDebug);
     };
@@ -106,21 +105,8 @@ angular.module('soundrad.controllers', [])
     
     $scope.$state = $state;
     
-    console.log('getting user tracks in userctrl');
     $scope.scget = '/users/' + $scope.viewUser + '/tracks';
     soundcloud.getTracks($scope);
-      
-
-// Following      
-/*
-      soundcloud.getFollowings($scope, $scope.viewUser);
-        $scope.sorts = [
-          { json: 'followers_count', human: 'Popularity', reverse: true },
-          { json: 'username', human: 'Alphabetical', reverse: false }
-        ];
-        $scope.sortFollowings = $scope.sorts[0]; 
-*/     
-
     
   }])
   
@@ -145,7 +131,7 @@ angular.module('soundrad.controllers', [])
       $scope.preloadContent = null;
       $scope.contentLoading = false;
     };
-    $scope.isDetail = true;
+    
     $scope.urlPath = '/' + $scope.viewUser + '/' + $stateParams.track;
     soundcloud.getTrack($scope);
   }])
@@ -160,7 +146,6 @@ angular.module('soundrad.controllers', [])
       $scope.preloadContent = null;
       $scope.contentLoading = false;
     };
-    //$scope.isDetail = true;
     $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
     soundcloud.getSet($scope);
   }])
@@ -169,6 +154,25 @@ angular.module('soundrad.controllers', [])
     
   }])
   
+  .controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentLoading = true;
+    soundcloud.getFollowings($scope, $scope.viewUser);
+    $scope.sorts = [
+      { json: 'followers_count', human: 'Popularity', reverse: true },
+      { json: 'username', human: 'Alphabetical', reverse: false }
+    ];
+    $scope.sortFollowings = $scope.sorts[0];  
+  }])
+  
+  .controller('FollowersCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentLoading = true;
+    soundcloud.getFollowers($scope, $scope.viewUser);
+    $scope.sorts = [
+      { json: 'followers_count', human: 'Popularity', reverse: true },
+      { json: 'username', human: 'Alphabetical', reverse: false }
+    ];
+    $scope.sortFollowers = $scope.sorts[0];
+  }])
   
   .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
 

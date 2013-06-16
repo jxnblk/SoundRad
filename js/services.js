@@ -136,6 +136,26 @@ angular.module('soundrad.services', [])
         getF();               
       },
       
+      getFollowers: function($scope, user){
+        var initLimit = 128,
+            initOffset = 0,                        
+            followers = [],
+            getF = function(){
+              SC.get('/users/' + user + '/followers', {limit: initLimit, offset: initOffset}, function(data){
+                $scope.$apply(function () {
+                  followers = followers.concat(data);
+                  if (followers.length >= (initLimit + initOffset)){
+                    initOffset = initOffset + 128;
+                    getF();
+                  }; 
+                  $scope.followers = followers;
+                  $scope.contentLoading = false;
+                });
+              });
+        };
+        getF();               
+      },
+      
       like: function($scope, trackid){
         SC.put('/me/favorites/' + trackid, function(){
         });

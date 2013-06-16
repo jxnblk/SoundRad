@@ -1,2 +1,14 @@
 
 <div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+
+
+<div ng-repeat="track in tracks" ng-controller="TrackCtrl">
+  
+  <!-- <div ng-include src="'/partials/_trackactions.html'" class="tappad borbot bor-gray2"></div> -->
+  
+  <div class="pad borbot bor-gray2" ng-show="track.description">
+    <p class="maxwi4" ng-bind-html-unsafe="track.description | richtext"></p>
+  </div>
+   
+  <a ng-href="{{track.permalink_url}}" target="_blank" class="db tappad-s gray5 borbot bor-gray2">View on SoundCloud</a>
+</div>

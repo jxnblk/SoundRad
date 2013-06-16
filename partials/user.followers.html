@@ -1,0 +1,11 @@
+
+<div class="borbot bor-gray2">
+  <h2 class="h3 reg pad dib">Followers ({{userData.followers_count}})</h2>
+  <div class="fr pad">
+    <select class="fr marto" ng-model="sortFollowers" ng-options="sort as sort.human for sort in sorts"></select>
+  </div>
+</div>
+<div ng-show="contentLoading" class="tappad gray5 txtcen">Loading...</div>
+<a ng-href="/{{follower.permalink}}" ng-repeat="follower in followers | orderBy: sortFollowers.json :sortFollowers.reverse" class="db tappad-s borbot bor-gray2">
+  {{follower.username}}
+</a>

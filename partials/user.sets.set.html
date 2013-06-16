@@ -12,5 +12,16 @@
   </div>
   
   <div ng-include src="'/partials/_tracklist.html'"></div>
+  
+  <div ng-controller="TrackCtrl">
+  
+    <!-- <div ng-include src="'/partials/_trackactions.html'" class="tappad borbot bor-gray2"></div> -->
+    
+    <div class="pad borbot bor-gray2" ng-show="set.description">
+      <p class="maxwi4" ng-bind-html-unsafe="set.description | richtext"></p>
+    </div>
+     
+    <a ng-href="{{set.permalink_url}}" target="_blank" class="db tappad-s gray5 borbot bor-gray2">View on SoundCloud</a>
+  </div>
 
 </div>

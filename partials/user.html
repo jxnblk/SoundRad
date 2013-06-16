@@ -19,24 +19,4 @@
     <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
   </div>
   
-  
-  
-  
-  
-  <div ng-switch="viewType == 'following'">
-    <div ng-switch-when="true">
-      <div class="borbot bor-gray2">
-        <h2 class="h3 reg pad dib">Following</h2>
-        <div class="fr pad">
-          <select class="fr marto" ng-model="sortFollowings" ng-options="sort as sort.human for sort in sorts"></select>
-        </div>
-      </div>
-      <div ng-show="contentLoading" class="tappad gray5 txtcen">Loading...</div>
-      <a ng-href="/{{following.permalink}}" ng-repeat="following in followings | orderBy: sortFollowings.json :sortFollowings.reverse" class="db tappad-s borbot bor-gray2">
-        {{following.username}}
-        <!-- <pre>{{following | json}}</pre> -->
-      </a>
-    </div>
-  </div>
-  
 </div>  
