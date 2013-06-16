@@ -90,91 +90,78 @@ angular.module('soundrad.controllers', [])
     soundcloud.getStream($scope);
   }])
   
-  .controller('RouteCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-    
-    console.log('RouteCtrl');
-    
-    $scope.viewType = $scope.$routeParams.type;
-    $scope.viewDetail = $scope.$routeParams.detail;
-
-      // Temporarily sets username before scget call finishes
-      //$scope.viewUsername = $scope.$routeParams.viewUser;
-      
-    $scope.viewUser = $scope.$routeParams.viewUser;
-    soundcloud.getUser($scope);
-    
-    
-    
-/*
-    $scope.$on("$routeChangeSuccess", function( $currentRoute, $previousRoute ){
-      //console.log('route changed');
-      if($scope.$routeParams.viewUser){
-        console.log($scope.$routeParams.viewUser);
-      };
-    });
-*/
- 
-    
-    
-  }])
-  
-  .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-
-    
-
-    $scope.showTracklist = true;
-    $scope.isDetail = false;
+  .controller('UserCtrl', ['$scope', 'soundcloud', '$stateParams', '$state', function($scope, soundcloud, $stateParams, $state) {
     $scope.contentLoading = true;
     $scope.pageSize = 16;
+    $scope.viewUser = $stateParams.user;
+    $scope.viewUsername = '.';
+    soundcloud.getUser($scope);
+    
+    $scope.$state = $state;
+    
+    console.log('getting user tracks in userctrl');
+    $scope.scget = '/users/' + $scope.viewUser + '/tracks';
+    soundcloud.getTracks($scope);
       
-    if ($scope.viewDetail) {
-      
-      // Set
-      if ($scope.preloadContent) {
-        $scope.set = {};
-        $scope.set.title = $scope.preloadContent.title;
-        $scope.tracks = $scope.preloadContent.tracks;
-        $scope.preloadContent = null;
-        $scope.contentLoading = false;
-      };
-      $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $scope.viewDetail;
-      soundcloud.getSet($scope);
-      
-    } else if ($scope.viewType == 'sets') {
-      $scope.scget = '/users/' + $scope.viewUser + '/playlists';
-          // Use smaller pageSize
-          $scope.pageSize = 8;
-      soundcloud.getTracks($scope);  
-    } else if ($scope.viewType == 'likes') {
-      $scope.scget = '/users/' + $scope.viewUser + '/favorites';
-      soundcloud.getTracks($scope);
-    } else if ($scope.viewType == 'following') {
-      $scope.showTracklist = false;
+
+// Following      
+/*
       soundcloud.getFollowings($scope, $scope.viewUser);
         $scope.sorts = [
           { json: 'followers_count', human: 'Popularity', reverse: true },
           { json: 'username', human: 'Alphabetical', reverse: false }
         ];
-        $scope.sortFollowings = $scope.sorts[0];      
-    } else if ($scope.viewType == 'info') {
-      $scope.showTracklist = false;
-      // Info View
-    } else if ($scope.viewType) {
-      // Track detail view
-      if ($scope.preloadContent) {
-        $scope.tracks = new Array($scope.preloadContent);
-        $scope.preloadContent = null;
-        $scope.contentLoading = false;
-      };
-      $scope.urlPath = '/' + $scope.viewUser + '/' + $scope.viewType;
-      soundcloud.getTrack($scope);
-      $scope.isDetail = true;
-    } else {
-      $scope.scget = '/users/' + $scope.viewUser + '/tracks';
-      soundcloud.getTracks($scope);
-    };
+        $scope.sortFollowings = $scope.sorts[0]; 
+*/     
+
     
   }])
+  
+  .controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentLoading = true;
+    $scope.scget = '/users/' + $scope.viewUser + '/favorites';
+    soundcloud.getTracks($scope);
+  }])
+  
+  .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.contentLoading = true;
+    $scope.scget = '/users/' + $scope.viewUser + '/playlists';
+    // Use smaller pageSize
+    $scope.pageSize = 8;
+    soundcloud.getTracks($scope); 
+  }])
+  
+  .controller('TrackDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
+    $scope.contentLoading = true;
+    if ($scope.preloadContent) {
+      $scope.tracks = new Array($scope.preloadContent);
+      $scope.preloadContent = null;
+      $scope.contentLoading = false;
+    };
+    $scope.isDetail = true;
+    $scope.urlPath = '/' + $scope.viewUser + '/' + $stateParams.track;
+    soundcloud.getTrack($scope);
+  }])
+  
+  .controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
+    //console.log('set detail ctrl');
+    $scope.contentLoading = true;
+    if ($scope.preloadContent) {
+      $scope.set = {};
+      $scope.set.title = $scope.preloadContent.title;
+      $scope.tracks = $scope.preloadContent.tracks;
+      $scope.preloadContent = null;
+      $scope.contentLoading = false;
+    };
+    //$scope.isDetail = true;
+    $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
+    soundcloud.getSet($scope);
+  }])
+  
+  .controller('InfoCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    
+  }])
+  
   
   .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
 
