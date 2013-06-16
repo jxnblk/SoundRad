@@ -27,6 +27,6 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $stateProvider.state('user.set', { url: "/sets/:set", templateUrl: "/partials/user.sets.set.html", controller: 'SetDetailCtrl' });
 
 
-    //$locationProvider.hashPrefix('!')
+    $locationProvider.hashPrefix('!')
     $locationProvider.html5Mode(true);
   }]);

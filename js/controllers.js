@@ -66,22 +66,29 @@ angular.module('soundrad.controllers', [])
       $scope.preloadContent = data;
     };
     
-    $scope.viewUser = $scope.$routeParams.viewUser;
+    //$scope.viewUser = $scope.$routeParams.viewUser;
     
-/*
-    $scope.$watch('$scope.viewUser', function() {
-      console.log('viewUser changed: ' + $scope.$routeParams.viewUser);
-      $scope.viewUser = $scope.$routeParams.viewUser;
-      soundcloud.getUser($scope);
-      //$scope.currentViewUser = $scope.viewUser;
-    });
-*/
+    $scope.connectDebug = storage.get('connectDebug');
+    
+    if(!$scope.connectDebug){
+      console.log('storing connectDebug');
+      $scope.connectDebug = false;
+      storage.set('connectDebug', $scope.connectDebug);
+    };
+    
+    $scope.toggleDebug = function() {
+      $scope.connectDebug = !$scope.connectDebug;
+      storage.set('connectDebug', $scope.connectDebug);
+    };
     
   }])
   
   .controller('CallbackCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){
-    $timeout($window.close, 400);
-    $window.opener.focus();
+    $timeout($window.opener.focus(), 500);
+    if($scope.connectDebug == false){
+      $timeout($window.close, 500);  
+    };
+    
   }])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {

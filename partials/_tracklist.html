@@ -3,7 +3,7 @@
 <div ng-show="contentLoading" class="tappad gray5 txtcen">Loading...</div>
 <div ng-hide="contentLoading">
 
-  <div ng-repeat="track in tracks" ng-switch="!!track.tracks" ng-controller="TrackCtrl">
+  <div id="{{track.permalink}}" ng-repeat="track in tracks" ng-switch="!!track.tracks" ng-controller="TrackCtrl">
     <div ng-switch-when="false" class="posrel media maxhi4 borbot bor-gray2">
       <div class="img">
         <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
