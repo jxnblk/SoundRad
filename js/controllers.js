@@ -65,7 +65,17 @@ angular.module('soundrad.controllers', [])
       $location.path(url);      
       $scope.preloadContent = data;
     };
-
+    
+    $scope.viewUser = $scope.$routeParams.viewUser;
+    
+/*
+    $scope.$watch('$scope.viewUser', function() {
+      console.log('viewUser changed: ' + $scope.$routeParams.viewUser);
+      $scope.viewUser = $scope.$routeParams.viewUser;
+      soundcloud.getUser($scope);
+      //$scope.currentViewUser = $scope.viewUser;
+    });
+*/
     
   }])
   
@@ -88,15 +98,29 @@ angular.module('soundrad.controllers', [])
     $scope.viewDetail = $scope.$routeParams.detail;
 
       // Temporarily sets username before scget call finishes
-      $scope.viewUsername = $scope.$routeParams.viewUser;
+      //$scope.viewUsername = $scope.$routeParams.viewUser;
       
     $scope.viewUser = $scope.$routeParams.viewUser;
+    soundcloud.getUser($scope);
+    
+    
+    
+/*
+    $scope.$on("$routeChangeSuccess", function( $currentRoute, $previousRoute ){
+      //console.log('route changed');
+      if($scope.$routeParams.viewUser){
+        console.log($scope.$routeParams.viewUser);
+      };
+    });
+*/
+ 
+    
     
   }])
   
   .controller('UserCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+
     
-    soundcloud.getUser($scope);
 
     $scope.showTracklist = true;
     $scope.isDetail = false;
