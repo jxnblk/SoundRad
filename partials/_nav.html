@@ -1,7 +1,7 @@
 <div class="borbot bor-gray2 overhide tappad">
   
-  <a href="/" class="tappad fl" ng-class="{'gray5': !!$routeParams.viewUser}">
-    <span ng-show="token">Stream</span>
+  <a href="/" class="tappad fl" ng-class="{'gray5': isStream == false}">
+    <span ng-show="token">Stream {{$state}}</span>
     <span ng-hide="token">Home</span>
   </a>    
   <a href="/{{me.permalink}}" class="tappad fl" ng-show="token && me.username.length < 13" ng-class="{'gray5': !(!$routeParams.type && $routeParams.viewUser == me.permalink)}">{{me.username}}</a>

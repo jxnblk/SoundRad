@@ -29,7 +29,7 @@ angular.module('soundrad.controllers', [])
       };
   }])
   
-  .controller('NavCtrl', ['$scope', '$routeParams', '$window', '$location', 'soundcloud', 'storage', function($scope, $routeParams, $window, $location, soundcloud, storage) {
+  .controller('NavCtrl', ['$scope', '$stateParams', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $window, $location, soundcloud, storage) {
     
     $scope.version = storage.get('version');
     
@@ -56,7 +56,7 @@ angular.module('soundrad.controllers', [])
       $window.location.href = '/';
     };
     
-    $scope.$routeParams = $routeParams;
+    $scope.$stateParams = $stateParams;
     
     $scope.modalContent = null;
 
@@ -65,8 +65,6 @@ angular.module('soundrad.controllers', [])
       $location.path(url);      
       $scope.preloadContent = data;
     };
-    
-    //$scope.viewUser = $scope.$routeParams.viewUser;
     
     $scope.connectDebug = storage.get('connectDebug');
     
@@ -78,6 +76,12 @@ angular.module('soundrad.controllers', [])
     $scope.toggleDebug = function() {
       $scope.connectDebug = !$scope.connectDebug;
       storage.set('connectDebug', $scope.connectDebug);
+    };
+    
+    $scope.debugConnect = function() {
+      console.log('debug connect');
+      $scope.connectDebug = true;
+      $scope.connect();
     };
     
   }])
