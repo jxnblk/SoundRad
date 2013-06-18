@@ -1,14 +1,32 @@
 
-<div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+<!-- <div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div> -->
 
+<!-- To do: make this work with a single track instead of an array -->
+
+    <div ng-repeat="track in tracks" class="posrel media" ng-controller="TracklistCtrl">
+      <div class="img">
+        <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
+        <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause db anim-pop-in"></i></a>
+      </div>
+      <div class="bd posrel minhi4">
+        <!-- <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate pr">{{track.user.username}}</a> -->
+        <p class="h2 b text mt-75 pr">{{track.title}}</p>
+      </div>
+    </div>
 
 <div ng-repeat="track in tracks" ng-controller="TrackCtrl">
   
-  <!-- <div ng-include src="'/partials/_trackactions.html'" class="tappad borbot bor-gray2"></div> -->
+  <div class="tappad-s pr txtri gray5">
+    <a class="dib lh2 gray5 anim-pop-in mr" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+    <a class="dib lh2 anim-pop-in mr" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-geo-heart"></i></a>
+    <span class="dib mr">{{track.favoritings_count}} Likes</span>
+    <span class="dib">{{track.playback_count}} Plays</span>
+  </div>
   
-  <div class="pad borbot bor-gray2" ng-show="track.description">
+  <div class="pad" ng-show="track.description">
+    <p class="sm gray5">Posted {{track.created_at | fromNow}}</p>
     <p class="maxwi4" ng-bind-html-unsafe="track.description | richtext"></p>
   </div>
    
-  <a ng-href="{{track.permalink_url}}" target="_blank" class="db tappad-s gray5 borbot bor-gray2">View on SoundCloud</a>
+  <a ng-href="{{track.permalink_url}}" target="_blank" class="db tappad-s gray5 bortop borbot bor-gray2">View on SoundCloud</a>
 </div>

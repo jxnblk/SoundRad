@@ -29,7 +29,7 @@ angular.module('soundrad.controllers', [])
       };
   }])
   
-  .controller('NavCtrl', ['$scope', '$stateParams', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $window, $location, soundcloud, storage) {
+  .controller('NavCtrl', ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
     
     $scope.version = storage.get('version');
     
@@ -57,6 +57,10 @@ angular.module('soundrad.controllers', [])
     };
     
     $scope.$stateParams = $stateParams;
+    
+    $scope.$on('$stateChangeSuccess', function(){
+      $scope.currentState = $state.current.name;
+    });
     
     $scope.modalContent = null;
 
@@ -109,8 +113,12 @@ angular.module('soundrad.controllers', [])
     
     $scope.$state = $state;
     
-    $scope.scget = '/users/' + $scope.viewUser + '/tracks';
-    soundcloud.getTracks($scope);
+    $scope.$on('$stateChangeSuccess', function(){
+      if ($state.current.name == 'user'){
+        $scope.scget = '/users/' + $scope.viewUser + '/tracks';
+        soundcloud.getTracks($scope);  
+      };  
+    });
     
   }])
   

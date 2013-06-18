@@ -2,7 +2,7 @@
   
   <div class="borbot bor-gray2 overhide">
     
-    <h2 class="reg pad">{{viewUsername}}</h2>
+    <h2 class="reg pt-5 pr pb-5 pl">{{viewUsername}}</h2>
   
     <div class="tappad">
       <a ng-href="/{{viewUser}}" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': $state.current.name == 'user'}">Tracks</a>
@@ -15,7 +15,7 @@
   
   <div ui-view></div>
   
-  <div ng-switch="$state.current.name == 'user' && contentLoading == false">
+  <div ng-switch="$state.current.name == 'user'">
     <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
   </div>
   
