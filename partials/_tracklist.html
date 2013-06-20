@@ -15,22 +15,34 @@
         <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
         <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause db anim-pop-in"></i></a>
       </div>
-      <div class="bd posrel minhi4">
-        <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate pr">{{track.user.username}}</a>
-        <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class="db h3 b text truncate pr">{{track.title}}</a>
+      <div class="bd posrel minhi4 hov">
+        <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate mr2">{{track.user.username}}</a>
+        <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class="db h3 b text truncate mr2">{{track.title}}</a>
+<!--
+        <div class="posabs top0 right0 mt-5 mr bg-gray2 rc sm hov-show">
+          <a class="db btn-sm gray5 anim-pop-in" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-geo-heart"></i> Like</a>
+          <a class="db btn-sm anim-pop-in" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-geo-heart"></i> Liked</a>
+        </div>
+-->
       </div>
     </div>
 
     <div ng-switch-when="true" class="">
-      <div id="{{track.id}}" class="media borbot bor-gray2">
+      <div id="{{track.id}}" class="media borbot bor-gray2 posrel">
         <div class="img">
           <a href="" ng-click="[preload('/' + track.user.permalink + '/sets/' + track.permalink, track), player.play(track.tracks, 0)]" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
         </div>
         <div class="bd">
-          <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate pr">{{track.user.username}}</a>
-          <a href="" ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)" class="db h3 b text truncate pr">{{track.title}}</a>
+          <a ng-href="/{{track.user.permalink}}" class="fl cl mt-5 gray5 truncate pr">{{track.user.username}}</a>
+          <a href="" ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)" class="fl cl h3 b text truncate pr">{{track.title}}</a>
         </div>
-        <!-- <div ng-show="showActions" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div> -->
+        <!-- <div class="posabs right1 top1 bot1" ng-include src="'/partials/_trackactions.html'" ng-controller="TrackCtrl"></div> -->
+<!--
+        <div class="posabs right1 top1 bot1" ng-controller="TrackCtrl">
+          <a class="dib lh2 gray5 anim-pop-in" href="" ng-click="like(setTrack.id, 'isSetTrack')" ng-hide="setTrack.user_favorite"><i class="icon icon-geo-heart"></i></a>
+          <a class="dib lh2 anim-pop-in" href="" ng-click="unlike(setTrack.id, 'isSetTrack')" ng-show="setTrack.user_favorite"><i class="icon icon-geo-heart"></i></a>
+        </div>
+-->
       </div>
     </div>
 
@@ -38,9 +50,8 @@
 
 </div>
 
-<div class="tappad mb txtcen overhide">
+<div class="tappad mb txtcen overhide" ng-show="hasPrevPage || hasNextPage || streamNextPage">
   <a href="" ng-show="hasPrevPage" ng-click="prevPage()" class="tappad fl">Previous</a>
   <a href="" ng-show="hasNextPage" ng-click="nextPage()" class="tappad fr">Next</a>
-  
   <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="db tappad">Show More</a>
 </div>

@@ -60,9 +60,8 @@ angular.module('soundrad.controllers', [])
     
     $scope.$on('$stateChangeSuccess', function(){
       $scope.currentState = $state.current.name;
+      $scope.viewUser = $stateParams.user;
     });
-    
-    $scope.modalContent = null;
 
     $scope.preloadContent = null;
     $scope.preload = function(url, data) {
@@ -88,6 +87,11 @@ angular.module('soundrad.controllers', [])
       $scope.connect();
     };
     
+    
+    //$scope.viewUser = $stateParams.user;
+    $scope.viewUser = null;
+    $scope.userData = null;
+    
   }])
   
   .controller('CallbackCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){
@@ -95,6 +99,25 @@ angular.module('soundrad.controllers', [])
     if($scope.connectDebug == false){
       $timeout($window.close, 500);  
     };
+    
+  }])
+  
+  .controller('BookmarkCtrl', ['$scope', 'storage', function($scope, storage){
+    $scope.bookmarks = storage.get('bookmarks');
+    
+    if (!$scope.bookmarks) {
+      $scope.bookmarks = [
+        { 'title': 'Jxnblk', 'url': '/jxnblk' },
+        { 'title': 'Mrsjxn', 'url': '/mrsjxn' },
+        { 'title': 'MrMrs', 'url': '/mr_mrs' },
+        { 'title': 'XLR8R', 'url': '/xlr8r' },
+        { 'title': 'Ghostly', 'url': '/ghostly' },
+        { 'title': 'SSENSE', 'url': '/ssense' },
+        { 'title': 'FACT Magazine', 'url': '/factmag' }
+      ];
+      storage.set('bookmarks', $scope.bookmarks);
+    };
+    
     
   }])
   
@@ -140,6 +163,7 @@ angular.module('soundrad.controllers', [])
     $scope.contentLoading = true;
     if ($scope.preloadContent) {
       $scope.tracks = new Array($scope.preloadContent);
+      $scope.track = $scope.preloadContent;
       $scope.preloadContent = null;
       $scope.contentLoading = false;
     };

@@ -67,6 +67,7 @@ angular.module('soundrad.services', [])
         SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
           $scope.$apply(function () {
             $scope.tracks = new Array(data);
+            $scope.track = data;
             $scope.hasPrevPage = false;
             $scope.hasNextPage = false;
             $scope.contentLoading = false;
@@ -193,6 +194,10 @@ angular.module('soundrad.services', [])
       playing: false,
       paused: false,
       play: function(tracks, i) {
+        if (i == null) {
+          tracks = new Array(tracks);
+          i = 0;
+        };
         player.tracks = tracks;
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
         } else { urlParams =  '?client_id=' + clientID; };
@@ -289,7 +294,18 @@ angular.module('soundrad.services', [])
   // Filters text from JSON objects
   .filter('richtext', function () {
     return function(text) {
+      if(text){
         return text.replace(/\n/g, '<br/>');
+      };
+    };
+  })
+  
+  // Escapes text for URL encoding
+  .filter('escape', function() {
+    return function(text){
+      if(text){
+        return text.escape;
+      };
     };
   });
   

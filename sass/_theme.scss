@@ -60,6 +60,19 @@ body.theme-default {
       box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
     }
   }
+  .btn-gray {
+    color: $def-text;
+    background-color: $def-gray2;
+    border: none;
+    &:hover {
+      color: $def-prime;
+      //background-color: lighten($def-gray2, 10%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  
   .input:focus {
     outline: none;
     border-color: $def-prime;
@@ -101,6 +114,18 @@ $sci-gray2: #777;
     &:hover {
       color: $sci-text;
       background-color: desaturate($sci-prime, 5%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  .btn-gray {
+    color: $sci-text;
+    background-color: $sci-gray1;
+    border: none;
+    &:hover {
+      color: $sci-prime;
+      //background-color: darken($sci-gray1, 10%);
     }
     &:active {
       box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
@@ -149,6 +174,18 @@ $blk-link:  #0cf;
     &:hover {
       color: #fff;
       background-color: lighten($blk-link, 10%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  .btn-gray {
+    color: $blk-dark;
+    background-color: $blk-light-gray;
+    border: none;
+    &:hover {
+      color: $blk-link;
+      //background-color: darken($blk-light-gray, 10%);
     }
     &:active {
       box-shadow: inset 0 2px 4px rgba(0,0,0,.2);

@@ -1,16 +1,18 @@
 <div class="borbot bor-gray2 overhide tappad">
   
-  <a href="/" class="tappad fl bold" ng-class="{'gray5': currentState != 'home'}">
+  <a href="/" class="tappad fl bold" ng-class="{'text': currentState != 'home'}">
     <span ng-show="token">Stream</span>
     <span ng-hide="token">Home</span>
   </a>    
-  <a href="/{{me.permalink}}" class="tappad fl bold" ng-show="token && me.username.length < 13" ng-class="{'gray5': currentState != 'user'}">{{me.username}}</a>
-  <a href="/{{me.permalink}}" class="tappad fl bold" ng-show="token && me.username.length >= 13" ng-class="{'gray5': currentState != 'user'}">You</a>
-  <a href="/{{me.permalink}}/sets" class="tappad fl bold" ng-class="{'gray5': currentState != 'user.sets'}" ng-show="token">Sets</a>
-  <a href="/{{me.permalink}}/likes" class="tappad fl bold" ng-class="{'gray5': currentState != 'user.likes'}" ng-show="token">Likes</a>
-
-  <a href="#" class="fr btn btn-sm btn-prime mt-5" ng-click="connect();" ng-hide="token">Connect</a>
+  <a href="/{{me.permalink}}" class="tappad fl bold" ng-show="token && me.username.length < 13" ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">{{me.username}}</a>
+  <a href="/{{me.permalink}}" class="tappad fl bold" ng-show="token && me.username.length >= 13" ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">You</a>
+  <a href="/{{me.permalink}}/sets" class="tappad fl bold" ng-class="{'text': currentState != 'user.sets' || me.permalink != viewUser}" ng-show="token">Sets</a>
+  <a href="/{{me.permalink}}/likes" class="tappad fl bold" ng-class="{'text': currentState != 'user.likes' || me.permalink != viewUser}" ng-show="token">Likes</a>
   
-  <a href="/settings" class="gray5" ng-show="token"><i class="tappad fr icon h3 icon-geo-settings"></i></a>
+  <span class="fr">
+    <a href="#" class="fr btn btn-sm btn-prime mt-5" ng-click="connect();" ng-hide="token">Connect</a>
+    <a href="/more" class="tappad gray5">More</a>
+  </span>
+  <!-- <a href="/settings" class="gray5" ng-show="token"><i class="tappad fr icon h3 icon-geo-settings"></i></a> -->
   
 </div>
