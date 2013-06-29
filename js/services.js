@@ -52,7 +52,8 @@ angular.module('soundrad.services', [])
         });
       },
       
-      getTracks: function($scope, params){                
+      getTracks: function($scope, params){  
+        //console.log('getTracks offset: ' + $scope.pageOffset);              
         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
           $scope.$apply(function () {
             $scope.tracks = data;
@@ -88,6 +89,7 @@ angular.module('soundrad.services', [])
       },
       
       getStream: function($scope, add){
+        //console.log('getstream pageoffset' + $scope.pageOffset);
         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
           $scope.$apply(function () {
             var tracks = [];
@@ -263,6 +265,16 @@ angular.module('soundrad.services', [])
       }
     }     
   })
+
+
+  ////////////////////////////////////////////////////////////////
+  // Bookmarks
+
+  // .factory('bookmarkService', function(storage){
+  //   return {
+      
+  //   }
+  // })
   
   
   ////////////////////////////////////////////////////////////////

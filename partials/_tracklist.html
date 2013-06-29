@@ -49,9 +49,10 @@
   </div>
 
 </div>
-
+<div id="{{page + 1}}"></div>
 <div class="tappad mb txtcen overhide" ng-show="hasPrevPage || hasNextPage || streamNextPage">
-  <a href="" ng-show="hasPrevPage" ng-click="prevPage()" class="tappad fl">Previous</a>
-  <a href="" ng-show="hasNextPage" ng-click="nextPage()" class="tappad fr">Next</a>
-  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="db tappad">Show More</a>
+  <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="tappad fl">Previous</a>
+  <small class="txtcen">{{page}}</small>
+  <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="tappad fr">Next</a>
+  <a href="#{{page}}" ng-show="streamNextPage" ng-click="showMoreStream()" class="db tappad">Show More</a>
 </div>

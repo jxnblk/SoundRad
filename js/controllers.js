@@ -45,6 +45,8 @@ angular.module('soundrad.controllers', [])
     $scope.token = storage.get('token');
     $scope.me = storage.get('me');
     
+    $scope.bookmarks = storage.get('bookmarks');
+
     if ($scope.token){
       soundcloud.connect($scope);
     };
@@ -94,6 +96,14 @@ angular.module('soundrad.controllers', [])
     //$scope.viewUser = $stateParams.user;
     $scope.viewUser = null;
     $scope.userData = null;
+
+    if ($location.hash() && !isNaN($location.hash())){
+      $scope.page = parseFloat($location.hash());
+      $scope.pageSize = 16;
+      $scope.pageOffset = $scope.page * $scope.pageSize;
+      // Need to reload scope.tracks here
+      
+    };
     
     
   }])
@@ -117,7 +127,11 @@ angular.module('soundrad.controllers', [])
   }])
   
   .controller('BookmarkCtrl', ['$scope', 'storage', function($scope, storage){
-    $scope.bookmarks = storage.get('bookmarks');
+    
+    // Started to set up a factory
+    //$scope.bookmarks = bookmarkService;
+
+    //$scope.bookmarks = storage.get('bookmarks');
     
     if (!$scope.bookmarks) {
       $scope.bookmarks = [
@@ -135,14 +149,10 @@ angular.module('soundrad.controllers', [])
     $scope.removeBookmark = function(i) {
       $scope.bookmarks.splice(i,1);
       storage.set('bookmarks', $scope.bookmarks);
-      console.log($scope.bookmarks);
     };
     
     $scope.addBookmark = function() {
       $scope.newBookmark = { 'title': $scope.viewUsername, 'url': '/' + $scope.viewUser };
-      console.log($scope.newBookmark);
-      console.log($scope.newBookmark.title);
-      console.log($scope.newBookmark.url);
       $scope.bookmarks.push($scope.newBookmark);
       storage.set('bookmarks', $scope.bookmarks);
     };
@@ -250,13 +260,25 @@ angular.module('soundrad.controllers', [])
   .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
 
     $scope.player = player;    
-    $scope.pageOffset = 0;
-    $scope.page = 1;
+    
+    // if ($location.hash() && !isNaN($location.hash())){
+    //   $scope.page = parseFloat($location.hash());
+    //   $scope.pageOffset = $scope.page * $scope.pageSize;
+    //   console.log('pageoffset: ' + $scope.pageOffset);
+    // } else {
+    if (!$scope.page) {
+      $scope.page = 1;
+      $scope.pageOffset = 0; 
+    };
+    
+    console.log('tracklistctrl page number: ' + $scope.page);
     
     // Stream Pagination
     $scope.showMoreStream = function() {
       $scope.scget = $scope.streamNextPage;
       soundcloud.getStream($scope, true);
+      $scope.page = $scope.page + 1;
+      console.log($scope.page);
     };
     
     // New Pagination
@@ -270,8 +292,8 @@ angular.module('soundrad.controllers', [])
           // Trying this to clear content when changing pages
           $scope.tracks = null;
         $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
-        $scope.updatePage();
         soundcloud.getTracks($scope);
+        $scope.updatePage();
       };
     };
     
