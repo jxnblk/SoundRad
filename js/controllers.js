@@ -31,8 +31,6 @@ angular.module('soundrad.controllers', [])
   
   .controller('NavCtrl', ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
     
-    console.log('navctrl');
-    
     $scope.version = storage.get('version');
     
     if(!$scope.version){
@@ -45,7 +43,7 @@ angular.module('soundrad.controllers', [])
     $scope.token = storage.get('token');
     $scope.me = storage.get('me');
     
-    $scope.bookmarks = storage.get('bookmarks');
+    //$scope.bookmarks = storage.get('bookmarks');
 
     if ($scope.token){
       soundcloud.connect($scope);
@@ -97,24 +95,21 @@ angular.module('soundrad.controllers', [])
     $scope.viewUser = null;
     $scope.userData = null;
 
-    if ($location.hash() && !isNaN($location.hash())){
-      $scope.page = parseFloat($location.hash());
-      $scope.pageSize = 16;
-      $scope.pageOffset = $scope.page * $scope.pageSize;
-      // Need to reload scope.tracks here
-      
+    $scope.page = 1;
+    $scope.pageSize = 16;
+    $scope.pageOffset = 0;
+
+    $scope.getPage = function() {
+      if ($location.hash() && !isNaN($location.hash())){
+        $scope.page = parseFloat($location.hash());
+        $scope.pageSize = 16;
+        $scope.pageOffset = $scope.page * $scope.pageSize;
+        // Need to reload scope.tracks here
+      } else {
+        $scope.page = 1;
+      };
     };
-    
-    
-  }])
-  
-  .controller('ListCtrl', ['$scope', 'storage', function($scope, storage) {
-    
-    $scope.listIsEditable = false;
-    
-    $scope.toggleListIsEditable = function() {
-      $scope.listIsEditable = !$scope.listIsEditable;
-    };
+    $scope.getPage();
     
   }])
   
@@ -123,52 +118,10 @@ angular.module('soundrad.controllers', [])
     if($scope.connectDebug == false){
       $timeout($window.close, 500);  
     };
-    
-  }])
-  
-  .controller('BookmarkCtrl', ['$scope', 'storage', function($scope, storage){
-    
-    // Started to set up a factory
-    //$scope.bookmarks = bookmarkService;
-
-    //$scope.bookmarks = storage.get('bookmarks');
-    
-    if (!$scope.bookmarks) {
-      $scope.bookmarks = [
-        { 'title': 'Jxnblk', 'url': '/jxnblk' },
-        { 'title': 'Mrsjxn', 'url': '/mrsjxn' },
-        { 'title': 'MrMrs', 'url': '/mr_mrs' },
-        { 'title': 'XLR8R', 'url': '/xlr8r' },
-        { 'title': 'Ghostly', 'url': '/ghostly' },
-        { 'title': 'SSENSE', 'url': '/ssense' },
-        { 'title': 'FACT Magazine', 'url': '/factmag' }
-      ];
-      storage.set('bookmarks', $scope.bookmarks);
-    };
-    
-    $scope.removeBookmark = function(i) {
-      $scope.bookmarks.splice(i,1);
-      storage.set('bookmarks', $scope.bookmarks);
-    };
-    
-    $scope.addBookmark = function() {
-      $scope.newBookmark = { 'title': $scope.viewUsername, 'url': '/' + $scope.viewUser };
-      $scope.bookmarks.push($scope.newBookmark);
-      storage.set('bookmarks', $scope.bookmarks);
-    };
-    
-    $scope.isBookmarked = false;
-    
-    for (var i = 0; i < $scope.bookmarks.length; i++) {
-      if ($scope.bookmarks[i].url == '/' + $scope.viewUser) {
-        $scope.isBookmarked = true;
-      };
-    };
-    
-    
   }])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+    $scope.page = 1;
     $scope.scget = '/me/activities/tracks';
     $scope.pageSize = 16;
     soundcloud.getStream($scope);
@@ -186,7 +139,8 @@ angular.module('soundrad.controllers', [])
     $scope.$on('$stateChangeSuccess', function(){
       if ($state.current.name == 'user'){
         $scope.scget = '/users/' + $scope.viewUser + '/tracks';
-        soundcloud.getTracks($scope);  
+        $scope.getPage();
+        soundcloud.getTracks($scope);
       };  
     });
     
@@ -194,12 +148,14 @@ angular.module('soundrad.controllers', [])
   
   .controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.contentLoading = true;
+    //$scope.getPage();
     $scope.scget = '/users/' + $scope.viewUser + '/favorites';
     soundcloud.getTracks($scope);
   }])
   
   .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.contentLoading = true;
+    //$scope.getPage();
     $scope.scget = '/users/' + $scope.viewUser + '/playlists';
     // Use smaller pageSize
     $scope.pageSize = 8;
@@ -220,7 +176,6 @@ angular.module('soundrad.controllers', [])
   }])
   
   .controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
-    //console.log('set detail ctrl');
     $scope.contentLoading = true;
     if ($scope.preloadContent) {
       $scope.set = {};
@@ -259,26 +214,13 @@ angular.module('soundrad.controllers', [])
   
   .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
 
-    $scope.player = player;    
-    
-    // if ($location.hash() && !isNaN($location.hash())){
-    //   $scope.page = parseFloat($location.hash());
-    //   $scope.pageOffset = $scope.page * $scope.pageSize;
-    //   console.log('pageoffset: ' + $scope.pageOffset);
-    // } else {
-    if (!$scope.page) {
-      $scope.page = 1;
-      $scope.pageOffset = 0; 
-    };
-    
-    console.log('tracklistctrl page number: ' + $scope.page);
+    $scope.player = player;
     
     // Stream Pagination
     $scope.showMoreStream = function() {
       $scope.scget = $scope.streamNextPage;
       soundcloud.getStream($scope, true);
       $scope.page = $scope.page + 1;
-      console.log($scope.page);
     };
     
     // New Pagination

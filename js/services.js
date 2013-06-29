@@ -89,8 +89,7 @@ angular.module('soundrad.services', [])
       },
       
       getStream: function($scope, add){
-        //console.log('getstream pageoffset' + $scope.pageOffset);
-        SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
+        SC.get($scope.scget, {limit: $scope.pageSize}, function(data){
           $scope.$apply(function () {
             var tracks = [];
             for (var i = 0; i < data.collection.length; i++) {                               
@@ -107,6 +106,7 @@ angular.module('soundrad.services', [])
             };
             if (add == true) {
               $scope.tracks = $scope.tracks.concat(tracks);
+              $scope.expandedStream = $scope.tracks;
             } else {
               $scope.tracks = tracks;
             };

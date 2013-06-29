@@ -5,7 +5,7 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
 
     $stateProvider.state('home', { url: "/", templateUrl: "/partials/home.html" });
     $stateProvider.state('callback', { url: "/callback", templateUrl: "/partials/callback.html" });
-    $stateProvider.state('more', { url: "/more", templateUrl: "/partials/_more.html" });
+    //$stateProvider.state('more', { url: "/more", templateUrl: "/partials/_more.html" });
     $stateProvider.state('settings', { url: "/settings", templateUrl: "/partials/settings.html" });
     $stateProvider.state('playing', { url: "/playing", templateUrl: "/partials/playing.html" });
     
