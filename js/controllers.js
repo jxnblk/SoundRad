@@ -32,11 +32,16 @@ angular.module('soundrad.controllers', [])
   .controller('NavCtrl', ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
     
     $scope.version = storage.get('version');
-    
     if(!$scope.version){
-      console.log('Reseting localStorage - version 16');
+      console.log('Reseting localStorage - version 32');
       storage.clearAll();
-      $scope.version = 16;
+      $scope.version = 32;
+      storage.set('version', $scope.version);
+    };
+    if($scope.version != 32){
+      console.log('Setting version to 32');
+      localStorage.removeItem('bookmarks');
+      $scope.version = 32;
       storage.set('version', $scope.version);
     };
     
