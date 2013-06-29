@@ -199,6 +199,8 @@
 .minhi6 { min-height:  8rem; }
 .minhi7 { min-height: 16rem; }
 
+.minhi100 { min-height: 100%; }
+
 .maxhi1 { max-height:  1rem; }
 .maxhi2 { max-height:  2rem; }
 .maxhi3 { max-height:  3rem; }
@@ -327,5 +329,27 @@
 .rotate-180 {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+.col-right {
+  display: none;
+  @include break(medium) {
+    display: block;
+    width: 20rem;
+    position: fixed;
+    top: 4rem;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.col-left {
+  @include break(medium) {
+    //position: relative;
+    //left: 0;
+    margin-right: 20rem;
+  }
 }
 

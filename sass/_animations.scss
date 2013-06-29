@@ -109,3 +109,37 @@
 }
 
 
+.list-enter,
+.list-leave,
+.list-move {
+  -webkit-transition: 1s linear all;
+  transition: 1s linear all;
+  position:relative;
+}
+
+.list-enter {
+  left:-50%;
+  opacity:0;
+}
+.list-enter.list-enter-active {
+  left:0;
+  opacity:1;
+}
+
+.list-leave {
+  left:0;
+  opacity:1;
+}
+.list-leave.list-leave-active {
+  left:-50%;
+  opacity:0;
+}
+
+.list-move {
+  opacity:0.5;
+}
+.list-move.list-move-active {
+  opacity:1;
+}
+
+

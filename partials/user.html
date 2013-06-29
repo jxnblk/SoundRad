@@ -1,7 +1,12 @@
 <div>
   
   <div class="borbot bor-gray2 overhide" ng-hide="$state.current.name == 'user.track'">
-    <h2 class="reg pt-5 pr pb-5 pl">{{viewUsername}}</h2>
+    <h2 class="reg pt-5 pr pb-5 pl">
+      {{viewUsername}}
+      
+      <a href="" class="ml p gray5 reg" ng-show="userData && !isBookmarked" ng-click="addBookmark()" ng-controller="BookmarkCtrl">(Bookmark)</a>
+      
+    </h2>
     <div class="tappad">
       <a ng-href="/{{viewUser}}" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': $state.current.name == 'user'}">Tracks</a>
       <a ng-href="/{{viewUser}}/sets" class="btn-sm fl mb-5" ng-class="{'btn-prime rc': $state.current.name == 'user.sets'}">Sets</a>

@@ -31,6 +31,8 @@ angular.module('soundrad.controllers', [])
   
   .controller('NavCtrl', ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
     
+    console.log('navctrl');
+    
     $scope.version = storage.get('version');
     
     if(!$scope.version){
@@ -84,6 +86,7 @@ angular.module('soundrad.controllers', [])
     $scope.debugConnect = function() {
       console.log('debug connect');
       $scope.connectDebug = true;
+      storage.set('connectDebug', $scope.connectDebug);
       $scope.connect();
     };
     
@@ -91,6 +94,17 @@ angular.module('soundrad.controllers', [])
     //$scope.viewUser = $stateParams.user;
     $scope.viewUser = null;
     $scope.userData = null;
+    
+    
+  }])
+  
+  .controller('ListCtrl', ['$scope', 'storage', function($scope, storage) {
+    
+    $scope.listIsEditable = false;
+    
+    $scope.toggleListIsEditable = function() {
+      $scope.listIsEditable = !$scope.listIsEditable;
+    };
     
   }])
   
@@ -116,6 +130,29 @@ angular.module('soundrad.controllers', [])
         { 'title': 'FACT Magazine', 'url': '/factmag' }
       ];
       storage.set('bookmarks', $scope.bookmarks);
+    };
+    
+    $scope.removeBookmark = function(i) {
+      $scope.bookmarks.splice(i,1);
+      storage.set('bookmarks', $scope.bookmarks);
+      console.log($scope.bookmarks);
+    };
+    
+    $scope.addBookmark = function() {
+      $scope.newBookmark = { 'title': $scope.viewUsername, 'url': '/' + $scope.viewUser };
+      console.log($scope.newBookmark);
+      console.log($scope.newBookmark.title);
+      console.log($scope.newBookmark.url);
+      $scope.bookmarks.push($scope.newBookmark);
+      storage.set('bookmarks', $scope.bookmarks);
+    };
+    
+    $scope.isBookmarked = false;
+    
+    for (var i = 0; i < $scope.bookmarks.length; i++) {
+      if ($scope.bookmarks[i].url == '/' + $scope.viewUser) {
+        $scope.isBookmarked = true;
+      };
     };
     
     
