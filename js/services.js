@@ -52,8 +52,7 @@ angular.module('soundrad.services', [])
         });
       },
       
-      getTracks: function($scope, params){  
-        //console.log('getTracks offset: ' + $scope.pageOffset);              
+      getTracks: function($scope, params){
         SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
           $scope.$apply(function () {
             $scope.tracks = data;

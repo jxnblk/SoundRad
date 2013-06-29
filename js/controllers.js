@@ -102,9 +102,7 @@ angular.module('soundrad.controllers', [])
     $scope.getPage = function() {
       if ($location.hash() && !isNaN($location.hash())){
         $scope.page = parseFloat($location.hash());
-        $scope.pageSize = 16;
-        $scope.pageOffset = $scope.page * $scope.pageSize;
-        // Need to reload scope.tracks here
+        $scope.pageOffset = ($scope.page - 1) * $scope.pageSize;
       } else {
         $scope.page = 1;
       };
@@ -123,13 +121,13 @@ angular.module('soundrad.controllers', [])
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     $scope.page = 1;
     $scope.scget = '/me/activities/tracks';
-    $scope.pageSize = 16;
+    //$scope.pageSize = 16;
     soundcloud.getStream($scope);
   }])
   
   .controller('UserCtrl', ['$scope', 'soundcloud', '$stateParams', '$state', function($scope, soundcloud, $stateParams, $state) {
     $scope.contentLoading = true;
-    $scope.pageSize = 16;
+    //$scope.pageSize = 16;
     $scope.viewUser = $stateParams.user;
     $scope.viewUsername = '.';
     soundcloud.getUser($scope);
@@ -158,7 +156,7 @@ angular.module('soundrad.controllers', [])
     //$scope.getPage();
     $scope.scget = '/users/' + $scope.viewUser + '/playlists';
     // Use smaller pageSize
-    $scope.pageSize = 8;
+    //$scope.pageSize = 8;
     soundcloud.getTracks($scope); 
   }])
   
