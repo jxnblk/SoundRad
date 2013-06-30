@@ -1,7 +1,7 @@
 <div class="" ng-switch="!!player.playing || !!player.paused">
 
   <div ng-switch-when="false" class="minhi4 pl pr borbot bor-gray2">
-    <h1 class="lh4">SoundRad</h1>
+    <h1 class="lh4 gray5">SoundRad</h1>
   </div>
 
   <div class="media player anim-slide-down" ng-switch-when="true">
@@ -27,8 +27,8 @@
         </div>
 
       </div>     
-      <span class="db posrel truncate mt-5 mr">{{player.tracks[player.i].user.username}}</span>
-      <h1 class="posrel h3 truncate mr">{{player.tracks[player.i].title}}</h1>      
+      <span class="db posrel truncate mt-5 mr pl-5">{{player.tracks[player.i].user.username}}</span>
+      <h1 class="posrel h3 truncate mr pl-5">{{player.tracks[player.i].title}}</h1>      
     </div>
   
   </div>

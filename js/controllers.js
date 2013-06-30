@@ -110,6 +110,7 @@ angular.module('soundrad.controllers', [])
         $scope.pageOffset = ($scope.page - 1) * $scope.pageSize;
       } else {
         $scope.page = 1;
+        $scope.pageOffset = 0;
       };
     };
     $scope.getPage();
