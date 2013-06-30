@@ -2,7 +2,7 @@
 <html lang="en" ng-app="soundrad"> 
 <head>
 	<meta charset="utf-8">
-  <title>SoundRad beta</title>
+  <title>SoundRad</title>
 	<meta name="author" content="">
 	<meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +18,8 @@
   
   <div class="mt4">
     <!-- <div class="col-left minhi100 bor-gray2 borright"> -->
-      <div ng-include src="'/partials/_nav.html'"></div>
-      <div ui-view></div>
+      <div ng-hide="currentState == 'home' && !token" ng-include src="'/partials/_nav.html'"></div>
+      <div ui-view class="maxwi5 wrap"></div>
     <!-- </div> -->
     <!-- <div class="col-right" ng-include src="'/partials/_more.html'"></div> -->
   </div>

@@ -129,7 +129,7 @@
 .fr,  .floright { float: right; }
 .cl,            { clear: left; }
 
-.wrap { margin: 0 auto; }
+.wrap { margin-right: auto; margin-left: auto; }
 
 .posrel { position: relative; }
 .posabs { position: absolute; }
