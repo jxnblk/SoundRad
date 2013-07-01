@@ -72,6 +72,7 @@ angular.module('soundrad.controllers', [])
 
     $scope.preloadContent = null;
     $scope.preload = function(url, data) {
+      $location.hash('');
       $location.path(url);      
       $scope.preloadContent = data;
     };
