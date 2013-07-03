@@ -47,8 +47,6 @@ angular.module('soundrad.controllers', [])
     
     $scope.token = storage.get('token');
     $scope.me = storage.get('me');
-    
-    //$scope.bookmarks = storage.get('bookmarks');
 
     if ($scope.token){
       soundcloud.connect($scope);
@@ -96,8 +94,6 @@ angular.module('soundrad.controllers', [])
       $scope.connect();
     };
     
-    
-    //$scope.viewUser = $stateParams.user;
     $scope.viewUser = null;
     $scope.userData = null;
 
@@ -128,13 +124,11 @@ angular.module('soundrad.controllers', [])
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     $scope.page = 1;
     $scope.scget = '/me/activities/tracks';
-    //$scope.pageSize = 16;
     soundcloud.getStream($scope);
   }])
   
   .controller('UserCtrl', ['$scope', 'soundcloud', '$stateParams', '$state', function($scope, soundcloud, $stateParams, $state) {
     $scope.contentLoading = true;
-    //$scope.pageSize = 16;
     $scope.viewUser = $stateParams.user;
     $scope.viewUsername = '.';
     soundcloud.getUser($scope);
@@ -152,18 +146,16 @@ angular.module('soundrad.controllers', [])
   }])
   
   .controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.tracks = null;
     $scope.contentLoading = true;
-    //$scope.getPage();
     $scope.scget = '/users/' + $scope.viewUser + '/favorites';
     soundcloud.getTracks($scope);
   }])
   
   .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+    $scope.tracks = null;
     $scope.contentLoading = true;
-    //$scope.getPage();
     $scope.scget = '/users/' + $scope.viewUser + '/playlists';
-    // Use smaller pageSize
-    //$scope.pageSize = 8;
     soundcloud.getTracks($scope); 
   }])
   
@@ -236,8 +228,7 @@ angular.module('soundrad.controllers', [])
     $scope.nextPage = function(){
       if($scope.hasNextPage){
         $scope.contentLoading = true;
-          // Trying this to clear content when changing pages
-          $scope.tracks = null;
+        $scope.tracks = null;
         $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
         soundcloud.getTracks($scope);
         $scope.updatePage();
@@ -292,7 +283,9 @@ angular.module('soundrad.controllers', [])
     $scope.themes = {
       'Default': 'theme-default',
       'Science': 'theme-science',
-      'BLK': 'theme-blk'
+      'BLK': 'theme-blk',
+      'Gray': 'theme-gray',
+      'Slice': 'theme-slice'
     };
     
     $scope.changeTheme = function(name) {

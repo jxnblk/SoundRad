@@ -6,14 +6,15 @@
   No Results
 </div> 
 
-<div ng-hide="contentLoading">
+<!-- <div ng-hide="contentLoading"> -->
+<div>
 
   <div id="{{track.permalink}}" ng-repeat="track in tracks" ng-switch="!!track.tracks" ng-controller="TrackCtrl">
     
     <div ng-switch-when="false" class="posrel media maxhi4 borbot bor-gray2">
       <div class="img">
-        <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play db anim-pop-in"></i></a>
-        <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-geo-pause db anim-pop-in"></i></a>
+        <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play db anim-pop-in"></i></a>
+        <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-pause db anim-pop-in"></i></a>
       </div>
       <div class="bd posrel minhi4 hov">
         <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate mr2">{{track.user.username}}</a>
@@ -24,7 +25,7 @@
     <div ng-switch-when="true" class="">
       <div id="{{track.id}}" class="media borbot bor-gray2 posrel">
         <div class="img">
-          <a href="" ng-click="[preload('/' + track.user.permalink + '/sets/' + track.permalink, track), player.play(track.tracks, 0)]" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-geo-play"></i></a>
+          <a href="" ng-click="[preload('/' + track.user.permalink + '/sets/' + track.permalink, track), player.play(track.tracks, 0)]" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play"></i></a>
         </div>
         <div class="bd">
           <a ng-href="/{{track.user.permalink}}" class="fl cl mt-5 gray5 truncate pr">{{track.user.username}}</a>
@@ -37,7 +38,7 @@
 
 </div>
 
-<div class="tappad mb txtcen overhide" ng-show="hasPrevPage || hasNextPage || streamNextPage">
+<div class="tappad mb txtcen overhide" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="contentLoading">
   <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="tappad fl">Previous</a>
   <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="tappad fr">Next</a>
   <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="db tappad">Show More</a>

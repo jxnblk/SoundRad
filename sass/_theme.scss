@@ -85,22 +85,22 @@ body.theme-default {
 
 /* Science Theme */
 $sci-prime: #9f0;
-$sci-text: #555;
+$sci-dark: #555;
 $sci-gray1: #ddd;
-$sci-gray2: #777;
+$sci-gray2: #999;
 
 .theme-science {
-  color: $sci-text;
-  background-color: $sci-gray1;
+  color: $sci-gray1;
+  background-color: $sci-dark;
   font-family: "freight-sans-pro", Helvetica, sans-serif;
   a {
-    color: darken($sci-prime, 20%);
+    color: darken($sci-prime, 5%);
     text-decoration: none;
     &:hover {
-      color: darken($sci-prime, 25%);
+      color: darken($sci-prime, 10%);
     }
   }
-  .text { color: $sci-text; }
+  .text { color: $sci-gray1; }
   .gray5 { color: $sci-gray2; }
   .gray2 { color: $sci-gray1; }
   .prime {  color: $sci-prime; }
@@ -108,11 +108,11 @@ $sci-gray2: #777;
   .bg-prime {  background-color: $sci-prime; }  
   .bor-gray2 { border-color: darken($sci-gray1, 10%); }
   .btn-prime {
-    color: $sci-text;
+    color: $sci-dark;
     background-color: $sci-prime;
     border: none;
     &:hover {
-      color: $sci-text;
+      color: $sci-dark;
       background-color: desaturate($sci-prime, 5%);
     }
     &:active {
@@ -120,8 +120,8 @@ $sci-gray2: #777;
     }
   }
   .btn-gray {
-    color: $sci-text;
-    background-color: $sci-gray1;
+    color: $sci-dark;
+    background-color: $sci-gray2;
     border: none;
     &:hover {
       color: $sci-prime;
@@ -135,8 +135,8 @@ $sci-gray2: #777;
     outline: none;
     border-color: $sci-prime;
   }
-  .player { color: #fff; background-color: lighten($sci-text, 5%); }
-  .player-buffer { background-color: $sci-text; }
+  .player { color: darken($sci-dark, 10%); background-color: darken($sci-gray2, 5%); }
+  .player-buffer { background-color: lighten($sci-gray2, 10%); }
   .player-played { background-color: $sci-prime; }
 }
 
@@ -198,7 +198,127 @@ $blk-link:  #0cf;
   .player { color: #fff; background-color: lighten($blk-dark, 5%); }
   .player-buffer { background-color: $blk-dark; }
   .player-played { background-color: $blk-link; }
-} 
+}
+
+/* Gray Theme */
+
+$gry-dark: #555;
+$gry-mid-gray: #999;
+$gry-light-gray: #eee;
+$gry-link:  #333;
+
+.theme-gray {
+  color: $gry-dark;
+  background-color: #fff;
+  font-family: "freight-sans-pro", Helvetica, sans-serif;
+  //font-family: Helvetica, sans-serif;
+  a {
+    color: $gry-link;
+    text-decoration: none;
+    &:hover {
+      color: darken($gry-link, 10%);
+    }
+  }
+  .text { color: $gry-dark; }
+  .gray5 { color: $gry-mid-gray; }
+  .gray2 { color: $gry-light-gray; }
+  .prime {  color: $gry-link; }
+  .bg-gray5 { background-color: $gry-mid-gray; }
+  .bg-gray2 { background-color: $gry-light-gray; }
+  .bg-prime {  background-color: $gry-link; }  
+  .bor-gray2 { border-color: $gry-light-gray; }
+  .btn-prime {
+    color: #fff;
+    background-color: $gry-link;
+    border: none;
+    &:hover {
+      color: #fff;
+      background-color: lighten($gry-link, 10%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  .btn-gray {
+    color: $gry-dark;
+    background-color: $gry-light-gray;
+    border: none;
+    &:hover {
+      color: $gry-link;
+      background-color: darken($gry-light-gray, 10%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  .input:focus {
+    outline: none;
+    border-color: $gry-link;
+  }
+  .player { color: #fff; background-color: lighten($gry-mid-gray, 5%); }
+  .player-buffer { background-color: $gry-mid-gray; }
+  .player-played { background-color: $gry-link; }
+}
+
+
+/* Slice Theme */
+
+$slc-dark: #310;
+$slc-mid: #930;
+//$slc-light-gray: #eee;
+$slc-orange:  #f60;
+
+.theme-slice {
+  color: $slc-dark;
+  background-color: $slc-orange;
+  font-family: "freight-sans-pro", Helvetica, sans-serif;
+  a {
+    color: $white;
+    text-decoration: none;
+    &:hover {
+      color: darken($slc-dark, 10%);
+    }
+  }
+  .text { color: $slc-dark; }
+  .gray5 { color: $slc-mid; }
+  .gray2 { color: $slc-mid; }
+  .prime {  color: $white; }
+  .bg-gray5 { background-color: $slc-mid; }
+  .bg-gray2 { background-color: $slc-mid; }
+  .bg-prime {  background-color: $white; }  
+  .bor-gray2 { border-color: $slc-mid; }
+  .btn-prime {
+    color: $white;
+    background-color: $slc-mid;
+    border: none;
+    &:hover {
+      color: $white;
+      background-color: darken($slc-mid, 10%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  .btn-gray {
+    color: $white;
+    background-color: $slc-mid;
+    border: none;
+    &:hover {
+      color: $white;
+      background-color: darken($slc-mid, 10%);
+    }
+    &:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
+    }
+  }
+  .input:focus {
+    outline: none;
+    border-color: $white;
+  }
+  .player { color: $white; background-color: darken($slc-orange, 5%); }
+  .player-buffer { background-color: darken($slc-orange, 10%); }
+  .player-played { background-color: $slc-mid; }
+}
 
 
 /* Non-colored Styles */
