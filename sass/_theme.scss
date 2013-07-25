@@ -106,7 +106,7 @@ $sci-gray2: #999;
   .prime {  color: $sci-prime; }
   .bg-gray2 { background-color: $sci-gray1; }
   .bg-prime {  background-color: $sci-prime; }  
-  .bor-gray2 { border-color: darken($sci-gray1, 10%); }
+  .bor-gray2 { border-color: darken($sci-dark, 10%); }
   .btn-prime {
     color: $sci-dark;
     background-color: $sci-prime;

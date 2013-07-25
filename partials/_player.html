@@ -8,10 +8,10 @@
   
     <div class="img overhide lh4">
       
-      <a href="" ng-click="player.prev()" class="hide-s fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-previous sm db"></i></a>
+      <a href="" ng-click="player.prev()" class="hide-s fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-previous db"></i></a>
       <a class="fl sq4 lh4 txtcen btn-prime" href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.playing"><i class="icon icon-play h3 lh4 db anim-pop-in"></i></a>
       <a class="fl sq4 lh4 txtcen btn-prime" href="" ng-click="player.pause(player.playing)" ng-show="player.playing"><i class="icon icon-pause h3 lh4 db anim-pop-in"></i></a>
-      <a href="" ng-click="player.next()" class="hide-s fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-skip sm db"></i></a>
+      <a href="" ng-click="player.next()" class="hide-s fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-skip db"></i></a>
     </div>
     
     <div class="bd posrel minhi4">
@@ -20,14 +20,14 @@
         <div class="posabs top0 bot0 left0 player-buffer" style="width: {{currentBufferPercentage}}%"></div>
         <div class="posabs top0 bot0 left0 player-played" style="width: {{currentTimePercentage}}%"></div>
         <div class="posabs fill z2" ng-click="seekTo($event)"></div>
-        <div class="posabs top0 right1 sm mt-5" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</div>
+        <div class="posabs top0 right1 sm mt-25" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</div>
         <div class="posabs top0 right0 bot0 z3 lh4">
           
           <!-- <a href="/playing" class="dib gray5"><i class="icon icon-geo-list_alt sm pad"></i></a> -->
         </div>
 
       </div>     
-      <span class="db posrel truncate mt-5 mr pl-5">{{player.tracks[player.i].user.username}}</span>
+      <span class="db posrel truncate mt-25 mr pl-5">{{player.tracks[player.i].user.username}}</span>
       <h1 class="posrel h3 truncate mr pl-5">{{player.tracks[player.i].title}}</h1>      
     </div>
   

@@ -17,7 +17,7 @@
         <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-pause db anim-pop-in"></i></a>
       </div>
       <div class="bd posrel minhi4 hov">
-        <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 truncate mr2">{{track.user.username}}</a>
+        <a ng-href="/{{track.user.permalink}}" class="db mt-25 gray5 truncate mr2">{{track.user.username}}</a>
         <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class="db h3 b text truncate mr2">{{track.title}}</a>
       </div>
     </div>
@@ -28,7 +28,7 @@
           <a href="" ng-click="[preload('/' + track.user.permalink + '/sets/' + track.permalink, track), player.play(track.tracks, 0)]" ng-hide="player.tracks == track.tracks && (player.playing || player.paused)" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play"></i></a>
         </div>
         <div class="bd">
-          <a ng-href="/{{track.user.permalink}}" class="fl cl mt-5 gray5 truncate pr">{{track.user.username}}</a>
+          <a ng-href="/{{track.user.permalink}}" class="fl cl mt-25 gray5 truncate pr">{{track.user.username}}</a>
           <a href="" ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)" class="fl cl h3 b text truncate pr">{{track.title}}</a>
         </div>
       </div>
