@@ -12,6 +12,18 @@ angular.module('soundrad.controllers', [])
     $scope.audio = audio;
 
   }])
+
+  .controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
+    $scope.title = function() {
+      if (player.playing) {
+        return '► ' + player.tracks[player.i].title + ' | SoundRad';
+      } else if (player.paused) {
+        return player.tracks[player.i].title + ' | SoundRad';
+      } else {
+        return 'SoundRad';  
+      };
+    };
+  }])
   
   .controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio) {
       function updateView() {
