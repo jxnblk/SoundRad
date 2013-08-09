@@ -13,6 +13,12 @@
 <a href="" ng-click="changeTheme('Science')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-science'}">Science</a>
     <a href="" ng-click="changeTheme('Slice')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-slice'}">Slice</a>
   </div>
+
+  <div class="mb2">
+    <h3>Bookmarklet</h3>
+    <p class="mb">Load any SoundCloud page in SoundRad. Drag this button to your bookmarks bar to install:</p>
+    <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="btn btn-med btn-prime h3 bold">Radify</a>
+  </div>
   
   <div ng-show="token" class="mb2">
     <p class="h3 bold mb">Connected as: {{me.username}}</p>
