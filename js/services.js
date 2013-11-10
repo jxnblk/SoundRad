@@ -31,17 +31,14 @@ angular.module('soundrad.services', [])
         SC.get('/me', callback);
       },
 
+      ////////////////
+      // Maybe not need this
       authenticate: function() {
-        return SC.accessToken();
+        Token = SC.accessToken();
       },
       
-      getUser: function($scope, params){
-        SC.get('/users/' + $scope.viewUser, function(data){
-          $scope.$apply(function () {
-            $scope.userData = data;
-            $scope.viewUsername = data.username;
-          });
-        });
+      getUser: function(user, callback){
+        SC.get('/users/' + user, callback);
       },
       
       getTracks: function($scope, params){

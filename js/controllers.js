@@ -70,7 +70,7 @@ angular.module('soundrad.controllers', [])
         $route.reload();
       });
     };
-    
+
     $scope.connect = function() {
       soundcloud.connect(function(me){
         console.log(me);
@@ -155,7 +155,12 @@ angular.module('soundrad.controllers', [])
     $scope.contentLoading = true;
     $scope.viewUser = $stateParams.user;
     $scope.viewUsername = '.';
-    soundcloud.getUser($scope);
+    soundcloud.getUser($scope.viewUser, function(data){
+      console.log('got user');
+      // console.log(data);
+      $scope.userData = data;
+      $scope.viewUsername = data.username;
+    });
     
     $scope.$state = $state;
     
