@@ -14,14 +14,12 @@
     class="" ng-class="{'btn-prime rc': $state.current.name == 'user.likes'}">
       Likes
   </a>
-  <a ng-href="/{{viewUser}}/info"
+  <!-- <a ng-href="/{{viewUser}}/info"
     class="" ng-class="{'btn-prime rc': $state.current.name == 'user.info'}">
       Info
-  </a>
+  </a> -->
 </div>
 
 <div ui-view></div>
   
-<div ng-switch="$state.current.name == 'user'">
-  <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
-</div>
+<div ng-show="$state.current.name == 'user'" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
