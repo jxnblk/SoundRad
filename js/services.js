@@ -119,11 +119,8 @@ angular.module('soundrad.services', [])
             tracks.push(playlist.tracks[i].id);
           };
           tracks.push(track.id);
-          // console.log( { kind: 'playlist', tracks: tracks });
           // Jesus christ why doesn't this work?
           SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
-          // playlist.tracks.push(track);
-          // SC.put(playlist.uri, playlist, callback);
         });
       },
       
