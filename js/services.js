@@ -120,12 +120,8 @@ angular.module('soundrad.services', [])
         SC.delete('/me/favorites/' + trackid);
       },
       
-      resolve: function($scope, params){
-        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
-          $scope.$apply(function () {
-            $scope.resolvedData = data;
-          });
-        });
+      resolve: function(path, callback){
+        SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
       }
     };
   
