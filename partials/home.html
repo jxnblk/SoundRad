@@ -1,0 +1,17 @@
+
+<div ng-switch="!!me">
+
+  <div ng-switch-when="true" ng-controller="StreamCtrl">
+    <h2>Stream</h2>
+    <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+  </div>
+
+  <div ng-switch-when="false">
+    <!-- include landing partial instead of inline content -->
+    <h1>SoundRad</h1>
+    <p><a href="" ng-click="connect()">Connect with SoundCloud</a></p>
+    <p><a href="" ng-click="debugConnect()" class="gray5">Connect with iOS7</a></p>
+  </div>
+
+</div>
+

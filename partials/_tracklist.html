@@ -1,0 +1,17 @@
+
+<!-- add a controller variable to determine whether or not it's a set -->
+
+
+  <div ng-repeat="track in tracks" ng-include src="'partials/_track.html'" ng-controller="TrackCtrl"> </div>
+
+  <!-- <div ng-switch-when="false">"It's a track!" -- Admiral Ackbar</div> -->
+
+<div ng-show="isLoading" class="tappad gray5 txtcen">Loading...</div>
+<div ng-show="!isLoading && tracks.length == 0" class="tappad gray5 txtcen">No Results</div>
+<!-- pagination or infinite scroll -->
+
+<div class="p2" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
+  <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="">Previous</a>
+  <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="">Next</a>
+  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="">Show More</a>
+</div>

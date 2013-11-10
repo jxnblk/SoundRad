@@ -1,0 +1,27 @@
+
+<h1>{{ viewUsername }}</h1>
+
+<div>
+  <a ng-href="/{{viewUser}}"
+    class="" ng-class="{'btn-prime rc': $state.current.name == 'user'}">
+      Tracks
+  </a>
+  <a ng-href="/{{viewUser}}/sets"
+    class="" ng-class="{'btn-prime rc': $state.current.name == 'user.sets'}">
+      Playlists
+  </a>
+  <a ng-href="/{{viewUser}}/likes"
+    class="" ng-class="{'btn-prime rc': $state.current.name == 'user.likes'}">
+      Likes
+  </a>
+  <a ng-href="/{{viewUser}}/info"
+    class="" ng-class="{'btn-prime rc': $state.current.name == 'user.info'}">
+      Info
+  </a>
+</div>
+
+<div ui-view></div>
+  
+<div ng-switch="$state.current.name == 'user'">
+  <div ng-switch-when="true" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+</div>

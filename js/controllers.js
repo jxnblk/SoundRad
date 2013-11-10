@@ -151,6 +151,7 @@ angular.module('soundrad.controllers', [])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     $scope.page = 1;
+    $scope.isLoading = true;
     var url = '/me/activities/tracks';
     var params = { limit: $scope.pageSize };
     soundcloud.getStream(url, params, function(data, tracks){
@@ -328,6 +329,7 @@ angular.module('soundrad.controllers', [])
     
     // Stream Pagination
     $scope.showMoreStream = function() {
+      $scope.isLoading = true;
       var url = $scope.streamNextPage;
       var params = { limit: $scope.pageSize };
       soundcloud.getStream(url, params, function(data, tracks){
