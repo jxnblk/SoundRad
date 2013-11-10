@@ -76,7 +76,7 @@ angular.module('soundrad.controllers', [])
         console.log(me);
         $scope.me = me;
         storage.set('me', me);
-        $route.reload();
+        $window.location.reload();
       });
     };
     
