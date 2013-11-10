@@ -53,34 +53,22 @@ angular.module('soundrad.services', [])
         SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
       },
       
-      getStream: function($scope, add){
-        SC.get($scope.scget, {limit: $scope.pageSize}, function(data){
-          $scope.$apply(function () {
-            var tracks = [];
-            for (var i = 0; i < data.collection.length; i++) {                               
-              if (data.collection[i].type == 'track') {
-                var track = data.collection[i].origin;
-                tracks.push(track);
-              } else if (data.collection[i].type == 'track-sharing') {
-                var track = data.collection[i].origin.track;
-                tracks.push(track);
-              } else {
-                console.log('Its something else');
-                console.log(data.collection[i]);
-              }; 
-            };
-            if (add == true) {
-              $scope.tracks = $scope.tracks.concat(tracks);
-              $scope.expandedStream = $scope.tracks;
+      getStream: function(params, callback){
+        SC.get('/me/activities/tracks', params, function(data){
+          var tracks = [];
+          for (var i = 0; i < data.collection.length; i++) {                               
+            if (data.collection[i].type == 'track') {
+              var track = data.collection[i].origin;
+              tracks.push(track);
+            } else if (data.collection[i].type == 'track-sharing') {
+              var track = data.collection[i].origin.track;
+              tracks.push(track);
             } else {
-              $scope.tracks = tracks;
-            };
-            $scope.hasPrevPage = false;
-            $scope.hasNextPage = false;  
-            $scope.contentLoading = false;
-            $scope.streamNextPage = data.next_href;
-            //$scope.streamPrevPage = data.future_href;
-          });
+              console.error('Its something else');
+              console.log(data.collection[i]);
+            }; 
+          };
+          callback(data, tracks);
         });
       },
 

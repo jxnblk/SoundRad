@@ -150,8 +150,16 @@ angular.module('soundrad.controllers', [])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     $scope.page = 1;
-    $scope.scget = '/me/activities/tracks';
-    soundcloud.getStream($scope);
+    var params = { limit: $scope.pageSize };
+    soundcloud.getStream(params, function(data, tracks){
+      $scope.$apply(function(){
+        $scope.tracks = tracks;
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;  
+        $scope.contentLoading = false;
+        $scope.streamNextPage = data.next_href;
+      });
+    });
   }])
   
   .controller('UserCtrl', ['$scope', 'soundcloud', '$stateParams', '$state', function($scope, soundcloud, $stateParams, $state) {
@@ -292,7 +300,16 @@ angular.module('soundrad.controllers', [])
     // Stream Pagination
     $scope.showMoreStream = function() {
       $scope.scget = $scope.streamNextPage;
-      soundcloud.getStream($scope, true);
+      var params = { limit: $scope.pageSize };
+      soundcloud.getStream(params, function(data, tracks){
+        $scope.$apply(function(){
+          $scope.tracks = $scope.tracks.concat(tracks);
+          $scope.hasPrevPage = false;
+          $scope.hasNextPage = false;  
+          $scope.contentLoading = false;
+          $scope.streamNextPage = data.next_href;
+        });
+      });
       $scope.page = $scope.page + 1;
     };
     
