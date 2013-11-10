@@ -49,16 +49,8 @@ angular.module('soundrad.services', [])
         SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
       },
       
-      getSet: function($scope, params){
-        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
-          $scope.$apply(function () {
-            $scope.set = data;
-            $scope.tracks = data.tracks;
-            $scope.hasPrevPage = false;
-            $scope.hasNextPage = false;
-            $scope.contentLoading = false;
-          });
-        });
+      getSet: function(path, callback){
+        SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
       },
       
       getStream: function($scope, add){

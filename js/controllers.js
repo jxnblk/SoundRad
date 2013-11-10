@@ -249,8 +249,16 @@ angular.module('soundrad.controllers', [])
       $scope.preloadContent = null;
       $scope.contentLoading = false;
     };
-    $scope.urlPath = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
-    soundcloud.getSet($scope);
+    var path = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
+    soundcloud.getSet(path, function(data){
+      $scope.$apply(function () {
+        $scope.set = data;
+        $scope.tracks = data.tracks;
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;
+        $scope.contentLoading = false;
+      });
+    });
   }])
   
   .controller('InfoCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
