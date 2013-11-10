@@ -72,52 +72,59 @@ angular.module('soundrad.services', [])
         });
       },
 
-      getFollowings: function($scope, user){
-        var initLimit = 200,
-            initOffset = 0,                        
-            followings = [],
+      getFollowings: function(user, callback){
+        var initLimit = 128, initOffset = 0, followings = [],
             getF = function(){
               SC.get('/users/' + user + '/followings', {limit: initLimit, offset: initOffset}, function(data){
-                $scope.$apply(function () {
-                  followings = followings.concat(data);
-                  if (followings.length >= (initLimit + initOffset)){
-                    initOffset = initOffset + 200;
-                    getF();
-                  }; 
-                  $scope.followings = followings;
-                  $scope.contentLoading = false;
-                });
+                followings = followings.concat(data);
+                if (followings.length >= (initLimit + initOffset)){
+                  initOffset = initOffset + initLimit;
+                  getF();
+                };
+                callback(followings);
               });
-        };
-        getF();               
+            };
+            getF();
+
       },
       
-      getFollowers: function($scope, user){
-        var initLimit = 128,
-            initOffset = 0,                        
-            followers = [],
+      getFollowers: function(user, callback){
+        var initLimit = 128, initOffset = 0, followers = [],
             getF = function(){
               SC.get('/users/' + user + '/followers', {limit: initLimit, offset: initOffset}, function(data){
-                $scope.$apply(function () {
-                  followers = followers.concat(data);
-                  if (followers.length >= (initLimit + initOffset)){
-                    initOffset = initOffset + 128;
-                    getF();
-                  }; 
-                  $scope.followers = followers;
-                  $scope.contentLoading = false;
-                });
+                followers = followers.concat(data);
+                if (followers.length >= (initLimit + initOffset)){
+                  initOffset = initOffset + initLimit;
+                  getF();
+                };
+                callback(followers);
               });
-        };
-        getF();               
+            };
+            getF();               
       },
       
-      like: function(trackid, callback){
+      like: function(trackid){
         SC.put('/me/favorites/' + trackid, callback);
       },
       
-      unlike: function(trackid, callback){
+      unlike: function(trackid){
         SC.delete('/me/favorites/' + trackid);
+      },
+
+      addToPlaylist: function(track, setid, callback){
+        SC.get('/playlists/' + setid, function(playlist) {
+          console.log(playlist);
+          var tracks = [], i;
+          for(i in playlist.tracks){
+            tracks.push(playlist.tracks[i].id);
+          };
+          tracks.push(track.id);
+          // console.log( { kind: 'playlist', tracks: tracks });
+          // Jesus christ why doesn't this work?
+          SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
+          // playlist.tracks.push(track);
+          // SC.put(playlist.uri, playlist, callback);
+        });
       },
       
       resolve: function(path, callback){
@@ -130,12 +137,8 @@ angular.module('soundrad.services', [])
   
   ////////////////////////////////////////////////////////////////
   // Player Factory
-  .factory('player', function($rootScope, audio, soundcloud) {
-    var player,
-        tracks,
-        i,
-        urlParams,
-        currentTimePercentage = audio.currentTime;
+  .factory('player', function(audio, soundcloud) {
+    var player, tracks, i, urlParams, currentTimePercentage = audio.currentTime;
         
     player = {
       tracks: tracks,
@@ -150,9 +153,7 @@ angular.module('soundrad.services', [])
         player.tracks = tracks;
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
         } else { urlParams =  '?client_id=' + clientID; };
-        if (player.paused != tracks[i]) {
-          audio.src = tracks[i].stream_url + urlParams;
-        };
+        if (player.paused != tracks[i]) audio.src = tracks[i].stream_url + urlParams;
         audio.play();
         player.playing = tracks[i];
         player.i = i;
@@ -180,7 +181,7 @@ angular.module('soundrad.services', [])
       }
     };
     audio.addEventListener('ended', function() {
-      $rootScope.$apply(player.next());
+      player.next();
     }, false);
     return player;
   })
@@ -188,7 +189,7 @@ angular.module('soundrad.services', [])
   
   ////////////////////////////////////////////////////////////////
   // Audio Factory
-  .factory('audio', function($document, $rootScope) {
+  .factory('audio', function($document) {
     var audio = $document[0].createElement('audio');  
     return audio;
   })
@@ -202,7 +203,7 @@ angular.module('soundrad.services', [])
         var string = JSON.stringify(obj)
         localStorage.setItem(key, string);
       },
-      get: function(key){
+      get: function(key, callback){
         var data = localStorage.getItem(key);
         var obj = JSON.parse(data);
         return obj;
