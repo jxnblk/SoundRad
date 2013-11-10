@@ -228,8 +228,16 @@ angular.module('soundrad.controllers', [])
       $scope.contentLoading = false;
     };
     
-    $scope.urlPath = '/' + $scope.viewUser + '/' + $stateParams.track;
-    soundcloud.getTrack($scope);
+    var path = '/' + $scope.viewUser + '/' + $stateParams.track;
+    soundcloud.getTrack(path, function(data){
+      $scope.$apply(function () {
+        $scope.tracks = new Array(data);
+        $scope.track = data;
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;
+        $scope.contentLoading = false;
+      });
+    });
   }])
   
   .controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){

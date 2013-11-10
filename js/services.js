@@ -42,22 +42,11 @@ angular.module('soundrad.services', [])
       },
       
       getTracks: function(url, params, callback){
-        console.log('getting tracks');
-        console.log(url);
-        console.log(params);
         SC.get(url, params, callback);
       },
       
-      getTrack: function($scope, params){
-        SC.get('/resolve.json?url=http://soundcloud.com' + $scope.urlPath , function(data){
-          $scope.$apply(function () {
-            $scope.tracks = new Array(data);
-            $scope.track = data;
-            $scope.hasPrevPage = false;
-            $scope.hasNextPage = false;
-            $scope.contentLoading = false;
-          });
-        });
+      getTrack: function(path, callback){
+        SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
       },
       
       getSet: function($scope, params){
