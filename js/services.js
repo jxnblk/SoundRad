@@ -112,14 +112,12 @@ angular.module('soundrad.services', [])
         getF();               
       },
       
-      like: function($scope, trackid){
-        SC.put('/me/favorites/' + trackid, function(){
-        });
+      like: function(trackid, callback){
+        SC.put('/me/favorites/' + trackid, callback);
       },
       
-      unlike: function($scope, trackid){
-        SC.delete('/me/favorites/' + trackid, function(){
-        });
+      unlike: function(trackid, callback){
+        SC.delete('/me/favorites/' + trackid);
       },
       
       resolve: function($scope, params){

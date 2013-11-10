@@ -363,24 +363,14 @@ angular.module('soundrad.controllers', [])
         $scope.showActions = !$scope.showActions;
       };
     
-      $scope.like = function(trackid, params) {        
-        if(params == 'isSetTrack') {
-          $scope.setTrack.user_favorite = true;
-        } else {
-          $scope.track.user_favorite = true;
-        };
+      $scope.like = function(trackid) {        
         if($scope.token){
-          soundcloud.like($scope, trackid);  
+          soundcloud.like(trackid);
         } else {
           $scope.connect();
         };
       };
-      $scope.unlike = function(trackid, params) {
-        if(params == 'isSetTrack') {
-          $scope.setTrack.user_favorite = false;
-        } else {
-          $scope.track.user_favorite = false;
-        };
+      $scope.unlike = function(trackid) {
         soundcloud.unlike($scope, trackid);
       };
       
