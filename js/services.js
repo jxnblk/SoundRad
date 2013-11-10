@@ -41,15 +41,11 @@ angular.module('soundrad.services', [])
         SC.get('/users/' + user, callback);
       },
       
-      getTracks: function($scope, params){
-        SC.get($scope.scget, {limit: $scope.pageSize, offset: $scope.pageOffset}, function(data){
-          $scope.$apply(function () {
-            $scope.tracks = data;
-            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-            $scope.contentLoading = false;
-          });      
-        });
+      getTracks: function(url, params, callback){
+        console.log('getting tracks');
+        console.log(url);
+        console.log(params);
+        SC.get(url, params, callback);
       },
       
       getTrack: function($scope, params){

@@ -65,7 +65,7 @@ angular.module('soundrad.controllers', [])
     if ($scope.token){
       soundcloud.reconnect($scope.token);
       soundcloud.me(function(me){
-        console.log(me);
+        //console.log(me);
         $scope.me = me;
         $route.reload();
       });
@@ -133,8 +133,11 @@ angular.module('soundrad.controllers', [])
         $scope.page = 1;
         $scope.pageOffset = 0;
       };
+      $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
     };
     $scope.getPage();
+
+    //$scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
     
   }])
   
@@ -156,19 +159,30 @@ angular.module('soundrad.controllers', [])
     $scope.viewUser = $stateParams.user;
     $scope.viewUsername = '.';
     soundcloud.getUser($scope.viewUser, function(data){
-      console.log('got user');
-      // console.log(data);
-      $scope.userData = data;
-      $scope.viewUsername = data.username;
+      $scope.$apply(function(){
+        $scope.userData = data;
+        $scope.viewUsername = data.username;
+      });
     });
     
     $scope.$state = $state;
+
+    $scope.getTracks = function(){
+      soundcloud.getTracks($scope.scget, $scope.getParams, function(data){
+        $scope.$apply(function(){
+          $scope.tracks = data;
+          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+          $scope.contentLoading = false;
+        });
+      });
+    };
     
     $scope.$on('$stateChangeSuccess', function(){
       if ($state.current.name == 'user'){
         $scope.scget = '/users/' + $scope.viewUser + '/tracks';
         $scope.getPage();
-        soundcloud.getTracks($scope);
+        $scope.getTracks();
       };  
     });
     
@@ -178,14 +192,31 @@ angular.module('soundrad.controllers', [])
     $scope.tracks = null;
     $scope.contentLoading = true;
     $scope.scget = '/users/' + $scope.viewUser + '/favorites';
-    soundcloud.getTracks($scope);
+    $scope.getPage();
+    // $scope.getTracks(); // not sure why tracks won't load from the parent controller
+    soundcloud.getTracks($scope.scget, $scope.getParams, function(data){
+      $scope.$apply(function(){
+        $scope.tracks = data;
+        $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+        $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+        $scope.contentLoading = false;
+      });
+    });
   }])
   
   .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.tracks = null;
     $scope.contentLoading = true;
     $scope.scget = '/users/' + $scope.viewUser + '/playlists';
-    soundcloud.getTracks($scope); 
+    $scope.getPage();
+    soundcloud.getTracks($scope.scget, $scope.getParams, function(data){
+      $scope.$apply(function(){
+        $scope.tracks = data;
+        $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+        $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+        $scope.contentLoading = false;
+      });
+    });
   }])
   
   .controller('TrackDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
@@ -259,7 +290,15 @@ angular.module('soundrad.controllers', [])
         $scope.contentLoading = true;
         $scope.tracks = null;
         $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
-        soundcloud.getTracks($scope);
+        $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
+        soundcloud.getTracks($scope.scget, $scope.getParams, function(data){
+          $scope.$apply(function(){
+            $scope.tracks = data;
+            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+            $scope.contentLoading = false;
+          });
+        });
         $scope.updatePage();
       };
     };
@@ -268,8 +307,16 @@ angular.module('soundrad.controllers', [])
       if($scope.pageOffset >= $scope.pageSize) {
         $scope.contentLoading = true;
         $scope.tracks = null;
-        $scope.pageOffset = $scope.pageOffset - $scope.pageSize;        
-        soundcloud.getTracks($scope);  
+        $scope.pageOffset = $scope.pageOffset - $scope.pageSize;
+        $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
+        soundcloud.getTracks($scope.scget, $scope.getParams, function(data){
+          $scope.$apply(function(){
+            $scope.tracks = data;
+            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+            $scope.contentLoading = false;
+          });
+        });
         $scope.updatePage(); 
       };      
     };
