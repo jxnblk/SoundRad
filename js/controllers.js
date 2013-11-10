@@ -142,6 +142,12 @@ angular.module('soundrad.controllers', [])
       });
     };
 
+    $scope.createPlaylist = function(){
+      soundcloud.createPlaylist(function(data){
+        console.log(data);
+      });
+    };
+
   }])
   
   .controller('CallbackCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){

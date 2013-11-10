@@ -111,15 +111,23 @@ angular.module('soundrad.services', [])
         SC.delete('/me/favorites/' + trackid);
       },
 
-      addToPlaylist: function(track, setid, callback){
+      createPlaylist: function(callback){
+        var tracks = [117837239].map(function(id) { return { id: id } });
+        SC.post('/playlists', {
+          playlist: { title: 'Test Playlist', tracks: tracks }
+        }, callback);
+      },
+
+      addToPlaylist: function(trackid, setid, callback){
         SC.get('/playlists/' + setid, function(playlist) {
           console.log(playlist);
           var tracks = [], i;
           for(i in playlist.tracks){
             tracks.push(playlist.tracks[i].id);
           };
-          tracks.push(track.id);
-          // Jesus christ why doesn't this work?
+          tracks.push(trackid);
+          var tracks = tracks.map(function(id) { return { id: id } });
+          console.log(tracks);
           SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
         });
       },
