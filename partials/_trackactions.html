@@ -7,8 +7,17 @@
     <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a>
     <!-- <div>{{ track }}</div> -->
 
-    <a href="" ng-click="addToPlaylist(track)">Add to Playlist</a>
-    <div ng-show="set">
+    <div>
+      <p>Add to playlist:</p>
+      <a href=""
+        ng-repeat="playlist in userPlaylists"
+        ng-click="addToPlaylist(track, playlist)">
+          {{ playlist.title }}
+      </a>
+    </div>
+    
+    <div ng-show="set && viewUser == me">
+      <!-- need to hide this for non-user sets -->
       [{{ set.title }}] - 
       <a href="" ng-click="removeFromPlaylist(track, set.id)">Remove from Playlist</a>
     </div>

@@ -32,13 +32,17 @@ angular.module('soundrad.services', [])
       },
 
       ////////////////
-      // Maybe not need this
-      authenticate: function() {
-        Token = SC.accessToken();
-      },
+      // Maybe don't need this
+      // authenticate: function() {
+      //   Token = SC.accessToken();
+      // },
       
       getUser: function(user, callback){
         SC.get('/users/' + user, callback);
+      },
+
+      getUserPlaylists: function(callback){
+        SC.get('/me/playlists', callback);
       },
       
       getTracks: function(url, params, callback){
@@ -111,39 +115,27 @@ angular.module('soundrad.services', [])
         SC.delete('/me/favorites/' + track.id, callback);
       },
 
-      createPlaylist: function(callback){
-        var tracks = [117837239].map(function(id) { return { id: id } });
-        SC.post('/playlists', {
-          playlist: { title: 'Test Playlist', tracks: tracks }
-        }, callback);
+      createPlaylist: function(playlist, callback){
+        SC.post('/playlists', playlist, callback);
       },
 
-      addToPlaylist: function(track, setid, callback){
-        // Already have the playlist data so ditch this
-        SC.get('/playlists/' + setid, function(playlist) {
-          var tracks = [], i;
-          for(i in playlist.tracks){
-            tracks.push(playlist.tracks[i].id);
-          };
-          tracks.push(track.id);
-          var tracks = tracks.map(function(id) { return { id: id } });
-          SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
-        });
+      addToPlaylist: function(track, playlist, callback){
+        var tracks = [], i;
+        for(i in playlist.tracks){
+          tracks.push(playlist.tracks[i].id);
+        };
+        tracks.push(track.id);
+        var tracks = tracks.map(function(id) { return { id: id } });
+        SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
       },
 
       removeFromPlaylist: function(track, playlist, callback){
-        // Get playlist data from view
-        // SC.get('/playlists/' + setid, function(playlist) {
-          console.log(playlist);
-          var tracks = [], i;
-          for(i in playlist.tracks){
-            if (playlist.tracks[i].id != track.id) tracks.push(playlist.tracks[i].id);
-          };
-          var tracks = tracks.map(function(id) { return { id: id } });
-          console.log(tracks);
-          console.log(playlist);
-          SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
-        // });
+        var tracks = [], i;
+        for(i in playlist.tracks){
+          if (playlist.tracks[i].id != track.id) tracks.push(playlist.tracks[i].id);
+        };
+        var tracks = tracks.map(function(id) { return { id: id } });
+        SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
       },
       
       resolve: function(path, callback){

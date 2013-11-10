@@ -21,17 +21,26 @@
         <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class=" h3 b text truncate mr2">{{track.title}}</a>
       </div>
       <!-- <div ng-include src="'partials/_trackactions.html'"></div> -->
-      <div>
+      <!-- <div>
         <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track)" ng-hide="track.user_favorite"><i class="icon icon-heart sm"></i> Like</a>
-        <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a>
+        <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a> -->
         <!-- <div>{{ track }}</div> -->
 
-        <a href="" ng-click="addToPlaylist(track)">Add to Playlist</a>
-        <div ng-show="set">
-          [{{ set.title }}] - 
-          <a href="" ng-click="removeFromPlaylist(track, set)">Remove from Playlist</a>
-        </div>
-      </div>
+        <!-- <a href="" ng-click="addToPlaylist(track)">Add to Playlist</a> -->
+        <!-- <div>viewUsername: {{ viewUsername }} | me.username: {{ me.username }}</div> -->
+        <!-- <div>track: <pre>{{ track | json }}</pre></div> -->
+        <!-- <div>
+          <p>Add to playlist:</p>
+          <a href=""
+            ng-repeat="playlist in userPlaylists"
+            ng-click="addToPlaylist(track, playlist)">
+              {{ playlist.title }}
+          </a>
+        </div> -->
+        <!-- <div ng-show="set.user_id == me.id">
+          <a href="" ng-click="removeFromPlaylist(track, set)">Remove from {{ set.title }}</a>
+        </div> -->
+      <!-- </div> -->
     </div>
 
     <div ng-switch-when="true" class="">

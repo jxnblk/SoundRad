@@ -44,34 +44,41 @@ angular.module('soundrad.controllers', [])
     
     $scope.version = storage.get('version');
     if(!$scope.version){
-      console.log('Reseting localStorage - version 64');
-      storage.clearAll();
-      $scope.version = 64;
-      storage.set('version', $scope.version);
+      console.log('Reseting localStorage - version 64'); storage.clearAll(); $scope.version = 64; storage.set('version', $scope.version);
     };
     if($scope.version != 64){
-      console.log('Setting version to 64');
-      localStorage.removeItem('bookmarks');
-      $scope.version = 64;
-      storage.set('version', $scope.version);
+      console.log('Setting version to 64'); localStorage.removeItem('bookmarks'); $scope.version = 64; storage.set('version', $scope.version);
     };
     
     $scope.token = storage.get('token');
     $scope.me = storage.get('me');
 
+    var getUserPlaylists = function(){
+      soundcloud.getUserPlaylists(function(data){
+        $scope.$apply(function(){
+          $scope.userPlaylists = data;
+          storage.set('playlists', data);  
+        });
+      });
+    };
+
     if ($scope.token){
       soundcloud.reconnect($scope.token);
       soundcloud.me(function(me){
         $scope.me = me;
+        getUserPlaylists();
         $route.reload();
       });
     };
+
+    
 
     $scope.connect = function() {
       soundcloud.connect(function(me){
         console.log(me);
         $scope.me = me;
         storage.set('me', me);
+        getUserPlaylists();
         $window.location.reload();
       });
     };
@@ -132,23 +139,6 @@ angular.module('soundrad.controllers', [])
       $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
     };
     $scope.getPage();
-
-
-    // Move this to track controller
-    $scope.addToPlaylist = function(track) {
-      console.log('add to set');
-      // Hard coding test set
-      soundcloud.addToPlaylist(track, 5485664, function(data){
-        console.log(data);
-      });
-    };
-
-    // move to track controller
-    $scope.createPlaylist = function(){
-      soundcloud.createPlaylist(function(data){
-        console.log(data);
-      });
-    };
 
   }])
   
@@ -258,6 +248,10 @@ angular.module('soundrad.controllers', [])
         $scope.isLoading = false;
       });
     });
+
+
+    
+
   }])
   
   .controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
@@ -415,6 +409,26 @@ angular.module('soundrad.controllers', [])
           $scope.$apply(function(){
             track.user_favorite = false;  
           });
+        });
+      };
+
+    
+      $scope.addToPlaylist = function(track, playlist) {
+        soundcloud.addToPlaylist(track, playlist, function(data){
+          console.log(data);
+        });
+      };
+
+      $scope.createPlaylist = function(name, track){
+        var tracks = track.id.map(function(id) { return { id: id } });
+        var playlist = {
+              playlist: {
+                title: name,
+                tracks: tracks
+              }
+            };
+        soundcloud.createPlaylist(playlist, function(data){
+          console.log(data);
         });
       };
       
