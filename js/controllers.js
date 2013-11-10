@@ -7,7 +7,7 @@ angular.module('soundrad.controllers', [])
 
 
   .controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
-  
+
     $scope.player = player;
     $scope.audio = audio;
 
@@ -41,19 +41,21 @@ angular.module('soundrad.controllers', [])
       };
   }])
   
-  .controller('NavCtrl', ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage', function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
+  .controller('NavCtrl',
+    ['$scope', '$stateParams', '$state', '$window', '$location', '$route', 'soundcloud', 'storage',
+    function($scope, $stateParams, $state, $window, $location, $route, soundcloud, storage) {
     
     $scope.version = storage.get('version');
     if(!$scope.version){
-      console.log('Reseting localStorage - version 32');
+      console.log('Reseting localStorage - version 64');
       storage.clearAll();
-      $scope.version = 32;
+      $scope.version = 64;
       storage.set('version', $scope.version);
     };
-    if($scope.version != 32){
-      console.log('Setting version to 32');
+    if($scope.version != 64){
+      console.log('Setting version to 64');
       localStorage.removeItem('bookmarks');
-      $scope.version = 32;
+      $scope.version = 64;
       storage.set('version', $scope.version);
     };
     
@@ -61,11 +63,21 @@ angular.module('soundrad.controllers', [])
     $scope.me = storage.get('me');
 
     if ($scope.token){
-      soundcloud.connect($scope);
+      soundcloud.reconnect($scope.token);
+      soundcloud.me(function(me){
+        console.log(me);
+        $scope.me = me;
+        $route.reload();
+      });
     };
     
     $scope.connect = function() {
-      soundcloud.connect($scope);
+      soundcloud.connect(function(me){
+        console.log(me);
+        $scope.me = me;
+        storage.set('me', me);
+        $route.reload();
+      });
     };
     
     $scope.logOut = function() {

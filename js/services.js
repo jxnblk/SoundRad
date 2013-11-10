@@ -1,8 +1,5 @@
 'use strict';
 
-/* Services */
-
-
 var Token;
 
 angular.module('soundrad.services', [])
@@ -15,32 +12,27 @@ angular.module('soundrad.services', [])
     });
     
     return {
+
+      reconnect: function(token) {
+        console.log('reconnecting...');
+        window.SC.storage().setItem('SC.accessToken', token);
+        Token = token;
+      },
       
-      connect: function($scope){
-        if($scope.me){
-          window.SC.storage().setItem('SC.accessToken', $scope.token);
-          Token = $scope.token;
-        } else {
-          SC.connect(function() {
-            $scope.$apply(function () {
-              SC.get('/me', function(me, error) { 
-                $scope.$apply(function () {
-                  if (error){
-                    console.log('Error getting /me');
-                  } else {
-                    $scope.me = me;
-                    storage.set('me', me);
-                  };
-                  $location.path('/');
-                });
-              });   
-              Token = SC.accessToken();
-              $scope.token = Token;
-              storage.set('token', Token);
-              
-            });
-          });
-        };
+      connect: function(callback){
+        SC.connect(function() {
+          Token = SC.accessToken();
+          storage.set('token', Token);
+          SC.get('/me', callback);
+        });
+      },
+
+      me: function(callback){
+        SC.get('/me', callback);
+      },
+
+      authenticate: function() {
+        return SC.accessToken();
       },
       
       getUser: function($scope, params){
@@ -266,14 +258,6 @@ angular.module('soundrad.services', [])
   })
 
 
-  ////////////////////////////////////////////////////////////////
-  // Bookmarks
-
-  // .factory('bookmarkService', function(storage){
-  //   return {
-      
-  //   }
-  // })
   
   
   ////////////////////////////////////////////////////////////////
