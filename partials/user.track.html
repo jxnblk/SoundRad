@@ -8,8 +8,8 @@
     <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 h3 truncate pr">{{track.user.username}}</a>
     <p class="h2 b text mb pr">{{track.title}}</p>
     <div class="mb" ng-controller="TrackCtrl">
-      <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track.id)" ng-hide="track.user_favorite"><i class="icon icon-heart sm"></i> Like</a>
-      <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a>
+      <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track)" ng-hide="track.user_favorite"><i class="icon icon-heart sm"></i> Like</a>
+      <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a>
 <!--
       <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track.id)" ng-hide="track.user_favorite">Like</a>
       <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite">Liked</a>

@@ -134,14 +134,16 @@ angular.module('soundrad.controllers', [])
     $scope.getPage();
 
 
-    // for testing
+    // Move this to track controller
     $scope.addToPlaylist = function(track) {
       console.log('add to set');
-      soundcloud.addToPlaylist(117837239, 5485664, function(data){
+      // Hard coding test set
+      soundcloud.addToPlaylist(track, 5485664, function(data){
         console.log(data);
       });
     };
 
+    // move to track controller
     $scope.createPlaylist = function(){
       soundcloud.createPlaylist(function(data){
         console.log(data);
@@ -159,8 +161,9 @@ angular.module('soundrad.controllers', [])
   
   .controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     $scope.page = 1;
+    var url = '/me/activities/tracks';
     var params = { limit: $scope.pageSize };
-    soundcloud.getStream(params, function(data, tracks){
+    soundcloud.getStream(url, params, function(data, tracks){
       $scope.$apply(function(){
         $scope.tracks = tracks;
         $scope.hasPrevPage = false;
@@ -276,6 +279,19 @@ angular.module('soundrad.controllers', [])
         $scope.isLoading = false;
       });
     });
+
+    $scope.removeFromPlaylist = function(track, playlist) {
+      console.log(playlist);
+      soundcloud.removeFromPlaylist(track, playlist, function(data){
+        console.log(data);
+        $scope.$apply(function(){
+          $scope.set = data;
+          $scope.tracks = data.tracks;
+        });
+      });
+    };
+
+
   }])
   
   .controller('InfoCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
@@ -318,9 +334,9 @@ angular.module('soundrad.controllers', [])
     
     // Stream Pagination
     $scope.showMoreStream = function() {
-      $scope.getUrl = $scope.streamNextPage;
+      var url = $scope.streamNextPage;
       var params = { limit: $scope.pageSize };
-      soundcloud.getStream(params, function(data, tracks){
+      soundcloud.getStream(url, params, function(data, tracks){
         $scope.$apply(function(){
           $scope.tracks = $scope.tracks.concat(tracks);
           $scope.hasPrevPage = false;
@@ -382,15 +398,24 @@ angular.module('soundrad.controllers', [])
         $scope.showActions = !$scope.showActions;
       };
     
-      $scope.like = function(trackid) {        
+      $scope.like = function(track) {        
+        console.log(track);
         if($scope.token){
-          soundcloud.like(trackid);
+          soundcloud.like(track, function(data){
+            $scope.$apply(function(){
+              track.user_favorite = true;
+            });           
+          });
         } else {
           $scope.connect();
         };
       };
-      $scope.unlike = function(trackid) {
-        soundcloud.unlike($scope, trackid);
+      $scope.unlike = function(track) {
+        soundcloud.unlike(track, function(data){
+          $scope.$apply(function(){
+            track.user_favorite = false;  
+          });
+        });
       };
       
       

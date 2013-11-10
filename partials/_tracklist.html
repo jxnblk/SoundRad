@@ -11,7 +11,7 @@
 
   <div id="{{track.permalink}}" ng-repeat="track in tracks" ng-switch="!!track.tracks" ng-controller="TrackCtrl">
     
-    <div ng-switch-when="false" class="posrel media maxhi4 borbot bor-gray2">
+    <div ng-switch-when="false" class="posrel media borbot bor-gray2">
       <div class="img">
         <a href="" ng-click="player.play(tracks, $index)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play db anim-pop-in"></i></a>
         <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-pause db anim-pop-in"></i></a>
@@ -19,9 +19,18 @@
       <div class="bd posrel minhi4 hov">
         <a ng-href="/{{track.user.permalink}}" class="db mt-25 gray5 truncate mr2">{{track.user.username}}</a>
         <a href="" ng-click="preload('/' + track.user.permalink + '/' + track.permalink, track)" class=" h3 b text truncate mr2">{{track.title}}</a>
+      </div>
+      <!-- <div ng-include src="'partials/_trackactions.html'"></div> -->
+      <div>
+        <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track)" ng-hide="track.user_favorite"><i class="icon icon-heart sm"></i> Like</a>
+        <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a>
+        <!-- <div>{{ track }}</div> -->
 
-        
-
+        <a href="" ng-click="addToPlaylist(track)">Add to Playlist</a>
+        <div ng-show="set">
+          [{{ set.title }}] - 
+          <a href="" ng-click="removeFromPlaylist(track, set)">Remove from Playlist</a>
+        </div>
       </div>
     </div>
 

@@ -53,8 +53,8 @@ angular.module('soundrad.services', [])
         SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
       },
       
-      getStream: function(params, callback){
-        SC.get('/me/activities/tracks', params, function(data){
+      getStream: function(url, params, callback){
+        SC.get(url, params, function(data){
           var tracks = [];
           for (var i = 0; i < data.collection.length; i++) {                               
             if (data.collection[i].type == 'track') {
@@ -103,12 +103,12 @@ angular.module('soundrad.services', [])
             getF();               
       },
       
-      like: function(trackid){
-        SC.put('/me/favorites/' + trackid, callback);
+      like: function(track, callback){
+        SC.put('/me/favorites/' + track.id, callback);
       },
       
-      unlike: function(trackid){
-        SC.delete('/me/favorites/' + trackid);
+      unlike: function(track, callback){
+        SC.delete('/me/favorites/' + track.id, callback);
       },
 
       createPlaylist: function(callback){
@@ -118,18 +118,32 @@ angular.module('soundrad.services', [])
         }, callback);
       },
 
-      addToPlaylist: function(trackid, setid, callback){
+      addToPlaylist: function(track, setid, callback){
+        // Already have the playlist data so ditch this
         SC.get('/playlists/' + setid, function(playlist) {
-          console.log(playlist);
           var tracks = [], i;
           for(i in playlist.tracks){
             tracks.push(playlist.tracks[i].id);
           };
-          tracks.push(trackid);
+          tracks.push(track.id);
           var tracks = tracks.map(function(id) { return { id: id } });
-          console.log(tracks);
           SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
         });
+      },
+
+      removeFromPlaylist: function(track, playlist, callback){
+        // Get playlist data from view
+        // SC.get('/playlists/' + setid, function(playlist) {
+          console.log(playlist);
+          var tracks = [], i;
+          for(i in playlist.tracks){
+            if (playlist.tracks[i].id != track.id) tracks.push(playlist.tracks[i].id);
+          };
+          var tracks = tracks.map(function(id) { return { id: id } });
+          console.log(tracks);
+          console.log(playlist);
+          SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
+        // });
       },
       
       resolve: function(path, callback){
