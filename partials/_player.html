@@ -1,39 +1,54 @@
-
-<div id="controls">
-  <a href="" ng-click="player.prev()"
-    class="">
-      <i class="ss-icon ss-skipback"></i>
-  </a>
-  <a href="" ng-click="player.play(player.tracks, player.i)"
-    class="" ng-hide="player.playing">
-      <i class="ss-icon ss-play"></i>
-  </a>
-  <a href="" ng-click="player.pause(player.playing)"
-    class="" ng-show="player.playing">
-      <i class="ss-icon ss-pause"></i>
-  </a>
-  <a href="" ng-click="player.next()"
-    class=""><i class="ss-icon ss-skipforward"></i>
-  </a>
-</div>
-
-<div id="player-info">
-  <p class="">{{player.tracks[player.i].user.username}}</p>
-  <h1 class="">{{player.tracks[player.i].title}}</h1>
-</div>
-
-<div id="player-meta">
-  <!-- like -->
-  <!-- link -->
-  <!-- share -->
-  <!-- add to playlist -->
-</div>
-
-<div id="scrubber" ng-controller="ScrubberCtrl">
-  <div class="player-buffer" style="width: {{currentBufferPercentage}}%"></div>
-  <div class="player-played" style="width: {{currentTimePercentage}}%"></div>
-  <div class="" ng-click="seekTo($event)"></div>
-  <div class="" ng-show="audio.readyState == 4">
-    {{currentTimeMS | playTime}} | {{durationMS | playTime}}
+<div id="player" class="clearfix bg-white border-bottom">
+  
+  <div id="player-controls" class="left bar-6">
+    <a href="" ng-click="player.prev()"
+      class="btn-player text">
+        <i class="ss-icon ss-skipback"></i>
+    </a>
+    <a href="" ng-click="player.play(player.tracks, player.i)"
+      class="btn-player text" ng-hide="player.playing">
+        <i class="ss-icon ss-play"></i>
+    </a>
+    <a href="" ng-click="player.pause(player.playing)"
+      class="btn-player text" ng-show="player.playing">
+        <i class="ss-icon ss-pause"></i>
+    </a>
+    <a href="" ng-click="player.next()"
+      class="btn-player text"><i class="ss-icon ss-skipforward"></i>
+    </a>
   </div>
+
+  <div id="player-body" class="clearfix">
+
+    <div id="player-body-top" class="clearfix bar-4">
+      <div id="player-meta" class="right px1">
+        <a href="" class="small btn btn-text-toggle"><i class="ss-icon ss-heart"></i> Like</a>
+        <!-- link -->
+        <!-- share -->
+        <!-- add to playlist -->
+      </div>
+
+      <div id="player-info" class="clearfix bar-4-double px1">
+        <p class="">{{player.tracks[player.i].user.username}}</p>
+        <h1 class="p">{{player.tracks[player.i].title}}</h1>
+      </div>
+    </div>
+
+    <div id="scrubber" ng-controller="ScrubberCtrl" class="bar-2 clearfix px1">
+      <div class="right ml1 small">
+        <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
+        <span ng-show="audio.readyState == 4">
+          {{currentTimeMS | playTime}} | {{durationMS | playTime}}
+        </span>
+      </div>
+      <div class="clearfix progress progress-light">
+        <div class="progress-background"></div>
+        <div class="progress-buffer" style="width: {{currentBufferPercentage}}%"></div>
+        <div class="progress-played" style="width: {{currentTimePercentage}}%"></div>
+        <div class="progress-overlay" ng-click="seekTo($event)"></div>
+      </div>
+    </div>
+
+  </div>
+
 </div>

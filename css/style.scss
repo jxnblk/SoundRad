@@ -2,19 +2,6 @@
 
 $font-primary: 'freight-sans-pro', Helvetica, sans-serif;
 @import "basscss";
-
-// Starter theme
-$blue: #0096cc;
-$text: #555;
-body {
-  color: $text;
-  background-color: #eee;
-}
-a {
-  color: $blue;
-  text-decoration: none;
-  &:hover {
-    color: darken($blue, 20%);
-  }
-}
+@import "modules";
+@import "themes";
 

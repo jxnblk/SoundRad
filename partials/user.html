@@ -1,23 +1,26 @@
+<div class="border-bottom">
+  <div class="bar-4 p1">
+    <h1 class="h1">{{ viewUsername }}</h1>
+  </div>
 
-<h1>{{ viewUsername }}</h1>
-
-<div>
-  <a ng-href="/{{viewUser}}"
-    class="" ng-class="{'btn-prime rc': $state.current.name == 'user'}">
-      Tracks
-  </a>
-  <a ng-href="/{{viewUser}}/sets"
-    class="" ng-class="{'btn-prime rc': $state.current.name == 'user.sets'}">
-      Playlists
-  </a>
-  <a ng-href="/{{viewUser}}/likes"
-    class="" ng-class="{'btn-prime rc': $state.current.name == 'user.likes'}">
-      Likes
-  </a>
-  <!-- <a ng-href="/{{viewUser}}/info"
-    class="" ng-class="{'btn-prime rc': $state.current.name == 'user.info'}">
-      Info
-  </a> -->
+  <div class="bar-3 px0 navbar">
+    <a ng-href="/{{viewUser}}"
+      class="" ng-class="{'text': $state.current.name != 'user'}">
+        Tracks
+    </a>
+    <a ng-href="/{{viewUser}}/sets"
+      class="" ng-class="{'text': $state.current.name != 'user.sets'}">
+        Playlists
+    </a>
+    <a ng-href="/{{viewUser}}/likes"
+      class="" ng-class="{'text': $state.current.name != 'user.likes'}">
+        Likes
+    </a>
+    <!-- <a ng-href="/{{viewUser}}/info"
+      class="" ng-class="{'text': $state.current.name != 'user.info'}">
+        Info
+    </a> -->
+  </div>
 </div>
 
 <div ui-view></div>

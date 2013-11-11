@@ -1,0 +1,88 @@
+// Modules
+
+.fixed-top {
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  z-index: 4;
+}
+.mt6 { margin-top: 6*$space; }
+.px0 { padding-right: .5*$space; padding-left: .5*$space; }
+
+.bar-3 {
+  min-height: 3*$space;
+  line-height: 3*$space;
+  
+}
+.navbar a {
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 .5*$space;
+}
+
+.bar-2 {
+  height: 2*$space;
+  line-height: 2*$space;
+}
+
+.bar-4 {
+  height: 4*$space;
+  line-height: 4*$space;
+}
+
+.bar-4-double {
+  height: 4*$space;
+  padding-top: .25*$space;
+  padding-bottom: .25*$space;
+  &, & h1, & h2 {
+    line-height: 1.75*$space;  
+  }
+}
+.bar-6 {
+  height: 6*$space;
+  line-height: 6*$space;
+}
+
+.btn {
+  font-weight: bold;
+  display: inline-block;
+  height: 2em;
+  line-height: 2;
+  padding: 0 1em;
+  border-radius: .25*$space;
+  .ss-icon {
+    position: relative;
+    top: .1875em;
+  }
+}
+.btn-player {
+  float: left;
+  height: 6*$space;
+  line-height: 6*$space;
+  padding: 0 $space;
+}
+
+
+.progress {
+  position: relative;
+  height: 2*$space;
+  cursor: pointer;
+}
+.progress-background,
+.progress-buffer,
+.progress-played,
+.progress-overlay {
+  position: absolute;
+}
+.progress-background,
+.progress-buffer,
+.progress-played {
+  top: .75*$space;
+  bottom: .75*$space;
+  left: 0;
+}
+.progress-background {
+  right: 0;
+}
+.progress-overlay {
+  top: 0; right: 0; bottom: 0; left: 0;
+}

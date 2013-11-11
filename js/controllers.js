@@ -100,6 +100,7 @@ angular.module('soundrad.controllers', [])
       $location.hash('');
       $location.path(url);      
       $scope.preloadContent = data;
+      console.log(data);
     };
     
     $scope.connectDebug = storage.get('connectDebug');
@@ -167,6 +168,7 @@ angular.module('soundrad.controllers', [])
   
   .controller('UserCtrl', ['$scope', 'soundcloud', '$stateParams', '$state', function($scope, soundcloud, $stateParams, $state) {
     $scope.isLoading = true;
+    $scope.isSetsList = false;
     $scope.viewUser = $stateParams.user;
     $scope.viewUsername = '.';
     soundcloud.getUser($scope.viewUser, function(data){
@@ -223,6 +225,7 @@ angular.module('soundrad.controllers', [])
     soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
+        $scope.isSetsList = true;
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
         $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
         $scope.isLoading = false;
@@ -249,16 +252,13 @@ angular.module('soundrad.controllers', [])
         $scope.isLoading = false;
       });
     });
-
-
-    
-
   }])
   
   .controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
     $scope.isLoading = true;
     if ($scope.preloadContent) {
-      $scope.set = {};
+      console.log($scope.preloadContent);
+      $scope.set = $scope.preloadContent;
       $scope.set.title = $scope.preloadContent.title;
       $scope.tracks = $scope.preloadContent.tracks;
       $scope.preloadContent = null;

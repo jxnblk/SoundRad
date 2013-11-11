@@ -1,25 +1,25 @@
 <nav>
   
   <a href="/"
-    class="" ng-class="{'is-active': currentState != 'home'}">
+    class="" ng-class="{'text': currentState != 'home'}">
     <span ng-show="token">Stream</span>
     <span ng-hide="token">Home</span>
   </a>
   
   <span ng-show="token">
     <a href="/{{me.permalink}}/sets"
-      class="" ng-class="{'is-active': currentState != 'user.sets' || me.permalink != viewUser}" >
+      class="" ng-class="{'text': currentState != 'user.sets' || me.permalink != viewUser}" >
         Playlists 
     </a>
     <a href="/{{me.permalink}}/likes"
       class="" ng-class="{'text': currentState != 'user.likes' || me.permalink != viewUser}">
         Likes
     </a>
-    <a href="/{{me.permalink}}" class=""  ng-class="{'is-active': currentState != 'user' || me.permalink != viewUser}">
+    <a href="/{{me.permalink}}" class=""  ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
-    <a href="/settings">Settings</a>
+    <a href="/settings" ng-class="{'text': currentState != 'settings'}">Settings</a>
   </span>
 
   <a href="" ng-click="connect();" ng-hide="token">Connect</a>

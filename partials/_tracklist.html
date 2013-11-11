@@ -1,17 +1,42 @@
 
-<!-- add a controller variable to determine whether or not it's a set -->
+<div ng-switch on="!!isSetsList" ng-controller="TrackCtrl">
 
+  <div ng-switch-when="false">
+    <div ng-repeat="track in tracks" class="bar-4-double px1 clearfix border-bottom">
 
-  <div ng-repeat="track in tracks" ng-include src="'partials/_track.html'" ng-controller="TrackCtrl"> </div>
+      <a href="" ng-click="player.play(tracks, $index)"
+        class="block bar-4-double text"
+        ng-class="{'is-active': player.playing.id == track.id}">
+        <p>{{ track.user.username }}</p>
+        <h3>{{ track.title }}</h3>
 
-  <!-- <div ng-switch-when="false">"It's a track!" -- Admiral Ackbar</div> -->
+        <!-- like/unlike
+        <!-- more disclosure -->
+        <!-- add to set -->
+      </a>
+    </div>
+  </div>
 
-<div ng-show="isLoading" class="tappad gray5 txtcen">Loading...</div>
-<div ng-show="!isLoading && tracks.length == 0" class="tappad gray5 txtcen">No Results</div>
-<!-- pagination or infinite scroll -->
+  <div id="sets-list" ng-switch-when="true">
+    <div ng-repeat="track in tracks" class="bar-3 px1 border-bottom">
+      <a href=""
+        ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
+        class="block text">
+          <!-- <p>{{ track.user.username }}</p> -->
+          <h3>{{ track.title }}</h3>
+      </a>
+    </div>
+  </div>
 
-<div class="p2" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
-  <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="">Previous</a>
-  <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="">Next</a>
-  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="">Show More</a>
+</div>
+
+  
+
+<div ng-show="isLoading" class="bar-4 center">Loading...</div>
+<div ng-show="!isLoading && tracks.length == 0" class="bar-4 center">No Results</div>
+
+<div class="bar-4 px1" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
+  <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="inline-block bold mr1">Previous</a>
+  <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="inline-block bold">Next</a>
+  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="block bold bar-4 center">Show More</a>
 </div>

@@ -1,0 +1,15 @@
+<div ng-controller="TracklistCtrl">
+  
+  <h2 class="">{{set.title}}</h2>
+  
+  <div ng-include src="'/partials/_tracklist.html'"></div>
+      
+  <div class="" ng-show="">
+    <p class="">Posted {{set.created_at | fromNow}}</p>
+    <p class="" ng-bind-html-unsafe="set.description | richtext"></p>
+  </div>
+   
+  <a ng-href="{{set.permalink_url}}" target="_blank" class="">View on SoundCloud</a>
+
+
+</div>

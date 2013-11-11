@@ -16,10 +16,11 @@
 <body class="{{theme}}" ng-controller="ThemeCtrl">
   
 <div class="" ng-controller="NavCtrl">
-  <div class="" ng-include src="'/partials/_player.html'" ng-controller="PlayerCtrl"></div>
+  <div class="fixed-top" ng-include src="'/partials/_player.html'" ng-controller="PlayerCtrl"></div>
   
-  <div class="mt4">
-    <div ng-hide="currentState == 'home' && !token" ng-include src="'/partials/_nav.html'"></div>
+  <div class="mt6">
+    <div ng-hide="currentState == 'home' && !token" ng-include src="'/partials/_nav.html'"
+        class="bar-3 navbar px0 border-bottom"></div>
     <div ui-view class="maxwi5 wrap"></div>
   </div>
     
