@@ -6,54 +6,39 @@
   z-index: 4;
 }
 
-.ss-icon {
-  position: relative;
-  top: .1875em;
-}
+.ss-icon { position: relative; top: .1875em; }
+
+.no-wrap { white-space: nowrap; }
 
 .mt6 { margin-top: 6*$space; }
 .px0 { padding-right: .5*$space; padding-left: .5*$space; }
 
+.bar-2 {
+  height: 2rem;
+  line-height: 2rem;
+}
 .bar-3 {
-  min-height: 3*$space;
-  line-height: 3*$space;
+  height: 3rem;
+  line-height: 3rem;
 }
-.bar-3-double {
-  height: 3*$space;
-  line-height: 1.25*$space;
-  padding-top: .25*$space;
-  padding-bottom: .25*$space;
+.bar-4 {
+  min-height: 3.25rem;
+  padding-top: .375rem;
+  padding-bottom: .375rem;
 }
+.bar-4-align {
+  line-height: 3rem;
+}
+.bar-6 {
+  height: 6rem;
+  line-height: 6rem;
+}
+.lh-small { line-height: 1.25; }
+
 .navbar a {
   font-weight: bold;
   display: inline-block;
-  padding: 0 .5*$space;
-}
-
-.bar-2 {
-  height: 2*$space;
-  line-height: 2*$space;
-}
-
-.bar-4 {
-  height: 4*$space;
-  line-height: 4*$space;
-}
-.bar-4-top {
-  height: 4*$space;
-}
-
-.bar-4-double {
-  height: 4*$space;
-  padding-top: .25*$space;
-  padding-bottom: .25*$space;
-  &, & h1, & h2 {
-    line-height: 1.75*$space;  
-  }
-}
-.bar-6 {
-  height: 6*$space;
-  line-height: 6*$space;
+  padding: 0 .5rem;
 }
 
 .btn {
@@ -61,7 +46,7 @@
   display: inline-block;
   height: 2em;
   line-height: 2;
-  padding: 0 1em;
+  padding: 0 .75em;
   border-radius: .25*$space;
   .ss-icon {
     position: relative;
@@ -110,4 +95,50 @@
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
+
+@media (min-width: 640px){
+  .hover-group {
+    .hover-show { display: none; }
+    &:hover .hover-show { display: block; }
+  }
+}
+  
+
+.ul {
+  list-style: none;
+  padding-left: 0;
+  li {
+    line-height: 2rem;
+    margin-bottom: 0;
+  }
+}
+
+.dropdown {
+  position: relative;
+}
+.dropdown-body {
+  position: absolute;
+  top: 100%;
+  white-space: no-wrap;
+  max-height: 256px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  &.is-open { display: block; }
+}
+
+.rounded { border-radius: .25rem; }
+
+
+.dropbar {
+  transition-property: height;
+  transition-duration: .25s;
+  transition-timing-function: ease;
+  height: 0;
+  overflow: hidden;
+  &.is-open {
+    height: 4rem;
+  }
+}
+
 

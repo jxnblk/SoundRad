@@ -4,6 +4,17 @@
   from { -webkit-transform: translate(0, -100%); }
   to   { -webkit-transform: translate(0, 0); }
 }
-.anim-slide-down {
+.slide-down {
   -webkit-animation: slide-down .2s ease;
 }
+
+@-webkit-keyframes popin {
+  0%   { -webkit-transform: scale(.8); }
+  80%  { -webkit-transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); }
+}
+.popin {
+  -webkit-animation: popin .1s linear;
+}
+
+// Transitions

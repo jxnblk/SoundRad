@@ -1,13 +1,13 @@
 <div class="border-bottom">
-  <div class="bar-4-top p1">
-    <h1>{{ viewUsername }}&nbsp;</h1>
+  <div class="bar-4 px1">
+    <h1 class="lh-small">{{ viewUsername }}&nbsp;</h1>
     <p>    
       <span class="small text mr1">{{userData.followers_count}} Followers</span>
       <span class="small text">{{userData.followings_count}} Following</span>
     </p>
   </div>
 
-  <div class="bar-3 px0 navbar" ng-show="userData.id != me.id">
+  <div class="bar-3 px0 navbar" ng-cloak ng-show="userData.id != me.id">
     <a ng-href="/{{viewUser}}"
       class="" ng-class="{'text': $state.current.name != 'user'}">
         Tracks

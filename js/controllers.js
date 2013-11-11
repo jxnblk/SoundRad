@@ -389,10 +389,11 @@ angular.module('soundrad.controllers', [])
   
   .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
     
-      $scope.showActions = false;
-      $scope.toggleActions = function() {
-        $scope.showActions = !$scope.showActions;
-      };
+      $scope.dropbarIsOpen = false;
+      $scope.toggleDropbar = function() { $scope.dropbarIsOpen = !$scope.dropbarIsOpen; };
+
+      $scope.dropdownIsOpen = false;
+      $scope.toggleDropdown = function() { $scope.dropdownIsOpen = ! $scope.dropdownIsOpen; };
     
       $scope.like = function(track) {        
         console.log(track);

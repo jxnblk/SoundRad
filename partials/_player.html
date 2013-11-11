@@ -1,48 +1,45 @@
 <div ng-switch="!!player.playing || !!player.paused">
 
   <div ng-switch-when="false" class="bar-6 px1 bg-white border-bottom">
-    <h1 class="bar-6">SoundRad</h1>
+    <h1 class="bar-6">SoundRad <span class="regular p">v64 beta</span></h1>
   </div>
 
-  <div ng-show="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom anim-slide-down">
+  <div ng-show="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom slide-down">
     
     <div id="player-controls" class="left bar-6">
       <a href="" ng-click="player.prev()"
-        class="btn-player text mobile-hide">
+        class="btn-player text mobile-hide popin">
           <i class="ss-icon ss-skipback"></i>
       </a>
       <a href="" ng-click="player.play(player.tracks, player.i)"
-        class="btn-player text" ng-hide="player.playing">
+        class="h2 btn-player text popin" ng-hide="player.playing">
           <i class="ss-icon ss-play"></i>
       </a>
       <a href="" ng-click="player.pause(player.playing)"
-        class="btn-player text" ng-show="player.playing">
+        class="h2 btn-player text popin" ng-show="player.playing">
           <i class="ss-icon ss-pause"></i>
       </a>
       <a href="" ng-click="player.next()"
-        class="btn-player text mobile-hide">
+        class="btn-player text mobile-hide popin">
           <i class="ss-icon ss-skipforward"></i>
       </a>
     </div>
 
     <div id="player-body" class="clearfix">
 
-      <div id="player-body-top" class="clearfix bar-4">
-        <div id="player-meta" class="right px1">
-          <a href="" class="small btn btn-text-toggle mobile-hide"><i class="ss-icon ss-heart"></i> Like</a>
-          <!-- link -->
-          <!-- share -->
-          <!-- add to playlist -->
-        </div>
+      <div id="player-body-top" class="clearfix">
+        <!-- <div id="player-meta" class="right bar-4 bar-4-align px1">
+          <a href="" class="small btn text"><i class="ss-icon ss-info"></i></a>
+        </div> -->
 
-        <div id="player-info" class="clearfix bar-4-double px1">
-          <p class="truncate">{{player.tracks[player.i].user.username}}</p>
-          <h1 class="p truncate">{{player.tracks[player.i].title}}</h1>
+        <div id="player-info" class="clearfix bar-4 px1">
+          <p class="truncate lh-small">{{player.tracks[player.i].user.username}}</p>
+          <h1 class="h2 lh-small truncate">{{player.tracks[player.i].title}}</h1>
         </div>
       </div>
 
       <div id="scrubber" ng-controller="ScrubberCtrl" class="bar-2 clearfix px1">
-        <div class="right ml1 small">
+        <div class="right ml1 small mobile-hide">
           <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
           <span ng-show="audio.readyState == 4">
             {{currentTimeMS | playTime}} | {{durationMS | playTime}}
@@ -59,5 +56,22 @@
     </div>
 
   </div>
+
+  <!-- <div id="player-dropbar" class="bg1 p1" ng-controller="TrackCtrl">
+    <a href=""
+      ng-click="like(player.tracks[player.i])" ng-hide="player.tracks[player.i].user_favorite"
+      class="btn btn-text-toggle mobile-hide">
+        <i class="ss-icon ss-heart small"></i> Like
+    </a>
+    <a href=""
+      ng-click="unlike(player.tracks[player.i])" ng-show="player.tracks[player.i].user_favorite"
+      class="btn btn-text-toggle is-active mobile-hide">
+        <i class="ss-icon ss-heart small"></i> Liked
+    </a>
+    <a href="" class="btn btn-text-toggle"><i class="ss-icon ss-plus small"></i> Add to Playlist</a>
+    <a href="" class="btn btn-text-toggle">Tweet</a>
+    <a href="" class="btn btn-text-toglle">http://soundrad.com/{{ player.tracks[player.i].user.permalink }}/{{ player.tracks[player.i].permalink }}</a>
+  </div> -->
+
 
 </div>

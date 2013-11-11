@@ -1,19 +1,67 @@
 
-<div ng-switch on="!!isSetsList" ng-controller="TrackCtrl">
+<div ng-switch on="!!isSetsList">
 
   <div ng-switch-when="false">
-    <div ng-repeat="track in tracks" class="bar-3-double px1 clearfix border-bottom">
+    <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
+      class="border-bottom hover-group hover" ng-class="{'is-active bg1': player.tracks[player.i].id == track.id}">
+
+      <div class="right bar-4 bar-4-align">
+        <div class="left hover-show small">
+          <a href=""
+            ng-click="like(track)" ng-hide="track.user_favorite"
+            class="btn btn-text-toggle mobile-hide popin">
+              <i class="ss-icon ss-heart"></i> Like
+          </a>
+          <a href=""
+            ng-click="unlike(track)" ng-show="track.user_favorite"
+            class="btn btn-text-toggle is-active mobile-hide popin">
+              <i class="ss-icon ss-heart"></i> Liked
+          </a>
+        </div>
+
+        <!-- <div class="dropdown inline-block">
+          <a href="" ng-click="toggleDropdown()" class="dropdown-toggle btn btn-text-toggle popin">
+            <i class="ss-icon ss-plus small"></i> Add to Playlist
+          </a>
+          <div class="dropdown-body bg1 p1 rounded" ng-class="{ 'is-open': dropdownIsOpen }">
+            <ul class="ul">
+              <li ng-repeat="set in userPlaylists">
+                <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+
+        <a href="" ng-click="toggleDropbar()" class="h2 btn btn-text-toggle">
+          <i class="ss-icon ss-ellipsis"></i>
+        </a>
+
+      </div>
 
       <a href="" ng-click="player.play(tracks, $index)"
-        class="block bar-3-double text"
-        ng-class="{'is-active': player.playing.id == track.id}">
+        class="block clearfix bar-4 px1 text">
         <p class="small truncate">{{ track.user.username }}</p>
         <h3 class="truncate">{{ track.title }}</h3>
-
-        <!-- like/unlike
-        <!-- more disclosure -->
-        <!-- add to set -->
       </a>
+      
+      <div class="dropbar clearfix px1" ng-class="{ 'is-open': dropbarIsOpen }">
+        
+          <div class="right">
+            <a href=""
+              ng-click="like(track)" ng-hide="track.user_favorite"
+              class="btn btn-text-toggle popin">
+                <i class="ss-icon ss-heart"></i> Like
+            </a>
+            <a href=""
+              ng-click="unlike(track)" ng-show="track.user_favorite"
+              class="btn btn-text-toggle is-active popin">
+                <i class="ss-icon ss-heart"></i> Liked
+            </a>
+          </div>
+        <!-- <a href=""><i class="ss-icon ss-plus"></i> Add to Playlist</a> -->
+        
+      </div>
     </div>
   </div>
 
@@ -22,7 +70,6 @@
       <a href=""
         ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
         class="block text">
-          <!-- <p>{{ track.user.username }}</p> -->
           <h3 class="truncate">{{ track.title }}</h3>
       </a>
     </div>
@@ -32,11 +79,11 @@
 
   
 
-<div ng-show="isLoading" class="bar-4 center">Loading...</div>
-<div ng-show="!isLoading && tracks.length == 0" class="bar-4 center">No Results</div>
+<div ng-show="isLoading" class="bar-4 bar-4-align center">Loading...</div>
+<div ng-show="!isLoading && tracks.length == 0" class="bar-4 bar-4-align center">No Results</div>
 
-<div class="bar-4 px1" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
+<div class="bar-4 bar-4-align px1" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
   <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="inline-block bold mr1">Previous</a>
-  <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="inline-block bold">Next</a>
+  <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="right inline-block bold">Next</a>
   <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="block bold bar-4 center">Show More</a>
 </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'ui.state']).
+var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'soundrad.directives', 'ui.state']).
   config(['$stateProvider', '$routeProvider', '$locationProvider', function($stateProvider, $routeProvider, $locationProvider) {
 
     $stateProvider.state('home', { url: "/", templateUrl: "/partials/home.html" });
