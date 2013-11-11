@@ -1,0 +1,9 @@
+// Animations
+
+@-webkit-keyframes slide-down {
+  from { -webkit-transform: translate(0, -100%); }
+  to   { -webkit-transform: translate(0, 0); }
+}
+.anim-slide-down {
+  -webkit-animation: slide-down .2s ease;
+}

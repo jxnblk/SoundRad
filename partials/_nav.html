@@ -1,4 +1,4 @@
-<nav>
+<nav class="clearfix">
   
   <a href="/"
     class="" ng-class="{'text': currentState != 'home'}">
@@ -15,13 +15,16 @@
       class="" ng-class="{'text': currentState != 'user.likes' || me.permalink != viewUser}">
         Likes
     </a>
+  </span>
+  <div ng-show="token" class="right">
+    <a href="" class="text"><i class="ss-icon ss-search"></i></a>
     <a href="/{{me.permalink}}" class=""  ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
-    <a href="/settings" ng-class="{'text': currentState != 'settings'}">Settings</a>
-  </span>
+    <!-- <a href="/settings" ng-class="{'text': currentState != 'settings'}"><i class="ss-icon ss-settings"></i></a> -->
+  </div>
 
-  <a href="" ng-click="connect();" ng-hide="token">Connect</a>
+  <a href="" ng-click="connect();" ng-hide="token" class="right btn btn-prime">Connect</a>
 
 </nav>

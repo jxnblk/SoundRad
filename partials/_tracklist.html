@@ -2,13 +2,13 @@
 <div ng-switch on="!!isSetsList" ng-controller="TrackCtrl">
 
   <div ng-switch-when="false">
-    <div ng-repeat="track in tracks" class="bar-4-double px1 clearfix border-bottom">
+    <div ng-repeat="track in tracks" class="bar-3-double px1 clearfix border-bottom">
 
       <a href="" ng-click="player.play(tracks, $index)"
-        class="block bar-4-double text"
+        class="block bar-3-double text"
         ng-class="{'is-active': player.playing.id == track.id}">
-        <p>{{ track.user.username }}</p>
-        <h3>{{ track.title }}</h3>
+        <p class="small truncate">{{ track.user.username }}</p>
+        <h3 class="truncate">{{ track.title }}</h3>
 
         <!-- like/unlike
         <!-- more disclosure -->
@@ -23,7 +23,7 @@
         ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
         class="block text">
           <!-- <p>{{ track.user.username }}</p> -->
-          <h3>{{ track.title }}</h3>
+          <h3 class="truncate">{{ track.title }}</h3>
       </a>
     </div>
   </div>

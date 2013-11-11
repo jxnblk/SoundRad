@@ -5,13 +5,24 @@
   top: 0; right: 0; left: 0;
   z-index: 4;
 }
+
+.ss-icon {
+  position: relative;
+  top: .1875em;
+}
+
 .mt6 { margin-top: 6*$space; }
 .px0 { padding-right: .5*$space; padding-left: .5*$space; }
 
 .bar-3 {
   min-height: 3*$space;
   line-height: 3*$space;
-  
+}
+.bar-3-double {
+  height: 3*$space;
+  line-height: 1.25*$space;
+  padding-top: .25*$space;
+  padding-bottom: .25*$space;
 }
 .navbar a {
   font-weight: bold;
@@ -27,6 +38,9 @@
 .bar-4 {
   height: 4*$space;
   line-height: 4*$space;
+}
+.bar-4-top {
+  height: 4*$space;
 }
 
 .bar-4-double {
@@ -86,3 +100,14 @@
 .progress-overlay {
   top: 0; right: 0; bottom: 0; left: 0;
 }
+
+@media (max-width: 640px){
+  .mobile-hide { display: none; }  
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+

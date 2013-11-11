@@ -170,7 +170,7 @@ angular.module('soundrad.controllers', [])
     $scope.isLoading = true;
     $scope.isSetsList = false;
     $scope.viewUser = $stateParams.user;
-    $scope.viewUsername = '.';
+    //$scope.viewUsername = '';
     soundcloud.getUser($scope.viewUser, function(data){
       $scope.$apply(function(){
         $scope.userData = data;
