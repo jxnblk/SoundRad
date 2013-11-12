@@ -166,6 +166,7 @@ angular.module('soundrad.services', [])
       playing: false,
       paused: false,
       play: function(tracks, i) {
+        console.log('play');
         if (i == null) {
           tracks = new Array(tracks);
           i = 0;

@@ -39,8 +39,8 @@ angular.module('soundrad.controllers', [])
 }])
   
 .controller('NavCtrl',
-    ['$scope', '$stateParams', '$state', '$window', '$location', '$route', 'soundcloud', 'storage',
-    function($scope, $stateParams, $state, $window, $location, $route, soundcloud, storage) {
+    ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage',
+    function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
     
     $scope.version = storage.get('version');
     if(!$scope.version){
@@ -67,7 +67,7 @@ angular.module('soundrad.controllers', [])
       soundcloud.me(function(me){
         $scope.me = me;
         getUserPlaylists();
-        $route.reload();
+        // $route.reload();
       });
     };
 
@@ -268,7 +268,6 @@ angular.module('soundrad.controllers', [])
     console.log(path);
     soundcloud.getSet(path, function(data){
       $scope.$apply(function () {
-        console.log(data);
         $scope.set = data;
         $scope.tracks = data.tracks;
         $scope.hasPrevPage = false;
@@ -296,10 +295,11 @@ angular.module('soundrad.controllers', [])
       });
     };
 
-    $scope.$watch('tracks', function(){
-      console.log($scope.tracks);
-    });
-    $scope.herro = function(){ console.log('oh herro'); };
+    $scope.sortableOptions = {
+      stop: function(e, ui) {
+        $scope.updatePlaylist();
+      }
+    };
 
 }])
   
@@ -339,6 +339,11 @@ angular.module('soundrad.controllers', [])
 .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
 
     $scope.player = player;
+
+    $scope.play = function(tracks, i){
+      console.log('play track');
+      player.play(tracks,i);
+    };
     
     // Stream Pagination
     $scope.showMoreStream = function() {

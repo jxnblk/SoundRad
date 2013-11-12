@@ -1,7 +1,7 @@
 'use strict';
 
-var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'ui.router', 'hmTouchEvents']).
-  config(['$stateProvider', '$routeProvider', '$locationProvider', function($stateProvider, $routeProvider, $locationProvider) {
+var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'ui.router', 'ui.sortable']).
+  config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
 
     $stateProvider.state('home', { url: "/", templateUrl: "/partials/home.html" });
     $stateProvider.state('callback', { url: "/callback", templateUrl: "/partials/callback.html" });
