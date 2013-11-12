@@ -1,6 +1,6 @@
 'use strict';
 
-var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'soundrad.directives', 'ui.state']).
+var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'ui.router', 'hmTouchEvents']).
   config(['$stateProvider', '$routeProvider', '$locationProvider', function($stateProvider, $routeProvider, $locationProvider) {
 
     $stateProvider.state('home', { url: "/", templateUrl: "/partials/home.html" });
@@ -15,7 +15,11 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
         // $stateProvider.state('user.following', { url: "/following", templateUrl: "/partials/user.following.html", controller: 'FollowingCtrl' });
         // $stateProvider.state('user.followers', { url: "/followers", templateUrl: "/partials/user.followers.html", controller: 'FollowersCtrl' });
     $stateProvider.state('user.track', { url: "/:track", templateUrl: "/partials/user.track.html", controller: 'TrackDetailCtrl' });
-    $stateProvider.state('user.set', { url: "/sets/:set", templateUrl: "/partials/user.sets.set.html", controller: 'SetDetailCtrl' });
+    
+    // Demo page to test drag and drop reorder
+    $stateProvider.state('user.setEdit', { url: "/sets/edit/:set", templateUrl: "/partials/user.sets.set-edit.html", controller: 'SetDetailCtrl' });    
+
+    $stateProvider.state('user.set', { url: "/sets/:set", templateUrl: "/partials/user.sets.set.html", controller: 'SetDetailCtrl' });    
 
     $locationProvider.hashPrefix('!')
     $locationProvider.html5Mode(true);

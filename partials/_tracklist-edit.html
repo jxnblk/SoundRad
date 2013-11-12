@@ -1,0 +1,34 @@
+<!-- <div class="white bg-text">
+  <pre ng-repeat="track in tracks">{{ $index }} - {{ track.title }}</pre>
+</div> -->
+
+<div cu-repeat-reorder='track in tracks'
+  cu-reorder-handle=".draggable"
+  hm-dragend="updatePlaylist()"
+  ng-controller="TrackCtrl"
+  class="border-bottom"
+  ng-class="{'is-active bg1': player.tracks[player.i].id == track.id, 'fadeout': isRemoving == track.id }"> 
+    
+    
+    <div class="draggable bar-4 px1 bg-white" draggable="true">
+      
+      <div class="right bar-4 bar-4-align mr1">
+        <a href="" ng-click="toggleRemove()" ng-hide="removeIsOpen"
+          class="btn text popin">
+            <i class="ss-icon ss-delete"></i>
+        </a>
+        <div class="inline-block fadein" ng-show="removeIsOpen">
+          Remove this track?
+          <a href="" ng-click="removeFromPlaylist(track, set)" class="btn btn-red mr1 ml1">
+            Remove
+          </a>
+          <a href="" ng-click="toggleRemove()" class="text">Cancel</a>
+        </div>
+      </div>
+      <div class="">
+        <p class="small truncate">{{ track.user.username }}</p>
+        <h3 class="truncate">{{ track.title }}</h3>
+      </div>
+
+    </div>
+</div>

@@ -112,18 +112,26 @@
     margin-bottom: 0;
   }
 }
+.menu li a {
+  display: block;
+}
 
 .dropdown {
   position: relative;
 }
 .dropdown-body {
   position: absolute;
+  z-index: 2;
   top: 100%;
   white-space: no-wrap;
+  min-width: 160px;
   max-height: 256px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   display: none;
+  &.dropdown-body-right {
+    right: 0;
+  }
   &.is-open { display: block; }
 }
 
@@ -135,10 +143,17 @@
   transition-duration: .25s;
   transition-timing-function: ease;
   height: 0;
-  overflow: hidden;
-  &.is-open {
-    height: 4rem;
+  .dropbar-body {
+    overflow: hidden;  
   }
+  &.is-open {
+    height: 3rem;
+  }
+}
+
+.draggable {
+  cursor: move;
+  -webkit-user-drag: element;
 }
 
 

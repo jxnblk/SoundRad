@@ -3,10 +3,10 @@
 
   <div ng-switch-when="false">
     <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-      class="border-bottom hover-group hover" ng-class="{'is-active bg1': player.tracks[player.i].id == track.id}">
+      class="border-bottom hover-group" ng-class="{'is-active bg1': player.tracks[player.i].id == track.id, 'fadeout': isRemoving == track.id }">
 
-      <div class="right bar-4 bar-4-align">
-        <div class="left hover-show small">
+      <div class="right bar-4 bar-4-align" ng-hide="isEditable">
+        <div class="left hover-show small" ng-hide="dropdownIsOpen">
           <a href=""
             ng-click="like(track)" ng-hide="track.user_favorite"
             class="btn btn-text-toggle mobile-hide popin">
@@ -19,23 +19,70 @@
           </a>
         </div>
 
-        <!-- <div class="dropdown inline-block">
-          <a href="" ng-click="toggleDropdown()" class="dropdown-toggle btn btn-text-toggle popin">
-            <i class="ss-icon ss-plus small"></i> Add to Playlist
+        <p class="left small" ng-show="flashMessage">{{ flashMessage }}</p>
+
+        <div class="dropdown inline-block">
+          <a href="" ng-click="toggleDropdown()" class="h2 btn btn-text-toggle">
+            <i class="ss-icon ss-ellipsis"></i>
           </a>
-          <div class="dropdown-body bg1 p1 rounded" ng-class="{ 'is-open': dropdownIsOpen }">
-            <ul class="ul">
-              <li ng-repeat="set in userPlaylists">
-                <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
+          <div class="dropdown-body dropdown-body-right bold p1 mr1 bg2 rounded fadein" ng-class="{'is-open': dropdownIsOpen }">
+            <ul class="ul menu" ng-hide="addToPlaylistIsOpen || shareIsOpen">
+              <li>
+                <a href=""
+                  ng-click="like(track)" ng-hide="track.user_favorite"
+                  class="popin">
+                    <i class="ss-icon ss-heart"></i> Like
+                </a>
               </li>
+              <li>
+                <a href=""
+                  ng-click="unlike(track)" ng-show="track.user_favorite"
+                  class="is-active popin">
+                    <i class="ss-icon ss-heart"></i> Liked
+                </a>
+              </li>
+              <li>
+                <a href="" ng-click="toggleAddToPlaylist()" class="">
+                    Add to Playlist
+                </a>
+              </li>
+              <!-- <li>
+                <a href="" ng-click="toggleShare()" class="">
+                  Share
+                </a>
+              </li> -->
+              <!-- <li>
+                <a href="" class="">Permalink</a>
+              </li> -->
             </ul>
+
+            <div ng-show="addToPlaylistIsOpen">
+              <a href="" ng-click="toggleAddToPlaylist()" class="block text">Cancel</a>
+              <ul class="ul">
+                <li><input type="text" placeholder="Create New Playlist" /></li>
+                <li ng-repeat="set in userPlaylists">
+                  <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
+                </li>
+              </ul>
+            </div>
+
+            <div ng-show="shareIsOpen">
+              <a href="">Tweet</a>
+              <a href="">http://soundrad.com/{{ track.user.permalink }}/{{ track.permalink }}</a>
+            </div>
+
           </div>
-        </div> -->
+        </div>
 
+      </div>
 
-        <a href="" ng-click="toggleDropbar()" class="h2 btn btn-text-toggle">
-          <i class="ss-icon ss-ellipsis"></i>
-        </a>
+      <div class="right bar-4 bar-4-align mr1" ng-show="isEditable">
+        <a href="" ng-click="toggleRemove()" ng-hide="removeIsOpen" class="btn text popin"><i class="ss-icon ss-delete"></i></a>
+        <div class="inline-block fadein" ng-show="removeIsOpen">
+          Remove this track?
+          <a href="" ng-click="removeFromPlaylist(track, set)" class="btn btn-red mr1 ml1">Remove</a>
+          <a href="" ng-click="toggleRemove()" class="text">Cancel</a>
+        </div>
 
       </div>
 
@@ -45,23 +92,22 @@
         <h3 class="truncate">{{ track.title }}</h3>
       </a>
       
-      <div class="dropbar clearfix px1" ng-class="{ 'is-open': dropbarIsOpen }">
-        
-          <div class="right">
-            <a href=""
-              ng-click="like(track)" ng-hide="track.user_favorite"
-              class="btn btn-text-toggle popin">
-                <i class="ss-icon ss-heart"></i> Like
-            </a>
-            <a href=""
-              ng-click="unlike(track)" ng-show="track.user_favorite"
-              class="btn btn-text-toggle is-active popin">
-                <i class="ss-icon ss-heart"></i> Liked
-            </a>
-          </div>
-        <!-- <a href=""><i class="ss-icon ss-plus"></i> Add to Playlist</a> -->
-        
-      </div>
+      <!-- <div class="dropbar clearfix px1 bg1" ng-class="{ 'is-open': dropbarIsOpen }">
+        <div class="right">
+          <a href=""
+            ng-click="like(track)" ng-hide="track.user_favorite"
+            class="btn btn-text-toggle popin">
+              <i class="ss-icon ss-heart"></i> Like
+          </a>
+          <a href=""
+            ng-click="unlike(track)" ng-show="track.user_favorite"
+            class="btn btn-text-toggle is-active popin">
+              <i class="ss-icon ss-heart"></i> Liked
+          </a>
+        </div>
+        <a href=""><i class="ss-icon ss-plus"></i> Add to Playlist</a>
+      </div> -->
+
     </div>
   </div>
 

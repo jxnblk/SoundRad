@@ -17,4 +17,19 @@
   -webkit-animation: popin .1s linear;
 }
 
+@-webkit-keyframes fadein {
+  from { -webkit-transform: scale(.5); opacity: 0; }
+    to { -webkit-transform: scale(1); opacity: 1; }
+}
+.fadein {
+  -webkit-animation: fadein .2s ease;
+}
+
+@-webkit-keyframes fadeout {
+  from { opacity: 1; }
+    to { opacity: 0; }
+}
+.fadeout { -webkit-animation: fadeout .5s ease; }
+
+
 // Transitions

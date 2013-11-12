@@ -137,6 +137,15 @@ angular.module('soundrad.services', [])
         var tracks = tracks.map(function(id) { return { id: id } });
         SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
       },
+
+      updatePlaylist: function(playlist, callback){
+        var tracks = [], i;
+        for(i in playlist.tracks){
+          tracks.push(playlist.tracks[i].id);
+        };
+        var tracks = tracks.map(function(id) { return { id: id } });
+        SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
+      },
       
       resolve: function(path, callback){
         SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);

@@ -1,16 +1,15 @@
 <div ng-controller="TracklistCtrl">
   
   <div class="bar-4 bar-4-align px1 border-bottom">
-    <h2 class="inline-block mr1">{{set.title}}</h2>
+    <h2 class="inline-block mr1">Editing: {{set.title}}</h2>
     
       <a href="" ng-hide="isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Edit</a>
       <a href="" ng-show="isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Done</a>
     
-      <!-- <a href="/{{ me.permalink }}/sets/edit/{{ set.permalink }}">Editing Test</a> -->
   </div>
   
-  <div ng-include src="'/partials/_tracklist.html'"></div>
-
+  <div ng-include src="'/partials/_tracklist-edit.html'"></div>
+      
   <div class="" ng-show="">
     <p class="">Posted {{set.created_at | fromNow}}</p>
     <p class="" ng-bind-html-unsafe="set.description | richtext"></p>

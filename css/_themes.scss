@@ -5,6 +5,7 @@ $text: #555;
 $bg: white;
 $bg1: #eee;
 $bg2: #ccc;
+$red: #d30;
 
 .theme-default {
   color: $text;
@@ -34,9 +35,16 @@ $bg2: #ccc;
       color: $bg;
       background-color: darken($highlight, 20%);
     }
-    &:active {
-      box-shadow: inset 0 4px 4px rgba(#000, .4);
+    &:active { box-shadow: inset 0 4px 4px rgba(#000, .4); }
+  }
+  .btn-red {
+    color: $bg;
+    background-color: $red;
+    &:hover {
+      color: $bg;
+      background-color: darken($red, 20%);
     }
+    &:active { box-shadow: inset 0 4px 4px rgba(#000,.4); }
   }
   .btn-text-toggle {
     color: lighten($text, 20%);
