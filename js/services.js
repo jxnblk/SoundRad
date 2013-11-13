@@ -193,7 +193,10 @@ angular.module('soundrad.services', [])
         player.paused = false;
       },
       next: function() {
+        console.log(player.tracks);
         player.i = player.i+1;
+        console.log(player.i);
+        console.log('play ' + player.tracks[player.i]);
         if (player.tracks.length > (player.i + 1)) player.play(player.tracks, player.i);   
       },
       prev: function() {

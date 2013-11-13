@@ -9,7 +9,10 @@
       <!-- <a href="/{{ me.permalink }}/sets/edit/{{ set.permalink }}">Editing Test</a> -->
   </div>
   
-  <div ng-include src="'/partials/_tracklist.html'"></div>
+  <div ng-switch="!!isEditable">
+    <div ng-switch-when="false" ng-include src="'/partials/_tracklist.html'"></div>
+    <div ng-switch-when="true" ng-include src="'/partials/_tracklist-edit.html'"></div>
+  </div>
 
   <div class="" ng-show="">
     <p class="">Posted {{set.created_at | fromNow}}</p>

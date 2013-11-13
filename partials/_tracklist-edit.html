@@ -1,19 +1,10 @@
-<!-- <div class="white bg-text">
-  <pre ng-repeat="track in tracks">{{ $index }} - {{ track.title }}</pre>
-</div> -->
-
-<!-- <div cu-repeat-reorder='track in tracks'cu-reorder-handle=".draggable"hm-dragend="updatePlaylist()"
-  ng-controller="TrackCtrl"
-  class="border-bottom"
-  ng-class="{'is-active bg1': player.tracks[player.i].id == track.id, 'fadeout': isRemoving == track.id }"> 
- -->
 <div ui-sortable="sortableOptions" ng-model="tracks" ng-controller="TrackCtrl">
   <div ng-repeat="track in tracks" 
     class="border-bottom"
     ng-class="{'is-active bg1': player.tracks[player.i].id == track.id, 'fadeout': isRemoving == track.id }">
     
     <div class="draggable bar-4 px1 bg-white">
-      <div class="right bar-4 bar-4-align mr1">
+      <div class="right bar-4 bar-4-align">
         <a href="" ng-click="toggleRemove()" ng-hide="removeIsOpen" class="btn text popin">
             <i class="ss-icon ss-delete"></i>
         </a>

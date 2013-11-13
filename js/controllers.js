@@ -254,7 +254,7 @@ angular.module('soundrad.controllers', [])
     });
 }])
   
-.controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
+.controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'player', function($scope, soundcloud, $stateParams, player){
     $scope.isLoading = true;
     if ($scope.preloadContent) {
       console.log($scope.preloadContent);
@@ -278,20 +278,19 @@ angular.module('soundrad.controllers', [])
 
     $scope.isEditable = false;
     $scope.toggleIsEditable = function(){ $scope.isEditable = !$scope.isEditable; };
-
     
-
     $scope.updatePlaylist = function(){
-      console.log('updating playlist: ' + $scope.set.title + ' with tracks:');
-      var i;
-      for(i in $scope.set.tracks){
-        console.log( i + ' ' + $scope.tracks[i].title );
+      if(player.tracks == $scope.set.tracks) {
+        var i;
+        for(i in $scope.set.tracks){
+          if($scope.set.tracks[i].id == player.playing.id){
+            player.i = parseInt(i);
+            player.tracks = $scope.set.tracks;
+          };
+        };
       };
-
       soundcloud.updatePlaylist($scope.set, function(data){
         console.log(data.title + ' updated');
-        console.log(data);
-        // apply updates to player if playing
       });
     };
 

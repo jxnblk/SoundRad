@@ -76,7 +76,7 @@
 
       </div>
 
-      <div class="right bar-4 bar-4-align mr1" ng-show="isEditable">
+      <!-- <div class="right bar-4 bar-4-align mr1" ng-show="isEditable">
         <a href="" ng-click="toggleRemove()" ng-hide="removeIsOpen" class="btn text popin"><i class="ss-icon ss-delete"></i></a>
         <div class="inline-block fadein" ng-show="removeIsOpen">
           Remove this track?
@@ -84,7 +84,7 @@
           <a href="" ng-click="toggleRemove()" class="text">Cancel</a>
         </div>
 
-      </div>
+      </div> -->
 
       <a href="" ng-click="play(tracks, $index)"
         class="block clearfix bar-4 px1 text">
@@ -92,22 +92,6 @@
         <h3 class="truncate">{{ track.title }}</h3>
       </a>
       
-      <!-- <div class="dropbar clearfix px1 bg1" ng-class="{ 'is-open': dropbarIsOpen }">
-        <div class="right">
-          <a href=""
-            ng-click="like(track)" ng-hide="track.user_favorite"
-            class="btn btn-text-toggle popin">
-              <i class="ss-icon ss-heart"></i> Like
-          </a>
-          <a href=""
-            ng-click="unlike(track)" ng-show="track.user_favorite"
-            class="btn btn-text-toggle is-active popin">
-              <i class="ss-icon ss-heart"></i> Liked
-          </a>
-        </div>
-        <a href=""><i class="ss-icon ss-plus"></i> Add to Playlist</a>
-      </div> -->
-
     </div>
   </div>
 
@@ -122,8 +106,6 @@
   </div>
 
 </div>
-
-  
 
 <div ng-show="isLoading" class="bar-4 bar-4-align center">Loading...</div>
 <div ng-show="!isLoading && tracks.length == 0" class="bar-4 bar-4-align center">No Results</div>
