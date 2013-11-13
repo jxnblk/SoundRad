@@ -54,9 +54,14 @@
   line-height: 2;
   padding: 0 .75em;
   border-radius: .25*$space;
+}
+.btn-icon {
+  position: relative;
+  padding-left: 2em;
   .ss-icon {
-    position: relative;
+    position: absolute;
     top: .1875em;
+    left: .75em;
   }
 }
 .btn-player {
