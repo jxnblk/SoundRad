@@ -7,6 +7,8 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $stateProvider.state('callback', { url: "/callback", templateUrl: "/partials/callback.html" });
     $stateProvider.state('settings', { url: "/settings", templateUrl: "/partials/settings.html" });
     $stateProvider.state('playing', { url: "/playing", templateUrl: "/partials/playing.html" });
+
+    $stateProvider.state('history', { url: "/history", templateUrl: "/partials/history.html", controller: 'HistoryCtrl' });
     
     $stateProvider.state('user', { url: "/:user", templateUrl: "/partials/user.html", controller: 'UserCtrl' });
         $stateProvider.state('user.likes', { url: "/likes", templateUrl: "/partials/user.likes.html", controller: 'LikesCtrl' });

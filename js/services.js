@@ -157,7 +157,7 @@ angular.module('soundrad.services', [])
   
   ////////////////////////////////////////////////////////////////
   // Player Factory
-  .factory('player', function(audio, soundcloud) {
+  .factory('player', function(audio, soundcloud ) {
     var player, tracks, i, urlParams, currentTimePercentage = audio.currentTime;
         
     player = {
@@ -181,6 +181,7 @@ angular.module('soundrad.services', [])
         player.i = i;
         player.paused = false;
         player.loaded = false;
+        // history.new(player.playing);
       },
       pause: function(track) {
         if (player.playing) {
@@ -253,6 +254,18 @@ angular.module('soundrad.services', [])
       }
     }     
   })
+
+  .factory('history',['storage', function(storage){
+    return {
+      new: function(track){
+        var history = [];
+        history = storage.get('history');
+        console.log(history);
+        history.unshift(track);
+        storage.set('history', history);
+      }
+    }
+  }])
 
 
   

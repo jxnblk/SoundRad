@@ -519,6 +519,8 @@ angular.module('soundrad.controllers', [])
   
 .controller('QueueCtrl', ['$scope', 'player', function($scope, player) {
     $scope.tracks = player.tracks;
-}]);
+}])
   
-  
+.controller('HistoryCtrl', ['$scope', 'storage', function($scope, storage){
+  $scope.history = storage.get('history');
+}]);  
