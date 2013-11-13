@@ -11,15 +11,15 @@ angular.module('soundrad.controllers', [])
 }])
 
 .controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
-    $scope.title = function() {
-      if (player.playing) {
-        return '► ' + player.tracks[player.i].title + ' | SoundRad';
-      } else if (player.paused) {
-        return player.tracks[player.i].title + ' | SoundRad';
-      } else {
-        return 'SoundRad';  
-      };
+  $scope.title = function() {
+    if (player.playing) {
+      return '► ' + player.tracks[player.i].title + ' | SoundRad';
+    } else if (player.paused) {
+      return player.tracks[player.i].title + ' | SoundRad';
+    } else {
+      return 'SoundRad';  
     };
+  };
 }])
   
 .controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio) {
@@ -171,7 +171,6 @@ angular.module('soundrad.controllers', [])
     $scope.isLoading = true;
     $scope.isSetsList = false;
     $scope.viewUser = $stateParams.user;
-    //$scope.viewUsername = '';
     soundcloud.getUser($scope.viewUser, function(data){
       $scope.$apply(function(){
         $scope.userData = data;
@@ -221,12 +220,20 @@ angular.module('soundrad.controllers', [])
 .controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.tracks = null;
     $scope.isLoading = true;
+    $scope.isSetsList = true;
     $scope.getUrl = '/users/' + $scope.viewUser + '/playlists';
     $scope.getPage();
+    console.log($scope.viewUser);
+    console.log($scope.me.username);
+    console.log($scope.viewUsername);
+    // console.log($scope.userPlaylists[0].title);
+    if($scope.viewUser == $scope.me.permalink && $scope.userPlaylists) {
+      console.log('loading your sets');
+      $scope.tracks = $scope.userPlaylists;
+    };
     soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
-        $scope.isSetsList = true;
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
         $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
         $scope.isLoading = false;
@@ -279,6 +286,7 @@ angular.module('soundrad.controllers', [])
       $scope.hasNextPage = false;
       $scope.streamNextPage = false;
       $scope.isLoading = false;
+      if(!player.playing && !player.paused) player.load($scope.tracks);
     });
   });
 
