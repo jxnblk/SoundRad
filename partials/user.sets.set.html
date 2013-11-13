@@ -1,12 +1,9 @@
 <div ng-controller="TracklistCtrl">
   
-  <div class="bar-4 bar-4-align px1 border-bottom">
-    <h2 class="inline-block mr1">{{set.title}}</h2>
-    
-      <a href="" ng-hide="isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Edit</a>
-      <a href="" ng-show="isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Done</a>
-    
-      <!-- <a href="/{{ me.permalink }}/sets/edit/{{ set.permalink }}">Editing Test</a> -->
+  <div class="clearfix bar-4 bar-4-align px1 border-bottom">
+    <a href="" ng-hide="isEditable" ng-click="toggleIsEditable()" class="right btn-text">Edit</a>
+    <a href="" ng-show="isEditable" ng-click="toggleIsEditable()" class="right btn-text">Done</a>
+    <h2 class="clearfix">{{set.title}}</h2>
   </div>
   
   <div ng-switch="!!isEditable">

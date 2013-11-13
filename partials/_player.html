@@ -28,9 +28,6 @@
     <div id="player-body" class="clearfix">
 
       <div id="player-body-top" class="clearfix">
-        <!-- <div id="player-meta" class="right bar-4 bar-4-align px1">
-          <a href="" class="small btn text"><i class="ss-icon ss-info"></i></a>
-        </div> -->
 
         <div id="player-info" class="clearfix bar-4 px1">
           <p class="truncate lh-small">{{player.tracks[player.i].user.username}}</p>
@@ -39,7 +36,7 @@
       </div>
 
       <div id="scrubber" ng-controller="ScrubberCtrl" class="bar-2 clearfix px1">
-        <div class="right ml1 small mobile-hide">
+        <div class="right right-align ml1 small mobile-hide" style="width:80px">
           <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
           <span ng-show="audio.readyState == 4">
             {{currentTimeMS | playTime}} | {{durationMS | playTime}}
@@ -56,22 +53,5 @@
     </div>
 
   </div>
-
-  <!-- <div id="player-dropbar" class="bg1 p1" ng-controller="TrackCtrl">
-    <a href=""
-      ng-click="like(player.tracks[player.i])" ng-hide="player.tracks[player.i].user_favorite"
-      class="btn btn-text-toggle mobile-hide">
-        <i class="ss-icon ss-heart small"></i> Like
-    </a>
-    <a href=""
-      ng-click="unlike(player.tracks[player.i])" ng-show="player.tracks[player.i].user_favorite"
-      class="btn btn-text-toggle is-active mobile-hide">
-        <i class="ss-icon ss-heart small"></i> Liked
-    </a>
-    <a href="" class="btn btn-text-toggle"><i class="ss-icon ss-plus small"></i> Add to Playlist</a>
-    <a href="" class="btn btn-text-toggle">Tweet</a>
-    <a href="" class="btn btn-text-toglle">http://soundrad.com/{{ player.tracks[player.i].user.permalink }}/{{ player.tracks[player.i].permalink }}</a>
-  </div> -->
-
 
 </div>

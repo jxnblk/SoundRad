@@ -13,12 +13,12 @@
 	<script type="text/javascript" src="//use.typekit.net/ppq8bhu.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body class="{{theme}}" ng-controller="ThemeCtrl">
+<body class="theme-default" ng-controller="ThemeCtrl">
   
 <div class="" ng-controller="NavCtrl">
-  <div class="fixed-top" ng-include src="'/partials/_player.html'" ng-controller="PlayerCtrl"></div>
+  <div class="fixed-top wrap" ng-include src="'/partials/_player.html'" ng-controller="PlayerCtrl"></div>
   
-  <div class="mt6">
+  <div class="mt6 wrap">
     <div ng-hide="currentState == 'home' && !token" ng-include src="'/partials/_nav.html'"
         class="bar-3 navbar px0 border-bottom"></div>
     <div ui-view></div>

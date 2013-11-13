@@ -17,6 +17,25 @@ $red: #d30;
       color: darken($highlight, 20%);
     }
   }
+  .menu-reverse {
+    color: white;
+    background-color: $highlight;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+        background-color: rgba(#000,.2);
+      }
+    }
+    .input {
+      color: white;
+      background-color: rgba(#000,.2);
+      border: none;
+      &:focus {
+        background-color: rgba(#000,.3);
+      }
+    }
+  }
   .white { color: white; }
   .text { color: $text; }
   .highlight { color: $highlight; }
@@ -27,6 +46,7 @@ $red: #d30;
 
   .bg1 { background-color: $bg1; }
   .bg2 { background-color: $bg2; }
+  .bg-active { background-color: rgba($highlight, .1); }
 
   .btn-prime {
     color: $bg;
@@ -56,7 +76,7 @@ $red: #d30;
       color: $highlight;
     }
   }
-
+  .input { border-color: $bg2; }
   .progress-light {
     .progress-background {
       background-color: $bg1;

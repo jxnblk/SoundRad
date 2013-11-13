@@ -165,19 +165,22 @@ angular.module('soundrad.services', [])
       i: i,
       playing: false,
       paused: false,
+      loaded: false,
       play: function(tracks, i) {
-        if (i == null) {
+        console.log('loaded: ' + player.loaded);
+        if (i == null) { 
           tracks = new Array(tracks);
           i = 0;
         };
         player.tracks = tracks;
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
         } else { urlParams =  '?client_id=' + clientID; };
-        if (player.paused != tracks[i]) audio.src = tracks[i].stream_url + urlParams;
+        if (player.paused != tracks[i] || player.loaded) audio.src = tracks[i].stream_url + urlParams;
         audio.play();
         player.playing = tracks[i];
         player.i = i;
         player.paused = false;
+        player.loaded = false;
       },
       pause: function(track) {
         if (player.playing) {
@@ -192,16 +195,29 @@ angular.module('soundrad.services', [])
         player.paused = false;
       },
       next: function() {
-        player.i = player.i+1;
-        if (player.tracks.length > player.i) {
+        if (player.tracks.length > player.i+1) {
+          player.i = player.i+1;
           player.play(player.tracks, player.i);
         } else {
-          player.stop();
+          //player.stop();
         };
       },
       prev: function() {
-        player.i = player.i-1;
+        if (player.i > 0) player.i = player.i-1;
         if (player.playing) player.play(player.tracks, player.i);
+      },
+      load: function(tracks){
+        if (!Array.isArray(tracks)) {
+            console.log('loading a single track');
+          tracks = new Array(tracks);
+        };
+        player.tracks = tracks;
+        player.i = 0;
+        player.paused = tracks[0];
+        player.loaded = true;
+        
+          console.log(player.tracks);
+          console.log(player.paused);
       }
     };
     audio.addEventListener('ended', function() {

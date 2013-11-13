@@ -1,17 +1,6 @@
-<div class="border-bottom">
-  <div class="bar-4 px1">
-    <h1 class="lh-small">{{ viewUsername }}&nbsp;</h1>
-    <p>    
-      <span class="small text mr1">{{userData.followers_count}} Followers</span>
-      <span class="small text">{{userData.followings_count}} Following</span>
-    </p>
-  </div>
-
-  <div class="bar-3 px0 navbar" ng-cloak ng-show="userData.id != me.id">
-    <a ng-href="/{{viewUser}}"
-      class="" ng-class="{'text': $state.current.name != 'user'}">
-        Tracks
-    </a>
+<div class="border-bottom" ng-cloak ng-show="userData.id != me.id && $state.current.name != 'user.track'">  
+  <h1 class="px1"><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
+  <div class="bar-3 px0 navbar">
     <a ng-href="/{{viewUser}}/sets"
       class="" ng-class="{'text': $state.current.name != 'user.sets'}">
         Playlists
@@ -20,10 +9,10 @@
       class="" ng-class="{'text': $state.current.name != 'user.likes'}">
         Likes
     </a>
-    <!-- <a ng-href="/{{viewUser}}/info"
+    <a ng-href="/{{viewUser}}/info"
       class="" ng-class="{'text': $state.current.name != 'user.info'}">
         Info
-    </a> -->
+    </a>
   </div>
 </div>
 

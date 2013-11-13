@@ -1,0 +1,56 @@
+<div ng-controller="TrackCtrl">
+  
+  
+  <div class="p1 clearfix">
+    <a href="" ng-click="player.play(track)" class="left mr1 h2 btn text popin"><i class="ss-icon ss-play"></i></a>
+    <div class="clearfix">
+      <a href="/{{ track.user.permalink }}" class="p text">{{ track.user.username }}</a>
+      <h1 class="">{{ track.title }}</h1>
+    </div>
+  </div>
+
+  <div class="p1">
+
+    <a href="" ng-click="like(track)" ng-hide="track.user_favorite" class="btn btn-prime mr1 popin">
+      <i class="ss-icon ss-heart"></i> Like
+    </a>
+    
+    <a href="" ng-click="unlike(track)" ng-show="track.user_favorite" class="btn btn-prime mr1 is-active popin">
+      <i class="ss-icon ss-heart"></i> Liked
+    </a>
+
+    <div class="inline-block dropdown">
+      <a href="" ng-click="toggleAddToPlaylist()" class="btn btn-prime mr1">Add to Playlist</a>
+      <div class="dropdown-body mt0 clearfix bold bg-highlight rounded popin" ng-class="{'is-open': addToPlaylistIsOpen}">
+        <a href="" ng-click="toggleAddToPlaylist()" class="tappad block px1 white">Cancel</a>
+        <ul class="ul menu menu-reverse">
+          <li class="px1"><input type="text" class="input mb1" placeholder="Create New Playlist" /></li>
+          <li ng-repeat="set in userPlaylists">
+            <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <a ng-show="track" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{track.title}}%20by%20{{track.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{track.user.permalink}}%2F{{track.permalink}}" target="_blank"
+      class="btn btn-prime mr1">
+      Tweet  
+    </a>
+
+    <input type="text" value="http://soundrad.com/{{ track.user.permalink }}/{{ track.permalink }}" onclick="this.focus();this.select();" class="input" readonly />
+  
+  </div>
+
+  <div class="bar-3 px1">
+    <span class="mr1">Posted {{ track.created_at | fromNow }}</span>
+    <span class="mr1">{{ track.favoritings_count }} Likes</span>
+    <span class="">{{ track.playback_count }} Plays</span>
+  </div>
+
+  <div class="p1">
+    <p class="mt2 mb2" ng-show="track.description" ng-bind-html-unsafe="track.description | richtext"></p>
+    <a ng-href="{{track.permalink_url}}" target="_blank" class="small py1">View on SoundCloud</a>
+  </div>
+
+
+</div>

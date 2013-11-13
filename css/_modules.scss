@@ -6,12 +6,17 @@
   z-index: 4;
 }
 
-.ss-icon { position: relative; top: .1875em; }
+.wrap {
+  max-width: 768px;
+  margin-right: auto;
+  margin-left: auto;
+}
 
-.no-wrap { white-space: nowrap; }
-
+.mt0 { margin-top: .5rem; }
 .mt6 { margin-top: 6*$space; }
 .px0 { padding-right: .5*$space; padding-left: .5*$space; }
+.ss-icon { position: relative; top: .1875em; }
+.no-wrap { white-space: nowrap; }
 
 .bar-2 {
   height: 2rem;
@@ -26,6 +31,7 @@
   padding-top: .375rem;
   padding-bottom: .375rem;
 }
+.tappad,
 .bar-4-align {
   line-height: 3rem;
 }
@@ -59,7 +65,16 @@
   line-height: 6*$space;
   padding: 0 $space;
 }
-
+.input {
+  height: 2rem;
+  line-height: 1.5rem;
+  padding: 0 .75rem;
+  border-radius: .25*$space;
+  border-width: 1px;
+  border-style: solid;
+  box-sizing: border-box;
+  outline: none;
+}
 
 .progress {
   position: relative;
@@ -112,8 +127,10 @@
     margin-bottom: 0;
   }
 }
-.menu li a {
+.menu a {
   display: block;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .dropdown {
