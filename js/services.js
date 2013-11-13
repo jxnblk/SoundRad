@@ -166,7 +166,6 @@ angular.module('soundrad.services', [])
       playing: false,
       paused: false,
       play: function(tracks, i) {
-        console.log('play');
         if (i == null) {
           tracks = new Array(tracks);
           i = 0;
@@ -187,17 +186,18 @@ angular.module('soundrad.services', [])
           player.paused = track;
         }
       },
-      stop: function(track) {
+      stop: function() {
         audio.pause();
         player.playing = false;
         player.paused = false;
       },
       next: function() {
-        console.log(player.tracks);
         player.i = player.i+1;
-        console.log(player.i);
-        console.log('play ' + player.tracks[player.i]);
-        if (player.tracks.length > (player.i + 1)) player.play(player.tracks, player.i);   
+        if (player.tracks.length > player.i) {
+          player.play(player.tracks, player.i);
+        } else {
+          player.stop();
+        };
       },
       prev: function() {
         player.i = player.i-1;

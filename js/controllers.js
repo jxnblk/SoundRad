@@ -234,71 +234,72 @@ angular.module('soundrad.controllers', [])
 }])
   
 .controller('TrackDetailCtrl', ['$scope', 'soundcloud', '$stateParams', function($scope, soundcloud, $stateParams){
-    $scope.isLoading = true;
-    if ($scope.preloadContent) {
-      $scope.tracks = new Array($scope.preloadContent);
-      $scope.track = $scope.preloadContent;
-      $scope.preloadContent = null;
+  $scope.isLoading = true;
+  if ($scope.preloadContent) {
+    $scope.tracks = new Array($scope.preloadContent);
+    $scope.track = $scope.preloadContent;
+    $scope.preloadContent = null;
+    $scope.isLoading = false;
+  };
+  
+  var path = '/' + $scope.viewUser + '/' + $stateParams.track;
+  soundcloud.getTrack(path, function(data){
+    $scope.$apply(function () {
+      $scope.tracks = new Array(data);
+      $scope.track = data;
+      $scope.hasPrevPage = false;
+      $scope.hasNextPage = false;
       $scope.isLoading = false;
-    };
-    
-    var path = '/' + $scope.viewUser + '/' + $stateParams.track;
-    soundcloud.getTrack(path, function(data){
-      $scope.$apply(function () {
-        $scope.tracks = new Array(data);
-        $scope.track = data;
-        $scope.hasPrevPage = false;
-        $scope.hasNextPage = false;
-        $scope.isLoading = false;
-      });
     });
+  });
 }])
   
 .controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'player', function($scope, soundcloud, $stateParams, player){
-    $scope.isLoading = true;
-    if ($scope.preloadContent) {
-      console.log($scope.preloadContent);
-      $scope.set = $scope.preloadContent;
-      $scope.set.title = $scope.preloadContent.title;
-      $scope.tracks = $scope.preloadContent.tracks;
-      $scope.preloadContent = null;
+  $scope.isLoading = true;
+  if ($scope.preloadContent) {
+    console.log($scope.preloadContent);
+    $scope.set = $scope.preloadContent;
+    $scope.set.title = $scope.preloadContent.title;
+    $scope.tracks = $scope.preloadContent.tracks;
+    $scope.preloadContent = null;
+    $scope.isLoading = false;
+  };
+  var path = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
+  console.log(path);
+  soundcloud.getSet(path, function(data){
+    $scope.$apply(function () {
+      $scope.set = data;
+      $scope.tracks = data.tracks;
+      $scope.hasPrevPage = false;
+      $scope.hasNextPage = false;
+      $scope.streamNextPage = false;
       $scope.isLoading = false;
-    };
-    var path = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
-    console.log(path);
-    soundcloud.getSet(path, function(data){
-      $scope.$apply(function () {
-        $scope.set = data;
-        $scope.tracks = data.tracks;
-        $scope.hasPrevPage = false;
-        $scope.hasNextPage = false;
-        $scope.isLoading = false;
-      });
     });
+  });
 
-    $scope.isEditable = false;
-    $scope.toggleIsEditable = function(){ $scope.isEditable = !$scope.isEditable; };
-    
-    $scope.updatePlaylist = function(){
-      if(player.tracks == $scope.set.tracks) {
-        var i;
-        for(i in $scope.set.tracks){
-          if($scope.set.tracks[i].id == player.playing.id){
-            player.i = parseInt(i);
-            player.tracks = $scope.set.tracks;
-          };
+  $scope.isEditable = false;
+  $scope.toggleIsEditable = function(){ $scope.isEditable = !$scope.isEditable; };
+  
+  $scope.updatePlaylist = function(){
+    if(player.tracks == $scope.set.tracks) {
+      var i;
+      for(i in $scope.set.tracks){
+        if($scope.set.tracks[i].id == player.playing.id){
+          player.i = parseInt(i);
+          player.tracks = $scope.set.tracks;
         };
       };
-      soundcloud.updatePlaylist($scope.set, function(data){
-        console.log(data.title + ' updated');
-      });
     };
+    soundcloud.updatePlaylist($scope.set, function(data){
+      console.log(data.title + ' updated');
+    });
+  };
 
-    $scope.sortableOptions = {
-      stop: function(e, ui) {
-        $scope.updatePlaylist();
-      }
-    };
+  $scope.sortableOptions = {
+    stop: function(e, ui) {
+      $scope.updatePlaylist();
+    }
+  };
 
 }])
   
@@ -306,184 +307,173 @@ angular.module('soundrad.controllers', [])
 }])
   
 .controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    $scope.isLoading = true;
-    soundcloud.getFollowings($scope.viewUser, function(data){
-      $scope.$apply(function(){
-        $scope.followings = data;
-        $scope.isLoading = false;
-      });
+  $scope.isLoading = true;
+  soundcloud.getFollowings($scope.viewUser, function(data){
+    $scope.$apply(function(){
+      $scope.followings = data;
+      $scope.isLoading = false;
     });
-    $scope.sorts = [
-      { json: 'followers_count', human: 'Popularity', reverse: true },
-      { json: 'username', human: 'Alphabetical', reverse: false }
-    ];
-    $scope.sortFollowings = $scope.sorts[0];  
+  });
+  $scope.sorts = [
+    { json: 'followers_count', human: 'Popularity', reverse: true },
+    { json: 'username', human: 'Alphabetical', reverse: false }
+  ];
+  $scope.sortFollowings = $scope.sorts[0];  
 }])
   
 .controller('FollowersCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
-    $scope.isLoading = true;
-    soundcloud.getFollowers($scope.viewUser, function(data){
-      $scope.$apply(function(){
-        $scope.followers = data;
-        $scope.isLoading = false;
-      });
+  $scope.isLoading = true;
+  soundcloud.getFollowers($scope.viewUser, function(data){
+    $scope.$apply(function(){
+      $scope.followers = data;
+      $scope.isLoading = false;
     });
-    $scope.sorts = [
-      { json: 'followers_count', human: 'Popularity', reverse: true },
-      { json: 'username', human: 'Alphabetical', reverse: false }
-    ];
-    $scope.sortFollowers = $scope.sorts[0];
+  });
+  $scope.sorts = [
+    { json: 'followers_count', human: 'Popularity', reverse: true },
+    { json: 'username', human: 'Alphabetical', reverse: false }
+  ];
+  $scope.sortFollowers = $scope.sorts[0];
 }])
   
 .controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
 
-    $scope.player = player;
-
-    $scope.play = function(tracks, i){
-      console.log('play track');
-      player.play(tracks,i);
-    };
-    
-    // Stream Pagination
-    $scope.showMoreStream = function() {
-      console.log('loading...');
+  $scope.player = player;
+  
+  // Stream Pagination
+  $scope.showMoreStream = function() {
+    console.log('loading...');
+    $scope.isLoading = true;
+    var url = $scope.streamNextPage;
+    var params = { limit: $scope.pageSize };
+    soundcloud.getStream(url, params, function(data, tracks){
+      $scope.$apply(function(){
+        $scope.tracks = $scope.tracks.concat(tracks);
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;  
+        $scope.isLoading = false;
+        $scope.streamNextPage = data.next_href;
+      });
+    });
+    $scope.page = $scope.page + 1;
+  };
+  
+  // New Pagination
+  $scope.updatePage = function(){
+    $scope.page = ($scope.pageOffset + $scope.pageSize) / $scope.pageSize;
+  };
+  
+  $scope.nextPage = function(){
+    if($scope.hasNextPage){
       $scope.isLoading = true;
-      var url = $scope.streamNextPage;
-      var params = { limit: $scope.pageSize };
-      soundcloud.getStream(url, params, function(data, tracks){
+      $scope.tracks = null;
+      $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
+      $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
+      soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
         $scope.$apply(function(){
-          $scope.tracks = $scope.tracks.concat(tracks);
-          $scope.hasPrevPage = false;
-          $scope.hasNextPage = false;  
+          $scope.tracks = data;
+          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
           $scope.isLoading = false;
-          $scope.streamNextPage = data.next_href;
         });
       });
-      $scope.page = $scope.page + 1;
+      $scope.updatePage();
     };
-    
-    // New Pagination
-    $scope.updatePage = function(){
-      $scope.page = ($scope.pageOffset + $scope.pageSize) / $scope.pageSize;
-    };
-    
-    $scope.nextPage = function(){
-      if($scope.hasNextPage){
-        $scope.isLoading = true;
-        $scope.tracks = null;
-        $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
-        $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
-        soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
-          $scope.$apply(function(){
-            $scope.tracks = data;
-            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-            $scope.isLoading = false;
-          });
+  };
+  
+  $scope.prevPage = function(){
+    if($scope.pageOffset >= $scope.pageSize) {
+      $scope.isLoading = true;
+      $scope.tracks = null;
+      $scope.pageOffset = $scope.pageOffset - $scope.pageSize;
+      $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
+      soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
+        $scope.$apply(function(){
+          $scope.tracks = data;
+          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+          $scope.isLoading = false;
         });
-        $scope.updatePage();
-      };
-    };
-    
-    $scope.prevPage = function(){
-      if($scope.pageOffset >= $scope.pageSize) {
-        $scope.isLoading = true;
-        $scope.tracks = null;
-        $scope.pageOffset = $scope.pageOffset - $scope.pageSize;
-        $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
-        soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
-          $scope.$apply(function(){
-            $scope.tracks = data;
-            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-            $scope.isLoading = false;
-          });
-        });
-        $scope.updatePage(); 
-      };      
-    };
+      });
+      $scope.updatePage(); 
+    };      
+  };
         
 }])
   
 .controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
-    
-      // $scope.dropbarIsOpen = false;
-      // $scope.toggleDropbar = function() {
-      //   $scope.dropbarIsOpen = !$scope.dropbarIsOpen;
-      // };
 
+  $scope.dropdownIsOpen = false;
+  $scope.toggleDropdown = function() {
+    $scope.dropdownIsOpen = ! $scope.dropdownIsOpen;
+    $scope.addToPlaylistIsOpen = false;
+    $scope.shareIsOpen = false;
+  };
+
+  $scope.addToPlaylistIsOpen = false;
+  $scope.toggleAddToPlaylist = function() { $scope.addToPlaylistIsOpen = ! $scope.addToPlaylistIsOpen; };      
+
+  $scope.shareIsOpen = false;
+  $scope.toggleShare = function() { $scope.shareIsOpen = !$scope.shareIsOpen; };
+
+  $scope.like = function(track) {        
+    console.log(track);
+    if($scope.token){
+      soundcloud.like(track, function(data){
+        $scope.$apply(function(){
+          track.user_favorite = true;
+        });           
+      });
+    } else {
+      $scope.connect();
+    };
+  };
+  $scope.unlike = function(track) {
+    soundcloud.unlike(track, function(data){
+      $scope.$apply(function(){
+        track.user_favorite = false;  
+      });
+    });
+  };
+
+  $scope.addToPlaylist = function(track, playlist) {
+    soundcloud.addToPlaylist(track, playlist, function(data){
+      console.log('added to ' + data.title);
+      console.log(data);
+      $scope.flashMessage = 'Added to ' + data.title;
       $scope.dropdownIsOpen = false;
-      $scope.toggleDropdown = function() {
-        $scope.dropdownIsOpen = ! $scope.dropdownIsOpen;
-        $scope.addToPlaylistIsOpen = false;
-        $scope.shareIsOpen = false;
-      };
+    });
+  };
 
-      $scope.addToPlaylistIsOpen = false;
-      $scope.toggleAddToPlaylist = function() { $scope.addToPlaylistIsOpen = ! $scope.addToPlaylistIsOpen; };      
-
-      $scope.shareIsOpen = false;
-      $scope.toggleShare = function() { $scope.shareIsOpen = !$scope.shareIsOpen; };
-    
-      $scope.like = function(track) {        
-        console.log(track);
-        if($scope.token){
-          soundcloud.like(track, function(data){
-            $scope.$apply(function(){
-              track.user_favorite = true;
-            });           
-          });
-        } else {
-          $scope.connect();
+  $scope.createPlaylist = function(name, track){
+    var tracks = track.id.map(function(id) { return { id: id } });
+    var playlist = {
+          playlist: {
+            title: name,
+            tracks: tracks
+          }
         };
-      };
-      $scope.unlike = function(track) {
-        soundcloud.unlike(track, function(data){
-          $scope.$apply(function(){
-            track.user_favorite = false;  
-          });
-        });
-      };
+    soundcloud.createPlaylist(playlist, function(data){
+      console.log(data);
+    });
+  };
 
-    
-      $scope.addToPlaylist = function(track, playlist) {
-        soundcloud.addToPlaylist(track, playlist, function(data){
-          console.log('added to ' + data.title);
-          console.log(data);
-          $scope.flashMessage = 'Added to ' + data.title;
-          $scope.dropdownIsOpen = false;
-        });
-      };
+  $scope.removeIsOpen = false;
+  $scope.toggleRemove = function() { $scope.removeIsOpen = !$scope.removeIsOpen; };
 
-      $scope.createPlaylist = function(name, track){
-        var tracks = track.id.map(function(id) { return { id: id } });
-        var playlist = {
-              playlist: {
-                title: name,
-                tracks: tracks
-              }
-            };
-        soundcloud.createPlaylist(playlist, function(data){
-          console.log(data);
-        });
-      };
-    
-      $scope.removeIsOpen = false;
-      $scope.toggleRemove = function() { $scope.removeIsOpen = !$scope.removeIsOpen; };
-
-      $scope.removeFromPlaylist = function(track, playlist) {
-        $scope.isRemoving = track.id;
-        console.log(playlist);
-        soundcloud.removeFromPlaylist(track, playlist, function(data){
-          console.log(data);
-          $scope.$apply(function(){
-            $scope.set = data;
-            $scope.tracks = data.tracks;
-            $scope.removeIsOpen = false;
-            $scope.isRemoving = null;
-          });
-        });
-      };
+  $scope.removeFromPlaylist = function(track, playlist) {
+    $scope.isRemoving = track.id;
+    console.log(playlist);
+    soundcloud.removeFromPlaylist(track, playlist, function(data){
+      console.log(data);
+      $scope.$apply(function(){
+        $scope.set = data;
+        $scope.tracks = data.tracks;
+        $scope.removeIsOpen = false;
+        $scope.isRemoving = null;
+      });
+    });
+  };
 
 }])
   
