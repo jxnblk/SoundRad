@@ -412,7 +412,7 @@ angular.module('soundrad.controllers', [])
         
 }])
   
-.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($scope, $timeout, soundcloud) {
 
   $scope.dropdownIsOpen = false;
   $scope.toggleDropdown = function() {
@@ -454,8 +454,15 @@ angular.module('soundrad.controllers', [])
     soundcloud.addToPlaylist(track, playlist, function(data){
       console.log('added to ' + data.title);
       console.log(data);
-      $scope.flashMessage = 'Added to ' + data.title;
-      $scope.dropdownIsOpen = false;
+      $scope.$apply(function(){
+        $scope.flashMessage = 'Added to ' + data.title;
+        $scope.addToPlaylistIsOpen = false;
+        $timeout(function(){
+          $scope.flashMessage = null;
+          $scope.dropdownIsOpen = false;  
+        }, 5000);
+      });
+      
     });
   };
 

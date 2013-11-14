@@ -3,8 +3,8 @@
   <div class="table tappad py0 border-bottom">
     <h2 class="table-cell px1">{{set.title}}</h2>
     <div class="table-cell px0 right-align">
-      <a href="" ng-hide="set.user.id != me.id || isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Edit</a>
-      <a href="" ng-show="set.user.id == me.id && isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Done</a>
+      <a href="" ng-hide="set.user.id != me.id || isEditable" ng-click="toggleIsEditable()" class="btn btn-text popin">Edit</a>
+      <a href="" ng-show="set.user.id == me.id && isEditable" ng-click="toggleIsEditable()" class="small btn btn-prime popin">Done</a>
     </div>
   </div>
   
@@ -14,7 +14,7 @@
   </div>
 
   <div class="px1">
-    <p class="">Posted {{set.created_at | fromNow}}</p>
+    <p class="small">Posted {{set.created_at | fromNow}}</p>
     <p class="" ng-bind-html-unsafe="set.description | richtext"></p>
   </div>
    
