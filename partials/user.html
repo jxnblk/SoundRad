@@ -1,6 +1,6 @@
-<div class="border-bottom" ng-cloak ng-show="userData.id != me.id && $state.current.name != 'user.track'">  
-  <h1 class="px1"><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
-  <div class="bar-3 px0 navbar">
+<div class="folding-table border-bottom" ng-cloak ng-show="userData.id != me.id && $state.current.name != 'user.track'">  
+  <h1 class="table-cell y3 px1"><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
+  <div class="table-cell x100 y3 navbar">
     <a ng-href="/{{viewUser}}/sets"
       class="" ng-class="{'text': $state.current.name != 'user.sets'}">
         Playlists
@@ -18,4 +18,4 @@
 
 <div ui-view></div>
   
-<div ng-show="$state.current.name == 'user'" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+<div ng-show="$state.current.name == 'user'" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>

@@ -7,6 +7,9 @@ $bg1: #eee;
 $bg2: #ccc;
 $red: #d30;
 
+// Universal utilities
+.rounded { border-radius: .25rem; }
+
 .theme-default {
   color: $text;
   background-color: $bg;
@@ -66,7 +69,7 @@ $red: #d30;
     }
     &:active { box-shadow: inset 0 4px 4px rgba(#000,.4); }
   }
-  .btn-text-toggle {
+  .btn-text {
     color: lighten($text, 20%);
     &:hover {
       color: darken($text, 20%);

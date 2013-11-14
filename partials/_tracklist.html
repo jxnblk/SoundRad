@@ -3,14 +3,17 @@
 
   <div ng-switch-when="false">
     <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-      class="border-bottom" ng-class="{'is-active bg-active': player.tracks[player.i].id == track.id}">
+      class="table border-bottom" ng-class="{'is-active bg-active': player.playing.id == track.id}">
 
-      <div class="right bar-4 bar-4-align">
+      <a href="" ng-click="player.play(tracks, $index)"
+        class="table-cell clearfix px1 py0 text">
+        <p class="small">{{ track.user.username }}</p>
+        <h3 class="">{{ track.title }}</h3>
+      </a>
 
+      <div class="table-cell right-align">
         <div class="dropdown inline-block">
-          <a href="" ng-click="toggleDropdown()" class="h2 btn btn-text-toggle">
-            <i class="ss-icon ss-ellipsis"></i>
-          </a>
+          <a href="" ng-click="toggleDropdown()" class="h2 btn btn-text"><i class="ss-icon ss-ellipsis"></i></a>
           <div class="dropdown-body dropdown-body-right bold mr1 fadein" ng-class="{'is-open': dropdownIsOpen }">
             <ul class="ul clearfix menu menu-reverse rounded" ng-hide="addToPlaylistIsOpen || shareIsOpen">
               <li>
@@ -41,9 +44,8 @@
                 <a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="">More Details</a>
               </li>
             </ul>
-
             <div ng-show="addToPlaylistIsOpen" class="clearfix white bg-highlight rounded popin">
-              <a href="" ng-click="toggleAddToPlaylist()" class="block px1 white">Cancel</a>
+              <a href="" ng-click="toggleAddToPlaylist()" class="block y3 px1 white">Cancel</a>
               <ul class="ul menu menu-reverse">
                 <li class="px1"><input type="text" class="input mb1" placeholder="Create New Playlist" /></li>
                 <li ng-repeat="set in userPlaylists">
@@ -51,43 +53,33 @@
                 </li>
               </ul>
             </div>
-
             <div ng-show="shareIsOpen">
               <a href="">Tweet</a>
               <a href="">http://soundrad.com/{{ track.user.permalink }}/{{ track.permalink }}</a>
             </div>
-
           </div>
         </div>
-
       </div>
-
-      <a href="" ng-click="player.play(tracks, $index)"
-        class="block clearfix bar-4 px1 text">
-        <p class="small truncate">{{ track.user.username }}</p>
-        <h3 class="truncate">{{ track.title }}</h3>
-      </a>
-      
     </div>
   </div>
 
   <div id="sets-list" ng-switch-when="true">
-    <div ng-repeat="track in tracks" class="bar-3 px1 border-bottom">
+    <div ng-repeat="track in tracks" class="y3 px1 border-bottom">
       <a href=""
         ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
         class="block text">
-          <h3 class="truncate">{{ track.title }}</h3>
+          <h3 class="">{{ track.title }}</h3>
       </a>
     </div>
   </div>
 
 </div>
 
-<div ng-show="isLoading" class="bar-4 bar-4-align center">Loading...</div>
-<div ng-show="!isLoading && tracks.length == 0" class="bar-4 bar-4-align center">No Results</div>
+<div ng-show="isLoading" class="y3 center">Loading...</div>
+<div ng-show="!isLoading && tracks.length == 0" class="y3 center">No Results</div>
 
-<div class="bar-4 bar-4-align px1" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
+<div class="y3 px1" ng-show="hasPrevPage || hasNextPage || streamNextPage" ng-hide="isLoading">
   <a href="#{{page}}" ng-show="hasPrevPage" ng-click="prevPage()" class="inline-block bold mr1">Previous</a>
   <a href="#{{page}}" ng-show="hasNextPage" ng-click="nextPage()" class="right inline-block bold">Next</a>
-  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="block bold bar-4 center">Show More</a>
+  <a href="" ng-show="streamNextPage" ng-click="showMoreStream()" class="block bold y3 center">Show More</a>
 </div>

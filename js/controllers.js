@@ -309,10 +309,8 @@ angular.module('soundrad.controllers', [])
   };
 
   $scope.sortableOptions = {
-    stop: function(e, ui) {
-      $scope.updatePlaylist();
-    }
-  };
+    stop: function(e, ui) { $scope.updatePlaylist();}},
+    { revert: true };
 
 }])
   

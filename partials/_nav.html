@@ -1,30 +1,35 @@
-<nav class="clearfix">
-  
-  <a href="/"
-    class="" ng-class="{'text': currentState != 'home'}">
-    <span ng-show="token">Stream</span>
-    <span ng-hide="token">Home</span>
-  </a>
-  
-  <span ng-show="token">
-    <a href="/{{me.permalink}}/sets"
-      class="" ng-class="{'text': currentState != 'user.sets' || me.permalink != viewUser}" >
-        Playlists 
+<nav class="table table-fixed">
+
+  <div class="table-cell">
+    <a href="/"
+      class="" ng-class="{'text': currentState != 'home'}">
+      <span ng-show="token">Stream</span>
+      <span ng-hide="token">Home</span>
     </a>
-    <a href="/{{me.permalink}}/likes"
-      class="" ng-class="{'text': currentState != 'user.likes' || me.permalink != viewUser}">
-        Likes
-    </a>
-  </span>
-  <div ng-show="token" class="right">
-    <!-- <a href="" class="text"><i class="ss-icon ss-search"></i></a> -->
+    
+    <span ng-show="token">
+      <a href="/{{me.permalink}}/sets"
+        class="" ng-class="{'text': currentState != 'user.sets' || me.permalink != viewUser}" >
+          Playlists 
+      </a>
+      <a href="/{{me.permalink}}/likes"
+        class="" ng-class="{'text': currentState != 'user.likes' || me.permalink != viewUser}">
+          Likes
+      </a>
+    </span>
+  </div>
+
+  <div ng-show="token" class="table-cell x25 right-align">
+    <!-- <a href="" class="text"><i class="icon search">search</i></a> -->
     <a href="/{{me.permalink}}" class=""  ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
-    <!-- <a href="/settings" ng-class="{'text': currentState != 'settings'}"><i class="ss-icon ss-settings"></i></a> -->
+    <!-- <a href="/settings" ng-class="{'text': currentState != 'settings'}"><i class="icon-settings"></i></a> -->
   </div>
 
-  <a href="" ng-click="connect();" ng-hide="token" class="right btn btn-prime">Connect</a>
+  <div ng-hide="token" class="table-cell right-align">
+    <a href="" ng-click="connect();" class="btn btn-prime">Connect</a>
+  </div>
 
 </nav>

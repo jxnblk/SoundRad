@@ -2,15 +2,28 @@
 <div ng-switch="!!me">
 
   <div ng-switch-when="true" ng-controller="StreamCtrl">
-    <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+    <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
   </div>
 
-  <div ng-switch-when="false">
-    <!-- include landing partial instead of inline content -->
-    <h1>SoundRad</h1>
-    <p><a href="" ng-click="connect()">Connect with SoundCloud</a></p>
-    <p><a href="" ng-click="debugConnect()" class="gray5">Connect with iOS7</a></p>
-  </div>
+  <main ng-switch-when="false" class="p1">
+    <section class="mb2">
+      <h1 class="h1 responsive"><span class="highlight">Sound</span>Rad</h1>
+      <p class="h2 responsive mb4">A radically simpler & faster SoundCloud player</p>
+      <p>
+        <a href="" ng-click="connect()" class="h2 btn btn-prime mr0">Connect with SoundCloud</a>
+        <a href="" ng-click="debugConnect()" class="btn btn-text">Connect with iOS7</a>
+      </p>
+    </section>
+    <footer class="py2">
+      <p class="small">
+        Made with love by
+        <a href="//jxnblk.com">Jxnblk</a>.
+        Powered by SoundCloud.
+        Fork me on
+        <a href="//github.com/jxnblk/SoundRad">Github</a>.
+      </p>
+    </footer>
+  </main>
 
 </div>
 

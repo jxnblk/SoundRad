@@ -1,14 +1,16 @@
 <div ng-controller="TracklistCtrl">
   
-  <div class="clearfix bar-4 bar-4-align px1 border-bottom">
-    <a href="" ng-hide="set.user.id != me.id || isEditable" ng-click="toggleIsEditable()" class="right btn-text">Edit</a>
-    <a href="" ng-show="set.user.id == me.id && isEditable" ng-click="toggleIsEditable()" class="right btn-text">Done</a>
-    <h2 class="clearfix">{{set.title}}</h2>
+  <div class="table tappad py0 border-bottom">
+    <h2 class="table-cell px1">{{set.title}}</h2>
+    <div class="table-cell px0 right-align">
+      <a href="" ng-hide="set.user.id != me.id || isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Edit</a>
+      <a href="" ng-show="set.user.id == me.id && isEditable" ng-click="toggleIsEditable()" class="btn btn-text">Done</a>
+    </div>
   </div>
   
   <div ng-switch="!!isEditable">
-    <div ng-switch-when="false" ng-include src="'/partials/_tracklist.html'"></div>
-    <div ng-switch-when="true" ng-include src="'/partials/_tracklist-edit.html'"></div>
+    <div ng-switch-when="false" ng-include src="'/partials/_tracklist.html'" class="mb3"></div>
+    <div ng-switch-when="true" ng-include src="'/partials/_tracklist-edit.html'" class="mb3"></div>
   </div>
 
   <div class="px1">
@@ -16,7 +18,7 @@
     <p class="" ng-bind-html-unsafe="set.description | richtext"></p>
   </div>
    
-  <a ng-href="{{set.permalink_url}}" target="_blank" class="block bar-4 bar-4-align center">View on SoundCloud</a>
+  <a ng-href="{{set.permalink_url}}" target="_blank" class="block y4 tappad center">View on SoundCloud</a>
 
 
 </div>

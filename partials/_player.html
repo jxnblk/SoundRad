@@ -1,41 +1,38 @@
 <div ng-switch="!!player.playing || !!player.paused">
 
-  <div ng-switch-when="false" class="bar-6 px1 bg-white border-bottom">
-    <h1 class="bar-6">SoundRad <span class="regular p">v64 beta</span></h1>
+  <div ng-switch-when="false" class="hi6 px1 bg-white border-bottom">
+    <h1 class="y6">SoundRad <span class="regular p">v64 beta</span></h1>
   </div>
 
   <div ng-show="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom slide-down">
     
-    <div id="player-controls" class="left bar-6">
-      <a href="" ng-click="player.prev()"
-        class="btn-player text mobile-hide popin">
-          <i class="ss-icon ss-skipback"></i>
-      </a>
-      <a href="" ng-click="player.play(player.tracks, player.i)"
-        class="h2 btn-player text popin" ng-hide="player.playing">
-          <i class="ss-icon ss-play"></i>
-      </a>
-      <a href="" ng-click="player.pause(player.playing)"
-        class="h2 btn-player text popin" ng-show="player.playing">
-          <i class="ss-icon ss-pause"></i>
-      </a>
-      <a href="" ng-click="player.next()"
-        class="btn-player text mobile-hide popin">
-          <i class="ss-icon ss-skipforward"></i>
-      </a>
+    <div id="player-controls" class="left px1 y6">
+        <a href="" ng-click="player.prev()"
+          class="btn btn-player text mobile-hide popin">
+            <span class="ss-icon ss-skipback"></span>
+        </a>
+        <a href="" ng-click="player.play(player.tracks, player.i)"
+          class="h2 btn btn-player text popin" ng-hide="player.playing">
+            <span class="ss-icon ss-play"></span>
+        </a>
+        <a href="" ng-click="player.pause(player.playing)"
+          class="h2 btn btn-player text popin" ng-show="player.playing">
+            <span class="ss-icon ss-pause"></span>
+        </a>
+        <a href="" ng-click="player.next()"
+          class="btn btn-player text mobile-hide popin">
+            <span class="ss-icon ss-skipforward"></span>
+        </a>
     </div>
 
-    <div id="player-body" class="clearfix">
-
-      <div id="player-body-top" class="clearfix">
-
-        <div id="player-info" class="clearfix bar-4 px1">
-          <p class="truncate lh-small">{{player.tracks[player.i].user.username}}</p>
-          <h1 class="h2 lh-small truncate">{{player.tracks[player.i].title}}</h1>
+    <div id="player-body" class="clearfix mr1">
+      <div id="player-body-top" class="">
+        <div id="player-info" class="">
+          <p class="truncate y2">{{player.tracks[player.i].user.username}}</p>
+          <h1 class="h2 y2 truncate">{{player.tracks[player.i].title}}</h1>
         </div>
       </div>
-
-      <div id="scrubber" ng-controller="ScrubberCtrl" class="bar-2 clearfix px1">
+      <div id="scrubber" ng-controller="ScrubberCtrl" class="clearfix y2">
         <div class="right right-align ml1 small mobile-hide" style="width:80px">
           <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
           <span ng-show="audio.readyState == 4">
@@ -49,7 +46,6 @@
           <div class="progress-overlay" ng-click="seekTo($event)"></div>
         </div>
       </div>
-
     </div>
 
   </div>
