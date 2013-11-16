@@ -292,18 +292,22 @@ angular.module('soundrad.controllers', [])
     $scope.preloadContent = null;
     $scope.isLoading = false;
   };
-  var path = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
-  soundcloud.getSet(path, function(data){
-    $scope.$apply(function () {
-      $scope.set = data;
-      $scope.tracks = data.tracks;
-      $scope.hasPrevPage = false;
-      $scope.hasNextPage = false;
-      $scope.streamNextPage = false;
-      $scope.isLoading = false;
-      if(!player.playing && !player.paused) player.load($scope.tracks);
+
+  $scope.getSet = function(){
+    var path = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
+    soundcloud.getSet(path, function(data){
+      $scope.$apply(function () {
+        $scope.set = data;
+        $scope.tracks = data.tracks;
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;
+        $scope.streamNextPage = false;
+        $scope.isLoading = false;
+        if(!player.playing && !player.paused) player.load($scope.tracks);
+      });
     });
-  });
+  };
+  $scope.getSet();
 
   $scope.isEditable = false;
   $scope.toggleIsEditable = function(){ $scope.isEditable = !$scope.isEditable; };
@@ -536,6 +540,7 @@ angular.module('soundrad.controllers', [])
     soundcloud.removeFromPlaylist(track, playlist, function(data){
       $scope.$apply(function(){
         $scope.set = data;
+        $scope.getSet();
         $scope.tracks = [];
         $scope.tracks = data.tracks;
         $scope.removeIsOpen = false;
