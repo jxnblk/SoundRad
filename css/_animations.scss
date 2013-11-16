@@ -31,5 +31,14 @@
 }
 .fadeout { -webkit-animation: fadeout .5s ease; }
 
+.fadeout-delay {
+  -webkit-animation-name: fadeout;
+  -webkit-animation-duration: .5s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-delay: 3s;
+}
+
 
 // Transitions
+.transition { -webkit-transition: all .3s ease; }

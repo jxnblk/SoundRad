@@ -19,17 +19,17 @@
       <i class="ss-icon ss-heart"></i> Liked
     </a>
 
+    <div class="overlay" ng-show="addToPlaylistIsOpen" ng-click="toggleAddToPlaylist()"></div>
     <div class="inline-block dropdown">
-      <a href="" ng-click="toggleAddToPlaylist()" class="btn btn-prime mr0">Add to Playlist</a>
-      <div class="dropdown-body mt0 clearfix bold bg-highlight rounded popin" ng-class="{'is-open': addToPlaylistIsOpen}">
-        <a href="" ng-click="toggleAddToPlaylist()" class="tappad block px1 white">Cancel</a>
-        <ul class="ul menu menu-reverse">
-          <li class="px1"><input type="text" class="input mb1" placeholder="Create New Playlist" /></li>
-          <li ng-repeat="set in userPlaylists">
-            <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
-          </li>
-        </ul>
+      <a href="" ng-click="toggleAddToPlaylist()" class="btn btn-prime mr0 transition" ng-class="{'btn-secondary': flashMessage}">
+        <span ng-hide="flashMessage">Add to Playlist</span>
+        <span ng-show="flashMessage" class="fadeout-delay">{{ flashMessage }}</span>
+      </a>
+      <div class="dropdown-body clearfix bold bg-highlight rounded popin"
+        ng-class="{'is-open': addToPlaylistIsOpen}"
+        ng-include src="'/partials/_add-to-playlist.html'">
       </div>
+      <!-- <div ng-show="flashMessage" ng-include src="'/partials/_flash-message.html'"></div> -->
     </div>
 
     <a ng-show="track" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{track.title}}%20by%20{{track.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{track.user.permalink}}%2F{{track.permalink}}" target="_blank"

@@ -1,7 +1,7 @@
 
 <div ng-switch="!!me">
 
-  <div ng-switch-when="true" ng-controller="StreamCtrl">
+  <div ng-switch-when="true" ng-controller="StreamCtrl" infinite-scroll="showMoreStream()" infinite-scroll-distance=".25">
     <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
   </div>
 

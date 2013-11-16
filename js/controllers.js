@@ -57,7 +57,7 @@ angular.module('soundrad.controllers', [])
     soundcloud.getUserPlaylists(function(data){
       $scope.$apply(function(){
         $scope.userPlaylists = data;
-        storage.set('playlists', data);  
+       storage.set('playlists', data);  
       });
     });
   };
@@ -95,6 +95,7 @@ angular.module('soundrad.controllers', [])
     $scope.viewUser = $stateParams.user;
   });
 
+  // Turn this into a directive for anchor tags
   $scope.preloadContent = null;
   $scope.preload = function(url, data) {
     $location.hash('');
@@ -175,6 +176,7 @@ angular.module('soundrad.controllers', [])
       $scope.$apply(function(){
         $scope.userData = data;
         $scope.viewUsername = data.username;
+        //if($scope.me) $scope.isFollowing(data.id);
       });
     });
     
@@ -196,8 +198,31 @@ angular.module('soundrad.controllers', [])
         $scope.getUrl = '/users/' + $scope.viewUser + '/tracks';
         $scope.getPage();
         $scope.getTracks();
+
       };  
     });
+
+    $scope.isFollowing = function(userid){
+      console.log('checking if following...' + userid);
+      soundcloud.isFollowing(userid, function(data, error){
+        console.log('data:');
+        console.log(data);
+        if(error) console.error(error);
+      });
+    };
+
+    $scope.follow = function(userid){
+      console.log('follow user ' +userid);
+      soundcloud.follow(userid, function(data){
+        console.log(data);
+      });
+    };
+    $scope.unfollow = function(userid){
+      soundcloud.unfollow(userid, function(data){
+        console.log(data);
+      });
+    };
+
     
 }])
   
@@ -347,14 +372,16 @@ angular.module('soundrad.controllers', [])
   $scope.sortFollowers = $scope.sorts[0];
 }])
   
-.controller('TracklistCtrl', ['$scope', '$location', '$anchorScroll', 'soundcloud', 'player', function($scope, $location, $anchorScroll, soundcloud, player) {
+.controller('TracklistCtrl', ['$scope', '$location', 'soundcloud', 'player', function($scope, $location, soundcloud, player) {
 
   $scope.player = player;
   
   // Stream Pagination
   $scope.showMoreStream = function() {
     console.log('loading...');
+      //if($scope.isLoading) return false;
     $scope.isLoading = true;
+
     var url = $scope.streamNextPage;
     var params = { limit: $scope.pageSize };
     soundcloud.getStream(url, params, function(data, tracks){
@@ -409,6 +436,29 @@ angular.module('soundrad.controllers', [])
       $scope.updatePage(); 
     };      
   };
+
+  $scope.getMore = function(){
+    if($scope.hasNextPage){
+      $scope.isLoading = true;
+      $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
+      $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
+      soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
+        $scope.$apply(function(){
+          $scope.tracks = $scope.tracks.concat(data);
+          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+          $scope.isLoading = false;
+        });
+      });
+      $scope.updatePage();
+    };
+  };
+
+  $scope.loadMore = function(){
+    if($scope.isLoading) return false;
+    if($scope.currentState == 'home') $scope.showMoreStream();
+    else $scope.getMore();
+  };
         
 }])
   
@@ -450,6 +500,8 @@ angular.module('soundrad.controllers', [])
     });
   };
 
+  $scope.flashMessage = null;
+
   $scope.addToPlaylist = function(track, playlist) {
     soundcloud.addToPlaylist(track, playlist, function(data){
       console.log('added to ' + data.title);
@@ -460,7 +512,7 @@ angular.module('soundrad.controllers', [])
         $timeout(function(){
           $scope.flashMessage = null;
           $scope.dropdownIsOpen = false;  
-        }, 5000);
+        }, 3500);
       });
       
     });
@@ -489,6 +541,7 @@ angular.module('soundrad.controllers', [])
       console.log(data);
       $scope.$apply(function(){
         $scope.set = data;
+        $scope.tracks = [];
         $scope.tracks = data.tracks;
         $scope.removeIsOpen = false;
         $scope.isRemoving = null;

@@ -14,7 +14,6 @@ angular.module('soundrad.services', [])
     return {
 
       reconnect: function(token) {
-        console.log('reconnecting...');
         window.SC.storage().setItem('SC.accessToken', token);
         Token = token;
       },
@@ -31,12 +30,6 @@ angular.module('soundrad.services', [])
         SC.get('/me', callback);
       },
 
-      ////////////////
-      // Maybe don't need this
-      // authenticate: function() {
-      //   Token = SC.accessToken();
-      // },
-      
       getUser: function(user, callback){
         SC.get('/users/' + user, callback);
       },
@@ -105,6 +98,20 @@ angular.module('soundrad.services', [])
               });
             };
             getF();               
+      },
+
+      isFollowing: function(userid, callback){
+        console.log('/me/followings/'+userid);
+        SC.get('/me/followings/'+userid+'?client_id='+clientID, callback);
+        // I love how well this fucking works
+      },
+
+      follow: function(userid, callback){
+        SC.put('/me/followings/'+userid, callback);
+      },
+
+      unfollow: function(userid, callback){
+        SC.delete('/me/followings/'+userid, callback);
       },
       
       like: function(track, callback){
@@ -216,9 +223,6 @@ angular.module('soundrad.services', [])
         player.i = 0;
         player.paused = tracks[0];
         player.loaded = true;
-        
-          console.log(player.tracks);
-          console.log(player.paused);
       }
     };
     audio.addEventListener('ended', function() {

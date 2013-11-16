@@ -4,7 +4,7 @@
 .fixed-top {
   position: fixed;
   top: 0; right: 0; left: 0;
-  z-index: 4;
+  z-index: 1;
 }
 
 .wrap {
@@ -115,7 +115,7 @@
 .dropdown-body {
   position: absolute;
   z-index: 2;
-  top: 100%;
+  top: 0;
   white-space: nowrap;
   min-width: 160px;
   max-height: 256px;
@@ -125,7 +125,14 @@
   &.dropdown-body-right {
     right: 0;
   }
+  // Handle this with ng-show instead
   &.is-open { display: block; }
+}
+.flash-message {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  white-space: nowrap;
 }
 
 // Buttons
@@ -234,5 +241,12 @@
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
   box-shadow: 0 0 4px 4px rgba(#000,.1);
+}
+
+// Overlay
+.overlay {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 1;
 }
 

@@ -1,7 +1,15 @@
+<div class="overlay" ng-click="toggleDropdown()" ng-show="dropdownIsOpen && !flashMessage"></div>
+
 <div class="dropdown inline-block">
-  <a href="" ng-click="toggleDropdown()" class="h2 btn btn-text popin"><i class="ss-icon ss-ellipsis"></i></a>
+  <a href="" ng-click="toggleDropdown()" class="h2 btn btn-text popin">
+    <i ng-hide="flashMessage" class="ss-icon ss-ellipsis"></i>
+    <span ng-show="flashMessage" class="small fadeout-delay">{{ flashMessage }}</span>
+  </a>
   <div class="dropdown-body dropdown-body-right bold mr1 white bg-highlight rounded fadein" ng-class="{'is-open': dropdownIsOpen }">
     <ul class="ul clearfix menu menu-reverse rounded" ng-hide="addToPlaylistIsOpen || shareIsOpen || flashMessage">
+      <li>
+        <a href="" ng-click="toggleDropdown()" class="small">Close</a>
+      </li>
       <li>
         <a href=""
           ng-click="like(track)" ng-hide="track.user_favorite"
@@ -30,21 +38,12 @@
         <a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="">More Details</a>
       </li>
     </ul>
-    <div ng-show="addToPlaylistIsOpen" class="clearfix popin">
-      <a href="" ng-click="toggleAddToPlaylist()" class="block y3 px1 white">Cancel</a>
-      <ul class="ul menu menu-reverse">
-        <li class="px1"><input type="text" class="input mb1" placeholder="Create New Playlist" /></li>
-        <li ng-repeat="set in userPlaylists">
-          <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
-        </li>
-      </ul>
-    </div>
+    <div 
+      ng-show="addToPlaylistIsOpen"
+      ng-include src="'/partials/_add-to-playlist.html'"></div>
     <div ng-show="shareIsOpen" class="p1">
       <a href="">Tweet</a>
       <a href="">http://soundrad.com/{{ track.user.permalink }}/{{ track.permalink }}</a>
-    </div>
-    <div ng-show="flashMessage" class="p1">
-      <p>{{ flashMessage }}</p>
     </div>
   </div>
 </div>

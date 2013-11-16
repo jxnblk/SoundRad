@@ -29,6 +29,7 @@ soundrad.directive('dropbar', function ($window) {
     };
   });
 
+
 // To do
 // - disclosure directive
 // - preloader directive
