@@ -486,6 +486,9 @@ angular.module('soundrad.controllers', [])
       soundcloud.like(track, function(data){
         $scope.$apply(function(){
           track.user_favorite = true;
+          $timeout(function(){
+            $scope.dropdownIsOpen = false;
+          }, 1000);
         });           
       });
     } else {
@@ -496,6 +499,9 @@ angular.module('soundrad.controllers', [])
     soundcloud.unlike(track, function(data){
       $scope.$apply(function(){
         track.user_favorite = false;  
+        $timeout(function(){
+          $scope.dropdownIsOpen = false;
+        }, 1000);
       });
     });
   };
