@@ -6,6 +6,7 @@ var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.contro
     $stateProvider.state('home', { url: "/", templateUrl: "/partials/home.html" });
     $stateProvider.state('callback', { url: "/callback", templateUrl: "/partials/callback.html" });
     $stateProvider.state('settings', { url: "/settings", templateUrl: "/partials/settings.html" });
+    $stateProvider.state('about', { url: "/about", templateUrl: "/partials/about.html" });
     $stateProvider.state('playing', { url: "/playing", templateUrl: "/partials/playing.html" });
 
     $stateProvider.state('history', { url: "/history", templateUrl: "/partials/history.html", controller: 'HistoryCtrl' });

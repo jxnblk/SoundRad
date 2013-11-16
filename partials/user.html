@@ -17,7 +17,7 @@
         Info
     </a>
 
-    <a href="/settings" class="" ng-show="userData.id == me.id">Settings</a>
+    <a href="/settings" class="" ng-class="{'text': $state.current.name != 'settings'}" ng-show="userData.id == me.id">Settings</a>
     
   </div>
 </div>

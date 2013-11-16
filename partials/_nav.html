@@ -9,17 +9,18 @@
     <!-- <a href="" class="text"><i class="icon search">Search</i></a> -->
   </div>
 
-  <div ng-show="token" class="dropdown dropdown-hover table-cell x25 right-align">
+  <div ng-show="token" class="dropdown hover-group table-cell x25 right-align">
     <a href="/{{me.permalink}}" class=""  ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
-    <div class="dropdown-body dropdown-body-right">
+    <div class="dropdown-body dropdown-body-right hover-show">
       <ul class="ul clearfix menu menu-reverse rounded">
         <li><a ng-href="/{{me.permalink}}/sets">Playlists</a></li>
         <li><a ng-href="/{{me.permalink}}/likes">Likes</a></li>
         <li><a ng-href="/{{me.permalink}}/info">Info</a></li>
-        <li><a href="/settings"><span class="icon-settings">Settings</span></a></li>
+        <li class="mt1"><a href="/settings" class="small regular">Settings</a></li>
+        <li class=""><a href="/about" class="small regular">About SoundRad</a></li>
       </ul>
     </div>
   </div>
