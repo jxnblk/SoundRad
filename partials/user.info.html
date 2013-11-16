@@ -1,7 +1,10 @@
 
-<div class="tappad pt-5 pb-5 overhide borbot bor-gray2">
-  <a href="/{{viewUser}}/followers" class="btn-sm fl text">{{userData.followers_count}} Followers</a>
-  <a href="/{{viewUser}}/following" class="btn-sm fl text">{{userData.followings_count}} Following</a>
+<div class="p1">
+  <h2>{{ followersCount | number }} Followers</h2>
+  <h2>{{ followingsCount | number }} Following</h2>
+
+  <p class="py2" ng-cloak ng-bind-html-unsafe="userData.description | richtext"></p>
+
 </div>
 
-<p class="pad maxwi4" ng-cloak ng-bind-html-unsafe="userData.description | richtext"></p>
+

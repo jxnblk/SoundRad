@@ -1,0 +1,20 @@
+<div ui-sortable="sortableOptions" ng-model="tracks">
+  <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
+    class="bg-white border-bottom">
+    
+    <div class="draggable table " ng-class="{'is-active bg-active': player.playing.id == track.id, 'fadeout': isRemoving == track.id }">   
+      <div class="table-cell px1 py0">
+        <p class="small">{{ track.user.username }}</p>
+        <h3 class="">{{ track.title }}</h3>
+      </div>
+      <div class="table-cell px0 right-align">
+        <a href="" ng-click="toggleRemove()" ng-hide="removeIsOpen" class="btn text popin"><i class="ss-icon ss-delete"></i></a>
+        <div class="inline-block small fadein" ng-show="removeIsOpen">
+          <a href="" ng-click="toggleRemove()" class="text">Cancel</a>
+          <a href="" ng-click="removeFromPlaylist(track, set)" class="btn btn-red ml1">Remove</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

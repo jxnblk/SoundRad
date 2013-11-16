@@ -1,24 +1,24 @@
 <div ng-controller="TracklistCtrl">
   
-  <div class="media borbot bor-gray2">
-    <div class="img">
-      <a href="" ng-click="player.play(tracks, 0)" ng-hide="player.playing || player.paused" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play db anim-pop-in"></i></a>
-      <a href="" ng-click="player.play(tracks, player.i)" ng-show="player.paused" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play db anim-pop-in"></i></a>
-      <a href="" ng-click="player.pause(player.playing)" ng-show="player.playing" class="db sq4 lh4 txtcen"><i class="icon icon-pause db anim-pop-in"></i></a>
-    </div>
-    <div class="bd">
-      <h2 class="lh4">{{set.title}}</h2>
+  <div class="table tappad py0 border-bottom">
+    <h2 class="table-cell px1">{{set.title}}</h2>
+    <div class="table-cell px0 right-align">
+      <a href="" ng-hide="set.user.id != me.id || isEditable" ng-click="toggleIsEditable()" class="btn btn-text popin">Edit</a>
+      <a href="" ng-show="set.user.id == me.id && isEditable" ng-click="toggleIsEditable()" class="small btn btn-prime popin">Done</a>
     </div>
   </div>
   
-  <div ng-include src="'/partials/_tracklist.html'"></div>
-      
-  <div class="pad overhide" ng-show="set.description">
-    <p class="sm gray5">Posted {{set.created_at | fromNow}}</p>
-    <p class="maxwi4" ng-bind-html-unsafe="set.description | richtext"></p>
+  <div ng-switch="!!isEditable">
+    <div ng-switch-when="false" ng-include src="'/partials/_tracklist.html'" class="mb3"></div>
+    <div ng-switch-when="true" ng-include src="'/partials/_tracklist-edit.html'" class="mb3"></div>
+  </div>
+
+  <div class="px1">
+    <p class="small">Posted {{set.created_at | fromNow}}</p>
+    <p class="" ng-bind-html-unsafe="set.description | richtext"></p>
   </div>
    
-  <a ng-href="{{set.permalink_url}}" target="_blank" class="db tappad-s gray5 bortop borbot bor-gray2">View on SoundCloud</a>
+  <a ng-href="{{set.permalink_url}}" target="_blank" class="block y4 tappad center">View on SoundCloud</a>
 
 
 </div>

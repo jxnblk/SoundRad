@@ -1,17 +1,12 @@
-/*
-
-        Radicons
-
-
-*/
+// Radicons
 
 @font-face {
   font-family: 'Radicons';
-  src:url('icons/Radicons.eot');
-  src:url('icons/Radicons.eot?#iefix') format('embedded-opentype'),
-    url('icons/Radicons.woff') format('woff'),
-    url('icons/Radicons.ttf') format('truetype'),
-    url('icons/Radicons.svg#Radicons') format('svg');
+  src:url('/icons/Radicons.eot');
+  src:url('/icons/Radicons.eot?#iefix') format('embedded-opentype'),
+    url('/icons/Radicons.woff') format('woff'),
+    url('/icons/Radicons.ttf') format('truetype'),
+    url('/icons/Radicons.svg#Radicons') format('svg');
   font-weight: normal;
   font-style: normal;
 }

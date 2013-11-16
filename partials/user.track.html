@@ -1,35 +1,56 @@
-
-<div class="posrel media" ng-controller="TracklistCtrl">
-  <div class="img">
-    <a href="" ng-click="player.play(track)" ng-hide="player.playing.id == track.id" class="db sq4 lh4 txtcen gray5"><i class="icon icon-play db anim-pop-in"></i></a>
-    <a href="" ng-click="player.pause(track)" ng-show="player.playing.id == track.id" class="db sq4 lh4 txtcen"><i class="icon icon-pause db anim-pop-in"></i></a>
+<div ng-controller="TrackCtrl">
+  
+  
+  <div class="p1 clearfix">
+    <!-- <a href="" ng-click="player.play(track)" class="left mr1 h2 btn btn-player text popin"><i class="ss-icon ss-play"></i></a> -->
+    <div class="clearfix">
+      <a href="/{{ track.user.permalink }}" class="p text">{{ track.user.username }}</a>
+      <h1><a href="" ng-click="player.play(track)" class="text">{{ track.title }}</a></h1>
+    </div>
   </div>
-  <div class="bd posrel minhi4 mb">
-    <a ng-href="/{{track.user.permalink}}" class="db mt-5 gray5 h3 truncate pr">{{track.user.username}}</a>
-    <p class="h2 b text mb pr">{{track.title}}</p>
-    <div class="mb" ng-controller="TrackCtrl">
-      <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track)" ng-hide="track.user_favorite"><i class="icon icon-heart sm"></i> Like</a>
-      <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track)" ng-show="track.user_favorite"><i class="icon icon-heart sm"></i> Liked</a>
-<!--
-      <a class="btn btn-sm btn-gray anim-pop-in mr" href="" ng-click="like(track.id)" ng-hide="track.user_favorite">Like</a>
-      <a class="btn btn-sm btn-prime anim-pop-in mr" href="" ng-click="unlike(track.id)" ng-show="track.user_favorite">Liked</a>
--->
 
-      <a ng-show="track" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{track.title}}%20by%20{{track.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{track.user.permalink}}%2F{{track.permalink}}" target="_blank"
-        class="btn btn-sm btn-gray">
-        Tweet  
+  <div class="p1">
+
+    <a href="" ng-click="like(track)" ng-hide="track.user_favorite" class="btn btn-icon btn-prime mr0 popin">
+      <i class="ss-icon ss-heart"></i> Like
+    </a>
+    
+    <a href="" ng-click="unlike(track)" ng-show="track.user_favorite" class="btn btn-icon btn-prime mr0 is-active popin">
+      <i class="ss-icon ss-heart"></i> Liked
+    </a>
+
+    <div class="overlay" ng-show="addToPlaylistIsOpen" ng-click="toggleAddToPlaylist()"></div>
+    <div class="inline-block dropdown">
+      <a href="" ng-click="toggleAddToPlaylist()" class="btn btn-prime mr0 transition" ng-class="{'btn-secondary': flashMessage}">
+        <span ng-hide="flashMessage">Add to Playlist</span>
+        <span ng-show="flashMessage" class="fadeout-delay">{{ flashMessage }}</span>
       </a>
+      <div class="dropdown-body dropdown-body-top clearfix bold bg-highlight rounded popin"
+        ng-class="{'is-open': addToPlaylistIsOpen}"
+        ng-include src="'/partials/_add-to-playlist.html'">
+      </div>
+      <!-- <div ng-show="flashMessage" ng-include src="'/partials/_flash-message.html'"></div> -->
     </div>
-    <div class="pr">
-      <p class="mb gray5">
-        <span class="mr">Posted {{track.created_at | fromNow}}</span>
-        <span class="mr">{{track.favoritings_count}} Likes</span>
-        <span class="">{{track.playback_count}} Plays</span>
-      </p>
-      <p class="maxwi4" ng-show="track.description" ng-bind-html-unsafe="track.description | richtext"></p>
-      <a ng-href="{{track.permalink_url}}" target="_blank" class="db lh3 gray5">View on SoundCloud</a>
-    </div>
+
+    <a ng-show="track" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{track.title}}%20by%20{{track.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{track.user.permalink}}%2F{{track.permalink}}" target="_blank"
+      class="btn btn-prime mr0">
+      Tweet  
+    </a>
+
+    <input type="text" value="http://soundrad.com/{{ track.user.permalink }}/{{ track.permalink }}" onclick="this.focus();this.select();" class="input" readonly />
+  
   </div>
+
+  <div class="y3 px1">
+    <span class="mr1">Posted {{ track.created_at | fromNow }}</span>
+    <span class="mr1">{{ track.favoritings_count }} Likes</span>
+    <span class="">{{ track.playback_count }} Plays</span>
+  </div>
+
+  <div class="p1">
+    <p class="mt2 mb2" ng-show="track.description" ng-bind-html-unsafe="track.description | richtext"></p>
+    <a ng-href="{{track.permalink_url}}" target="_blank" class="small py1">View on SoundCloud</a>
+  </div>
+
+
 </div>
-      
-<!-- <a ng-href="{{track.permalink_url}}" target="_blank" class="db tappad-s gray5 bortop borbot bor-gray2">View on SoundCloud</a> -->

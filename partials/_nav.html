@@ -1,19 +1,32 @@
-<div class="borbot bor-gray2 overhide tappad">
-  
-  <a href="/" class="tappad fl bold" ng-class="{'text': currentState != 'home'}">
-    <span ng-show="token">Stream</span>
-    <span ng-hide="token">Home</span>
-  </a>    
-  <a href="/{{me.permalink}}" class="tappad fl bold" ng-show="token && me.username.length < 13" ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">{{me.username}}</a>
-  <a href="/{{me.permalink}}" class="tappad fl bold" ng-show="token && me.username.length >= 13" ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">You</a>
-  <a href="/{{me.permalink}}/sets" class="tappad fl bold" ng-class="{'text': currentState != 'user.sets' || me.permalink != viewUser}" ng-show="token">Sets</a>
-  <a href="/{{me.permalink}}/likes" class="tappad fl bold" ng-class="{'text': currentState != 'user.likes' || me.permalink != viewUser}" ng-show="token">Likes</a>
+<nav class="table table-fixed">
 
-  <span class="fr">
-    <a href="#" class="fr btn btn-sm btn-prime mt-5" ng-click="connect();" ng-hide="token">Connect</a>
-    <!-- <a href="/more" class="fr tappad gray5 hide-m" ng-show="token">More</a> -->
-    <a href="/settings" class="gray5" ng-show="token"><i class="tappad fr icon h3 icon-settings"></i></a>
-  </span>
-  
-  
-</div>
+  <div class="table-cell">
+    <a href="/"
+      class="" ng-class="{'text': currentState != 'home'}">
+      <span ng-show="token">Stream</span>
+      <span ng-hide="token">Home</span>
+    </a>
+    <!-- <a href="" class="text"><i class="icon search">Search</i></a> -->
+  </div>
+
+  <div ng-show="token" class="dropdown hover-group table-cell x25 right-align">
+    <a href="/{{me.permalink}}" class=""  ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">
+      <span ng-show="me.username.length < 13">{{me.username}}</span>
+      <span ng-show="me.username.length >= 13">Me</span>
+    </a>
+    <div class="dropdown-body dropdown-body-right hover-show">
+      <ul class="ul clearfix menu menu-reverse rounded">
+        <li><a ng-href="/{{me.permalink}}/sets">Playlists</a></li>
+        <li><a ng-href="/{{me.permalink}}/likes">Likes</a></li>
+        <li><a ng-href="/{{me.permalink}}/info">Info</a></li>
+        <li class="mt1"><a href="/settings" class="small regular">Settings</a></li>
+        <li class=""><a href="/about" class="small regular">About SoundRad</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div ng-hide="token" class="table-cell right-align">
+    <a href="" ng-click="connect();" class="btn btn-prime">Connect</a>
+  </div>
+
+</nav>

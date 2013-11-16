@@ -1,36 +1,53 @@
-<div class="" ng-switch="!!player.playing || !!player.paused">
+<div ng-switch="!!player.playing || !!player.paused">
 
-  <div ng-switch-when="false" class="minhi4 pl pr borbot bor-gray2">
-    <h1 class="lh4 gray5">SoundRad</h1>
+  <div ng-switch-when="false" class="hi6 px1 bg-white border-bottom">
+    <h1 class="y6">SoundRad <span class="regular p">v64 beta</span></h1>
   </div>
 
-  <div class="media player anim-slide-down" ng-switch-when="true">
-  
-    <div class="img overhide lh4">
-      
-      <a href="" ng-click="player.prev()" class="hide-s fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-previous db"></i></a>
-      <a class="fl sq4 lh4 txtcen btn-prime" href="" ng-click="player.play(player.tracks, player.i)" ng-hide="player.playing"><i class="icon icon-play h3 lh4 db anim-pop-in"></i></a>
-      <a class="fl sq4 lh4 txtcen btn-prime" href="" ng-click="player.pause(player.playing)" ng-show="player.playing"><i class="icon icon-pause h3 lh4 db anim-pop-in"></i></a>
-      <a href="" ng-click="player.next()" class="hide-s fl lh4 pl pr maxhi4 txtcen btn-prime"><i class="icon icon-skip db"></i></a>
-    </div>
+  <div ng-show="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom slide-down">
     
-    <div class="bd posrel minhi4">
-      
-      <div class="posabs fill" ng-controller="ScrubberCtrl">
-        <div class="posabs top0 bot0 left0 player-buffer" style="width: {{currentBufferPercentage}}%"></div>
-        <div class="posabs top0 bot0 left0 player-played" style="width: {{currentTimePercentage}}%"></div>
-        <div class="posabs fill z2" ng-click="seekTo($event)"></div>
-        <div class="posabs top0 right1 sm mt-25" ng-show="audio.readyState == 4">{{currentTimeMS | playTime}} | {{durationMS | playTime}}</div>
-        <div class="posabs top0 right0 bot0 z3 lh4">
-          
-          <!-- <a href="/playing" class="dib gray5"><i class="icon icon-geo-list_alt sm pad"></i></a> -->
-        </div>
-
-      </div>     
-      <span class="db posrel truncate mt-25 mr pl-5">{{player.tracks[player.i].user.username}}</span>
-      <h1 class="posrel h3 truncate mr pl-5">{{player.tracks[player.i].title}}</h1>      
+    <div id="player-controls" class="left px1 y6">
+        <a href="" ng-click="player.prev()"
+          class="btn btn-player text mobile-hide popin">
+            <span class="ss-icon ss-skipback"></span>
+        </a>
+        <a href="" ng-click="player.play(player.tracks, player.i)"
+          class="h2 btn btn-player text popin" ng-hide="player.playing">
+            <span class="ss-icon ss-play"></span>
+        </a>
+        <a href="" ng-click="player.pause(player.playing)"
+          class="h2 btn btn-player text popin" ng-show="player.playing">
+            <span class="ss-icon ss-pause"></span>
+        </a>
+        <a href="" ng-click="player.next()"
+          class="btn btn-player text mobile-hide popin">
+            <span class="ss-icon ss-skipforward"></span>
+        </a>
     </div>
-  
+
+    <div id="player-body" class="clearfix mr1">
+      <div id="player-body-top" class="">
+        <div id="player-info" class="">
+          <p class="truncate y2">{{player.tracks[player.i].user.username}}</p>
+          <h1 class="h2 y2 truncate">{{player.tracks[player.i].title}}</h1>
+        </div>
+      </div>
+      <div id="scrubber" ng-controller="ScrubberCtrl" class="clearfix y2">
+        <div class="right right-align ml1 small mobile-hide" style="width:88px">
+          <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
+          <span ng-show="audio.readyState == 4">
+            {{currentTimeMS | playTime}} | {{durationMS | playTime}}
+          </span>
+        </div>
+        <div class="clearfix progress progress-light">
+          <div class="progress-background"></div>
+          <div class="progress-buffer" style="width: {{currentBufferPercentage}}%"></div>
+          <div class="progress-played" style="width: {{currentTimePercentage}}%"></div>
+          <div class="progress-overlay" ng-click="seekTo($event)"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

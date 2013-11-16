@@ -1,37 +1,16 @@
-
-<a href="/playing" class="tappad-s h3 borbot bor-gray2" ng-controller="PlayerCtrl" ng-show="player.tracks">Now Playing</a>
-
-<div class="pad2">
-  <h1 class="reg mb2">Settings</h1>
+<div class="p1">
   
-  <h2 class="h3 mb">Theme:</h2>
+  <h1 class="h2 responsive">Settings</h1>
   
-  <div class="mb2">
-    <a href="" ng-click="changeTheme('Default')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-default'}">Default</a>
-    <a href="" ng-click="changeTheme('BLK')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-blk'}">BLK</a>
-    <a href="" ng-click="changeTheme('Gray')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-gray'}">Gray</a>
-<a href="" ng-click="changeTheme('Science')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-science'}">Science</a>
-    <a href="" ng-click="changeTheme('Slice')" class="btn-sm dib mb" ng-class="{'btn-prime rc': theme == 'theme-slice'}">Slice</a>
-  </div>
+  <section class="py2">
+    <h2>Bookmarklet</h2>
+    <p class="mb1">Reload any SoundCloud page in SoundRad. Drag this bookmarklet to your bookmarks bar to install:</p>
+    <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="btn btn-prime h3">Radify</a>
+  </section>
 
-  <div class="mb2">
-    <h3>Bookmarklet</h3>
-    <p class="mb">Load any SoundCloud page in SoundRad. Drag this button to your bookmarks bar to install:</p>
-    <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="btn btn-med btn-prime h3 bold">Radify</a>
-  </div>
-  
-  <div ng-show="token" class="mb2">
-    <p class="h3 bold mb">Connected as: {{me.username}}</p>
-    <a href="#" ng-click="logOut()" class="p btn btn-sm btn-prime">Sign Out</a>
-  </div>
-  
-  <div ng-show="!token">
-    <h2 class="h3 mb">Debug Connect (for iOS7)</h2>
-    <a href="" ng-click="debugConnect()" class="btn btn-sm btn-prime dib mb2">Connect</a>
-  </div>
-
-  <h2 class="h3 mb">About</h2>
-  <p class="gray5 mb">Made with love by <a href="http://jxnblk.com" target="_blank">Jxnblk</a>. Powered by SoundCloud.</p>
-  <p class="gray5 mb">Fork me on <a href="http://github.com/jxnblk/soundrad" target="_blank">Github</a>.</p>
+  <p class="py2">
+    Connected as: {{me.username}}.
+    <a href="#" ng-click="logOut()" class="">Sign Out</a>
+  </p>
 
 </div>

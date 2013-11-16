@@ -14,7 +14,6 @@ angular.module('soundrad.services', [])
     return {
 
       reconnect: function(token) {
-        console.log('reconnecting...');
         window.SC.storage().setItem('SC.accessToken', token);
         Token = token;
       },
@@ -31,12 +30,6 @@ angular.module('soundrad.services', [])
         SC.get('/me', callback);
       },
 
-      ////////////////
-      // Maybe don't need this
-      // authenticate: function() {
-      //   Token = SC.accessToken();
-      // },
-      
       getUser: function(user, callback){
         SC.get('/users/' + user, callback);
       },
@@ -106,6 +99,19 @@ angular.module('soundrad.services', [])
             };
             getF();               
       },
+
+      isFollowing: function(userid, callback){
+        SC.get('/me/followings/'+userid+'?client_id='+clientID, callback);
+        // I love how well this fucking works
+      },
+
+      follow: function(userid, callback){
+        SC.put('/me/followings/'+userid, callback);
+      },
+
+      unfollow: function(userid, callback){
+        SC.delete('/me/followings/'+userid, callback);
+      },
       
       like: function(track, callback){
         SC.put('/me/favorites/' + track.id, callback);
@@ -137,6 +143,15 @@ angular.module('soundrad.services', [])
         var tracks = tracks.map(function(id) { return { id: id } });
         SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
       },
+
+      updatePlaylist: function(playlist, callback){
+        var tracks = [], i;
+        for(i in playlist.tracks){
+          tracks.push(playlist.tracks[i].id);
+        };
+        var tracks = tracks.map(function(id) { return { id: id } });
+        SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
+      },
       
       resolve: function(path, callback){
         SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);
@@ -148,7 +163,7 @@ angular.module('soundrad.services', [])
   
   ////////////////////////////////////////////////////////////////
   // Player Factory
-  .factory('player', function(audio, soundcloud) {
+  .factory('player', function(audio, soundcloud ) {
     var player, tracks, i, urlParams, currentTimePercentage = audio.currentTime;
         
     player = {
@@ -156,19 +171,22 @@ angular.module('soundrad.services', [])
       i: i,
       playing: false,
       paused: false,
+      loaded: false,
       play: function(tracks, i) {
-        if (i == null) {
+        if (i == null) { 
           tracks = new Array(tracks);
           i = 0;
         };
         player.tracks = tracks;
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
         } else { urlParams =  '?client_id=' + clientID; };
-        if (player.paused != tracks[i]) audio.src = tracks[i].stream_url + urlParams;
+        if (player.paused != tracks[i] || player.loaded) audio.src = tracks[i].stream_url + urlParams;
         audio.play();
         player.playing = tracks[i];
         player.i = i;
         player.paused = false;
+        player.loaded = false;
+        // history.new(player.playing);
       },
       pause: function(track) {
         if (player.playing) {
@@ -177,18 +195,31 @@ angular.module('soundrad.services', [])
           player.paused = track;
         }
       },
-      stop: function(track) {
+      stop: function() {
         audio.pause();
         player.playing = false;
         player.paused = false;
       },
       next: function() {
-        player.i = player.i+1;
-        if (player.tracks.length > (player.i + 1)) player.play(player.tracks, player.i);   
+        if (player.tracks.length > player.i+1) {
+          player.i = player.i+1;
+          player.play(player.tracks, player.i);
+        } else {
+          //player.stop();
+        };
       },
       prev: function() {
-        player.i = player.i-1;
+        if (player.i > 0) player.i = player.i-1;
         if (player.playing) player.play(player.tracks, player.i);
+      },
+      load: function(tracks){
+        if (!Array.isArray(tracks)) {
+          tracks = new Array(tracks);
+        };
+        player.tracks = tracks;
+        player.i = 0;
+        player.paused = tracks[0];
+        player.loaded = true;
       }
     };
     audio.addEventListener('ended', function() {
@@ -224,6 +255,18 @@ angular.module('soundrad.services', [])
       }
     }     
   })
+
+  .factory('history',['storage', function(storage){
+    return {
+      new: function(track){
+        var history = [];
+        history = storage.get('history');
+        console.log(history);
+        history.unshift(track);
+        storage.set('history', history);
+      }
+    }
+  }])
 
 
   
