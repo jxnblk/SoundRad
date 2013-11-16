@@ -101,7 +101,6 @@ angular.module('soundrad.services', [])
       },
 
       isFollowing: function(userid, callback){
-        console.log('/me/followings/'+userid);
         SC.get('/me/followings/'+userid+'?client_id='+clientID, callback);
         // I love how well this fucking works
       },
@@ -174,7 +173,6 @@ angular.module('soundrad.services', [])
       paused: false,
       loaded: false,
       play: function(tracks, i) {
-        console.log('loaded: ' + player.loaded);
         if (i == null) { 
           tracks = new Array(tracks);
           i = 0;
@@ -216,7 +214,6 @@ angular.module('soundrad.services', [])
       },
       load: function(tracks){
         if (!Array.isArray(tracks)) {
-            console.log('loading a single track');
           tracks = new Array(tracks);
         };
         player.tracks = tracks;

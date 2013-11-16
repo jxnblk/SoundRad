@@ -1,10 +1,11 @@
 <a href="" ng-click="toggleAddToPlaylist()" class="tappad small block px1 white">Cancel</a>
 <ul class="ul menu menu-reverse">
-  <li class="px1"><input type="text" class="input mb1" placeholder="Create New Playlist" /></li>
+  <li class="px1">
+    <form ng-submit="createPlaylist(newPlaylistTitle, track)">
+      <input type="text" class="input mb1" ng-model="newPlaylistTitle" placeholder="Create New Playlist" />
+    </form>
+  </li>
   <li ng-repeat="set in userPlaylists">
     <a href="" ng-click="addToPlaylist(track, set)">{{ set.title }}</a>
   </li>
 </ul>
-<!-- <div ng-show="flashMessage" class="p1">
-  <p class="small">{{ flashMessage }}</p>
-</div> -->
