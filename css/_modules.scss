@@ -115,19 +115,20 @@
 .dropdown-body {
   position: absolute;
   z-index: 2;
-  top: 0;
+  top: 100%;
   white-space: nowrap;
   min-width: 160px;
   max-height: 256px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   display: none;
-  &.dropdown-body-right {
-    right: 0;
-  }
+  &.dropdown-body-right { right: 0;}
+  &.dropdown-body-top { top: 0; }
   // Handle this with ng-show instead
   &.is-open { display: block; }
 }
+.dropdown-hover:hover .dropdown-body { display: block; }
+
 .flash-message {
   position: absolute;
   z-index: 2;

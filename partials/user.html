@@ -1,6 +1,9 @@
-<div class="folding-table border-bottom" ng-show="$state.current.name != 'user.track'">  
-  <h1 class="table-cell y3 px1"><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
-  <div class="table-cell x100 y3 navbar" ng-show="userData.id != me.id">
+<div class="border-bottom" ng-show="$state.current.name != 'user.track'">  
+  <h1 class="mt1 px1"><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
+  <!-- <a href ng-click="follow(userData.id)">Follow</a> -->
+  <!-- <a href ng-click="unfollow(userData.id)">Unfollow</a> -->
+
+  <div class="mb1 navbar">
     <a ng-href="/{{viewUser}}/sets"
       class="" ng-class="{'text': $state.current.name != 'user.sets'}">
         Playlists
@@ -13,8 +16,9 @@
       class="" ng-class="{'text': $state.current.name != 'user.info'}">
         Info
     </a>
-    <!-- <a href ng-click="follow(userData.id)">Follow</a> -->
-    <!-- <a href ng-click="unfollow(userData.id)">Unfollow</a> -->
+
+    <a href="/settings" class="" ng-show="userData.id == me.id">Settings</a>
+    
   </div>
 </div>
 

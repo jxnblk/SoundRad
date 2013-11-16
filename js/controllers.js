@@ -177,6 +177,8 @@ angular.module('soundrad.controllers', [])
         $scope.userData = data;
         $scope.viewUsername = data.username;
         //if($scope.me) $scope.isFollowing(data.id);
+        $scope.followersCount = parseInt(data.followers_count);
+        $scope.followingsCount = parseInt(data.followings_count);
       });
     });
     
