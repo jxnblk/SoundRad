@@ -6,9 +6,10 @@
     <div infinite-scroll="loadMore()">
 
       <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-        class="table border-bottom" ng-class="{'is-active bg-active': player.playing.id == track.id}">
+        class="table border-bottom" ng-class="{'is-active': player.playing.id == track.id}">
         <a href="" ng-click="player.play(tracks, $index)"
-          class="table-cell clearfix px1 py0 text">
+          class="table-cell clearfix px1 py0 text"
+          ng-class="{'highlight': player.playing.id == track.id}">
           <p class="small">{{ track.user.username }}</p>
           <h3 class="">{{ track.title }}</h3>
         </a>

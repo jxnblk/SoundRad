@@ -57,7 +57,7 @@ angular.module('soundrad.controllers', [])
     soundcloud.getUserPlaylists(function(data){
       $scope.$apply(function(){
         $scope.userPlaylists = data;
-       storage.set('playlists', data);  
+       //storage.set('playlists', data);  
       });
     });
   };
@@ -143,9 +143,9 @@ angular.module('soundrad.controllers', [])
 }])
   
 .controller('CallbackCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){
-  $timeout($window.opener.focus(), 500);
+  $timeout($window.opener.focus(), 300);
   if($scope.connectDebug == false){
-    $timeout($window.close, 500);  
+    $timeout($window.close, 800);
   };
 }])
   

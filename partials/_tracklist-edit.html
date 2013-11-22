@@ -2,8 +2,8 @@
   <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
     class="bg-white border-bottom">
     
-    <div class="draggable table " ng-class="{'is-active bg-active': player.playing.id == track.id, 'fadeout': isRemoving == track.id }">   
-      <div class="table-cell px1 py0">
+    <div class="draggable table " ng-class="{'is-active': player.playing.id == track.id, 'fadeout': isRemoving == track.id }">   
+      <div class="table-cell px1 py0" ng-class="{'highlight': player.playing.id == track.id}">
         <p class="small">{{ track.user.username }}</p>
         <h3 class="">{{ track.title }}</h3>
       </div>
