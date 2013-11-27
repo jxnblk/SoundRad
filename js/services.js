@@ -200,10 +200,10 @@ angular.module('soundrad.services', [])
         if (player.playing) {
           player.pause(player.playing);
         } else if (player.paused) {
-          player.play(player.tracks, player.i)
-        } else {
-          player.play(player.tracks, 0)
-        }
+          player.play(player.tracks, player.i);
+        } else if (player.tracks) {
+          player.play(player.tracks, 0);
+        };
       },
       stop: function() {
         audio.pause();
@@ -221,6 +221,12 @@ angular.module('soundrad.services', [])
       prev: function() {
         if (player.i > 0) player.i = player.i-1;
         if (player.playing) player.play(player.tracks, player.i);
+      },
+      addTracks: function(tracks){
+        console.log(player.tracks.length);
+        console.log(tracks);
+        player.tracks = player.tracks.concat(tracks);
+        console.log(player.tracks.length);
       },
       load: function(tracks){
         if (!Array.isArray(tracks)) {

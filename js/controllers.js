@@ -8,9 +8,21 @@ angular.module('soundrad.controllers', [])
     $scope.player = player;
     $scope.audio = audio;
 
-    Mousetrap.bind(['j', 'shift+right'], player.next);
-    Mousetrap.bind(['k', 'shift+left'], player.prev);
-    Mousetrap.bind('space', function(e) { player.toggle(e) });
+    Mousetrap.bind(['j', 'shift+right'], function(){
+      $scope.$apply(function(){
+        player.next();
+      });
+    });
+    Mousetrap.bind(['k', 'shift+left'], function(){
+      $scope.$apply(function(){
+        player.prev();
+      });
+    });
+    Mousetrap.bind('space', function(e) {
+      $scope.$apply(function(){
+        player.toggle(e);
+      });
+    });
 
 }])
 
@@ -146,7 +158,6 @@ angular.module('soundrad.controllers', [])
 
   var modalIsOpen = false; 
   var toggleShortcutsHelper = function() {
-    console.log('keyboard shortcuts');
     $scope.$apply(function(){
       if(!modalIsOpen) $scope.modalContent = '/partials/_keyboard-shortcuts.html';
       else $scope.modalContent = null;
@@ -160,6 +171,34 @@ angular.module('soundrad.controllers', [])
   };
 
   Mousetrap.bind('?', toggleShortcutsHelper);
+  Mousetrap.bind('esc', function(e){
+    e.preventDefault();
+    $scope.$apply(function(){
+      $scope.modalContent = null;
+      modalIsOpen = false;
+    });
+  });
+
+  Mousetrap.bind('g s', function(){
+    $scope.$apply(function(){
+      $location.path('/');
+    });
+  });
+  Mousetrap.bind('g m', function(){
+    $scope.$apply(function(){
+      $location.path('/' + $scope.me.permalink);
+    });
+  });
+  Mousetrap.bind('g l', function(){
+    $scope.$apply(function(){
+      $location.path('/' + $scope.me.permalink + '/likes');
+    });
+  });
+  Mousetrap.bind('g p', function(){
+    $scope.$apply(function(){
+      $location.path('/' + $scope.me.permalink + '/sets');
+    });
+  });
 
 }])
   
@@ -397,6 +436,9 @@ angular.module('soundrad.controllers', [])
     var params = { limit: $scope.pageSize };
     soundcloud.getStream(url, params, function(data, tracks){
       $scope.$apply(function(){
+        if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
+          player.tracks = player.tracks.concat(tracks);
+        };
         $scope.tracks = $scope.tracks.concat(tracks);
         $scope.hasPrevPage = false;
         $scope.hasNextPage = false;  
@@ -455,6 +497,9 @@ angular.module('soundrad.controllers', [])
       $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
       soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
         $scope.$apply(function(){
+          if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
+            player.tracks = player.tracks.concat(data);
+          };
           $scope.tracks = $scope.tracks.concat(data);
           $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
           $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
