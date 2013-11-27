@@ -152,6 +152,10 @@ angular.module('soundrad.services', [])
         var tracks = tracks.map(function(id) { return { id: id } });
         SC.put(playlist.uri, { playlist: { tracks: tracks } }, callback);
       },
+
+      search: function(params, callback){
+        SC.get('/search', params, callback);
+      },
       
       resolve: function(path, callback){
         SC.get('/resolve.json?url=http://soundcloud.com' + path, callback);

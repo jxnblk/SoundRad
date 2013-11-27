@@ -199,6 +199,12 @@ angular.module('soundrad.controllers', [])
       $location.path('/' + $scope.me.permalink + '/sets');
     });
   });
+  Mousetrap.bind('/', function(e){
+    e.preventDefault();
+    $scope.$apply(function(){
+      $location.path('/search');
+    });
+  });
 
 }])
   
@@ -611,6 +617,40 @@ angular.module('soundrad.controllers', [])
         $scope.tracks = data.tracks;
         $scope.removeIsOpen = false;
         $scope.isRemoving = null;
+      });
+    });
+  };
+
+}])
+
+.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function($scope, $location, soundcloud) {
+
+  $scope.search = function(){
+    console.log('search for ' + $scope.searchQuery);
+    $scope.isLoading = true;
+    $scope.searchResults = null;
+    $location.search($scope.searchQuery); 
+
+    $scope.pageOffset = 0;
+    var params = { q: $scope.searchQuery };
+    soundcloud.search(params, function(data){
+      $scope.$apply(function(){
+        $scope.searchResults = data.collection;  
+        $scope.isLoading = false;
+      });
+    });
+  };
+
+  $scope.searchMore = function(){
+    if($scope.isLoading || !$scope.searchResults) return false;
+    console.log('search more');
+    $scope.isLoading = true;
+    $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
+    var params = { q: $scope.searchQuery, offset: $scope.pageOffset };
+    soundcloud.search(params, function(data) {
+      $scope.$apply(function(){
+        $scope.searchResults = $scope.searchResults.concat(data.collection);
+        $scope.isLoading = false;
       });
     });
   };
