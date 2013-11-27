@@ -195,6 +195,15 @@ angular.module('soundrad.services', [])
           player.paused = track;
         }
       },
+      toggle: function() {
+        if (player.playing) {
+          player.pause(player.playing);
+        } else if (player.paused) {
+          player.play(player.tracks, player.i)
+        } else {
+          player.play(player.tracks, 0)
+        }
+      },
       stop: function() {
         audio.pause();
         player.playing = false;
