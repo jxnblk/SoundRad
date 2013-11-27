@@ -8,6 +8,9 @@ angular.module('soundrad.controllers', [])
     $scope.player = player;
     $scope.audio = audio;
 
+    Mousetrap.bind("j", player.next);
+    Mousetrap.bind("k", player.prev);
+    Mousetrap.bind("p", player.toggle);
 }])
 
 .controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
