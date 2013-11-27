@@ -8,9 +8,10 @@ angular.module('soundrad.controllers', [])
     $scope.player = player;
     $scope.audio = audio;
 
-    Mousetrap.bind("j", player.next);
-    Mousetrap.bind("k", player.prev);
-    Mousetrap.bind("p", player.toggle);
+    Mousetrap.bind(['j', 'shift+right'], player.next);
+    Mousetrap.bind(['k', 'shift+left'], player.prev);
+    Mousetrap.bind('space', function(e) { player.toggle(e) });
+
 }])
 
 .controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
@@ -56,20 +57,20 @@ angular.module('soundrad.controllers', [])
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
 
-  var getUserPlaylists = function(){
-    soundcloud.getUserPlaylists(function(data){
-      $scope.$apply(function(){
-        $scope.userPlaylists = data;
-       //storage.set('playlists', data);  
-      });
-    });
-  };
+  // var getUserPlaylists = function(){
+  //   soundcloud.getUserPlaylists(function(data){
+  //     $scope.$apply(function(){
+  //       $scope.userPlaylists = data;
+  //      //storage.set('playlists', data);  
+  //     });
+  //   });
+  // };
 
   if ($scope.token){
     soundcloud.reconnect($scope.token);
     soundcloud.me(function(me){
       $scope.me = me;
-      getUserPlaylists();
+      //getUserPlaylists();
       // $route.reload();
     });
   };
@@ -80,7 +81,7 @@ angular.module('soundrad.controllers', [])
     soundcloud.connect(function(me){
       $scope.me = me;
       storage.set('me', me);
-      getUserPlaylists();
+      //getUserPlaylists();
       $window.location.reload();
     });
   };
@@ -142,6 +143,23 @@ angular.module('soundrad.controllers', [])
     $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
   };
   $scope.getPage();
+
+  var modalIsOpen = false; 
+  var toggleShortcutsHelper = function() {
+    console.log('keyboard shortcuts');
+    $scope.$apply(function(){
+      if(!modalIsOpen) $scope.modalContent = '/partials/_keyboard-shortcuts.html';
+      else $scope.modalContent = null;
+    });
+    modalIsOpen = !modalIsOpen;
+  };
+
+  $scope.closeModal = function(){
+    $scope.modalContent = null;
+    modalIsOpen = false;
+  };
+
+  Mousetrap.bind('?', toggleShortcutsHelper);
 
 }])
   

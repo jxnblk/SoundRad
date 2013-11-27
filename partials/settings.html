@@ -8,12 +8,7 @@
     <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="btn btn-prime h3">Radify</a>
   </section>
 
-  <section class="py2">
-    <h2>Keyboard Shortcuts</h2>
-    <p class="mb1">Pause/Play: <code>p</code></p>
-    <p class="mb1">Next track: <code>j</code></p>
-    <p class="mb1">Previous track: <code>k</code></p>
-  </section>
+  <section class="py2" ng-include src="'/partials/_keyboard-shortcuts.html'"></section>
 
   <p class="py2">
     Connected as: {{me.username}}.

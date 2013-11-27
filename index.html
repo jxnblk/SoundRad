@@ -23,7 +23,11 @@
         class="y3 navbar border-bottom"></div>
     <div ui-view></div>
   </div>
-    
+
+  <div class="overlay" style="display:none" ng-show="modalContent" ng-click="closeModal()">
+    <div class="modal p1 white bg-text rounded"  ng-include src="modalContent"></div>
+  </div>
+
 </div>
   
 

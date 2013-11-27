@@ -195,7 +195,8 @@ angular.module('soundrad.services', [])
           player.paused = track;
         }
       },
-      toggle: function() {
+      toggle: function(e) {
+        e.preventDefault();
         if (player.playing) {
           player.pause(player.playing);
         } else if (player.paused) {
@@ -276,6 +277,15 @@ angular.module('soundrad.services', [])
       }
     }
   }])
+
+  // Mousetrap factory
+  // .factory('mousetrap', ['player', function(player){
+  //   return function() {
+  //     Mousetrap.bind("j", player.next);
+  //     Mousetrap.bind("k", player.prev);
+  //     Mousetrap.bind("space", function(e) { player.toggle(e) });
+  //   }
+  // }])
 
 
   
