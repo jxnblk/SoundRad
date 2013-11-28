@@ -449,8 +449,10 @@ angular.module('soundrad.controllers', [])
       $scope.getParams = { limit: $scope.pageSize, offset: $scope.pageOffset };
       soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
         $scope.$apply(function(){
-          if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
-            player.tracks = player.tracks.concat(data);
+          if(player.tracks){
+            if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
+              player.tracks = player.tracks.concat(data);
+            };
           };
           $scope.tracks = $scope.tracks.concat(data);
           $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);

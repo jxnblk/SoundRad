@@ -1,6 +1,6 @@
 'text use strict';
 
-var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'ui.router', 'ui.sortable', 'infinite-scroll']).
+var soundrad = angular.module('soundrad', ['soundrad.services', 'soundrad.controllers', 'ngTouch', 'ui.router', 'ui.sortable', 'infinite-scroll']).
   config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
 
     $stateProvider.state('home', { url: '/', templateUrl: '/partials/home.html' });
