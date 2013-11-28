@@ -1,10 +1,10 @@
-<div ng-switch="!!player.playing || !!player.paused">
+<div>
 
-  <div ng-switch-when="false" class="hi6 px1 bg-white border-bottom">
+  <div ng-if="!player.playing && !player.paused" class="hi6 px1 bg-white border-bottom">
     <h1 class="y6">SoundRad <span class="regular p">v64 beta</span></h1>
   </div>
 
-  <div ng-show="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom slide-down">
+  <div ng-if="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom slide-down">
     
     <div id="player-controls" class="left px1 y6">
         <a href="" ng-click="player.prev()"

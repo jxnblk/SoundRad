@@ -1,29 +1,25 @@
 
-<div ng-switch="!!me">
-
-  <div ng-switch-when="true" ng-controller="StreamCtrl" infinite-scroll="showMoreStream()" infinite-scroll-distance=".25">
-    <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
-  </div>
-
-  <main ng-switch-when="false" class="p1">
-    <section class="mb2">
-      <h1 class="h1 responsive"><span class="highlight">Sound</span>Rad</h1>
-      <p class="h2 responsive mb4">A radically simpler & faster SoundCloud player</p>
-      <p>
-        <a href="" ng-click="connect()" class="p responsive btn btn-prime mr0">Connect with SoundCloud</a>
-        <!-- <a href="" ng-click="debugConnect()" class="btn btn-text">Connect with iOS7</a> -->
-      </p>
-    </section>
-    <footer class="py2">
-      <p class="small">
-        Made with love by
-        <a href="//jxnblk.com">Jxnblk</a>.
-        Powered by SoundCloud.
-        Fork me on
-        <a href="//github.com/jxnblk/SoundRad">Github</a>.
-      </p>
-    </footer>
-  </main>
-
+<div ng-if="me" ng-controller="StreamCtrl" infinite-scroll="showMoreStream()" infinite-scroll-distance=".25">
+  <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
 </div>
 
+<main ng-if="!me" class="p1">
+  <section class="mb2">
+    <h1 class="h1 responsive"><span class="highlight">Sound</span>Rad</h1>
+    <p class="h2 responsive mb4">A radically simpler & faster SoundCloud player</p>
+    <p>
+      <!-- <a href="" ng-click="connect()" class="p responsive btn btn-prime mr0">Connect with SoundCloud</a> -->
+      <!-- <a href="" ng-click="debugConnect()" class="btn btn-text">Connect with iOS7</a> -->
+      <a href="" ng-click="testConnect()" class="p responsive btn btn-prime mr0">Connect with SoundCloud</a>
+    </p>
+  </section>
+  <footer class="py2">
+    <p class="small">
+      Made with love by
+      <a href="//jxnblk.com">Jxnblk</a>.
+      Powered by SoundCloud.
+      Fork me on
+      <a href="//github.com/jxnblk/SoundRad">Github</a>.
+    </p>
+  </footer>
+</main>

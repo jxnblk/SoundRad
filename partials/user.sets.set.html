@@ -8,10 +8,8 @@
     </div>
   </div>
   
-  <div ng-switch="!!isEditable">
-    <div ng-switch-when="false" ng-include src="'/partials/_tracklist.html'" class="mb3"></div>
-    <div ng-switch-when="true" ng-include src="'/partials/_tracklist-edit.html'" class="mb3"></div>
-  </div>
+  <div ng-if="!isEditable" ng-include src="'/partials/_tracklist.html'" class="mb3"></div>
+  <div ng-if="isEditable" ng-include src="'/partials/_tracklist-edit.html'" class="mb3"></div>
 
   <div class="px1">
     <p class="small">Posted {{set.created_at | fromNow}}</p>

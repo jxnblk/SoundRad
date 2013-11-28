@@ -19,8 +19,9 @@ angular.module('soundrad.controllers', [])
       });
     });
     Mousetrap.bind('space', function(e) {
+      e.preventDefault();
       $scope.$apply(function(){
-        player.toggle(e);
+        player.toggle();
       });
     });
 
@@ -58,6 +59,16 @@ angular.module('soundrad.controllers', [])
   ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage',
   function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
     
+
+  // Testing oauth flow for iOS7
+  if($location.hash()){
+    var token = $location.hash().replace('#','').split('&')[0].split('=')[1];
+    if(token) {
+      console.log('setting oauth token based on hash...');
+      storage.set('token', token);
+    };
+  };
+
   $scope.version = storage.get('version');
   if(!$scope.version){
     console.log('Reseting localStorage - version 64'); storage.clearAll(); $scope.version = 64; storage.set('version', $scope.version);
@@ -69,33 +80,34 @@ angular.module('soundrad.controllers', [])
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
 
-  // var getUserPlaylists = function(){
-  //   soundcloud.getUserPlaylists(function(data){
-  //     $scope.$apply(function(){
-  //       $scope.userPlaylists = data;
-  //      //storage.set('playlists', data);  
-  //     });
-  //   });
-  // };
+  var getUserPlaylists = function(){
+    soundcloud.getUserPlaylists(function(data){
+      $scope.$apply(function(){
+        $scope.userPlaylists = data;
+      });
+    });
+  };
 
   if ($scope.token){
     soundcloud.reconnect($scope.token);
     soundcloud.me(function(me){
       $scope.me = me;
-      //getUserPlaylists();
-      // $route.reload();
+      storage.set('me', me);
+      getUserPlaylists();
     });
   };
-
-    
 
   $scope.connect = function() {
     soundcloud.connect(function(me){
       $scope.me = me;
       storage.set('me', me);
-      //getUserPlaylists();
+      getUserPlaylists();
       $window.location.reload();
     });
+  };
+
+  $scope.testConnect = function() {
+    soundcloud.testConnect();
   };
   
   $scope.logOut = function() {
@@ -170,7 +182,10 @@ angular.module('soundrad.controllers', [])
     modalIsOpen = false;
   };
 
-  Mousetrap.bind('?', toggleShortcutsHelper);
+  Mousetrap.bind('?', function(){
+    toggleShortcutsHelper();
+  });
+
   Mousetrap.bind('esc', function(e){
     e.preventDefault();
     $scope.$apply(function(){
@@ -208,11 +223,11 @@ angular.module('soundrad.controllers', [])
 
 }])
   
-.controller('CallbackCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){
-  $timeout($window.opener.focus(), 300);
-  if($scope.connectDebug == false){
-    $timeout($window.close, 800);
-  };
+.controller('CallbackCtrl', ['$scope', '$window', '$timeout', '$location', function($scope, $window, $timeout, $location){
+  console.log($location.hash());
+  // $timeout($window.opener.focus(), 500);
+  // $timeout($window.close, 800);
+  $location.path('/');
 }])
   
 .controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
@@ -227,7 +242,9 @@ angular.module('soundrad.controllers', [])
       $scope.hasNextPage = false;  
       $scope.isLoading = false;
       $scope.streamNextPage = data.next_href;
-      if(!player.playing && !player.paused) player.load($scope.tracks);
+      if(!player.playing && !player.paused) {
+        player.load($scope.tracks);
+      };
     });
   });
 }])

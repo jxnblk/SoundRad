@@ -24,19 +24,22 @@
     <div ui-view></div>
   </div>
 
-  <div class="overlay p1" style="display:none" ng-show="modalContent" ng-click="closeModal()">
-    <div class="modal p1 bg2 rounded"  ng-include src="modalContent"></div>
+  <div class="overlay p1" style="" ng-if="modalContent" ng-click="closeModal()">
+    <div class="modal p1" ng-class="{'bg2 rounded': modalContent}"  ng-include src="modalContent"></div>
   </div>
 
 </div>
-  
 
   <script src="//connect.soundcloud.com/sdk.js"></script>
+  
+  <!-- Attempts to hack iOS7 Auth -->
+<!--   <script>window.SC = window.SC || {};</script>
+ -->
   <script src="/js/lib/moment.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
 
   <script src="/js/lib/angular-ui-router.min.js"></script>
   <script src="/js/lib/sortable.js"></script>

@@ -4,7 +4,7 @@ var Token;
 
 angular.module('soundrad.services', [])
 
-  .factory('soundcloud', function($location, storage) {
+  .factory('soundcloud', function($location, $window, storage) {
   
     SC.initialize({
       client_id: clientID,
@@ -24,6 +24,10 @@ angular.module('soundrad.services', [])
           storage.set('token', Token);
           SC.get('/me', callback);
         });
+      },
+
+      testConnect: function(callback){
+        $window.location.href = 'https://soundcloud.com/connect?client_id=66828e9e2042e682190d1fde4b02e265&redirect_uri=http%3A%2F%2Fbeta.soundrad.com%2Fcallback&response_type=code_and_token&scope=non-expiring&display=popup';
       },
 
       me: function(callback){
@@ -190,7 +194,6 @@ angular.module('soundrad.services', [])
         player.i = i;
         player.paused = false;
         player.loaded = false;
-        // history.new(player.playing);
       },
       pause: function(track) {
         if (player.playing) {
@@ -199,8 +202,7 @@ angular.module('soundrad.services', [])
           player.paused = track;
         }
       },
-      toggle: function(e) {
-        e.preventDefault();
+      toggle: function() {
         if (player.playing) {
           player.pause(player.playing);
         } else if (player.paused) {

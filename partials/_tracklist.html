@@ -1,38 +1,30 @@
 
-<div ng-switch on="!!isSetsList">
-
-  <div ng-switch-when="false">
-
-    <div infinite-scroll="loadMore()">
-
-      <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-        class="table border-bottom" ng-class="{'is-active': player.playing.id == track.id}">
-        <a href="" ng-click="player.play(tracks, $index)"
-          class="table-cell clearfix px1 py0 text"
-          ng-class="{'highlight': player.playing.id == track.id}">
-          <p class="small">{{ track.user.username }}</p>
-          <h3 class="">{{ track.title }}</h3>
-        </a>
-        <div class="table-cell right-align">
-          <div ng-include src="'/partials/_track-actions.html'"></div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div id="sets-list" ng-switch-when="true">
-    <div ng-repeat="track in tracks" class="y3 px1 border-bottom">
-      <a href=""
-        ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
-        class="block text">
-          <h3 class="">{{ track.title }}</h3>
-      </a>
+<div ng-if="!isSetsList" infinite-scroll="loadMore()">
+  <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
+    class="table border-bottom" ng-class="{'is-active': player.playing.id == track.id}">
+    <a href="" ng-click="player.play(tracks, $index)"
+      class="table-cell clearfix px1 py0 text"
+      ng-class="{'highlight': player.playing.id == track.id}">
+      <p class="small">{{ track.user.username }}</p>
+      <h3 class="">{{ track.title }}</h3>
+    </a>
+    <div class="table-cell right-align">
+      <div ng-include src="'/partials/_track-actions.html'"></div>
     </div>
   </div>
-
 </div>
+
+<div id="sets-list" ng-if="isSetsList">
+  <div ng-repeat="track in tracks" class="y3 px1 border-bottom">
+    <a href=""
+      ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
+      class="block text">
+        <h3 class="">{{ track.title }}</h3>
+    </a>
+  </div>
+</div>
+
+
 
 <div ng-show="isLoading" class="y3 center">Loading...</div>
 <div ng-show="!isLoading && tracks.length == 0" class="y3 center">No Results</div>

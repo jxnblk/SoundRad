@@ -24,4 +24,4 @@
 
 <div ui-view></div>
   
-<div ng-show="$state.current.name == 'user'" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
+<div ng-if="$state.current.name == 'user'" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
