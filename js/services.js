@@ -18,16 +18,8 @@ angular.module('soundrad.services', [])
         Token = token;
       },
       
-      connect: function(callback){
-        SC.connect(function() {
-          Token = SC.accessToken();
-          storage.set('token', Token);
-          SC.get('/me', callback);
-        });
-      },
-
-      testConnect: function(callback){
-        $window.location.href = 'https://soundcloud.com/connect?client_id=66828e9e2042e682190d1fde4b02e265&redirect_uri=http%3A%2F%2Fbeta.soundrad.com%2Fcallback&response_type=code_and_token&scope=non-expiring&display=popup';
+      connect: function(){
+        $window.location.href = 'https://soundcloud.com/connect?client_id=' + clientID + '&redirect_uri=' + callbackUrl + '&response_type=code_and_token&scope=non-expiring&display=popup';
       },
 
       me: function(callback){
@@ -278,27 +270,17 @@ angular.module('soundrad.services', [])
     }     
   })
 
-  .factory('history',['storage', function(storage){
-    return {
-      new: function(track){
-        var history = [];
-        history = storage.get('history');
-        console.log(history);
-        history.unshift(track);
-        storage.set('history', history);
-      }
-    }
-  }])
-
-  // Mousetrap factory
-  // .factory('mousetrap', ['player', function(player){
-  //   return function() {
-  //     Mousetrap.bind("j", player.next);
-  //     Mousetrap.bind("k", player.prev);
-  //     Mousetrap.bind("space", function(e) { player.toggle(e) });
+  // .factory('history',['storage', function(storage){
+  //   return {
+  //     new: function(track){
+  //       var history = [];
+  //       history = storage.get('history');
+  //       console.log(history);
+  //       history.unshift(track);
+  //       storage.set('history', history);
+  //     }
   //   }
   // }])
-
 
   
   
