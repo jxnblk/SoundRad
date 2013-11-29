@@ -28,12 +28,12 @@
     <div id="player-body" class="clearfix mr1">
       <div id="player-body-top" class="">
         <div id="player-info" class="">
-          <p class="truncate y2">{{player.tracks[player.i].user.username}}</p>
+          <p class="truncate y1p5 mt0">{{player.tracks[player.i].user.username}}</p>
           <h1 class="h2 y2 truncate">{{player.tracks[player.i].title}}</h1>
         </div>
       </div>
       <div id="scrubber" ng-controller="ScrubberCtrl" class="clearfix y2">
-        <div class="right right-align ml1 small mobile-hide" style="width:88px">
+        <div class="right right-align ml1 small mobile-hide" style="width:96px">
           <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
           <span ng-show="audio.readyState == 4">
             {{currentTimeMS | playTime}} | {{durationMS | playTime}}

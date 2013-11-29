@@ -5,8 +5,8 @@
     <a href="" ng-click="player.play(tracks, $index)"
       class="table-cell clearfix px1 py0 text"
       ng-class="{'highlight': player.playing.id == track.id}">
-      <p class="small">{{ track.user.username }}</p>
-      <h3 class="">{{ track.title }}</h3>
+      <p class="small y1p5">{{ track.user.username }}</p>
+      <h3 class="y2">{{ track.title }}</h3>
     </a>
     <div class="table-cell right-align">
       <div ng-include src="'/partials/_track-actions.html'"></div>
