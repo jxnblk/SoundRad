@@ -1,45 +1,41 @@
 <div>
 
-  <div ng-if="!player.playing && !player.paused" class="hi6 px1 bg-white border-bottom">
-    <h1 class="y6">SoundRad <span class="regular p">v64 beta</span></h1>
+  <div ng-if="!player.playing && !player.paused" class="px1">
+    <h1>SoundRad v128 beta</h1>
   </div>
 
-  <div ng-if="player.playing || player.paused" id="player" class="clearfix bg-white border-bottom slide-down">
+  <div ng-if="player.playing || player.paused" id="player" class="px1">
     
-    <div id="player-controls" class="left px1 y6">
+    <div id="player-controls" class="">
         <a href="" ng-click="player.prev()"
-          class="btn btn-player text mobile-hide popin">
-            <span class="ss-icon ss-skipback"></span>
+          class="button button-icon">
+          <div icon="previous"></div>
         </a>
         <a href="" ng-click="player.play(player.tracks, player.i)"
-          class="h2 btn btn-player text popin" ng-hide="player.playing">
-            <span class="ss-icon ss-play"></span>
+          class="button button-icon" ng-hide="player.playing">
+          <div icon="play"></div>
         </a>
         <a href="" ng-click="player.pause(player.playing)"
-          class="h2 btn btn-player text popin" ng-show="player.playing">
-            <span class="ss-icon ss-pause"></span>
+          class="button button-icon" ng-show="player.playing">
+          <div icon="pause"></div>
         </a>
         <a href="" ng-click="player.next()"
-          class="btn btn-player text mobile-hide popin">
-            <span class="ss-icon ss-skipforward"></span>
+          class="button button-icon">
+          <div icon="next"></div>
         </a>
     </div>
 
-    <div id="player-body" class="clearfix mr1">
-      <div id="player-body-top" class="">
-        <div id="player-info" class="">
-          <p class="truncate y1p5 mt0">{{player.tracks[player.i].user.username}}</p>
-          <h1 class="h2 y2 truncate">{{player.tracks[player.i].title}}</h1>
-        </div>
-      </div>
-      <div id="scrubber" ng-controller="ScrubberCtrl" class="clearfix y2">
-        <div class="right right-align ml1 small mobile-hide" style="width:96px">
+    <div id="player-body" class="">
+      <h1 class="h2">{{player.tracks[player.i].user.username}}</h1>
+      <h1 class="">{{player.tracks[player.i].title}}</h1>
+      <div id="scrubber" ng-controller="ScrubberCtrl" class="">
+        <div class="h3">
           <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
           <span ng-show="audio.readyState == 4">
             {{currentTimeMS | playTime}} | {{durationMS | playTime}}
           </span>
         </div>
-        <div class="clearfix progress progress-light">
+        <div class="progress progress-light">
           <div class="progress-background"></div>
           <div class="progress-buffer" style="width: {{currentBufferPercentage}}%"></div>
           <div class="progress-played" style="width: {{currentTimePercentage}}%"></div>

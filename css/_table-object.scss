@@ -1,0 +1,14 @@
+// Table object
+
+@media (min-width: 40em){
+  .table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .table-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+

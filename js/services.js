@@ -2,9 +2,8 @@
 
 var Token;
 
-angular.module('soundrad.services', [])
 
-  .factory('soundcloud', function($location, $window, storage) {
+soundrad.factory('soundcloud', function($location, $window, storage) {
   
     SC.initialize({
       client_id: clientID,
@@ -158,12 +157,12 @@ angular.module('soundrad.services', [])
       }
     };
   
-  })
+  });
   
   
   ////////////////////////////////////////////////////////////////
   // Player Factory
-  .factory('player', function(audio, soundcloud ) {
+soundrad.factory('player', function(audio, soundcloud ) {
     var player, tracks, i, urlParams, currentTimePercentage = audio.currentTime;
         
     player = {
@@ -240,20 +239,20 @@ angular.module('soundrad.services', [])
       player.next();
     }, false);
     return player;
-  })
+});
   
   
-  ////////////////////////////////////////////////////////////////
-  // Audio Factory
-  .factory('audio', function($document) {
-    var audio = $document[0].createElement('audio');  
-    return audio;
-  })
+////////////////////////////////////////////////////////////////
+// Audio Factory
+soundrad.factory('audio', function($document) {
+  var audio = $document[0].createElement('audio');  
+  return audio;
+});
   
   
-  ////////////////////////////////////////////////////////////////
-  // Local Storage Factory
-  .factory('storage', function(){            
+////////////////////////////////////////////////////////////////
+// Local Storage Factory
+soundrad.factory('storage', function(){            
     return {
       set: function(key, obj){
         var string = JSON.stringify(obj)
@@ -268,34 +267,34 @@ angular.module('soundrad.services', [])
         localStorage.clear();
       }
     }     
-  })
+});
 
-  // .factory('history',['storage', function(storage){
-  //   return {
-  //     new: function(track){
-  //       var history = [];
-  //       history = storage.get('history');
-  //       console.log(history);
-  //       history.unshift(track);
-  //       storage.set('history', history);
-  //     }
-  //   }
-  // }])
+// soundrad.factory('history',['storage', function(storage){
+//   return {
+//     new: function(track){
+//       var history = [];
+//       history = storage.get('history');
+//       console.log(history);
+//       history.unshift(track);
+//       storage.set('history', history);
+//     }
+//   }
+// }]);
 
   
   
-  ////////////////////////////////////////////////////////////////
-  // Filters
+////////////////////////////////////////////////////////////////
+// Filters
   
-  // Converts dates to relative time
-  .filter('fromNow', function() {
+// Converts dates to relative time
+soundrad.filter('fromNow', function() {
     return function(dateString) {
       return moment(new Date(dateString)).fromNow();
     };
-  })
+});
   
-  // Converts milliseconds to hours, minutes, seconds
-  .filter('playTime', function() {
+// Converts milliseconds to hours, minutes, seconds
+soundrad.filter('playTime', function() {
     return function(ms) {
       var hours = Math.floor(ms / 36e5),
           mins = '0' + Math.floor((ms % 36e5) / 6e4),
@@ -308,24 +307,50 @@ angular.module('soundrad.services', [])
         return mins+':'+secs;  
       }; 
     };
-  })
+});
   
-  // Filters text from JSON objects
-  .filter('richtext', function () {
+// Filters text from JSON objects
+soundrad.filter('richtext', function () {
     return function(text) {
       if(text){
         return text.replace(/\n/g, '<br/>');
       };
     };
-  })
+});
   
-  // Escapes text for URL encoding
-  .filter('escape', function() {
+// Escapes text for URL encoding
+soundrad.filter('escape', function() {
     return function(text){
       if(text){
         return text.escape;
       };
     };
-  });
+});
   
+// Plangular Icons
+soundrad.directive('icon', function() {
+  var iconUrl = 'icons/plangular-icons.svg',
+      xmlHttp = null,
+      sprite;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open('GET', iconUrl, false);
+  xmlHttp.send(null);
+  if(xmlHttp.responseXML) sprite = xmlHttp.responseXML.documentElement;
+  else console.error('Icon sprite not found - check iconUrl variable in plangular.js');
+  console.log(sprite);
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function (scope, elem, attrs) {
+      if (!sprite) return false;
+      var el = elem[0],
+          id = attrs.icon,
+          svg = sprite.getElementById(id).cloneNode(true);
+      el.className += ' plangular-icon plangular-icon-' + id;
+      svg.removeAttribute('id');
+      svg.setAttribute('class', el.className);
+      el.parentNode.replaceChild(svg, el);
+    }
+  }
+});
   

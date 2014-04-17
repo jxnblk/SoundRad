@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('soundrad.controllers', [])
+//angular.module('soundrad.controllers', [])
 
 
-.controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
+soundrad.controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
 
     $scope.player = player;
     $scope.audio = audio;
@@ -25,9 +25,9 @@ angular.module('soundrad.controllers', [])
       });
     });
 
-}])
+}]);
 
-.controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
+soundrad.controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
   $scope.title = function() {
     if (player.playing) {
       return '► ' + player.tracks[player.i].title + ' | SoundRad';
@@ -37,9 +37,9 @@ angular.module('soundrad.controllers', [])
       return 'SoundRad';  
     };
   };
-}])
+}]);
   
-.controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio) {
+soundrad.controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio) {
   function updateView() {
     $scope.$apply(function() {
       $scope.currentBufferPercentage = ((audio.buffered.length && audio.buffered.end(0)) / audio.duration) * 100;
@@ -53,11 +53,11 @@ angular.module('soundrad.controllers', [])
     var xpos = $event.offsetX / $event.target.offsetWidth;
     audio.currentTime = (xpos * audio.duration);
   };
-}])
+}]);
   
-.controller('NavCtrl',
-  ['$scope', '$stateParams', '$state', '$window', '$location', 'soundcloud', 'storage',
-  function($scope, $stateParams, $state, $window, $location, soundcloud, storage) {
+soundrad.controller('NavCtrl',
+  ['$scope', '$routeParams', '$window', '$location', 'soundcloud', 'storage',
+  function($scope, $routeParams, $window, $location, soundcloud, storage) {
 
   // Defaults
   $scope.viewUser = null;
@@ -114,12 +114,14 @@ angular.module('soundrad.controllers', [])
     $window.location.href = '/';
   };
     
-  $scope.$stateParams = $stateParams;
+  $scope.$routeParams = $routeParams;
   
+  /*
   $scope.$on('$stateChangeSuccess', function(){
     $scope.currentState = $state.current.name;
     $scope.viewUser = $stateParams.user;
   });
+  */
 
   // Turn this into a directive for anchor tags
   $scope.preloadContent = null;
@@ -194,15 +196,16 @@ angular.module('soundrad.controllers', [])
     });
   });
 
-}])
+}]);
   
-.controller('CallbackCtrl', ['$scope', '$location', function($scope, $location){
+soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $location){
   $location.path('/');
-}])
+}]);
   
-.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
+soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
   $scope.page = 1;
   $scope.isLoading = true;
+  $scope.isHome = true;
   var url = '/me/activities/tracks';
   var params = { limit: $scope.pageSize };
   soundcloud.getStream(url, params, function(data, tracks){
@@ -217,12 +220,13 @@ angular.module('soundrad.controllers', [])
       };
     });
   });
-}])
+}]);
   
-.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$stateParams', '$state', function($scope, $sce, soundcloud, $stateParams, $state) {
+soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
     $scope.isLoading = true;
     $scope.isSetsList = false;
-    $scope.viewUser = $stateParams.user;
+    $scope.isHome = false;
+    $scope.viewUser = $routeParams.user;
     soundcloud.getUser($scope.viewUser, function(data){
       $scope.$apply(function(){
         $scope.userData = data;
@@ -236,7 +240,7 @@ angular.module('soundrad.controllers', [])
       });
     });
     
-    $scope.$state = $state;
+    //$scope.$state = $state;
 
     $scope.getTracks = function(){
       soundcloud.getTracks($scope.getUrl, $scope.getParams, function(data){
@@ -249,6 +253,7 @@ angular.module('soundrad.controllers', [])
       });
     };
     
+    /*
     $scope.$on('$stateChangeSuccess', function(){
       if ($state.current.name == 'user'){
         $scope.getUrl = '/users/' + $scope.viewUser + '/tracks';
@@ -256,6 +261,7 @@ angular.module('soundrad.controllers', [])
         $scope.getTracks();
       };  
     });
+    */
 
     $scope.isFollowing = function(userid){
       console.log('checking if following...' + userid);
@@ -276,9 +282,10 @@ angular.module('soundrad.controllers', [])
       });
     };
     
-}])
+}]);
   
-.controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+/*
+soundrad.controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.tracks = null;
     $scope.isLoading = true;
     $scope.getUrl = '/users/' + $scope.viewUser + '/favorites';
@@ -291,9 +298,11 @@ angular.module('soundrad.controllers', [])
         $scope.isLoading = false;
       });
     });
-}])
+}]);
+*/
   
-.controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+/*
+soundrad.controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.tracks = null;
     $scope.isLoading = true;
     $scope.isSetsList = true;
@@ -310,9 +319,11 @@ angular.module('soundrad.controllers', [])
         $scope.isLoading = false;
       });
     });
-}])
+}]);
+*/
   
-.controller('TrackDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'player', function($scope, soundcloud, $stateParams, player){
+/*
+soundrad.controller('TrackDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'player', function($scope, soundcloud, $stateParams, player){
   
   $scope.player = player;
 
@@ -335,9 +346,11 @@ angular.module('soundrad.controllers', [])
       if(!player.playing && !player.paused) player.load($scope.track);
     });
   });
-}])
+}]);
+*/
   
-.controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'player', function($scope, soundcloud, $stateParams, player){
+/*
+soundrad.controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'player', function($scope, soundcloud, $stateParams, player){
   $scope.isLoading = true;
   if ($scope.preloadContent) {
     $scope.set = $scope.preloadContent;
@@ -382,13 +395,17 @@ angular.module('soundrad.controllers', [])
 
   $scope.sortableOptions = { stop: function(e, ui) { $scope.updatePlaylist(); } }, { revert: true };
 
-}])
+}]);
+*/
   
-.controller('InfoCtrl', ['$scope', '$sce', 'soundcloud', function($scope, $sce, soundcloud){
+/*
+soundrad.controller('InfoCtrl', ['$scope', '$sce', 'soundcloud', function($scope, $sce, soundcloud){
   // $scope.description = $sce.trustAsHtml($scope.userData.description);
-}])
+}]);
+*/
   
-.controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+/*
+soundrad.controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
   $scope.isLoading = true;
   soundcloud.getFollowings($scope.viewUser, function(data){
     $scope.$apply(function(){
@@ -401,9 +418,9 @@ angular.module('soundrad.controllers', [])
     { json: 'username', human: 'Alphabetical', reverse: false }
   ];
   $scope.sortFollowings = $scope.sorts[0];  
-}])
+}]);
   
-.controller('FollowersCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+soundrad.controller('FollowersCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
   $scope.isLoading = true;
   soundcloud.getFollowers($scope.viewUser, function(data){
     $scope.$apply(function(){
@@ -416,9 +433,10 @@ angular.module('soundrad.controllers', [])
     { json: 'username', human: 'Alphabetical', reverse: false }
   ];
   $scope.sortFollowers = $scope.sorts[0];
-}])
+}]);
+*/
   
-.controller('TracklistCtrl', ['$scope', '$location', 'soundcloud', 'player', function($scope, $location, soundcloud, player) {
+soundrad.controller('TracklistCtrl', ['$scope', '$location', 'soundcloud', 'player', function($scope, $location, soundcloud, player) {
 
   $scope.player = player;
   
@@ -470,14 +488,16 @@ angular.module('soundrad.controllers', [])
   };
 
   $scope.loadMore = function(){
+    console.log('loadMore');
+    console.log($scope.$routeParams);
     if($scope.isLoading) return false;
-    if($scope.currentState == 'home') $scope.showMoreStream();
+    if($scope.isHome) $scope.showMoreStream();
     else $scope.getMore();
   };
         
-}])
+}]);
   
-.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($scope, $timeout, soundcloud) {
+soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($scope, $timeout, soundcloud) {
 
   $scope.dropdownIsOpen = false;
   $scope.toggleDropdown = function() {
@@ -570,9 +590,9 @@ angular.module('soundrad.controllers', [])
     });
   };
 
-}])
+}]);
 
-.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function($scope, $location, soundcloud) {
+soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function($scope, $location, soundcloud) {
 
   $scope.search = function(){
     console.log('search for ' + $scope.searchQuery);
@@ -604,14 +624,14 @@ angular.module('soundrad.controllers', [])
     });
   };
 
-}])
+}]);
   
-.controller('QueueCtrl', ['$scope', 'player', function($scope, player) {
-    $scope.tracks = player.tracks;
-}])
+soundrad.controller('QueueCtrl', ['$scope', 'player', function($scope, player) {
+  $scope.tracks = player.tracks;
+}]);
   
-// .controller('HistoryCtrl', ['$scope', 'storage', function($scope, storage){
+// soundrad.controller('HistoryCtrl', ['$scope', 'storage', function($scope, storage){
 //   $scope.history = storage.get('history');
-// }])
+// }]);
 
-;  
+  
