@@ -219,17 +219,20 @@ angular.module('soundrad.controllers', [])
   });
 }])
   
-.controller('UserCtrl', ['$scope', 'soundcloud', '$stateParams', '$state', function($scope, soundcloud, $stateParams, $state) {
+.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$stateParams', '$state', function($scope, $sce, soundcloud, $stateParams, $state) {
     $scope.isLoading = true;
     $scope.isSetsList = false;
     $scope.viewUser = $stateParams.user;
     soundcloud.getUser($scope.viewUser, function(data){
       $scope.$apply(function(){
         $scope.userData = data;
+        $scope.userDescription = $sce.trustAsHtml(data.description);
         $scope.viewUsername = data.username;
         //if($scope.me) $scope.isFollowing(data.id);
         $scope.followersCount = parseInt(data.followers_count);
         $scope.followingsCount = parseInt(data.followings_count);
+          // This doesn't work
+          // $scope.isFollowing(data.id);
       });
     });
     
@@ -262,6 +265,7 @@ angular.module('soundrad.controllers', [])
         if(error) console.error(error);
       });
     };
+
 
     $scope.follow = function(userid){
       soundcloud.follow(userid, function(data){
@@ -380,7 +384,8 @@ angular.module('soundrad.controllers', [])
 
 }])
   
-.controller('InfoCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
+.controller('InfoCtrl', ['$scope', '$sce', 'soundcloud', function($scope, $sce, soundcloud){
+  // $scope.description = $sce.trustAsHtml($scope.userData.description);
 }])
   
 .controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
@@ -483,6 +488,7 @@ angular.module('soundrad.controllers', [])
 
   $scope.addToPlaylistIsOpen = false;
   $scope.toggleAddToPlaylist = function() { 
+    console.log('toggle playlist');
     $scope.addToPlaylistIsOpen = ! $scope.addToPlaylistIsOpen;
   };
 

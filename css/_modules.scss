@@ -50,6 +50,11 @@
 
 // Testing
 // Responsive folding table
+.folding-table {
+  .table-cell {
+    display: block;
+  }
+}
 @media (min-width:512px){
   .folding-table {
     display: table;

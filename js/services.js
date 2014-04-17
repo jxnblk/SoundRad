@@ -97,7 +97,7 @@ angular.module('soundrad.services', [])
       },
 
       isFollowing: function(userid, callback){
-        SC.get('/me/followings/'+userid+'?client_id='+clientID, callback);
+        SC.get('/me/followings/'+userid, callback);
         // I love how well this fucking works
       },
 

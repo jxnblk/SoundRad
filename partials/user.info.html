@@ -3,7 +3,7 @@
   <h2>{{ followersCount | number }} Followers</h2>
   <h2>{{ followingsCount | number }} Following</h2>
 
-  <p class="py2" ng-cloak ng-bind-html-unsafe="userData.description | richtext"></p>
+  <p class="py2" ng-if="userDescription" ng-bind-html="userDescription"></p>
 
 </div>
 

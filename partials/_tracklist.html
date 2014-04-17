@@ -1,14 +1,14 @@
 
 <div ng-if="!isSetsList" infinite-scroll="loadMore()" infinite-scroll-distance=".5">
   <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-    class="table border-bottom" ng-class="{'is-active': player.playing.id == track.id}">
+    class="folding-table border-bottom" ng-class="{'is-active': player.playing.id == track.id}">
     <a href="" ng-click="player.play(tracks, $index)"
-      class="table-cell clearfix px1 py0 text"
+      class="table-cell x100 clearfix py0 text"
       ng-class="{'highlight': player.playing.id == track.id}">
-      <p class="small y1p5">{{ track.user.username }}</p>
-      <h3 class="y2">{{ track.title }}</h3>
+      <p class="px1 small y1p5">{{ track.user.username }}</p>
+      <h3 class="px1 y2">{{ track.title }}</h3>
     </a>
-    <div class="table-cell right-align">
+    <div class="table-cell nowrap">
       <div ng-include src="'/partials/_track-actions.html'"></div>
     </div>
   </div>
