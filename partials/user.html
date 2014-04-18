@@ -10,5 +10,11 @@
     </div>
   </div>
 
-  <div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+  <div
+    ng-include
+    src="'/partials/_tracklist.html'"
+    infinite-scroll="loadMore()"
+    infinite-scroll-distance=".25"
+    ng-controller="TracklistCtrl">
+  </div>
 </div>

@@ -1,9 +1,9 @@
 <div ng-if="me"
-  ng-controller="StreamCtrl"
   ng-include
-  src="'partials/_stream.html'"
+  src="'partials/_tracklist.html'"
   infinite-scroll="loadMore()"
-  infinite-scroll-distance=".25">
+  infinite-scroll-distance=".25"
+  ng-controller="StreamCtrl">
 
 <main ng-if="!me" class="p1">
   <section class="mb2">
