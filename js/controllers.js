@@ -65,7 +65,7 @@ soundrad.controller('NavCtrl',
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
   console.log('me from storage');
-  console.log($scope.me);
+  console.log(!$scope.me);
 
   // Get token from url hash after auth
   if($location.hash()){
@@ -81,6 +81,7 @@ soundrad.controller('NavCtrl',
     });
   };
   if ($scope.token){
+    console.log('has token, reconnecting');
     soundcloud.reconnect($scope.token);
     soundcloud.me(function(me){
       $scope.me = me;
