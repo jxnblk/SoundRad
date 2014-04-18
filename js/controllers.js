@@ -4,10 +4,8 @@
 
 
 soundrad.controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
-
   $scope.player = player;
   $scope.audio = audio;
-
   Mousetrap.bind(['j', 'shift+right'], function(){
     $scope.$apply(function(){
       player.next();
@@ -24,7 +22,6 @@ soundrad.controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope,
       player.toggle();
     });
   });
-
 }]);
 
 soundrad.controller('HeadCtrl', ['$scope', 'player', function($scope, player) {
@@ -58,26 +55,21 @@ soundrad.controller('ScrubberCtrl', ['$scope', 'audio', function($scope, audio) 
 soundrad.controller('NavCtrl',
   ['$scope', '$routeParams', '$window', '$location', 'soundcloud', 'storage',
   function($scope, $routeParams, $window, $location, soundcloud, storage) {
-
   // Defaults
   $scope.user = null;
   $scope.userData = null;
-
   $scope.page = 1;
   $scope.pageSize = 16;
   $scope.pageOffset = 0;
-
   $scope.$routeParams = $routeParams;
-    
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
 
-  // Get token from url hash
+  // Get token from url hash after auth
   if($location.hash()){
     var token = $location.hash().replace('#','').split('&')[0].split('=')[1];
     if(token) storage.set('token', token);
   };
-
   var getUserPlaylists = function(){
     soundcloud.getUserPlaylists(function(data){
       $scope.$apply(function(){
@@ -85,25 +77,22 @@ soundrad.controller('NavCtrl',
       });
     });
   };
-
   if ($scope.token){
     soundcloud.reconnect($scope.token);
     soundcloud.me(function(me){
       $scope.me = me;
+      console.log(me);
       storage.set('me', me);
       getUserPlaylists();
     });
   };
-
   $scope.connect = function() {
     soundcloud.connect();
   };
-  
   $scope.logOut = function() {
     storage.clearAll();
     $window.location.href = '/';
   };
-    
   Mousetrap.bind('g s', function(){
     $scope.$apply(function(){
       $location.path('/');
@@ -130,7 +119,6 @@ soundrad.controller('NavCtrl',
       $location.path('/search');
     });
   });
-
 }]);
   
 soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $location){

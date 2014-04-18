@@ -1,10 +1,12 @@
-// Table object
+// Table Object
 
-@media (min-width: 40em){
+@media (min-width: 36em) {
   .table {
     display: table;
-    table-layout: fixed;
     width: 100%;
+  }
+  .table-fixed {
+    table-layout: fixed;
   }
   .table-cell {
     display: table-cell;
