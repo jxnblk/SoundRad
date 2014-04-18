@@ -10,3 +10,6 @@
     <div ng-include src="'/partials/_track-actions.html'"></div>
   </div>
 </div>
+
+<div ng-show="isLoading" class="y3 center">Loading...</div>
+<div ng-show="!isLoading && tracks.length == 0" class="y3 center">No Results</div>
