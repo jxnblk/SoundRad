@@ -4,7 +4,7 @@
     <span ng-hide="token">Home</span>
   </a>
 
-  <div ng-show="token">
+  <span ng-show="token">
     <a href="/{{me.permalink}}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
@@ -15,10 +15,10 @@
     <a href="/search" class="h3"><i class="ss-icon ss-search"></i> Search</a>
     <a href="/settings" class="h3">Settings</a>
     <a href="/about" class="h3">About SoundRad</a>
-  </div>
+  </span>
 
-  <div ng-hide="token">
+  <span ng-hide="token">
     <a href="" ng-click="connect();" class="button button-blue">Connect</a>
-  </div>
+  </span>
 
 </nav>
