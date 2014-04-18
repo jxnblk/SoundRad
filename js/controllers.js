@@ -361,6 +361,7 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
   $scope.loadMore = function(){
     if($scope.isLoading) return false;
     if($scope.hasNextPage){
+      console.log('loadMore');
       $scope.isLoading = true;
       $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
       var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
