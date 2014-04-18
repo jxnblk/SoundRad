@@ -3,7 +3,7 @@
 <div ng-if="!isSetsList" infinite-scroll="loadMore()" infinite-scroll-distance=".5">
 -->
 <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-    class="border-light-gray border-bottom">
+    class="py1 border-light-gray border-bottom">
     <a href="" ng-click="player.play(tracks, $index)"
       class="dark-gray"
       ng-class="{'blue': player.playing.id == track.id}">

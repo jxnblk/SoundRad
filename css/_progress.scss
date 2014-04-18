@@ -1,0 +1,26 @@
+// Progress bar
+
+.progress {
+  position: relative;
+  height: 1rem;
+  cursor: pointer;
+}
+.progress-background,
+.progress-buffer,
+.progress-played,
+.progress-overlay {
+  position: absolute;
+}
+.progress-background,
+.progress-buffer,
+.progress-played {
+  top: .75rem;
+  bottom: .75rem;
+  left: 0;
+}
+.progress-background {
+  right: 0;
+}
+.progress-overlay {
+
+}
