@@ -64,6 +64,8 @@ soundrad.controller('NavCtrl',
   $scope.$routeParams = $routeParams;
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
+  console.log('me from storage');
+  console.log($scope.me);
 
   // Get token from url hash after auth
   if($location.hash()){
