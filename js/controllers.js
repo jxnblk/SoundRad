@@ -75,10 +75,7 @@ soundrad.controller('NavCtrl',
   // Get token from url hash
   if($location.hash()){
     var token = $location.hash().replace('#','').split('&')[0].split('=')[1];
-    if(token) {
-      console.log('setting oauth token based on hash...');
-      storage.set('token', token);
-    };
+    if(token) storage.set('token', token);
   };
 
   var getUserPlaylists = function(){
@@ -107,32 +104,6 @@ soundrad.controller('NavCtrl',
     $window.location.href = '/';
   };
     
-  var modalIsOpen = false; 
-  var toggleShortcutsHelper = function() {
-    $scope.$apply(function(){
-      if(!modalIsOpen) $scope.modalContent = '/partials/_keyboard-shortcuts.html';
-      else $scope.modalContent = null;
-    });
-    modalIsOpen = !modalIsOpen;
-  };
-
-  $scope.closeModal = function(){
-    $scope.modalContent = null;
-    modalIsOpen = false;
-  };
-
-  Mousetrap.bind('?', function(){
-    toggleShortcutsHelper();
-  });
-
-  Mousetrap.bind('esc', function(e){
-    e.preventDefault();
-    $scope.$apply(function(){
-      $scope.modalContent = null;
-      modalIsOpen = false;
-    });
-  });
-
   Mousetrap.bind('g s', function(){
     $scope.$apply(function(){
       $location.path('/');
@@ -184,6 +155,26 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
       };
     });
   });
+  // Stream Pagination
+  $scope.getMore = function() {
+    $scope.isLoading = true;
+    var url = $scope.streamNextPage;
+    var params = { limit: $scope.pageSize };
+    soundcloud.getStream(url, params, function(data, tracks){
+      $scope.$apply(function(){
+        if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
+          player.tracks = player.tracks.concat(tracks);
+        };
+        $scope.tracks = $scope.tracks.concat(tracks);
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;  
+        $scope.isLoading = false;
+        $scope.streamNextPage = data.next_href;
+      });
+    });
+    $scope.page = $scope.page + 1;
+  };
+  
 }]);
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
@@ -219,7 +210,6 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     };
     
     $scope.isFollowing = function(userid){
-      console.log('checking if following...' + userid);
       soundcloud.isFollowing(userid, function(data, error){
         console.log('data:');
         console.log(data);
@@ -382,59 +372,43 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
 
   $scope.player = player;
   
-  // Stream Pagination
-  $scope.showMoreStream = function() {
-    $scope.isLoading = true;
-    var url = $scope.streamNextPage;
-    var params = { limit: $scope.pageSize };
-    soundcloud.getStream(url, params, function(data, tracks){
-      $scope.$apply(function(){
-        if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
-          player.tracks = player.tracks.concat(tracks);
-        };
-        $scope.tracks = $scope.tracks.concat(tracks);
-        $scope.hasPrevPage = false;
-        $scope.hasNextPage = false;  
-        $scope.isLoading = false;
-        $scope.streamNextPage = data.next_href;
-      });
-    });
-    $scope.page = $scope.page + 1;
-  };
-  
   // New Pagination
   $scope.updatePage = function(){
     $scope.page = ($scope.pageOffset + $scope.pageSize) / $scope.pageSize;
   };
+  if($scope.streamNextPage) console.log('has stream next page');
+  if(!$scope.streamNextPage) console.log('doesnt have stream next page');
 
-  $scope.getMore = function(){
-    if($scope.hasNextPage){
-      $scope.isLoading = true;
-      $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
-      var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-      soundcloud.getTracks($scope.getUrl, params, function(data){
-        $scope.$apply(function(){
-          if(player.tracks){
-            if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
-              player.tracks = player.tracks.concat(data);
+  if(!$scope.getMore){
+    console.log('no getMore function found');
+    $scope.getMore = function(){
+      if($scope.hasNextPage){
+        $scope.isLoading = true;
+        $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
+        var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
+        soundcloud.getTracks($scope.getUrl, params, function(data){
+          $scope.$apply(function(){
+            if(player.tracks){
+              if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
+                player.tracks = player.tracks.concat(data);
+              };
             };
-          };
-          $scope.tracks = $scope.tracks.concat(data);
-          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-          $scope.isLoading = false;
+            $scope.tracks = $scope.tracks.concat(data);
+            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+            $scope.isLoading = false;
+          });
         });
-      });
-      $scope.updatePage();
+        $scope.updatePage();
+      };
     };
   };
 
   $scope.loadMore = function(){
-    console.log('loadMore');
-    console.log($scope.$routeParams);
     if($scope.isLoading) return false;
-    if($scope.isHome) $scope.showMoreStream();
-    else $scope.getMore();
+    //if($scope.isHome) $scope.showMoreStream();
+    //else $scope.getMore();
+    $scope.getMore();
   };
         
 }]);
@@ -450,7 +424,6 @@ soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($
 
   $scope.addToPlaylistIsOpen = false;
   $scope.toggleAddToPlaylist = function() { 
-    console.log('toggle playlist');
     $scope.addToPlaylistIsOpen = ! $scope.addToPlaylistIsOpen;
   };
 
@@ -537,7 +510,6 @@ soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($
 soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function($scope, $location, soundcloud) {
 
   $scope.search = function(){
-    console.log('search for ' + $scope.searchQuery);
     $scope.isLoading = true;
     $scope.searchResults = null;
     $location.search($scope.searchQuery); 
@@ -554,7 +526,6 @@ soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function
 
   $scope.searchMore = function(){
     if($scope.isLoading || !$scope.searchResults) return false;
-    console.log('search more');
     $scope.isLoading = true;
     $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
     var params = { q: $scope.searchQuery, offset: $scope.pageOffset };
