@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.5;
   font-weight: 400;
 }
@@ -10,11 +10,11 @@ body {
 
 // Base Type Scale
 h1, h2, h3, h4, h5, h6 {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
-//.h1 { font-size: 1.375rem; }
-.h2 { font-size: 1.125rem; }
-.h3 { font-size: .875rem; }
+.h1 { font-size: 1.25rem; }
+.h2 { font-size: 1rem; }
+.h3 { font-size: .75rem; }
 
 // Utilities
 

@@ -29,7 +29,7 @@
       <h1 class="h2">{{player.tracks[player.i].user.username}}</h1>
       <h1 class="">{{player.tracks[player.i].title}}</h1>
       <div id="scrubber" ng-controller="ScrubberCtrl" class="">
-        <div class="h3">
+        <div class="h3 mid-gray">
           <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
           <span ng-show="audio.readyState == 4">
             {{currentTimeMS | playTime}} | {{durationMS | playTime}}
