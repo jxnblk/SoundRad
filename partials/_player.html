@@ -1,10 +1,10 @@
 <div class="border-bottom border-light-gray">
 
-  <div ng-if="!player.playing && !player.paused" class="px1">
+  <div ng-if="!player.playing && !player.paused">
     <h1>SoundRad v128 beta</h1>
   </div>
 
-  <div ng-if="player.playing || player.paused" id="player" class="px1">
+  <div ng-if="player.playing || player.paused" id="player">
     
     <div id="player-controls" class="">
         <a href="" ng-click="player.prev()"
