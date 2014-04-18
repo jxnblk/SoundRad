@@ -1,0 +1,17 @@
+// Animations
+
+@-webkit-keyframes popin {
+  0%   { -webkit-transform: scale(.8); }
+  80%  { -webkit-transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); }
+}
+@keyframes popin {
+  0%   { transform: scale(.8); }
+  80%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.popin {
+  -webkit-animation: popin .1s linear;
+  animation: popin .1s linear;
+}
+

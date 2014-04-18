@@ -59,6 +59,9 @@ a {
     box-shadow: 0 0 0 2px #fff, 0 0 1px 4px rgba($blue, .5);
   }
 }
+.button-icon {
+  svg { fill: $dark-gray; }
+}
 
 .button-blue {
   color: #fff;
