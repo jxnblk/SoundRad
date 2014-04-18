@@ -31,7 +31,7 @@
       <div id="scrubber" ng-controller="ScrubberCtrl" class="">
         <div class="progress">
           <div class="progress-background bg-light-gray"></div>
-          <div class="progress-buffer bg-mid-gray" style="width: {{currentBufferPercentage}}%"></div>
+          <div class="progress-buffer bg-darken" style="width: {{currentBufferPercentage}}%"></div>
           <div class="progress-played bg-blue" style="width: {{currentTimePercentage}}%"></div>
           <div class="progress-overlay" ng-click="seekTo($event)"></div>
         </div>
