@@ -1,34 +1,24 @@
-<nav class="table table-fixed">
+<nav class="leading-3">
+  <a href="/">
+    <span ng-show="token">Stream</span>
+    <span ng-hide="token">Home</span>
+  </a>
 
-  <div class="table-cell">
-    <a href="/"
-      class="" ng-class="{'text': currentState != 'home'}">
-      <span ng-show="token">Stream</span>
-      <span ng-hide="token">Home</span>
-    </a>
-    <!-- <a href="" class="text"><i class="icon search">Search</i></a> -->
-  </div>
-
-  <div ng-show="token" class="dropdown hover-group table-cell x25 right-align">
-    <a href="/{{me.permalink}}" class=""  ng-class="{'text': currentState != 'user' || me.permalink != viewUser}">
+  <div ng-show="token">
+    <a href="/{{me.permalink}}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
-    <div class="dropdown-body dropdown-body-right hover-show">
-      <ul class="ul clearfix menu menu-reverse rounded">
-        <li><a ng-href="/{{me.permalink}}/sets">Playlists</a></li>
-        <li><a ng-href="/{{me.permalink}}/likes">Likes</a></li>
-        <li><a ng-href="/{{me.permalink}}/info">Info</a></li>
-        <li class="mt1"><a href="/search" class="small regular"><i class="ss-icon ss-search"></i> Search</a></li>
-        <li><a href="/settings" class="small regular">Settings</a></li>
-        <li><a href="/about" class="small regular">About SoundRad</a></li>
-        <!-- <li><a href="#" ng-click="logOut()" class="small regular">Sign Out</a></li> -->
-      </ul>
-    </div>
+    <a ng-href="/{{me.permalink}}/sets">Playlists</a>
+    <a ng-href="/{{me.permalink}}/likes">Likes</a>
+    <a ng-href="/{{me.permalink}}/info">Info</a>
+    <a href="/search" class="h3"><i class="ss-icon ss-search"></i> Search</a>
+    <a href="/settings" class="h3">Settings</a>
+    <a href="/about" class="h3">About SoundRad</a>
   </div>
 
-  <div ng-hide="token" class="table-cell right-align">
-    <a href="" ng-click="connect();" class="btn btn-prime">Connect</a>
+  <div ng-hide="token">
+    <a href="" ng-click="connect();" class="button button-blue">Connect</a>
   </div>
 
 </nav>
