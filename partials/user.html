@@ -1,28 +1,13 @@
-<div class="border-bottom" ng-show="$state.current.name != 'user.track'">  
-  <h1 class="mt1 px1"><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
-  <!-- <span ng-click="isFollowing(userData.id)">following: {{ isFollowing(userData.id) }}</span> -->
-  <!-- <a href ng-click="follow(userData.id)">Follow</a> -->
-  <!-- <a href ng-click="unfollow(userData.id)">Unfollow</a> -->
+<div class="border-bottom">  
+  <h1><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
 
-  <div class="mb1 navbar">
-    <a ng-href="/{{viewUser}}/sets"
-      class="" ng-class="{'text': $state.current.name != 'user.sets'}">
-        Playlists
-    </a>
-    <a ng-href="/{{viewUser}}/likes"
-      class="" ng-class="{'text': $state.current.name != 'user.likes'}">
-        Likes
-    </a>
-    <a ng-href="/{{viewUser}}/info"
-      class="" ng-class="{'text': $state.current.name != 'user.info'}">
-        Info
-    </a>
-
-    <a href="/settings" class="" ng-class="{'text': $state.current.name != 'settings'}" ng-show="userData.id == me.id">Settings</a>
-    
+  <div>
+    <a ng-href="/{{viewUser}}/sets"> Playlists </a>
+    <a ng-href="/{{viewUser}}/likes"> Likes </a>
+    <a ng-href="/{{viewUser}}/info"> Info </a>
+    <a href="/settings" ng-show="userData.id == me.id">Settings</a>
   </div>
 </div>
 
-<div ui-view></div>
-  
-<div ng-if="$state.current.name == 'user'" ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
+<div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
+

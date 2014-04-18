@@ -157,6 +157,7 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
   });
   // Stream Pagination
   $scope.getMore = function() {
+    console.log('getting more for stream');
     $scope.isLoading = true;
     var url = $scope.streamNextPage;
     var params = { limit: $scope.pageSize };
