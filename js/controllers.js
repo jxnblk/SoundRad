@@ -69,6 +69,7 @@ soundrad.controller('NavCtrl',
 
   // Get token from url hash after auth
   if($location.hash()){
+    console.log('getting token from hash');
     var token = $location.hash().replace('#','').split('&')[0].split('=')[1];
     if(token) storage.set('token', token);
   };
