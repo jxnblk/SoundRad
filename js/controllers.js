@@ -60,7 +60,7 @@ soundrad.controller('NavCtrl',
   function($scope, $routeParams, $window, $location, soundcloud, storage) {
 
   // Defaults
-  $scope.viewUser = null;
+  $scope.user = null;
   $scope.userData = null;
 
   $scope.page = 1;
@@ -140,13 +140,12 @@ soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $lo
 soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
   $scope.page = 1;
   $scope.isLoading = true;
+  $scope.player = player;
   var url = '/me/activities/tracks';
   var params = { limit: $scope.pageSize };
   soundcloud.getStream(url, params, function(data, tracks){
     $scope.$apply(function(){
       $scope.tracks = tracks;
-      $scope.hasPrevPage = false;
-      $scope.hasNextPage = false;  
       $scope.isLoading = false;
       $scope.streamNextPage = data.next_href;
       if(!player.playing && !player.paused) {
@@ -167,8 +166,6 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
           player.tracks = player.tracks.concat(tracks);
         };
         $scope.tracks = $scope.tracks.concat(tracks);
-        $scope.hasPrevPage = false;
-        $scope.hasNextPage = false;  
         $scope.isLoading = false;
         $scope.streamNextPage = data.next_href;
       });
@@ -181,26 +178,20 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
     $scope.isLoading = true;
     $scope.isSetsList = false;
-    $scope.isHome = false;
-    $scope.viewUser = $routeParams.user;
-    soundcloud.getUser($scope.viewUser, function(data){
+    $scope.user = $routeParams.user;
+    soundcloud.getUser($scope.user, function(data){
       $scope.$apply(function(){
         $scope.userData = data;
         $scope.userDescription = $sce.trustAsHtml(data.description);
-        $scope.viewUsername = data.username;
-        //if($scope.me) $scope.isFollowing(data.id);
+        $scope.username = data.username;
         $scope.followersCount = parseInt(data.followers_count);
         $scope.followingsCount = parseInt(data.followings_count);
-          // This doesn't work
-          // $scope.isFollowing(data.id);
       });
     });
     
-    //$scope.$state = $state;
-
     $scope.getTracks = function(){
       var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-      soundcloud.getTracks($scope.getUrl, params, function(data){
+      soundcloud.getTracks($scope.api, params, function(data){
         $scope.$apply(function(){
           $scope.tracks = data;
           $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
@@ -210,22 +201,11 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
       });
     };
     
-    $scope.isFollowing = function(userid){
-      soundcloud.isFollowing(userid, function(data, error){
-        console.log('data:');
-        console.log(data);
-        if(error) console.error(error);
-      });
+    $scope.follow = function(userid) {
+      soundcloud.follow(userid);
     };
-
-
-    $scope.follow = function(userid){
-      soundcloud.follow(userid, function(data){
-      });
-    };
-    $scope.unfollow = function(userid){
-      soundcloud.unfollow(userid, function(data){
-      });
+    $scope.unfollow = function(userid) {
+      soundcloud.unfollow(userid);
     };
     
 }]);
@@ -234,9 +214,10 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
 soundrad.controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
     $scope.tracks = null;
     $scope.isLoading = true;
-    $scope.getUrl = '/users/' + $scope.viewUser + '/favorites';
+    $scope.api = '/users/' + $scope.user + '/favorites';
+    //$scope.api = '/users/' + $scope.user + '/favorites';
     var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-    soundcloud.getTracks($scope.getUrl, params, function(data){
+    soundcloud.getTracks($scope.api, params, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
@@ -252,12 +233,12 @@ soundrad.controller('SetsCtrl', ['$scope', 'soundcloud', function($scope, soundc
     $scope.tracks = null;
     $scope.isLoading = true;
     $scope.isSetsList = true;
-    $scope.getUrl = '/users/' + $scope.viewUser + '/playlists';
-    if($scope.viewUser == $scope.me.permalink && $scope.userPlaylists) {
+    $scope.api = '/users/' + $scope.user + '/playlists';
+    if($scope.user == $scope.me.permalink && $scope.userPlaylists) {
       $scope.tracks = $scope.userPlaylists;
     };
     var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-    soundcloud.getTracks($scope.getUrl, params, function(data){
+    soundcloud.getTracks($scope.api, params, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
@@ -275,7 +256,7 @@ soundrad.controller('TrackDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 
 
   $scope.isLoading = true;
   
-  var path = '/' + $scope.viewUser + '/' + $stateParams.track;
+  var path = '/' + $scope.user + '/' + $stateParams.track;
   soundcloud.getTrack(path, function(data){
     $scope.$apply(function () {
       $scope.tracks = new Array(data);
@@ -294,7 +275,7 @@ soundrad.controller('SetDetailCtrl', ['$scope', 'soundcloud', '$stateParams', 'p
   $scope.isLoading = true;
 
   $scope.getSet = function(){
-    var path = '/' + $scope.viewUser + '/sets/' + $stateParams.set;
+    var path = '/' + $scope.user + '/sets/' + $stateParams.set;
     soundcloud.getSet(path, function(data){
       $scope.$apply(function () {
         $scope.set = data;
@@ -340,7 +321,7 @@ soundrad.controller('InfoCtrl', ['$scope', '$sce', 'soundcloud', function($scope
 /*
 soundrad.controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
   $scope.isLoading = true;
-  soundcloud.getFollowings($scope.viewUser, function(data){
+  soundcloud.getFollowings($scope.user, function(data){
     $scope.$apply(function(){
       $scope.followings = data;
       $scope.isLoading = false;
@@ -355,7 +336,7 @@ soundrad.controller('FollowingCtrl', ['$scope', 'soundcloud', function($scope, s
   
 soundrad.controller('FollowersCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
   $scope.isLoading = true;
-  soundcloud.getFollowers($scope.viewUser, function(data){
+  soundcloud.getFollowers($scope.user, function(data){
     $scope.$apply(function(){
       $scope.followers = data;
       $scope.isLoading = false;
@@ -373,18 +354,13 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
 
   $scope.player = player;
   
-  // New Pagination
-  $scope.updatePage = function(){
-    $scope.page = ($scope.pageOffset + $scope.pageSize) / $scope.pageSize;
-  };
-
   $scope.loadMore = function(){
     if($scope.isLoading) return false;
     if($scope.hasNextPage){
       $scope.isLoading = true;
       $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
       var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-      soundcloud.getTracks($scope.getUrl, params, function(data){
+      soundcloud.getTracks($scope.api, params, function(data){
         $scope.$apply(function(){
           if(player.tracks){
             if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
@@ -392,12 +368,11 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
             };
           };
           $scope.tracks = $scope.tracks.concat(data);
-          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
           $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
           $scope.isLoading = false;
         });
       });
-      $scope.updatePage();
+      $scope.page++;
     };
   };
 
