@@ -198,8 +198,9 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     
 }]);
 
-soundrad.controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+soundrad.controller('UserTracksCtrl', ['$scope', '$routeParams', 'soundcloud', function($scope, $routeParams, soundcloud) {
   console.log('user tracks controller');
+  $scope.user = $routeParams.user;
   $scope.api = '/users/' + $scope.user + '/tracks';
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
   soundcloud.getTracks($scope.api, params, function(data){
