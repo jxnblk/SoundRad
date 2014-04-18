@@ -5,6 +5,12 @@
   infinite-scroll-distance=".25"
   ng-controller="StreamCtrl">
 
+<div>Debugging $scope.me</div>
+<div ng-show="!me">ng-show="!me"</div>
+<div ng-if="!me">ng-if="!me"</div>
+<div ng-show="me">ng-show="me"</div>
+<div ng-if="me">ng-if="me"</div>
+
 <main ng-if="!me" class="p1">
   <section class="mb2">
     <h1><span class="blue">Sound</span>Rad</h1>
