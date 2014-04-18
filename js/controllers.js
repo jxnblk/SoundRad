@@ -189,24 +189,26 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
       });
     });
     
-    $scope.getTracks = function(){
-      var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-      soundcloud.getTracks($scope.api, params, function(data){
-        $scope.$apply(function(){
-          $scope.tracks = data;
-          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-          $scope.isLoading = false;
-        });
-      });
-    };
-    
     $scope.follow = function(userid) {
       soundcloud.follow(userid);
     };
     $scope.unfollow = function(userid) {
       soundcloud.unfollow(userid);
     };
+    
+}]);
+
+soundrad.controller('UserTracksCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+  console.log('user tracks controller');
+  var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
+  soundcloud.getTracks($scope.api, params, function(data){
+    $scope.$apply(function(){
+      $scope.tracks = data;
+      $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+      $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+      $scope.isLoading = false;
+    });
+  });
     
 }]);
   

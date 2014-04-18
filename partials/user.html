@@ -1,13 +1,14 @@
-<div class="border-bottom">  
-  <h1><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
+<div ng-controller="UserCtrl">
+  <div class="border-bottom">  
+    <h1><a ng-href="/{{ viewUser }}" class="text">{{ viewUsername }}&nbsp;</a></h1>
 
-  <div>
-    <a ng-href="/{{viewUser}}/sets"> Playlists </a>
-    <a ng-href="/{{viewUser}}/likes"> Likes </a>
-    <a ng-href="/{{viewUser}}/info"> Info </a>
-    <a href="/settings" ng-show="userData.id == me.id">Settings</a>
+    <div>
+      <a ng-href="/{{viewUser}}/sets"> Playlists </a>
+      <a ng-href="/{{viewUser}}/likes"> Likes </a>
+      <a ng-href="/{{viewUser}}/info"> Info </a>
+      <a href="/settings" ng-show="userData.id == me.id">Settings</a>
+    </div>
   </div>
+
+  <div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
 </div>
-
-<div ng-include src="'/partials/_tracklist.html'" ng-controller="TracklistCtrl"></div>
-
