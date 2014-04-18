@@ -140,7 +140,6 @@ soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $lo
 soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
   $scope.page = 1;
   $scope.isLoading = true;
-  $scope.isHome = true;
   var url = '/me/activities/tracks';
   var params = { limit: $scope.pageSize };
   soundcloud.getStream(url, params, function(data, tracks){
@@ -156,7 +155,7 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
     });
   });
   // Stream Pagination
-  $scope.getMore = function() {
+  $scope.loadMore = function() {
     console.log('getting more for stream');
     $scope.isLoading = true;
     var url = $scope.streamNextPage;
@@ -377,41 +376,30 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
   $scope.updatePage = function(){
     $scope.page = ($scope.pageOffset + $scope.pageSize) / $scope.pageSize;
   };
-  if($scope.streamNextPage) console.log('has stream next page');
-  if(!$scope.streamNextPage) console.log('doesnt have stream next page');
-
-  if(!$scope.getMore){
-    console.log('no getMore function found');
-    $scope.getMore = function(){
-      if($scope.hasNextPage){
-        $scope.isLoading = true;
-        $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
-        var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-        soundcloud.getTracks($scope.getUrl, params, function(data){
-          $scope.$apply(function(){
-            if(player.tracks){
-              if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
-                player.tracks = player.tracks.concat(data);
-              };
-            };
-            $scope.tracks = $scope.tracks.concat(data);
-            $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-            $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-            $scope.isLoading = false;
-          });
-        });
-        $scope.updatePage();
-      };
-    };
-  };
 
   $scope.loadMore = function(){
     if($scope.isLoading) return false;
-    //if($scope.isHome) $scope.showMoreStream();
-    //else $scope.getMore();
-    $scope.getMore();
+    if($scope.hasNextPage){
+      $scope.isLoading = true;
+      $scope.pageOffset = $scope.pageOffset + $scope.pageSize;
+      var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
+      soundcloud.getTracks($scope.getUrl, params, function(data){
+        $scope.$apply(function(){
+          if(player.tracks){
+            if($scope.tracks[$scope.tracks.length-1].id == player.tracks[player.tracks.length-1].id) {
+              player.tracks = player.tracks.concat(data);
+            };
+          };
+          $scope.tracks = $scope.tracks.concat(data);
+          $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+          $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+          $scope.isLoading = false;
+        });
+      });
+      $scope.updatePage();
+    };
   };
-        
+
 }]);
   
 soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($scope, $timeout, soundcloud) {
@@ -540,12 +528,4 @@ soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function
 
 }]);
   
-soundrad.controller('QueueCtrl', ['$scope', 'player', function($scope, player) {
-  $scope.tracks = player.tracks;
-}]);
-  
-// soundrad.controller('HistoryCtrl', ['$scope', 'storage', function($scope, storage){
-//   $scope.history = storage.get('history');
-// }]);
-
   

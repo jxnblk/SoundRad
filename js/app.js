@@ -7,9 +7,7 @@ var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ui.sortable', 
     $routeProvider.when('/callback', { templateUrl: '/partials/callback.html' });
     $routeProvider.when('/settings', { templateUrl: '/partials/settings.html' });
     $routeProvider.when('/about', { templateUrl: '/partials/about.html' });
-    $routeProvider.when('/playing', { templateUrl: '/partials/playing.html' });
     $routeProvider.when('/search', { templateUrl: '/partials/search.html' });
-    $routeProvider.when('/history', { templateUrl: '/partials/history.html' });
 
     $routeProvider.when('/:user', { templateUrl: '/partials/user.html', controller: 'UserCtrl' });
     //$routeProvider.when('/:user/likes', { templateUrl: '/partials/user.likes.html' });

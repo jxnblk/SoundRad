@@ -1,7 +1,15 @@
 
+<!--
 <div ng-if="me" ng-controller="StreamCtrl" infinite-scroll="showMoreStream()" infinite-scroll-distance=".25">
   <div ng-include src="'partials/_tracklist.html'" ng-controller="TracklistCtrl" class="mb3"></div>
 </div>
+-->
+<div ng-if="me"
+  ng-controller="StreamCtrl"
+  ng-include
+  src="'partials/_stream.html'"
+  infinite-scroll="showMoreStream()"
+  infinite-scroll-distance=".25">
 
 <main ng-if="!me" class="p1">
   <section class="mb2">

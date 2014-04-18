@@ -1,0 +1,13 @@
+<div ng-repeat="track in tracks" ng-controller="TrackCtrl"
+  class="table border-bottom" ng-class="{'is-active': player.playing.id == track.id}">
+  <a href="" ng-click="player.play(tracks, $index)"
+    class="table-cell dark-gray"
+    ng-class="{'blue': player.playing.id == track.id}">
+    <p>{{ track.user.username }}</p>
+    <h3>{{ track.title }}</h3>
+  </a>
+  <div class="table-cell nowrap">
+    <p>Stream</p>
+    <div ng-include src="'/partials/_track-actions.html'"></div>
+  </div>
+</div>

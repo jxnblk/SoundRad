@@ -269,20 +269,7 @@ soundrad.factory('storage', function(){
     }     
 });
 
-// soundrad.factory('history',['storage', function(storage){
-//   return {
-//     new: function(track){
-//       var history = [];
-//       history = storage.get('history');
-//       console.log(history);
-//       history.unshift(track);
-//       storage.set('history', history);
-//     }
-//   }
-// }]);
 
-  
-  
 ////////////////////////////////////////////////////////////////
 // Filters
   
@@ -337,7 +324,6 @@ soundrad.directive('icon', function() {
   xmlHttp.send(null);
   if(xmlHttp.responseXML) sprite = xmlHttp.responseXML.documentElement;
   else console.error('Icon sprite not found - check iconUrl variable in plangular.js');
-  console.log(sprite);
   return {
     restrict: 'A',
     scope: true,

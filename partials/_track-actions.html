@@ -1,14 +1,5 @@
-<!--
-<div class="overlay" ng-click="toggleDropdown()" ng-show="dropdownIsOpen && !flashMessage"></div>
-<div class="overlay" ng-click="toggleAddToPlaylist()" ng-show="addToPlaylistIsOpen && !flashMessage"></div>
--->
-
-<a href ng-click="like(track)" ng-hide="track.user_favorite" class="btn btn-text popin">
-  Like
-</a>
-<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="btn btn-text popin">
-  Unlike
-</a>
+<a href ng-click="like(track)" ng-hide="track.user_favorite" class="btn btn-text popin">Like</a>
+<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="btn btn-text popin">Unlike</a>
 
 <!--
 <div class="dropdown inline-block">
@@ -22,7 +13,5 @@
 </div>
 -->
 
-<a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="btn btn-text">
-  Details
-</a>
+<a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="btn btn-text">Details</a>
 

@@ -16,10 +16,8 @@
 
 <div id="sets-list" ng-if="isSetsList">
   <div ng-repeat="track in tracks" class="y3 px1 border-bottom">
-    <a href=""
-      ng-click="preload('/' + track.user.permalink + '/sets/' + track.permalink, track)"
-      class="block text">
-        <h3 class="">{{ track.title }}</h3>
+    <a ng-href="/{{ track.user.permalink }}/sets/{{ track.permalink }}" class="block text">
+      <h3 class="">{{ track.title }}</h3>
     </a>
   </div>
 </div>
