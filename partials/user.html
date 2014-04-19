@@ -20,11 +20,13 @@
 </div>
 
 <div ng-if="!isSetlist && !track" ng-include src="'/partials/_tracklist.html'"
+  class="pb4"
   infinite-scroll="loadMore()" infinite-scroll-distance=".75"
   ng-controller="TracklistCtrl">
 </div>
 
 <div ng-if="isSetlist" ng-include src="'/partials/_setlist.html'"
+  class="pb4"
   infinite-scroll="loadMore()" infinite-scroll-distance=".75"
   ng-controller="TracklistCtrl">
 </div>
