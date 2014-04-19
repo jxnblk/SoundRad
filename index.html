@@ -14,13 +14,13 @@
 </head>
 <body>
   
-<div ng-controller="NavCtrl" class="measure wrap px2">
+<div ng-controller="NavCtrl" class="measure wrap">
 
-  <div ng-include src="'partials/_player.html'" ng-controller="PlayerCtrl" class="fixed r0 l0 measure wrap px2"></div>
+  <div ng-include src="'partials/_player.html'" ng-controller="PlayerCtrl" class="fixed r0 l0 measure wrap px1"></div>
   
-  <div ng-include src="'partials/_nav.html'" class="layout-fixed-clear"></div>
+  <div ng-include src="'partials/_nav.html'" class="layout-fixed-clear px1"></div>
 
-  <div ng-view></div>
+  <div ng-view class="px1"></div>
 
 </div>
 
