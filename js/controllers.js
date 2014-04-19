@@ -86,11 +86,9 @@ soundrad.controller('NavCtrl',
     });
   };
   if ($scope.token){
-    console.log('has token, reconnecting');
     soundcloud.reconnect($scope.token);
     soundcloud.me(function(me){
       $scope.me = me;
-      console.log(me);
       storage.set('me', me);
       getUserPlaylists();
     });
@@ -153,7 +151,6 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
   // Stream Pagination
   $scope.loadMore = function() {
     if($scope.isLoading) return false;
-    console.log('getting more for stream');
     $scope.isLoading = true;
     var url = $scope.streamNextPage;
     var params = { limit: $scope.pageSize };
@@ -173,9 +170,6 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
 }]);
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', 'player', function($scope, $sce, soundcloud, $routeParams, player) {
-  console.log('UserCtrl');
-  console.log('subpath: ' + $routeParams.subpath);
-  console.log('setTitle: ' + $routeParams.setTitle);
 
   $scope.isLoading = true;
   $scope.isSetlist = false;
@@ -183,7 +177,6 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
   if ($routeParams.user != $scope.$parent.user) {
-    console.log('new user');
     $scope.$parent.user = $routeParams.user;
     soundcloud.getUser($scope.$parent.user, function(data){
       $scope.$apply(function(){
@@ -233,11 +226,9 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     $scope.api = '/users/' + $scope.user + '/favorites';
     getTracks();
   } else if ($routeParams.setTitle) {
-    console.log('set detail');
     $scope.api = '/' + $scope.user + '/sets/' + $routeParams.setTitle;
     getSet();
   } else if ($routeParams.subpath == 'sets') {
-    console.log('sets list');
     $scope.api = '/users/' + $scope.user + '/playlists';
     getTracks();
   };
