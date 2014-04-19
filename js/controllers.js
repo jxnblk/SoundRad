@@ -169,6 +169,9 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
   console.log('UserCtrl');
+  console.log($routeParams.user);
+  console.log($routeParams.subpath);
+
   $scope.user = $routeParams.user;
   soundcloud.getUser($scope.user, function(data){
     $scope.$apply(function(){

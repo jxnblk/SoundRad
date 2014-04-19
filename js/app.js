@@ -9,9 +9,11 @@ var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ui.sortable', 
     $routeProvider.when('/about', { templateUrl: '/partials/about.html' });
     $routeProvider.when('/search', { templateUrl: '/partials/search.html' });
 
-    $routeProvider.when('/:user', { templateUrl: '/partials/user.html'  });
-    $routeProvider.when('/:user/likes', { templateUrl: '/partials/user.html', reloadOnSearch: false });
-    $routeProvider.when('/:user/sets', { templateUrl: '/partials/user.html', reloadOnSearch: false });
+    $routeProvider.when('/:user/:subpath', { templateUrl: '/partials/user.html'  });
+    /*
+    $routeProvider.when('/:user/likes', { templateUrl: '/partials/user.html' });
+    $routeProvider.when('/:user/sets', { templateUrl: '/partials/user.html' });
+    */
 
     //$routeProvider.when('/:user/likes', { templateUrl: '/partials/user.likes.html' });
     /*
