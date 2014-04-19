@@ -64,8 +64,7 @@ soundrad.controller('NavCtrl',
   $scope.$routeParams = $routeParams;
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
-  console.log('me from storage');
-  console.log(!$scope.me);
+  $scope.tracks = [ {}, {}, {}, {}, {}, {}, {} ];
 
   // Get token from url hash after auth
   if($location.hash()){
@@ -173,7 +172,6 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   console.log('setTitle: ' + $routeParams.setTitle);
 
   $scope.isLoading = true;
-  $scope.player = player;
   var path;
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
