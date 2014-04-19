@@ -66,7 +66,10 @@ soundrad.controller('NavCtrl',
   $scope.me = storage.get('me');
   // Fake UI empty state loading
   $scope.tracks = [
-    { user: { username: ' ' }, title: ' ' },
+    { user: { username: '\xa0' }, title: '\xa0' },
+    { user: { username: '\xa0' }, title: '\xa0' },
+    { user: { username: '\xa0' }, title: '\xa0' },
+    { user: { username: '\xa0' }, title: '\xa0' },
     { user: { username: ' ' }, title: ' ' },
     { user: { username: ' ' }, title: ' ' },
     { user: { username: ' ' }, title: ' ' },
