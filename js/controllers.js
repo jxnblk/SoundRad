@@ -65,7 +65,7 @@ soundrad.controller('NavCtrl',
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
   // Fake UI empty state loading
-  if($routeParams.subpath == (null || 'sets' || 'likes') ) {
+  if ( $routeParams.subpath == null || $routeParams.subpath == 'sets' || $routeParams.subpath == 'likes' ) {
     console.log('isnt a track');
     $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
       { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
