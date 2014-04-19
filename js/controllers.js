@@ -65,12 +65,15 @@ soundrad.controller('NavCtrl',
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
   // Fake UI empty state loading
-  $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
-    { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
-    { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
-    { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
-    { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
-    { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' } ];
+  if($routeParams.subpath == null || 'sets' || 'likes' ) {
+    console.log('isnt a track');
+    $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
+      { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
+      { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
+      { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
+      { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
+      { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' } ];
+  };
 
   // Get token from url hash after auth
   if($location.hash()){
