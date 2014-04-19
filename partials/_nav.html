@@ -14,7 +14,6 @@
     <a ng-show="token" href="/{{me.permalink}}" class="mr1">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
-      <a href="/settings" class="h3">Settings</a>
     </a>
     <span ng-hide="token">
       <a href="" ng-click="connect();" class="button button-blue">Connect</a>
@@ -26,4 +25,5 @@
       <!--
       <a ng-href="/{{me.permalink}}/info">Info</a>
       <a href="/about" class="h3">About</a>
+      <a href="/settings" class="h3">Settings</a>
       -->
