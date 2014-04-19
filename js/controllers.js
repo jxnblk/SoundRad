@@ -169,19 +169,23 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
   console.log('UserCtrl');
-  console.log($routeParams.user);
-  console.log($routeParams.subpath);
+  console.log('scope.user: ' + $scope.user);
+  console.log('routeParams.user: ' + $routeParams.user);
+  console.log('subpath: ' + $routeParams.subpath);
 
-  $scope.user = $routeParams.user;
-  soundcloud.getUser($scope.user, function(data){
-    $scope.$apply(function(){
-      $scope.userData = data;
-      $scope.userDescription = $sce.trustAsHtml(data.description);
-      $scope.username = data.username;
-      $scope.followersCount = parseInt(data.followers_count);
-      $scope.followingsCount = parseInt(data.followings_count);
+  if ($routeParams.user != $scope.user) {
+    console.log('new user');
+    $scope.user = $routeParams.user;
+    soundcloud.getUser($scope.user, function(data){
+      $scope.$apply(function(){
+        $scope.userData = data;
+        $scope.userDescription = $sce.trustAsHtml(data.description);
+        $scope.username = data.username;
+        $scope.followersCount = parseInt(data.followers_count);
+        $scope.followingsCount = parseInt(data.followings_count);
+      });
     });
-  });
+  };
   
   $scope.follow = function(userid) {
     soundcloud.follow(userid);
