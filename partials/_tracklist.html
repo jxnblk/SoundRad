@@ -1,9 +1,5 @@
-
-<!--
-<div ng-if="!isSetsList" infinite-scroll="loadMore()" infinite-scroll-distance=".5">
--->
 <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-    class="py1 border-light-gray border-bottom">
+    class="py1 border-bottom">
     <a href="" ng-click="player.play(tracks, $index)"
       class="dark-gray"
       ng-class="{'blue': player.playing.id == track.id}">
@@ -14,19 +10,5 @@
   </div>
 </div>
 
-<!--
-Make this its own partial
-<div id="sets-list" ng-if="isSetsList">
-  <div ng-repeat="track in tracks" class="y3 px1 border-bottom">
-    <a ng-href="/{{ track.user.permalink }}/sets/{{ track.permalink }}" class="block text">
-      <h3 class="">{{ track.title }}</h3>
-    </a>
-  </div>
-</div>
--->
-
-<div ng-show="isLoading" class="leading-3 center">
-  <img src="icons/loading.svg" alt="Loading" width="16" height="16"/>
-</div>
-<div ng-show="!isLoading && tracks.length == 0" class="leading-3 center">No Results</div>
+<div ng-include src="'/partials/_loading.html'"></div>
 

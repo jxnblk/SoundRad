@@ -1,0 +1,15 @@
+
+<!--
+<div ng-if="!isSetsList" infinite-scroll="loadMore()" infinite-scroll-distance=".5">
+-->
+
+<div id="setlist">
+  <div ng-repeat="track in tracks" class="py1 border-bottom">
+    <a ng-href="/{{ track.user.permalink }}/sets/{{ track.permalink }}" class="block dark-gray">
+      <h3 class="">{{ track.title }}</h3>
+    </a>
+  </div>
+</div>
+
+<div ng-include src="'/partials/_loading.html'"></div>
+

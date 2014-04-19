@@ -178,6 +178,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   console.log('setTitle: ' + $routeParams.setTitle);
 
   $scope.isLoading = true;
+  $scope.isSetlist = false;
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
   if ($routeParams.user != $scope.$parent.user) {
@@ -223,8 +224,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     });
   };
 
-  if ($routeParams.subpath == 'sets') $scope.isSetsList = true;
-  else $scope.isSetsList = false;
+  if ($routeParams.subpath == 'sets') $scope.isSetlist = true;
   if (!$routeParams.subpath) {
     $scope.api = '/users/' + $scope.user + '/tracks';
     getTracks();
