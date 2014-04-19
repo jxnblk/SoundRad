@@ -170,6 +170,10 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
   console.log('UserCtrl');
   console.log('subpath: ' + $routeParams.subpath);
+  console.log('setTitle: ' + $routeParams.setTitle);
+
+  $scope.isLoading = true;
+  var path;
 
   if ($routeParams.user != $scope.$parent.user) {
     console.log('new user');
@@ -188,27 +192,46 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   $scope.follow = function(userid) { soundcloud.follow(userid); };
   $scope.unfollow = function(userid) { soundcloud.unfollow(userid); };
     
-  // User tracks
-  // Set state variables to control tracks
-  $scope.isLoading = true;
+  $scope.getTracks = function() {
+    soundcloud.getTracks(path, params, function(data){
+      $scope.$apply(function(){
+        $scope.tracks = data;
+        $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+        $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+        $scope.isLoading = false;
+      });
+    });
+  });
+
+  $scope.getSet = function(){
+    soundcloud.getSet(path, function(data){
+      $scope.$apply(function () {
+        $scope.set = data;
+        $scope.tracks = data.tracks;
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;
+        $scope.streamNextPage = false;
+        $scope.isLoading = false;
+        if(!player.playing && !player.paused) player.load($scope.tracks);
+      });
+    });
+  };
+
   if ($routeParams.subpath == 'sets') $scope.isSetsList = true;
   else $scope.isSetsList = false;
   if (!$routeParams.subpath) {
-    $scope.api = '/users/' + $scope.user + '/tracks';
+    path = '/users/' + $scope.user + '/tracks';
   } else if ($routeParams.subpath == 'likes') {
-    $scope.api = '/users/' + $scope.user + '/favorites';
+    path = '/users/' + $scope.user + '/favorites';
+  } else if ($routeParams.setTitle) {
+    console.log('set detail');
+    path = '/' + $scope.user + '/sets/' + $routeParams.setTitle;
   } else if ($routeParams.subpath == 'sets') {
-    $scope.api = '/users/' + $scope.user + '/playlists';
+    console.log('sets list');
+    path = '/users/' + $scope.user + '/playlists';
   };
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
-  soundcloud.getTracks($scope.api, params, function(data){
-    $scope.$apply(function(){
-      $scope.tracks = data;
-      $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
-      $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
-      $scope.isLoading = false;
-    });
-  });
+
 }]);
 
 /*
