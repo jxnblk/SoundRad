@@ -1,13 +1,11 @@
-<div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-    class="table border-bottom">
-    <a href="" ng-click="player.play(tracks, $index)"
-      class="block table-cell py1 full-width dark-gray"
-      ng-class="{'blue': player.playing.id == track.id}">
-      <p>{{ track.user.username }}</p>
-      <h3>{{ track.title }}</h3>
-    </a>
-    <div ng-include src="'/partials/_track-actions.html'" class="table-cell pl2 nowrap mobile-right-align"></div>
-  </div>
+<div ng-repeat="track in tracks" ng-controller="TrackCtrl" class="table border-bottom">
+  <a href="" ng-click="player.play(tracks, $index)"
+    class="block table-cell py1 full-width dark-gray"
+    ng-class="{'blue': player.playing.id == track.id}">
+    <p>{{ track.user.username }}</p>
+    <h3>{{ track.title }}</h3>
+  </a>
+  <div ng-include src="'/partials/_track-actions.html'" class="table-cell pl2 nowrap mobile-right-align"></div>
 </div>
 
 <div ng-include src="'/partials/_loading.html'"></div>
