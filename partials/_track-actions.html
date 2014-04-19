@@ -1,5 +1,5 @@
-<a href ng-click="like(track)" ng-hide="track.user_favorite" class="h3 mid-gray">Like</a>
-<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="h3 mid-gray">Unlike</a>
+<a href ng-click="like(track)" ng-hide="track.user_favorite" class="h3 inline-block mr1 mid-gray popin">Like</a>
+<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="h3 inline-block mr1 mid-gray popin">Unlike</a>
 
 <!--
 <div class="dropdown inline-block">
@@ -13,5 +13,5 @@
 </div>
 -->
 
-<a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="h3 mid-gray">Details</a>
+<a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="h3 inline-block mid-gray">Details</a>
 
