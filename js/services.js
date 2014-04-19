@@ -172,12 +172,9 @@ soundrad.factory('player', function(audio, soundcloud ) {
       paused: false,
       loaded: false,
       play: function(tracks, i) {
-        console.log('player.play');
         if (i == null) { 
           tracks = new Array(tracks);
           i = 0;
-          console.log('is a single track');
-          console.log(tracks);
         };
         player.tracks = tracks;
         if (Token && tracks[i].sharing == 'private'){ urlParams = '?oauth_token=' + Token;
