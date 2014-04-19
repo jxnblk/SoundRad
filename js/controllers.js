@@ -174,6 +174,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
 
   $scope.isLoading = true;
   var path;
+  var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
   if ($routeParams.user != $scope.$parent.user) {
     console.log('new user');
@@ -192,7 +193,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   $scope.follow = function(userid) { soundcloud.follow(userid); };
   $scope.unfollow = function(userid) { soundcloud.unfollow(userid); };
     
-  $scope.getTracks = function() {
+  var getTracks = function() {
     soundcloud.getTracks(path, params, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
@@ -203,7 +204,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     });
   };
 
-  $scope.getSet = function(){
+  var getSet = function(){
     soundcloud.getSet(path, function(data){
       $scope.$apply(function () {
         $scope.set = data;
@@ -221,16 +222,19 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   else $scope.isSetsList = false;
   if (!$routeParams.subpath) {
     path = '/users/' + $scope.user + '/tracks';
+    getTracks();
   } else if ($routeParams.subpath == 'likes') {
     path = '/users/' + $scope.user + '/favorites';
+    getTracks();
   } else if ($routeParams.setTitle) {
     console.log('set detail');
     path = '/' + $scope.user + '/sets/' + $routeParams.setTitle;
+    getSet();
   } else if ($routeParams.subpath == 'sets') {
     console.log('sets list');
     path = '/users/' + $scope.user + '/playlists';
+    getTracks();
   };
-  var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
 }]);
 
