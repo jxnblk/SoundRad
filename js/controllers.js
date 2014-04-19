@@ -65,6 +65,7 @@ soundrad.controller('NavCtrl',
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
   // Fake UI empty state loading
+  console.log($routeParams.subpath);
   if ( $routeParams.subpath == null || $routeParams.subpath == 'sets' || $routeParams.subpath == 'likes' ) {
     console.log('isnt a track');
     $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
@@ -173,6 +174,8 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
 }]);
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', 'player', function($scope, $sce, soundcloud, $routeParams, player) {
+
+  console.log($routeParams.subpath);
 
   $scope.isLoading = true;
   $scope.isSetlist = false;
