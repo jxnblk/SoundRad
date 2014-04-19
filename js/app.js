@@ -11,7 +11,7 @@ var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ui.sortable', 
 
     $routeProvider.when('/:user', { templateUrl: '/partials/user.html', controller: 'UserCtrl' });
     $routeProvider.when('/:user/likes', { templateUrl: '/partials/user.html', controller: 'UserCtrl', reloadOnSearch: false });
-    $routeProvider.when('/:user/sets', { templateUrl: '/partials/user.html', controller: 'UserTracksCtrl', reloadOnSearch: false });
+    $routeProvider.when('/:user/sets', { templateUrl: '/partials/user.html', controller: 'UserCtrl', reloadOnSearch: false });
 
     //$routeProvider.when('/:user/likes', { templateUrl: '/partials/user.likes.html' });
     /*
