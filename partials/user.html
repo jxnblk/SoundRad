@@ -1,19 +1,16 @@
-  <div class="py2 border-bottom">  
-    <h1><a ng-href="/{{ user }}" class="text">{{ userData.username }}&nbsp;</a></h1>
+<div class="py2 border-bottom">  
+  <h1><a ng-href="/{{ user }}" class="dark-gray">{{ userData.username }}&nbsp;</a></h1>
 
-    <div>
-      <a ng-href="/{{user}}/sets"> Playlists </a>
-      <a ng-href="/{{user}}/likes"> Likes </a>
-      <a ng-href="/{{user}}/info"> Info </a>
-      <a href="/settings" ng-show="userData.id == me.id">Settings</a>
-    </div>
+  <div class="leading-3 bold">
+    <a ng-href="/{{user}}/sets" class="leading-3 inline-block mr1">Playlists</a>
+    <a ng-href="/{{user}}/likes" class="leading-3 inline-block mr1">Likes</a>
+    <a ng-href="/{{user}}/info" class="leading-3 inline-block mr1">Info</a>
+    <a href="/settings" ng-show="userData.id == me.id" class="leading-3 inline-block mr1">Settings</a>
   </div>
+</div>
 
-  <div
-    ng-include
-    src="'/partials/_tracklist.html'"
-    infinite-scroll="loadMore()"
-    infinite-scroll-distance=".25"
-    ng-controller="TracklistCtrl">
-  </div>
+<div ng-include src="'/partials/_tracklist.html'"
+  infinite-scroll="loadMore()" infinite-scroll-distance=".25"
+  ng-controller="TracklistCtrl">
+</div>
 
