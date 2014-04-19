@@ -207,7 +207,8 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   var getTrack = function(){
     soundcloud.getTrack($scope.api, function(data){
       $scope.$apply(function () {
-        $scope.tracks = new Array(data);
+        //$scope.tracks = new Array(data);
+        $scope.tracks = null;
         $scope.track = data;
         $scope.hasPrevPage = false;
         $scope.hasNextPage = false;

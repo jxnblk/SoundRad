@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div ng-if="!isSetlist" ng-include src="'/partials/_tracklist.html'"
+<div ng-if="!isSetlist && !track" ng-include src="'/partials/_tracklist.html'"
   infinite-scroll="loadMore()" infinite-scroll-distance=".25"
   ng-controller="TracklistCtrl">
 </div>
@@ -22,5 +22,10 @@
 <div ng-if="isSetlist" ng-include src="'/partials/_setlist.html'"
   infinite-scroll="loadMore()" infinite-scroll-distance=".25"
   ng-controller="TracklistCtrl">
+</div>
+
+<div ng-if="track">
+  <pre>Track detail view</pre>
+  <h1>{{ track.title }}</h1>
 </div>
 
