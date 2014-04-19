@@ -63,6 +63,9 @@ a {
 .button-icon {
   svg { fill: $dark-gray; }
 }
+.button-icon-disabled {
+  svg { fill: $mid-gray; }
+}
 
 .button-blue {
   color: #fff;
@@ -126,6 +129,7 @@ a {
 .border-bottom {
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  border-bottom-color: $light-gray;
 }
 
 .border-light-gray {

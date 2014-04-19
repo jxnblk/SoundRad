@@ -1,49 +1,43 @@
-<div class="py1 border-bottom border-light-gray">
-
-  <div ng-if="!player.playing && !player.paused">
-    <h1>SoundRad v128 beta</h1>
+<div id="player" class="fixed mobile-table bg-white border-bottom">
+  <div id="player-controls" class="mobile-table-cell nowrap font-zero">
+    <a href="#" ng-click="player.prev()"
+      class="h2 button button-icon mobile-collapse-x" ng-class="{'button-icon-disabled': !player.playing && !player.paused }">
+      <div icon="previous" class="icon"></div>
+    </a>
+    <a href="#" ng-click="player.play(player.tracks, player.i)"
+      class="h2 button button-icon button-icon-big popin" ng-hide="player.playing" ng-class="{'button-icon-disabled': !player.playing && !player.paused }">
+      <div icon="play" class="icon"></div>
+    </a>
+    <a href="#" ng-click="player.pause(player.playing)"
+      class="h2 button button-icon button-icon-big popin" ng-show="player.playing" ng-class="{'button-icon-disabled': !player.playing && !player.paused }">
+      <div icon="pause" class="icon"></div>
+    </a>
+    <a href="#" ng-click="player.next()"
+      class="button button-icon mobile-collapse-x" ng-class="{'button-icon-disabled': !player.playing && !player.paused }">
+      <div icon="next" class="icon"></div>
+    </a>
   </div>
 
-  <div ng-if="player.playing || player.paused" id="player" class="oh">
-    
-    <div id="player-controls" class="left">
-      <a href="#" ng-click="player.prev()"
-        class="button button-icon">
-        <div icon="previous" class="icon"></div>
-      </a>
-      <a href="#" ng-click="player.play(player.tracks, player.i)"
-        class="h1 button button-icon popin" ng-hide="player.playing">
-        <div icon="play" class="icon"></div>
-      </a>
-      <a href="#" ng-click="player.pause(player.playing)"
-        class="h1 button button-icon popin" ng-show="player.playing">
-        <div icon="pause" class="icon"></div>
-      </a>
-      <a href="#" ng-click="player.next()"
-        class="button button-icon">
-        <div icon="next" class="icon"></div>
-      </a>
-    </div>
-
-    <div id="player-body" class="oh">
-      <h1 class="h2 regular">{{player.tracks[player.i].user.username}}</h1>
-      <h1 class="">{{player.tracks[player.i].title}}</h1>
-      <div id="scrubber" ng-controller="ScrubberCtrl" class="">
-        <div class="progress">
-          <div class="progress-background bg-light-gray"></div>
-          <div class="progress-buffer bg-darken" style="width: {{currentBufferPercentage}}%"></div>
-          <div class="progress-played bg-blue" style="width: {{currentTimePercentage}}%"></div>
-          <div class="progress-overlay" ng-click="seekTo($event)"></div>
-        </div>
-        <div class="h3 mid-gray">
-          <span ng-hide="audio.readyState == 4">00:00 | 00:00</span>
-          <span ng-show="audio.readyState == 4">
-            {{currentTimeMS | playTime}} | {{durationMS | playTime}}
-          </span>
-        </div>
+  <div id="player-body" class="mobile-table-cell full-width py1">
+    <h1 class="h2 regular truncate">{{player.tracks[player.i].user.username}}</h1>
+    <h1 class="truncate">{{player.tracks[player.i].title}}</h1>
+    <h1 ng-if="!player.playing && !player.paused" class="h2 regular">SoundRad</h1>
+    <h1 ng-if="!player.playing && !player.paused">SoundRad</h1>
+    <div id="scrubber" ng-controller="ScrubberCtrl">
+      <div class="progress mr1">
+        <div class="progress-background bg-light-gray"></div>
+        <div class="progress-buffer bg-darken" style="width: {{currentBufferPercentage}}%"></div>
+        <div class="progress-played bg-blue" style="width: {{currentTimePercentage}}%"></div>
+        <div class="progress-overlay" ng-click="seekTo($event)"></div>
+      </div>
+      <div class="h3 oh mr1 mid-gray mobile-collapse-y">
+        <span ng-if="audio.readyState != 4" class="left">00:00</span>
+        <span ng-if="audio.readyState != 4" class="right">00:00</span>
+        <span ng-if="audio.readyState == 4" class="left">{{currentTimeMS | playTime}}</span>
+        <span ng-if="audio.readyState == 4" class="right">{{durationMS | playTime}}</span>
       </div>
     </div>
-
   </div>
 
 </div>
+

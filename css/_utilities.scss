@@ -21,7 +21,18 @@
 .mobile-show {
   display: none;
 }
+.mobile-collapse-x {
+  transition: width .2s ease, padding .2s ease;
+  svg { transition: width .2s ease; }
+}
+.mobile-collapse-y {
+  max-height: 3rem;
+  transition: max-height .2s ease;
+}
 
+.layout-fixed-clear {
+  padding-top: 6.25rem;
+}
 @media screen and (max-width: 48em) {
   .mobile-show,
   .mobile-block {
@@ -35,6 +46,17 @@
   }
   .mobile-center {
     text-align: center;
+  }
+  .mobile-collapse-x {
+    width: 0;
+    padding: 0;
+    svg { width: 0; }
+  }
+  .mobile-collapse-y {
+    max-height: 0;
+  } 
+  .layout-fixed-clear {
+    padding-top: 5rem;
   }
 }
 

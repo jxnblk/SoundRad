@@ -24,6 +24,17 @@ strong, .bold { font-weight: 600; }
 .caps { text-transform: uppercase; letter-spacing: .2em; }
 .center { text-align: center; }
 .right-align  { text-align: right; }
+.nowrap { white-space: nowrap; }
+.truncate {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+// For inline-block elements
+// Use .h2 to reset to 1rem
+.font-zero { font-size: 0; }
+
 
 
 // Typographical Measure
@@ -42,5 +53,9 @@ strong, .bold { font-weight: 600; }
 .leading-4 { line-height: 4rem; }
 
 // Icons
-.icon { width: 1em; height: 1em; }
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -.125em;
+}
 

@@ -22,3 +22,16 @@
 
 .button-small { padding: 0 1rem; }
 
+.button-icon {
+  padding: 0 1rem;
+  min-height: 4rem;
+  line-height: 4rem;
+}
+.button-icon-big {
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: -.375em;
+  }
+}
+
