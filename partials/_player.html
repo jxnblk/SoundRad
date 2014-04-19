@@ -21,10 +21,9 @@
   <div id="player-body" class="mobile-table-cell full-width py1">
     <div class="mobile-table mobile-table-fixed">
       <div class="mobile-table-cell full-width">
-        <h1 class="h2 regular truncate">{{player.tracks[player.i].user.username}}</h1>
+        <h1 class="h2 regular truncate">{{player.tracks[player.i].user.username}}&nbsp;</h1>
         <h1 class="truncate">{{player.tracks[player.i].title}}</h1>
-        <h1 ng-if="!player.playing && !player.paused" class="h2 regular">SoundRad</h1>
-        <h1 ng-if="!player.playing && !player.paused">SoundRad</h1>
+        <h1 ng-if="!player.playing && !player.paused" class="mid-gray"><span class="blue">Sound</span>Rad</h1>
         <div id="scrubber" ng-controller="ScrubberCtrl">
           <div class="progress mr1">
             <div class="progress-background bg-light-gray"></div>
