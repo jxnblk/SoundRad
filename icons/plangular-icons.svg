@@ -16,5 +16,9 @@
     <path d="M0 0 L28 14 V0 H32 V32 H28 V18 L0 32 z" />
   </svg>
 
+  <svg id="search" class="plangular-icon plangular-icon-next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" y="160">
+    <path d="M12 0 A12 12 0 0 0 0 12 A12 12 0 0 0 12 24 A12 12 0 0 0 18.5 22.25 L28 32 L32 28 L22.25 18.5 A12 12 0 0 0 24 12 A12 12 0 0 0 12 0 M12 4 A8 8 0 0 1 12 20 A8 8 0 0 1 12 4" />
+  </svg>
+
 </svg>
 
