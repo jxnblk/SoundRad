@@ -1,10 +1,12 @@
 <div class="border-bottom">  
-  <a href="/settings" ng-if="userData.id == me.id" class="h3 right mt2">Settings</a>
   <h1 class="mt2"><a ng-href="/{{ user }}" class="dark-gray">{{ userData.username }}&nbsp;</a></h1>
-  <div class="leading-3 bold">
-    <a ng-href="/{{user}}/sets" class="leading-3 inline-block mr1">Playlists</a>
-    <a ng-href="/{{user}}/likes" class="leading-3 inline-block mr1">Likes</a>
-    <a ng-href="/{{user}}/info" class="leading-3 inline-block mr1">Info</a>
+  <div class="clearfix">
+    <div class="leading-3 bold left">
+      <a ng-href="/{{user}}/sets" class="leading-3 inline-block mr1">Playlists</a>
+      <a ng-href="/{{user}}/likes" class="leading-3 inline-block mr1">Likes</a>
+      <a ng-href="/{{user}}/info" class="leading-3 inline-block mr1">Info</a>
+    </div>
+    <a href="/settings" ng-if="userData.id == me.id" class="h3 leading-3 right">Settings</a>
   </div>
 </div>
 
