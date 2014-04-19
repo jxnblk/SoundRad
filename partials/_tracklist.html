@@ -1,7 +1,7 @@
 <div ng-repeat="track in tracks" ng-controller="TrackCtrl"
-    class="table py1 border-bottom">
+    class="table border-bottom">
     <a href="" ng-click="player.play(tracks, $index)"
-      class="table-cell full-width dark-gray"
+      class="block table-cell py1 full-width dark-gray"
       ng-class="{'blue': player.playing.id == track.id}">
       <p>{{ track.user.username }}</p>
       <h3>{{ track.title }}</h3>
