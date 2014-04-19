@@ -16,8 +16,16 @@
     <path d="M0 0 L28 14 V0 H32 V32 H28 V18 L0 32 z" />
   </svg>
 
-  <svg id="search" class="plangular-icon plangular-icon-next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" y="160">
+  <svg id="search" class="plangular-icon plangular-icon-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" y="160">
     <path d="M12 0 A12 12 0 0 0 0 12 A12 12 0 0 0 12 24 A12 12 0 0 0 18.5 22.25 L28 32 L32 28 L22.25 18.5 A12 12 0 0 0 24 12 A12 12 0 0 0 12 0 M12 4 A8 8 0 0 1 12 20 A8 8 0 0 1 12 4" />
+  </svg>
+
+  <svg id="heart" class="plangular-icon plangular-icon-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" y="160">
+    <path d="M0 10 C0 6, 3 2, 8 2 C12 2, 15 5, 16 6 C17 5, 20 2, 24 2 C30 2, 32 6, 32 10 C32 18, 18 29, 16 30 C14 29, 0 18, 0 10" />
+  </svg>
+
+  <svg id="cog" class="plangular-icon plangular-icon-cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" y="160">
+    <path d="M14 0 H18 L19 6 L20.707 6.707 L26 3.293 L28.707 6 L25.293 11.293 L26 13 L32 14 V18 L26 19 L25.293 20.707 L28.707 26 L26 28.707 L20.707 25.293 L19 26 L18 32 L14 32 L13 26 L11.293 25.293 L6 28.707 L3.293 26 L6.707 20.707 L6 19 L0 18 L0 14 L6 13 L6.707 11.293 L3.293 6 L6 3.293 L11.293 6.707 L13 6 L14 0 z M16 10 A6 6 0 0 0 16 22 A6 6 0 0 0 16 10"/>
   </svg>
 
 </svg>

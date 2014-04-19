@@ -1,5 +1,11 @@
-<a href ng-click="like(track)" ng-hide="track.user_favorite" class="h3 inline-block mr1 mid-gray popin">Like</a>
-<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="h3 inline-block mr1 mid-gray popin">Unlike</a>
+<a href ng-click="like(track)" ng-hide="track.user_favorite" class="h3 inline-block mr1 mid-gray popin">
+  <div class="icon" icon="heart"></div>
+  Like
+</a>
+<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="h3 inline-block mr1 mid-gray popin">
+  <div class="icon" icon="heart"></div>
+  Liked
+</a>
 
 <!--
 <div class="dropdown inline-block">
