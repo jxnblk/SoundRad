@@ -11,12 +11,12 @@
     </span>
   </div>
   <div class="right">
-    <a ng-show="token" href="/{{me.permalink}}" class="mr1">
+    <a ng-show="token" href="/{{me.permalink}}" class="">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
     <span ng-hide="token">
-      <a href="" ng-click="connect();" class="button button-blue">Connect</a>
+      <a href="" ng-click="connect();" class="button button-small button-blue">Connect</a>
     </span>
   </div>
 
