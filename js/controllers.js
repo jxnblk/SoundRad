@@ -64,7 +64,17 @@ soundrad.controller('NavCtrl',
   $scope.$routeParams = $routeParams;
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
-  $scope.tracks = [ {}, {}, {}, {}, {}, {}, {} ];
+  // Fake UI empty state loading
+  $scope.tracks = [
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' },
+    { user: { username: ' ' }, title: ' ' }
+  ];
 
   // Get token from url hash after auth
   if($location.hash()){
