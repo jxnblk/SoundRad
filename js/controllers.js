@@ -167,12 +167,13 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
   
 }]);
   
-soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
+soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', 'player', function($scope, $sce, soundcloud, $routeParams, player) {
   console.log('UserCtrl');
   console.log('subpath: ' + $routeParams.subpath);
   console.log('setTitle: ' + $routeParams.setTitle);
 
   $scope.isLoading = true;
+  $scope.player = player;
   var path;
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
@@ -200,6 +201,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
         $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
         $scope.isLoading = false;
+        if(!player.playing && !player.paused) player.load($scope.tracks);
       });
     });
   };
