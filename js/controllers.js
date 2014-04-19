@@ -168,27 +168,43 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
 }]);
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', function($scope, $sce, soundcloud, $routeParams) {
-    console.log('UserCtrl');
-    $scope.user = $routeParams.user;
-    soundcloud.getUser($scope.user, function(data){
-      $scope.$apply(function(){
-        $scope.userData = data;
-        $scope.userDescription = $sce.trustAsHtml(data.description);
-        $scope.username = data.username;
-        $scope.followersCount = parseInt(data.followers_count);
-        $scope.followingsCount = parseInt(data.followings_count);
-      });
+  console.log('UserCtrl');
+  $scope.user = $routeParams.user;
+  soundcloud.getUser($scope.user, function(data){
+    $scope.$apply(function(){
+      $scope.userData = data;
+      $scope.userDescription = $sce.trustAsHtml(data.description);
+      $scope.username = data.username;
+      $scope.followersCount = parseInt(data.followers_count);
+      $scope.followingsCount = parseInt(data.followings_count);
     });
+  });
+  
+  $scope.follow = function(userid) {
+    soundcloud.follow(userid);
+  };
+  $scope.unfollow = function(userid) {
+    soundcloud.unfollow(userid);
+  };
     
-    $scope.follow = function(userid) {
-      soundcloud.follow(userid);
-    };
-    $scope.unfollow = function(userid) {
-      soundcloud.unfollow(userid);
-    };
-    
+  // User tracks
+  // Set state variables to control tracks
+  $scope.isLoading = true;
+  $scope.isSetsList = false;
+  $scope.user = $routeParams.user;
+  $scope.api = '/users/' + $scope.user + '/tracks';
+  var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
+  soundcloud.getTracks($scope.api, params, function(data){
+    $scope.$apply(function(){
+      $scope.tracks = data;
+      $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
+      $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+      $scope.isLoading = false;
+    });
+  });
 }]);
 
+/*
 soundrad.controller('UserTracksCtrl', ['$scope', '$routeParams', 'soundcloud', function($scope, $routeParams, soundcloud) {
   $scope.isLoading = true;
   $scope.isSetsList = false;
@@ -205,6 +221,7 @@ soundrad.controller('UserTracksCtrl', ['$scope', '$routeParams', 'soundcloud', f
   });
     
 }]);
+*/
   
 /*
 soundrad.controller('LikesCtrl', ['$scope', 'soundcloud', function($scope, soundcloud){
