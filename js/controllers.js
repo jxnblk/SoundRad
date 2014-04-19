@@ -56,7 +56,7 @@ soundrad.controller('NavCtrl',
   ['$scope', '$routeParams', '$window', '$location', 'soundcloud', 'storage',
   function($scope, $routeParams, $window, $location, soundcloud, storage) {
   // Defaults
-  $scope.user = null;
+  $scope.user = 'test';
   $scope.userData = null;
   $scope.page = 1;
   $scope.pageSize = 16;
