@@ -575,6 +575,10 @@ soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function
   };
 
   console.log($location.search().q);
+  if ($location.search().q){
+    $scope.searchQuery = $location.search().q;
+    $scope.search();
+  };
 
 }]);
   
