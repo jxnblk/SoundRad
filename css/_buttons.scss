@@ -21,6 +21,12 @@
 .button-big { padding: 1rem 1.5rem; }
 
 .button-small { padding: 0 1rem; }
+.button-tiny-text {
+  font-size: .75rem;
+  min-height: 1.5rem;
+  line-height: 1.5rem;
+  padding: 0;
+}
 
 .button-icon {
   padding: 0 1rem;

@@ -33,6 +33,7 @@ $green: #0f6;
 .bg-darken { background-color: rgba(#000,.2); }
 
 .fill-dark-gray { fill: $dark-gray; }
+.fill-red { fill: $red; }
 
 
 // Base theme styles
@@ -79,14 +80,13 @@ a {
   }
 }
 
-.button-gray {
-  color: #fff;
-  background-color: $mid-gray;
+.button-text-gray {
+  color: $mid-gray;
+  svg { fill: $mid-gray; }
   &:hover {
-    color: #fff;
-    background-color: darken($mid-gray, 20%);
+    color: $blue;
+    svg  { fill: $blue; }
   }
-  &:focus {}
 }
 
 
