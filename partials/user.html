@@ -10,7 +10,10 @@
       <a ng-href="/{{user}}/info" class="leading-3 inline-block mr1">Info</a>
       -->
     </div>
-    <a href="/settings" ng-if="userData.id == me.id" class="h3 leading-3 right">Settings</a>
+    <a href="/settings" ng-if="userData.id == me.id" class="button button-tiny-text button-text-gray right">
+      <div class="icon" icon="cog"></div>
+      Settings
+    </a>
   </div>
 </div>
 
