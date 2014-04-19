@@ -1,24 +1,29 @@
-<nav class="leading-3 border-bottom border-light-gray">
-  <a href="/">
-    <span ng-show="token">Stream</span>
-    <span ng-hide="token">Home</span>
-  </a>
-
-  <span ng-show="token">
-    <a href="/{{me.permalink}}">
+<nav class="bold leading-3 clearfix border-bottom border-light-gray">
+  <div class="left">
+    <a href="/">
+      <span ng-show="token">Stream</span>
+      <span ng-hide="token">Home</span>
+    </a>
+    <span ng-show="token">
+      <a ng-href="/{{me.permalink}}/sets">Playlists</a>
+      <a ng-href="/{{me.permalink}}/likes">Likes</a>
+      <a href="/search" class="h3"><i class="ss-icon ss-search"></i> Search</a>
+      <a href="/settings" class="h3">Settings</a>
+    </span>
+  </div>
+  <div class="right">
+    <a ng-show="token" href="/{{me.permalink}}">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
-    <a ng-href="/{{me.permalink}}/sets">Playlists</a>
-    <a ng-href="/{{me.permalink}}/likes">Likes</a>
-    <a ng-href="/{{me.permalink}}/info">Info</a>
-    <a href="/search" class="h3"><i class="ss-icon ss-search"></i> Search</a>
-    <a href="/settings" class="h3">Settings</a>
-    <a href="/about" class="h3">About SoundRad</a>
-  </span>
-
-  <span ng-hide="token">
-    <a href="" ng-click="connect();" class="button button-blue">Connect</a>
-  </span>
+    <span ng-hide="token">
+      <a href="" ng-click="connect();" class="button button-blue">Connect</a>
+    </span>
+  </div>
 
 </nav>
+
+      <!--
+      <a ng-href="/{{me.permalink}}/info">Info</a>
+      <a href="/about" class="h3">About</a>
+      -->
