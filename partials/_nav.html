@@ -1,18 +1,16 @@
 <nav class="bold leading-3 clearfix border-bottom border-light-gray">
   <div class="left">
-    <a href="/" class="mr1"
-      ng-class="{'dark-gray': $routeParams}">
-        <span ng-show="token">Stream</span>
-        <span ng-hide="token">Home</span>
-        {{ $routeParams }}
+    <a href="/" class="mr1 dark-gray">
+      <span ng-show="token">Stream</span>
+      <span ng-hide="token">Home</span>
     </a>
   </div>
   <div class="right">
-    <a href="/search" class="h3 mr1">
-      <div class="icon" icon="search"></div>
+    <a href="/search" class="mr1 dark-gray">
+      <div class="icon fill-dark-gray" icon="search"></div>
       <span class="mobile-hide">Search</span>
     </a>
-    <a ng-show="token" href="/{{me.permalink}}" class="">
+    <a ng-show="token" href="/{{me.permalink}}" class="dark-gray">
       <span ng-show="me.username.length < 13">{{me.username}}</span>
       <span ng-show="me.username.length >= 13">Me</span>
     </a>
