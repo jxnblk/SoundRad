@@ -574,7 +574,7 @@ soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function
     });
   };
 
-  console.log($location.search('q'));
+  console.log($location.search().q);
 
 }]);
   
