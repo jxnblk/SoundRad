@@ -175,14 +175,12 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
 }]);
   
 soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams', 'player', function($scope, $sce, soundcloud, $routeParams, player) {
-
-  console.log($routeParams.subpath);
-
   $scope.isLoading = true;
   $scope.isSetlist = false;
   $scope.player = player;
   $scope.state = $routeParams;
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
+
 
   if ($routeParams.user != $scope.$parent.user) {
     $scope.$parent.user = $routeParams.user;
@@ -201,6 +199,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   $scope.unfollow = function(userid) { soundcloud.unfollow(userid); };
     
   var getTracks = function() {
+    $scope.setEmptyState();
     soundcloud.getTracks($scope.api, params, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
@@ -227,6 +226,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   };
 
   var getSet = function(){
+    $scope.setEmptyState();
     soundcloud.getSet($scope.api, function(data){
       $scope.$apply(function () {
         $scope.set = data;
