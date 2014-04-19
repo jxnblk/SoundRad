@@ -224,7 +224,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     });
   };
 
-  if ($routeParams.subpath == 'sets') $scope.isSetlist = true;
+  if (!$routeParams.setTitle && $routeParams.subpath == 'sets') $scope.isSetlist = true;
   if (!$routeParams.subpath) {
     $scope.api = '/users/' + $scope.user + '/tracks';
     getTracks();
