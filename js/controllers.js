@@ -201,7 +201,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         $scope.isLoading = false;
       });
     });
-  });
+  };
 
   $scope.getSet = function(){
     soundcloud.getSet(path, function(data){
