@@ -149,6 +149,7 @@ soundrad.factory('soundcloud', function($location, $window, storage) {
       },
 
       search: function(params, callback){
+        console.log('getting search');
         SC.get('/search', params, callback);
       },
       

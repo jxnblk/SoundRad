@@ -545,6 +545,7 @@ soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($
 soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function($scope, $location, soundcloud) {
 
   $scope.search = function(){
+    console.log('submitted search');
     $scope.isLoading = true;
     $scope.searchResults = null;
     $location.search($scope.searchQuery); 
@@ -552,6 +553,7 @@ soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function
     $scope.pageOffset = 0;
     var params = { q: $scope.searchQuery };
     soundcloud.search(params, function(data){
+      console.log('got data');
       $scope.$apply(function(){
         $scope.searchResults = data.collection;  
         $scope.isLoading = false;
