@@ -74,6 +74,8 @@ a {
 .button-blue {
   color: #fff;
   background-color: $blue;
+  svg { fill: #fff; }
+  .red { fill: $red; }
   &:hover {
     color: #fff;
     background-color: darken($blue, 20%);
