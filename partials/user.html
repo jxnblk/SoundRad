@@ -1,7 +1,7 @@
-<div class="border-bottom">  
-  <h1 class="mt2"><a ng-href="/{{ user }}" ng-class="{'dark-gray': !state.subpath}">{{ userData.username }}&nbsp;</a></h1>
-  <div class="clearfix">
-    <div class="leading-3 bold left">
+<div class="table border-bottom">  
+  <div class="table-cell">
+    <h1 class="mt2"><a ng-href="/{{ user }}" ng-class="{'dark-gray': !state.subpath}">{{ userData.username }}&nbsp;</a></h1>
+    <div class="leading-3 bold">
       <a ng-href="/{{user}}/sets" class="leading-3 inline-block mr1"
         ng-class="{'dark-gray': state.subpath == 'sets'}">Playlists</a>
       <a ng-href="/{{user}}/likes" class="leading-3 inline-block mr1"
@@ -10,7 +10,9 @@
       <a ng-href="/{{user}}/info" class="leading-3 inline-block mr1">Info</a>
       -->
     </div>
-    <a href="/settings" ng-if="userData.id == me.id" class="button button-tiny-text button-text-gray right">
+  </div>
+  <div class="table-cell right-align">
+    <a href="/settings" ng-if="userData.id == me.id" class="button button-tiny-text button-text-gray">
       <div class="icon" icon="cog"></div>
       Settings
     </a>
@@ -27,8 +29,6 @@
   ng-controller="TracklistCtrl">
 </div>
 
-<div ng-if="track">
-  <pre>Track detail view</pre>
-  <h1>{{ track.title }}</h1>
+<div ng-if="track" ng-include src="'/partials/_track.html'">
 </div>
 
