@@ -83,6 +83,7 @@ a {
 .button-text-gray {
   color: $mid-gray;
   svg { fill: $mid-gray; }
+  .red { fill: $red; }
   &:hover {
     color: $blue;
     svg  { fill: $blue; }
