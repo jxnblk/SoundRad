@@ -204,6 +204,19 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     });
   };
 
+  var getTrack = function(){
+    soundcloud.getTrack($scope.api, function(data){
+      $scope.$apply(function () {
+        $scope.tracks = new Array(data);
+        $scope.track = data;
+        $scope.hasPrevPage = false;
+        $scope.hasNextPage = false;
+        $scope.isLoading = false;
+        if(!player.playing && !player.paused) player.load($scope.track);
+      });
+    });
+  };
+
   var getSet = function(){
     soundcloud.getSet($scope.api, function(data){
       $scope.$apply(function () {
@@ -231,6 +244,10 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   } else if ($routeParams.subpath == 'sets') {
     $scope.api = '/users/' + $scope.user + '/playlists';
     getTracks();
+  } else {
+    console.log('its a track!');
+    $scope.api = '/' + $scope.user + '/' + $routeParams.subpath;
+    getTrack();
   };
 
 }]);
