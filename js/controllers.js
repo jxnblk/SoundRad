@@ -178,7 +178,6 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   console.log('setTitle: ' + $routeParams.setTitle);
 
   $scope.isLoading = true;
-  var path;
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
   if ($routeParams.user != $scope.$parent.user) {
@@ -199,7 +198,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   $scope.unfollow = function(userid) { soundcloud.unfollow(userid); };
     
   var getTracks = function() {
-    soundcloud.getTracks(path, params, function(data){
+    soundcloud.getTracks($scope.api, params, function(data){
       $scope.$apply(function(){
         $scope.tracks = data;
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
@@ -211,7 +210,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   };
 
   var getSet = function(){
-    soundcloud.getSet(path, function(data){
+    soundcloud.getSet($scope.api, function(data){
       $scope.$apply(function () {
         $scope.set = data;
         $scope.tracks = data.tracks;
@@ -227,18 +226,18 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   if ($routeParams.subpath == 'sets') $scope.isSetsList = true;
   else $scope.isSetsList = false;
   if (!$routeParams.subpath) {
-    path = '/users/' + $scope.user + '/tracks';
+    $scope.api = '/users/' + $scope.user + '/tracks';
     getTracks();
   } else if ($routeParams.subpath == 'likes') {
-    path = '/users/' + $scope.user + '/favorites';
+    $scope.api = '/users/' + $scope.user + '/favorites';
     getTracks();
   } else if ($routeParams.setTitle) {
     console.log('set detail');
-    path = '/' + $scope.user + '/sets/' + $routeParams.setTitle;
+    $scope.api = '/' + $scope.user + '/sets/' + $routeParams.setTitle;
     getSet();
   } else if ($routeParams.subpath == 'sets') {
     console.log('sets list');
-    path = '/users/' + $scope.user + '/playlists';
+    $scope.api = '/users/' + $scope.user + '/playlists';
     getTracks();
   };
 
