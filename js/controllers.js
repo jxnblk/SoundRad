@@ -174,12 +174,12 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   console.log('routeParams.user: ' + $routeParams.user);
   console.log('subpath: ' + $routeParams.subpath);
 
-  if ($routeParams.user != $scope.user) {
+  if ($routeParams.user != $scope.$parent.user) {
     console.log('new user');
-    $scope.user = $routeParams.user;
-    soundcloud.getUser($scope.user, function(data){
+    $scope.$parent.user = $routeParams.user;
+    soundcloud.getUser($scope.$parent.user, function(data){
       $scope.$apply(function(){
-        $scope.userData = data;
+        $scope.$parent.userData = data;
         $scope.userDescription = $sce.trustAsHtml(data.description);
         $scope.username = data.username;
         $scope.followersCount = parseInt(data.followers_count);
