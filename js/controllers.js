@@ -65,7 +65,7 @@ soundrad.controller('NavCtrl',
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
   // Fake UI empty state loading
-  function setEmptyState() {
+  $scope.setEmptyState = function() {
     console.log('isnt a track');
     $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
       { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
@@ -136,12 +136,13 @@ soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $lo
 }]);
   
 soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
-  setEmptyState();
   $scope.page = 1;
   $scope.isLoading = true;
   $scope.player = player;
   var url = '/me/activities/tracks';
   var params = { limit: $scope.pageSize };
+  $scope.setEmptyState();
+
   soundcloud.getStream(url, params, function(data, tracks){
     $scope.$apply(function(){
       $scope.tracks = tracks;
