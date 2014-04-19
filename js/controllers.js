@@ -179,6 +179,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
 
   $scope.isLoading = true;
   $scope.isSetlist = false;
+  $scope.state = $routeParams;
   var params = { limit: $scope.pageSize, offset: $scope.pageOffset };
 
   if ($routeParams.user != $scope.$parent.user) {
