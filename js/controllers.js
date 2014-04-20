@@ -108,6 +108,11 @@ soundrad.controller('NavCtrl',
     storage.clearAll();
     $window.location.href = '/';
   };
+  $scope.openModal = function(obj){
+    console.log('open modal');
+    console.log(obj);
+    $scope.modal = obj;
+  };
   Mousetrap.bind('g s', function(){
     $scope.$apply(function(){
       $location.path('/');
@@ -309,12 +314,6 @@ soundrad.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, sound
       $scope.$apply(function(){
         track.user_favorite = false;  
       });
-    });
-  };
-  $scope.openSetModal = function(track){
-    console.log('open modal');
-    $scope.$apply(function(){
-      $scope.$parent.modal = { template: 'partials/_add-to-set.html', track: track };
     });
   };
 }]);
