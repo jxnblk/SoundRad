@@ -7,13 +7,16 @@
   Liked
 </a>
 
-<div class="relative inline-block border border-blue rounded" ng-controller="AddToSetCtrl">
-  <a href ng-click="toggleDropdown()" class="button button-tiny-text button-text-gray mr1">
+<div class="relative inline-block" ng-controller="AddToSetCtrl">
+  <a href
+    ng-click="toggleDropdown()"
+    ng-class="{'button-box-blue': dropdownIsOpen}"
+    class="button button-tiny-text button-text-gray mr1">
     Add to Playlist
   </a>
   <div 
     class="absolute bold bg-white rounded border border-blue fadein"
-    ng-class="{'is-open': dropdownIsOpen }"
+    ng-if="dropdownIsOpen"
     ng-include src="'/partials/_add-to-set.html'">
   </div>
 </div>
