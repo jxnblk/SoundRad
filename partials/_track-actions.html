@@ -7,17 +7,18 @@
   Liked
 </a>
 
-<!--
 <div class="dropdown inline-block">
-  <a href ng-click="toggleAddToPlaylist()" class="btn btn-text">
-    <i class="ss-icon ss-plus"></i>
+  <a href ng-click="toggleAddToPlaylist()" class="button button-tiny-text button-text-gray mr1">
+    Add to Playlist
   </a>
+  <!--
   <div 
     class="dropdown-body dropdown-body-right bold white bg-highlight rounded fadein"
     ng-class="{'is-open': addToPlaylistIsOpen }"
-    ng-include src="'/partials/_add-to-playlist.html'"></div>
+    ng-include src="'/partials/_add-to-playlist.html'">
+  </div>
+  -->
 </div>
--->
 
 <a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="button button-tiny-text button-text-gray">Details</a>
 
