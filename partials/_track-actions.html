@@ -1,8 +1,8 @@
-<a href ng-click="like(track)" ng-hide="track.user_favorite" class="button button-tiny-text button-text-gray mr1 popin">
+<a href ng-click="like(track)" ng-hide="track.user_favorite" class="button button-tiny-text button-text-gray mr2 popin">
   <div class="icon" icon="heart"></div>
   Like
 </a>
-<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="button button-tiny-text button-text-gray mr1 popin">
+<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="button button-tiny-text button-text-gray mr2 popin">
   <div class="icon red" icon="heart"></div>
   Liked
 </a>
@@ -12,7 +12,7 @@
     ng-click="toggleDropdown()"
     ng-class="{'blue': dropdownIsOpen}"
     title="Add to Playlist"
-    class="button button-tiny-text button-text-gray mr1">
+    class="button button-tiny-text button-text-gray mr2">
     <div class="icon" icon="add-to-set"></div>
     <!--
     Add to Playlist
