@@ -63,6 +63,7 @@ soundrad.controller('NavCtrl',
   $scope.$routeParams = $routeParams;
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
+  $scope.authenticating = false;
   // Fake UI empty state loading
   $scope.setEmptyState = function() {
     $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
@@ -77,7 +78,11 @@ soundrad.controller('NavCtrl',
   if($location.hash()){
     console.log('getting token from hash');
     var token = $location.hash().replace('#','').split('&')[0].split('=')[1];
-    if(token) storage.set('token', token);
+    if(token) {
+      storage.set('token', token);
+      $scope.token = token;
+      $scope.authenticating = true;
+    };
   };
   var getUserPlaylists = function(){
     soundcloud.getUserPlaylists(function(data){

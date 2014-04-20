@@ -15,6 +15,9 @@
       <a href="" ng-click="connect()" class="button button-blue">Connect with SoundCloud</a>
     </p>
   </section>
+  <div ng-if="authenticating" class="py2">
+    <h1 class="mid-gray">Connecting...</h1>
+  </div>
   <footer class="py2">
     <p class="h3">
       <a href="/about">About</a> | 
