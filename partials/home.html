@@ -6,22 +6,18 @@
   infinite-scroll-distance=".75"
   ng-controller="StreamCtrl"></div>
 
-<div>Debugging $scope.me</div>
-<div ng-show="!me">ng-show="!me"</div>
-<div ng-if="!me">ng-if="!me"</div>
-<div ng-show="me">ng-show="me"</div>
-<div ng-if="me">ng-if="me"</div>
 
-<main ng-if="!me" class="p1">
+<main ng-if="!me" class="py4">
   <section class="mb2">
-    <h1><span class="blue">Sound</span>Rad</h1>
-    <p>A radically simpler & faster SoundCloud player</p>
+    <h1 class="h0"><span class="blue">Sound</span>Rad</h1>
+    <p class="h1 mb2">A radically simpler & faster SoundCloud player</p>
     <p>
       <a href="" ng-click="connect()" class="button button-blue">Connect with SoundCloud</a>
     </p>
   </section>
   <footer class="py2">
     <p class="h3">
+      <a href="/about">About</a> | 
       Made with love by
       <a href="//jxnblk.com">Jxnblk</a>.
       Powered by SoundCloud.
