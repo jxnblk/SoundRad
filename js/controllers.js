@@ -113,6 +113,9 @@ soundrad.controller('NavCtrl',
     console.log(obj);
     $scope.modal = obj;
   };
+  $scope.closeModal = function() {
+    $scope.modal = null;
+  };
   Mousetrap.bind('g s', function(){
     $scope.$apply(function(){
       $location.path('/');

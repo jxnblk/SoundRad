@@ -28,7 +28,9 @@
 
   <div ng-if="modal">
     <div class="fixed t0 r0 b0 l0 bg-lighten ng-click="closeModal()"></div>
-    <div ng-include src="modal.template" class="fixed t0 r0 b0 l0 m4 p4 bg-white border border-blue"></div>
+    <div ng-include src="modal.template"
+      style="overflow-y:scroll;"
+      class="fixed t0 r0 b0 l0 m4 p4 bg-white rounded border border-blue"></div>
   </div>
 
 </div>
