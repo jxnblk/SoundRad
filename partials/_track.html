@@ -1,14 +1,15 @@
 <div class="py2">
-  <h1 class="h0"><a ng-href="/{{ track.user.permalink }}/{{ track.permalink }}" ng-click="player.play(track)" class="dark-gray">{{ track.title }}</a></h1>
+  <h1 class="h2 regular"><a ng-href="/{{ track.user.permalink }}" class="dark-gray">{{ track.user.username }}</a></h1>
+  <h1><a ng-href="/{{ track.user.permalink }}/{{ track.permalink }}" ng-click="player.play(track)" class="dark-gray">{{ track.title }}</a></h1>
 
 </div>
 <div class="py2">
-  <a href="" ng-click="like(track)" ng-hide="track.user_favorite" class="button button-small button-blue mr1 popin">
+  <a href="" ng-click="like(track)" ng-hide="track.user_favorite" class="button button-small button-box-blue mr1 popin">
     <div class="icon" icon="heart"></div>
     Like
   </a>
   
-  <a href="" ng-click="unlike(track)" ng-show="track.user_favorite" class="button button-small button-blue mr1 popin">
+  <a href="" ng-click="unlike(track)" ng-show="track.user_favorite" class="button button-small button-box-blue mr1 popin">
     <div class="icon red" icon="heart"></div>
     Liked
   </a>
@@ -29,7 +30,7 @@
     -->
 
   <a ng-show="track" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{track.title}}%20by%20{{track.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{track.user.permalink}}%2F{{track.permalink}}" target="_blank"
-    class="button button-small button-blue mr1">
+    class="button button-small button-box-blue mr1">
     <div class="icon" icon="twitter"></div>
     Tweet
   </a>

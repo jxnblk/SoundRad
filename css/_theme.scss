@@ -83,6 +83,18 @@ a {
   }
 }
 
+.button-box-blue {
+  color: $blue;
+  box-shadow: inset 0 0 2px $blue;
+  svg { fill: $blue; }
+  .red { fill: $red; }
+  &:hover {
+    color: #fff;
+    background-color: $blue;
+    svg { fill: #fff; }
+  }
+}
+
 .button-text-gray {
   color: $mid-gray;
   svg { fill: $mid-gray; }
