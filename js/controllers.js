@@ -1,6 +1,5 @@
-'use strict';
 
-//angular.module('soundrad.controllers', [])
+'use strict';
 
 
 soundrad.controller('PlayerCtrl', ['$scope', 'player', 'audio', function($scope, player, audio) {
@@ -217,6 +216,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         //$scope.tracks = new Array(data);
         $scope.tracks = null;
         $scope.track = data;
+        $scope.description = $sce.trustAsHtml(data.description);
         $scope.hasPrevPage = false;
         $scope.hasNextPage = false;
         $scope.isLoading = false;
