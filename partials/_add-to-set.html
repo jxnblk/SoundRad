@@ -1,16 +1,21 @@
-<!--
-<div class="px1">
-  <form ng-submit="createPlaylist(newPlaylistTitle, track)">
-    <input type="text" class="input mb1" ng-model="newPlaylistTitle" placeholder="Create New Playlist" />
-  </form>
-</div>
--->
+<div ng-controller="AddToSetCtrl">
+  <h1>Add to Playlist</h1>
+  <pre>{{ modal | json }}</pre>
+  <!--
+  <div class="px1">
+    <form ng-submit="createPlaylist(newPlaylistTitle, track)">
+      <input type="text" class="input mb1" ng-model="newPlaylistTitle" placeholder="Create New Playlist" />
+    </form>
+  </div>
+  -->
 
-<a href
-  class="h3 bold p1 block"
-  ng-repeat="set in userPlaylists"
-  ng-click="addToPlaylist(track, set)">
-    {{ set.title }}
-    <span ng-if="wasAdded == set.id" class="mid-gray">Added</span>
-</a>
+  <a href
+    class="h3 bold p1 block"
+    ng-repeat="set in userPlaylists"
+    ng-click="addToPlaylist(track, set)">
+      {{ set.title }}
+      <span ng-if="wasAdded == set.id" class="mid-gray">Added</span>
+  </a>
+
+</div>
 

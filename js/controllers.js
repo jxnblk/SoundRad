@@ -64,6 +64,7 @@ soundrad.controller('NavCtrl',
   $scope.token = storage.get('token');
   $scope.me = storage.get('me');
   $scope.isConnecting = false;
+  $scope.modal = null;
   // Fake UI empty state loading
   $scope.setEmptyState = function() {
     $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
@@ -309,6 +310,9 @@ soundrad.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, sound
         track.user_favorite = false;  
       });
     });
+  };
+  $scope.openSetModal = function(track){
+    $scope.$parent.modal = { template: 'partials/_add-to-set.html', track: track };
   };
 }]);
 
