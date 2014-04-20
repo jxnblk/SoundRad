@@ -313,7 +313,9 @@ soundrad.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, sound
   };
   $scope.openSetModal = function(track){
     console.log('open modal');
-    $scope.$parent.modal = { template: 'partials/_add-to-set.html', track: track };
+    $scope.apply(function(){
+      $scope.$parent.modal = { template: 'partials/_add-to-set.html', track: track };
+    });
   };
 }]);
 
