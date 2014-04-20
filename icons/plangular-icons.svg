@@ -32,5 +32,9 @@
     <path d="M2 4 C6 8 10 12 15 11 A6 6 0 0 1 22 4 A6 6 0 0 1 26 6 A8 8 0 0 0 31 4 A8 8 0 0 1 28 8 A8 8 0 0 0 32 7 A8 8 0 0 1 28 11 A18 18 0 0 1 10 30 A18 18 0 0 1 0 27 A12 12 0 0 0 8 24 A8 8 0 0 1 3 20 A8 8 0 0 0 6 19.5 A8 8 0 0 1 0 12 A8 8 0 0 0 3 13 A8 8 0 0 1 2 4"/>
   </svg>
 
+  <svg id="add-to-set" class="plangular-icon plangular-icon-add-to-set" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <path d="M4 0 H8 V4 H12 V8 H8 V12 H4 V8 H0 V4 H4z M16 4 H32 V8 H16z M8 14 H32 V18 H8z M8 24 H32 V28 H8z "/>
+  </svg>
+
 </svg>
 
