@@ -151,9 +151,8 @@ a {
   border-bottom-color: $light-gray;
 }
 
-.border-light-gray {
-  border-color: $light-gray;
-}
+.border-light-gray { border-color: $light-gray; }
+.border-blue { border-color: $blue; }
 
 // Utilities
 .rounded { border-radius: .25rem; }

@@ -7,17 +7,15 @@
   Liked
 </a>
 
-<div class="dropdown inline-block">
-  <a href ng-click="toggleAddToPlaylist()" class="button button-tiny-text button-text-gray mr1">
+<div class="relative inline-block border border-blue rounded" ng-controller="AddToSetCtrl">
+  <a href ng-click="toggleDropdown()" class="button button-tiny-text button-text-gray mr1">
     Add to Playlist
   </a>
-  <!--
   <div 
-    class="dropdown-body dropdown-body-right bold white bg-highlight rounded fadein"
-    ng-class="{'is-open': addToPlaylistIsOpen }"
-    ng-include src="'/partials/_add-to-playlist.html'">
+    class="absolute bold bg-white rounded border border-blue fadein"
+    ng-class="{'is-open': dropdownIsOpen }"
+    ng-include src="'/partials/_add-to-set.html'">
   </div>
-  -->
 </div>
 
 <a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="button button-tiny-text button-text-gray">Details</a>
