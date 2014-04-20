@@ -97,7 +97,7 @@ a {
 }
 
 .button-text-gray {
-  color: $mid-gray;
+  color: lighten($mid-gray,20%);
   svg { fill: $mid-gray; }
   .red { fill: $red; }
   &:hover {
