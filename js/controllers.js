@@ -109,8 +109,6 @@ soundrad.controller('NavCtrl',
     $window.location.href = '/';
   };
   $scope.openModal = function(obj){
-    console.log('open modal');
-    console.log(obj);
     $scope.modal = obj;
   };
   $scope.closeModal = function() {
