@@ -3,15 +3,23 @@
   <a href="/about">About</a>
 </div>
 
-<p class="py2 border-bottom">
-  Connected as: {{me.username}}.
-  <a href ng-click="logOut()" class="button button-box-blue">Sign Out</a>
+<p class="table py2 border-bottom">
+  <div class="table-cell">
+    Connected as: {{me.username}}.
+  </div>
+  <div class="table-cell right-align">
+    <a href ng-click="logOut()" class="button button-box-blue">Sign Out</a>
+  </div>
 </p>
 
-<section class="py2 border-bottom">
-  <h2>Bookmarklet</h2>
-  <p class="mb1">Reload any SoundCloud page in SoundRad. Drag this bookmarklet to your bookmarks bar to install:</p>
-  <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="button button-box-blue">Radify</a>
+<section class="table py2 border-bottom">
+  <div class="table-cell">
+    <h2>Bookmarklet</h2>
+    <p class="mb1">Reload any SoundCloud page in SoundRad. Drag this bookmarklet to your bookmarks bar to install:</p>
+  </div>
+  <div class="table-cell right-align">
+    <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="button button-box-blue">Radify</a>
+  </div>
 </section>
 
 <section class="py2" ng-include src="'/partials/_keyboard-shortcuts.html'"></section>
