@@ -1,8 +1,8 @@
-<a href ng-click="like(track)" ng-hide="track.user_favorite" class="button button-tiny-text button-text-gray mr2 popin">
+<a href ng-click="like(track)" ng-hide="track.user_favorite" title="Like" class="button button-tiny-text button-text-gray mr2 popin">
   <div class="icon" icon="heart"></div>
   Like
 </a>
-<a href ng-click="unlike(track)" ng-show="track.user_favorite" class="button button-tiny-text button-text-gray mr2 popin">
+<a href ng-click="unlike(track)" ng-show="track.user_favorite" title="Unlike" class="button button-tiny-text button-text-gray mr2 popin">
   <div class="icon red" icon="heart"></div>
   Liked
 </a>
@@ -25,5 +25,5 @@
   </div>
 </div>
 
-<a href="/{{ track.user.permalink }}/{{ track.permalink }}" class="button button-tiny-text button-text-gray">Details</a>
+<a href="/{{ track.user.permalink }}/{{ track.permalink }}" title="View Details" class="button button-tiny-text button-text-gray">Details</a>
 
