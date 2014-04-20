@@ -12,9 +12,9 @@
 	<link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
 </head>
-<body>
+<body ng-class="{ 'fixed': modal }">
   
-<div ng-controller="NavCtrl" class="measure wrap" ng-class="{'fixed': modal}">
+<div ng-controller="NavCtrl" class="measure wrap">
 
   <div class="fixed r0 l0 z2 measure wrap">
     <div ng-include src="'partials/_player.html'" ng-controller="PlayerCtrl" class="px1"></div>
