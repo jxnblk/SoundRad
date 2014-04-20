@@ -24,7 +24,7 @@
   to { transform: scale(1); opacity: 1; }
 }
 .fadein {
-  -webkit-animation: fadein .3s ease-in;
-  animation: fadein .3s ease-in;
+  -webkit-animation: fadein .2s ease-out;
+  animation: fadein .2s ease-out;
 }
 
