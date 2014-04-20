@@ -1,18 +1,19 @@
-<div class="p1">
-
-  <h1 class="h2 responsive">Settings</h1>
-
-  <section class="py2">
-    <h2>Bookmarklet</h2>
-    <p class="mb1">Reload any SoundCloud page in SoundRad. Drag this bookmarklet to your bookmarks bar to install:</p>
-    <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="btn btn-prime h3">Radify</a>
-  </section>
-
-  <section class="py2" ng-include src="'/partials/_keyboard-shortcuts.html'"></section>
-
-  <p class="py2">
-    Connected as: {{me.username}}.
-    <a href="#" ng-click="logOut()" class="">Sign Out</a>
-  </p>
-
+<div class="py2 border-bottom">
+  <h1 class="inline-block mr1">Settings</h1>
+  <a href="/about">About</a>
 </div>
+
+<p class="py2 border-bottom">
+  Connected as: {{me.username}}.
+  <a href ng-click="logOut()" class="button button-box-blue">Sign Out</a>
+</p>
+
+<section class="py2 border-bottom">
+  <h2>Bookmarklet</h2>
+  <p class="mb1">Reload any SoundCloud page in SoundRad. Drag this bookmarklet to your bookmarks bar to install:</p>
+  <a href="javascript:location.href='http://soundrad.com'+window.location.pathname" class="button button-box-blue">Radify</a>
+</section>
+
+<section class="py2" ng-include src="'/partials/_keyboard-shortcuts.html'"></section>
+
+
