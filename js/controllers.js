@@ -148,7 +148,7 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
       $scope.tracks = tracks;
       $scope.isLoading = false;
       $scope.streamNextPage = data.next_href;
-      if(!player.playing && !player.paused) {
+      if(!player.playing) {
         player.load($scope.tracks);
       };
     });
@@ -206,7 +206,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
         $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
         $scope.isLoading = false;
-        if(!player.playing && !player.paused) player.load($scope.tracks);
+        if(!player.playing) player.load($scope.tracks);
       });
     });
   };
@@ -220,7 +220,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         $scope.hasPrevPage = false;
         $scope.hasNextPage = false;
         $scope.isLoading = false;
-        if(!player.playing && !player.paused) player.load($scope.track);
+        if(!player.playing) player.load($scope.track);
       });
     });
   };
@@ -235,7 +235,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         $scope.hasNextPage = false;
         $scope.streamNextPage = false;
         $scope.isLoading = false;
-        if(!player.playing && !player.paused) player.load($scope.tracks);
+        if(!player.playing) player.load($scope.tracks);
       });
     });
   };
