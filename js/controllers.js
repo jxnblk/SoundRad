@@ -216,7 +216,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         //$scope.tracks = new Array(data);
         $scope.tracks = null;
         $scope.track = data;
-        $scope.description = $sce.trustAsHtml(data.description);
+        //$scope.description = $sce.trustAsHtml(data.description);
         $scope.hasPrevPage = false;
         $scope.hasNextPage = false;
         $scope.isLoading = false;
