@@ -7,9 +7,10 @@
 -->
 
 <a href
-  class="h3 p1 block"
+  class="h3 bold p1 block"
   ng-repeat="set in userPlaylists"
   ng-click="addToPlaylist(track, set)">
     {{ set.title }}
+    <span ng-if="wasAdded == track.id" class="mid-gray">Added</span>
 </a>
 

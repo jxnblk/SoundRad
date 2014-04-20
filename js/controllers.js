@@ -316,6 +316,7 @@ soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($
 
 soundrad.controller('AddToSetCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
   $scope.dropdownIsOpen = false;
+  $scope.wasAdded = null;
   $scope.toggleDropdown = function() {
     $scope.dropdownIsOpen = !$scope.dropdownIsOpen;
   };
@@ -323,12 +324,11 @@ soundrad.controller('AddToSetCtrl', ['$scope', 'soundcloud', function($scope, so
     soundcloud.addToPlaylist(track, playlist, function(data){
       $scope.$apply(function(){
         console.log('Added to ' + data.title);
-        //$scope.flashMessage = 'Added to ' + data.title;
-        //$scope.addToPlaylistIsOpen = false;
-        //$timeout(function(){
-        //  $scope.flashMessage = null;
-        //  $scope.dropdownIsOpen = false;  
-        //}, 3500);
+        $scope.wasAdded = track.id;
+        $timeout(function(){
+          $scope.wasAdded = null;
+          $scope.dropdownIsOpen = false;  
+        }, 800);
       });
       
     });
