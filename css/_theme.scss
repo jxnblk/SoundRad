@@ -5,7 +5,8 @@
 
 $blue: #0096cc;
 $light-gray: #eaeff0;
-$mid-gray: #708690;
+//$mid-gray: #708690;
+$mid-gray: #8096a0;
 $dark-gray: #405660;
 
 $red: #f52;
@@ -97,7 +98,7 @@ a {
 }
 
 .button-text-gray {
-  color: lighten($mid-gray,20%);
+  color: $mid-gray;
   svg { fill: $mid-gray; }
   .red { fill: $red; }
   &:hover {
