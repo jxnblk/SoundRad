@@ -1,4 +1,4 @@
-<header class="mobile-table">
+<header class="mobile-table p2 mb2 border-bottom">
   <div class="mobile-table-cell">
     <h1>Add to Playlist</h1>
     <h1 class="h2">{{ modal.track.title }}</h1>
@@ -7,7 +7,9 @@
     <a href ng-click="closeModal()">Close</a>
   </div>
 </header>
-<div ng-controller="AddToSetCtrl">
+<div ng-controller="AddToSetCtrl"
+  style="overflow-y:scroll"
+  class="p2">
   <!--
   <div class="px1">
     <form ng-submit="createPlaylist(newPlaylistTitle, track)">

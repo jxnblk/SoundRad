@@ -15,3 +15,16 @@
   animation: popin .1s linear;
 }
 
+@-webkit-keyframes fadein {
+  from { -webkit-transform: scale(.8); opacity: .5; }
+  to { -webkit-transform: scale(1); opacity: 1; }
+}
+@keyframes fadein {
+  from { transform: scale(.8); opacity: .5; }
+  to { transform: scale(1); opacity: 1; }
+}
+.fadein {
+  -webkit-animation: fadein .3s ease-in;
+  animation: fadein .3s ease-in;
+}
+
