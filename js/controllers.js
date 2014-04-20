@@ -287,15 +287,12 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
   };
 }]);
   
-soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($scope, $timeout, soundcloud) {
+soundrad.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
   $scope.like = function(track) {        
     if($scope.token){
       soundcloud.like(track, function(data){
         $scope.$apply(function(){
           track.user_favorite = true;
-          $timeout(function(){
-            $scope.dropdownIsOpen = false;
-          }, 1000);
         });           
       });
     } else {
@@ -306,15 +303,12 @@ soundrad.controller('TrackCtrl', ['$scope', '$timeout', 'soundcloud', function($
     soundcloud.unlike(track, function(data){
       $scope.$apply(function(){
         track.user_favorite = false;  
-        $timeout(function(){
-          $scope.dropdownIsOpen = false;
-        }, 1000);
       });
     });
   };
 }]);
 
-soundrad.controller('AddToSetCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+soundrad.controller('AddToSetCtrl', ['$scope', '$timeout', 'soundcloud', function($scope, $timeout, soundcloud) {
   $scope.dropdownIsOpen = false;
   $scope.wasAdded = null;
   $scope.toggleDropdown = function() {
@@ -324,7 +318,7 @@ soundrad.controller('AddToSetCtrl', ['$scope', 'soundcloud', function($scope, so
     soundcloud.addToPlaylist(track, playlist, function(data){
       $scope.$apply(function(){
         console.log('Added to ' + data.title);
-        $scope.wasAdded = track.id;
+        $scope.wasAdded = data.id;
         $timeout(function(){
           $scope.wasAdded = null;
           $scope.dropdownIsOpen = false;  
