@@ -85,7 +85,7 @@ a {
 
 .button-box-blue {
   color: $blue;
-  box-shadow: inset 0 0 0 2px $blue;
+  box-shadow: inset 0 0 0 1px $blue;
   svg { fill: $blue; }
   .red { fill: $red; }
   &:hover {
