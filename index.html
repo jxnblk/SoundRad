@@ -14,15 +14,16 @@
 </head>
 <body>
   
-  <div ng-controller="NavCtrl" class="measure wrap" ng-class="{ 'fixed': modal }">
+<div ng-controller="NavCtrl" ng-class="{ 'fixed': modal }">
 
   <div class="fixed r0 l0 z2 measure wrap">
     <div ng-include src="'partials/_player.html'" ng-controller="PlayerCtrl" class="px1"></div>
   </div>
   
-  <div ng-include src="'partials/_nav.html'" class="layout-fixed-clear px1"></div>
-
-  <div ng-view class="px1"></div>
+  <div class="measure wrap">
+    <div ng-include src="'partials/_nav.html'" class="layout-fixed-clear px1"></div>
+    <div ng-view class="px1"></div>
+  </div>
 
   <div ng-if="modal">
     <div class="fixed t0 r0 b0 l0 z2 bg-lighten" ng-click="closeModal()"></div>
