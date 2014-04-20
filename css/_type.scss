@@ -10,12 +10,12 @@ body {
 
 // Base Type Scale
 .h0 { font-size: 2rem; }
-.h1, h1, h2, h3, h4, h5, h6 { font-size: 1.125rem; }
-.h2 { font-size: 1rem; }
+.h1, h1 { font-size: 1.125rem; }
+.h2, h2, h3, h4, h5, h6 { font-size: 1rem; }
 .h3 { font-size: .875rem; }
 
 @media (min-width: 48em) {
-  .h1, h1, h2, h3, h4, h5, h6 { font-size: 1.25rem; }
+  .h1, h1 { font-size: 1.25rem; }
 }
 
 // Utilities
