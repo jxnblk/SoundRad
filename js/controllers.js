@@ -65,7 +65,6 @@ soundrad.controller('NavCtrl',
   $scope.me = storage.get('me');
   // Fake UI empty state loading
   $scope.setEmptyState = function() {
-    console.log('isnt a track');
     $scope.tracks = [ { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
       { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
       { user: { username: '\xa0' }, title: '\xa0' }, { user: { username: '\xa0' }, title: '\xa0' },
@@ -254,7 +253,6 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     $scope.api = '/users/' + $scope.user + '/playlists';
     getTracks();
   } else {
-    console.log('its a track!');
     $scope.api = '/' + $scope.user + '/' + $routeParams.subpath;
     getTrack();
   };
@@ -349,7 +347,6 @@ soundrad.controller('AddToSetCtrl', ['$scope', '$timeout', 'soundcloud', functio
 
 soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function($scope, $location, soundcloud) {
   $scope.search = function(){
-    console.log('submitted search');
     $scope.isLoading = true;
     $scope.searchResults = null;
     $location.search('q', $scope.searchQuery); 
@@ -357,7 +354,6 @@ soundrad.controller('SearchCtrl', ['$scope', '$location', 'soundcloud', function
     $scope.pageOffset = 0;
     var params = { q: $scope.searchQuery };
     soundcloud.search(params, function(data){
-      console.log('got data');
       $scope.$apply(function(){
         $scope.searchResults = data.collection;  
         $scope.isLoading = false;
