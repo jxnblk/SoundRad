@@ -140,6 +140,12 @@ soundrad.controller('NavCtrl',
       $location.path('/search');
     });
   });
+  Mousetrap.bind('esc', function(e){
+    e.preventDefault();
+    $scope.$apply(function(){
+      $scope.closeModal();
+    });
+  });
 }]);
   
 soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $location){
