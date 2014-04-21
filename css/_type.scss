@@ -30,7 +30,7 @@ strong, .bold { font-weight: 600; }
 .nowrap { white-space: nowrap; }
 .truncate {
   white-space: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
