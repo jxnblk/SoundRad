@@ -20,7 +20,7 @@ gulp.task('compile', function() {
       ])
     .pipe(concat('script.js'))
     .pipe(ngmin())
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('./js/'));
 });
 
