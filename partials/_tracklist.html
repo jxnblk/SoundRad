@@ -1,3 +1,31 @@
+<div ng-if="set">
+  <div class="py2">
+    <h1 class="mb2"><a ng-href="/{{ set.user.permalink }}" class="dark-gray">{{ set.user.username }}</a></h1>
+    <h1 class="h0"><a ng-href="/{{ set.user.permalink }}/{{ set.permalink }}" ng-click="player.play(set)" class="dark-gray">{{ set.title }}</a></h1>
+  </div>
+  <div class="py2">
+    <a href="" ng-click="like(set)" ng-hide="set.user_favorite" class="button button-box-blue mr1 popin">
+      <div class="icon" icon="heart"></div>
+      Like
+    </a>
+    <a href="" ng-click="unlike(set)" ng-show="set.user_favorite" class="button button-box-blue mr1 popin">
+      <div class="icon red" icon="heart"></div>
+      Liked
+    </a>
+    <a ng-show="set" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{set.title}}%20by%20{{set.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{set.user.permalink}}%2F{{set.permalink}}" target="_blank"
+      class="button button-box-blue mr1">
+      <div class="icon" icon="twitter"></div>
+      Tweet
+    </a>
+
+    <span class="h3 leading-3 mobile-block">
+      <span class="mr1">Posted {{ set.created_at | fromNow }}</span>
+      <span class="mr1">{{ set.favoritings_count }} Likes</span>
+      <span class="">{{ set.playback_count }} Plays</span>
+    </span>
+  </div>
+</div>
+
 <div ng-repeat="track in tracks" ng-controller="TrackCtrl" class="table border-bottom">
   <a href="" ng-click="player.play(tracks, $index)"
     title="Play Track"
