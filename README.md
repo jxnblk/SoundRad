@@ -18,7 +18,7 @@ First Byte        | 0.885s     | 0.231s
 Start Render      | 4.325s     | 0.944s
 Speed Index       | 5645       | 1500
 
-## Second View
+### Second View
 
 Metric            | SoundCloud | SoundRad
 ------------------|------------|---------
