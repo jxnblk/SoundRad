@@ -18,7 +18,7 @@ gulp.task('compile', function() {
       './js/controllers.js',
       ])
     .pipe(concat('script.js'))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('./js/'));
 });
 
