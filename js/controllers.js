@@ -307,6 +307,7 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
 soundrad.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
   $scope.like = function(track) {        
     if($scope.token){
+      track.user_favorite = true;
       soundcloud.like(track, function(data){
         $scope.$apply(function(){
           track.user_favorite = true;
@@ -317,6 +318,7 @@ soundrad.controller('TrackCtrl', ['$scope', 'soundcloud', function($scope, sound
     };
   };
   $scope.unlike = function(track) {
+    track.user_favorite = false;  
     soundcloud.unlike(track, function(data){
       $scope.$apply(function(){
         track.user_favorite = false;  
