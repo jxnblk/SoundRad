@@ -187,7 +187,7 @@ soundrad.controller('StreamCtrl', ['$scope', '$location', 'soundcloud', 'player'
       });
     });
     $scope.page = $scope.page + 1;
-    $location.search('page', $scope.page).reload(false);
+    $location.hash($scope.page);
   };
   
 }]);
@@ -301,7 +301,7 @@ soundrad.controller('TracklistCtrl', ['$scope', '$location', 'soundcloud', 'play
         });
       });
       $scope.page++;
-      $location.search('page', $scope.page).reload(false);
+      $location.hash($scope.page);
     };
   };
 }]);
