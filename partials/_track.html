@@ -1,5 +1,5 @@
 <div class="py2">
-  <h1 class=""><a ng-href="/{{ track.user.permalink }}" class="dark-gray">{{ track.user.username }}</a></h1>
+  <h1 class="mb2"><a ng-href="/{{ track.user.permalink }}" class="dark-gray">{{ track.user.username }}</a></h1>
   <h1 class="h0"><a ng-href="/{{ track.user.permalink }}/{{ track.permalink }}" ng-click="player.play(track)" class="dark-gray">{{ track.title }}</a></h1>
 
 </div>
@@ -35,24 +35,21 @@
     Tweet
   </a>
 
+  <span class="h3 leading-3 mobile-block">
+    <span class="mr1">Posted {{ track.created_at | fromNow }}</span>
+    <span class="mr1">{{ track.favoritings_count }} Likes</span>
+    <span class="">{{ track.playback_count }} Plays</span>
+  </span>
+
 </div>
 
 <!--
 <input type="text" value="http://soundrad.com/{{ track.user.permalink }}/{{ track.permalink }}" onclick="this.focus();this.select();" class="input" readonly />
 -->
 
-<div class="h2 leading-3 py2">
-  <span class="mr1">Posted {{ track.created_at | fromNow }}</span>
-  <span class="mr1">{{ track.favoritings_count }} Likes</span>
-  <span class="">{{ track.playback_count }} Plays</span>
-</div>
 
 <div class="py2">
   <p class="mb2" ng-show="track.description" ng-bind-html="track.description | richtext"></p>
-  <!--
-  <pre>sce description</pre>
-  <p class="mb2" ng-bind-html="description | richtext"></p>
-  -->
   <a ng-href="{{track.permalink_url}}" target="_blank" class="h3 py1">View on SoundCloud</a>
 </div>
 
