@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var ngmin = require('gulp-ngmin');
 var uglify = require('gulp-uglify');
 
 gulp.task('compile', function() {
@@ -18,7 +19,8 @@ gulp.task('compile', function() {
       './js/controllers.js',
       ])
     .pipe(concat('script.js'))
-    //.pipe(uglify())
+    .pipe(ngmin())
+    .pipe(uglify())
     .pipe(gulp.dest('./js/'));
 });
 
