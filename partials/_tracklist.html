@@ -1,4 +1,4 @@
-<div ng-if="set" class="border-bottom">
+<div ng-if="set" class="border-bottom" ng-controller="TrackCtrl">
   <div class="py2">
     <h1 class="mb2"><a ng-href="/{{ set.user.permalink }}" class="dark-gray">{{ set.user.username }}</a></h1>
     <h1 class="h0"><a ng-href="/{{ set.user.permalink }}/{{ set.permalink }}" ng-click="player.play(set)" class="dark-gray">{{ set.title }}</a></h1>
@@ -12,7 +12,7 @@
       <div class="icon red" icon="heart"></div>
       Liked
     </a>
-    <a ng-show="set" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{set.title}}%20by%20{{set.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{set.user.permalink}}%2F{{set.permalink}}" target="_blank"
+    <a ng-show="set" ng-href="https://twitter.com/intent/tweet?text=Check%20out%20{{set.title}}%20by%20{{set.user.username}}%20on%20@SoundRad.&amp;url=http%3A%2F%2Fsoundrad.com%2F{{set.user.permalink}}%2Fsets%2F{{set.permalink}}" target="_blank"
       class="button button-box-blue mr1">
       <div class="icon" icon="twitter"></div>
       Tweet
