@@ -1,6 +1,6 @@
 'text use strict';
 
-var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ngSanitize', 'ui.sortable', 'infinite-scroll']).
+var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ngSanitize', 'infinite-scroll']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider.when('/', { templateUrl: '/partials/home.html' });
@@ -11,10 +11,6 @@ var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ngSanitize', '
 
     $routeProvider.when('/:user/:subpath?/:setTitle?', { templateUrl: '/partials/user.html', controller: 'UserCtrl' });
 
-    /*
-    $stateProvider.state('playing', { url: '/playing', templateUrl: '/partials/playing.html' });
-    $stateProvider.state('history', { url: '/history', templateUrl: '/partials/history.html', controller: 'HistoryCtrl' });
-    */
     $locationProvider.html5Mode(true);
   }]);
 
