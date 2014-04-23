@@ -6,6 +6,7 @@ gulp.task('compile', function() {
   return gulp.src([
       './js/lib/moment.min.js',
       './js/lib/mousetrap.min.js',
+      './js/lib/jquery-1.11.0.min.js',
       './js/lib/angular.min.js',
       './js/lib/angular-route.min.js',
       './js/lib/angular-touch.min.js',
