@@ -249,7 +249,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
     soundcloud.getSet($scope.api, function(data){
       $scope.$apply(function () {
         $scope.set = data;
-        console.log(set);
+        console.log($scope.set);
         $scope.tracks = data.tracks;
         $scope.hasPrevPage = false;
         $scope.hasNextPage = false;
