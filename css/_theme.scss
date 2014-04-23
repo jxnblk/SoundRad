@@ -82,6 +82,7 @@ a {
   &:hover {
     color: #fff;
     background-color: darken($blue, 20%);
+    .red { fill: $red; }
   }
 }
 

@@ -1,10 +1,10 @@
 <a href ng-click="like(track)" ng-hide="track.user_favorite" title="Like" class="button button-tiny-text button-text-gray mr2 popin">
   <div class="inline-block icon" icon="heart"></div>
-  Like
+  <span class="mobile-hide">Like</span>
 </a>
 <a href ng-click="unlike(track)" ng-show="track.user_favorite" title="Unlike" class="button button-tiny-text button-text-gray mr2 popin">
   <div class="inline-block icon red" icon="heart"></div>
-  Liked
+  <span class="mobile-hide">Liked</span>
 </a>
 
 <a href
@@ -12,27 +12,8 @@
   title="Add to Playlist"
   class="button button-tiny-text button-text-gray mr2">
     <div class="icon" icon="add-to-set"></div>
-    Playlist
+    <span class="mobile-hide">Playlist</span>
 </a>
-<!--
-<div class="left-align relative inline-block bg-white" ng-controller="AddToSetCtrl">
-  <a href
-    ng-click="toggleDropdown()"
-    ng-class="{'blue': dropdownIsOpen}"
-    title="Add to Playlist"
-    class="button button-tiny-text button-text-gray mr2">
-      <div class="icon" icon="add-to-set"></div>
-      Playlist
-  </a>
-  <div class="fixed t0 r0 b0 l0 z1 bg-lighten" ng-if="dropdownIsOpen" ng-click="toggleDropdown()"></div>
-  <div 
-    class="absolute r0 z1 bold bg-white rounded border border-blue fadein"
-    style="max-height:12rem;overflow-y:scroll"
-    ng-if="dropdownIsOpen"
-    ng-include src="'/partials/_add-to-set.html'">
-  </div>
-</div>
--->
 
 <a href="/{{ track.user.permalink }}/{{ track.permalink }}" title="View Details" class="button button-tiny-text button-text-gray">Details</a>
 
