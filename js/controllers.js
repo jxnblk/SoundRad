@@ -152,7 +152,7 @@ soundrad.controller('CallbackCtrl', ['$scope', '$location', function($scope, $lo
   $location.path('/');
 }]);
   
-soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
+soundrad.controller('StreamCtrl', ['$scope', '$location', 'soundcloud', 'player', function($scope, $location, soundcloud, player) {
   $scope.page = 1;
   $scope.isLoading = true;
   $scope.player = player;
@@ -187,6 +187,7 @@ soundrad.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($s
       });
     });
     $scope.page = $scope.page + 1;
+    $location.search('page', $scope.page);
   };
   
 }]);
@@ -279,7 +280,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
   // $scope.description = $sce.trustAsHtml($scope.userData.description);
 }]);
 
-soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
+soundrad.controller('TracklistCtrl', ['$scope', '$location', 'soundcloud', 'player', function($scope, $location, soundcloud, player) {
   $scope.player = player;
   $scope.loadMore = function(){
     if($scope.isLoading) return false;
@@ -300,6 +301,7 @@ soundrad.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function
         });
       });
       $scope.page++;
+      $location.search('page', $scope.page);
     };
   };
 }]);
