@@ -1,0 +1,4 @@
+<div>{{ currentUser.username }}</div>
+<a href ng-if="!currentUser" ng-click="connect()">Connect</a>
+<a href ng-if="currentUser" ng-click="logout()">Sign Out</a>
+

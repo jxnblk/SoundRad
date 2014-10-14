@@ -1,4 +1,3 @@
-// SoundRad config
 
 // Beta config
 var clientID = '66828e9e2042e682190d1fde4b02e265';

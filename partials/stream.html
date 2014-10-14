@@ -1,0 +1,9 @@
+<ul>
+  <li ng-repeat="track in tracks">
+    {{ track.type }}
+    {{ track.origin.user.username }}
+    {{ track.origin.title }}
+    {{ track.origin.stream_url }}
+  </li>
+</ul>
+<a href class="button button-blue-outline" ng-click="loadMore()">Show More</a>
