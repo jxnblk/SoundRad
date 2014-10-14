@@ -223,6 +223,7 @@ soundrad.controller('UserCtrl', ['$scope', '$sce', 'soundcloud', '$routeParams',
         $scope.tracks = data;
         $scope.hasPrevPage = ($scope.pageOffset >= $scope.pageSize);
         $scope.hasNextPage = ($scope.tracks.length >= $scope.pageSize);
+        console.log('hasNextPage', $scope.tracks.length >= $scope.pageSize);
         $scope.isLoading = false;
         if(!player.playing) player.load($scope.tracks);
       });

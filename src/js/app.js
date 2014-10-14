@@ -1,6 +1,6 @@
 'text use strict';
 
-var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ngSanitize', 'infinite-scroll']).
+var soundrad = angular.module('soundrad', ['ngTouch', 'ngRoute', 'ngSanitize']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider.when('/', { templateUrl: '/partials/home.html' });
