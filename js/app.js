@@ -39,23 +39,25 @@ app.config([
 app.factory('soundcloud', [
   '$window',
   '$http',
-  function ($window, $http) {
+  'storage',
+  function ($window, $http, storage) {
     var soundcloud = {};
-    soundcloud.api = 'https://api-v2.soundcloud.com';
+    var token = storage.get('token');
+    //soundcloud.api = 'https://api-v2.soundcloud.com';
+    soundcloud.api = 'https://api.soundcloud.com';
     soundcloud.params = {
       client_id: clientID,
-      callback: 'JSON_CALLBACK',
-      offset: 0,
-      limit: 16
+      oauth_token: token
     };
     soundcloud.connect = function () {
       $window.location.href = 'https://soundcloud.com/connect?client_id=' + clientID + '&redirect_uri=' + callbackUrl + '&response_type=code_and_token&scope=non-expiring&display=popup';
     };
     soundcloud.get = function (path, callback) {
-      $http.jsonp(this.api + path, { params: this.params }).error(function (err) {
+      $http.get(this.api + path, { params: this.params }).error(function (err) {
         console.log('error', err);
       }).success(function (data) {
-        console.log('get', data);  //if (callback) callback(data);
+        if (callback)
+          callback(data);
       });
     };
     return soundcloud;
@@ -98,6 +100,8 @@ app.controller('MainCtrl', [
           storage.set('currentUser', data);
           console.log('me', data);
         });
+        $location.search('');
+        $location.hash('');
       }
       ;
     }
@@ -114,12 +118,14 @@ app.controller('StreamCtrl', [
   'soundcloud',
   function ($scope, soundcloud) {
     $scope.page = 0;
-    //soundcloud.get('/stream', function(data) {
-    soundcloud.get('/users/jxnblk', function (data) {
+    soundcloud.get('/me/activities', function (data) {
+      $scope.tracks = data.collection;
+      console.log(data);
     });
     $scope.loadMore = function () {
       soundcloud.get($scope.next_href, function (data) {
         $scope.$apply(function () {
+          console.log(data);
           $scope.tracks.push(data.collection);
           $scope.next_href = data.next_href;
         });

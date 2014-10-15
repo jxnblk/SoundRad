@@ -17,6 +17,8 @@ app.controller('MainCtrl',
         storage.set('currentUser', data);
         console.log('me', data);
       });
+      $location.search('');
+      $location.hash('');
     };
   };
 

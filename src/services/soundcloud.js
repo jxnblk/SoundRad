@@ -1,13 +1,13 @@
-app.factory('soundcloud', function($window, $http) {
+app.factory('soundcloud', function($window, $http, storage) {
 
   var soundcloud = {};
+  var token = storage.get('token');
 
-  soundcloud.api = 'https://api-v2.soundcloud.com';
+  //soundcloud.api = 'https://api-v2.soundcloud.com';
+  soundcloud.api = 'https://api.soundcloud.com';
   soundcloud.params = {
     client_id: clientID,
-    callback: 'JSON_CALLBACK',
-    offset: 0,
-    limit: 16
+    oauth_token: token
   };
 
   soundcloud.connect = function(){
@@ -15,13 +15,13 @@ app.factory('soundcloud', function($window, $http) {
   };
 
   soundcloud.get = function(path, callback) {
-    $http.jsonp(this.api + path, { params: this.params })
+    $http.get(this.api + path, { params: this.params })
+    //$http.jsonp(this.api + path + '?client_id=' + clientID + '&oauth_token=' + token + '&callback=JSON_CALLBACK')
       .error(function(err) {
         console.log('error', err);
       })
       .success(function(data) {
-        console.log('get', data);
-        //if (callback) callback(data);
+        if (callback) callback(data);
       });
   };
 

@@ -2,14 +2,15 @@ app.controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundclou
 
   $scope.page = 0;
 
-  //soundcloud.get('/stream', function(data) {
-  soundcloud.get('/users/jxnblk', function(data) {
-    //console.log(data);
+  soundcloud.get('/me/activities', function(data) {
+    $scope.tracks = data.collection;
+    console.log(data);
   });
 
   $scope.loadMore = function() {
     soundcloud.get($scope.next_href, function(data) {
       $scope.$apply(function() {
+        console.log(data);
         $scope.tracks.push(data.collection);
         $scope.next_href = data.next_href;
       });
