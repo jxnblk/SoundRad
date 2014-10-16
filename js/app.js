@@ -131,7 +131,9 @@ app.factory('player', [
         this.index = index;
       if (!this.tracks[this.index])
         return false;
-      this.audio.src = this.tracks[this.index].stream_url + this.params;
+      if (this.audio.src != this.tracks[this.index].stream_url + this.params) {
+        this.audio.src = this.tracks[this.index].stream_url + this.params;
+      }
       this.audio.play();
     };
     player.pause = function () {
