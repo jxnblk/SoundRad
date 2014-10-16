@@ -24,6 +24,6 @@
         {{ player.tracks[player.index].title || '&nbsp;' }}
       </div>
     </h1>
-    <progress class="progress" max="1" ng-value="{{ currentTime/audio.duration }}"></progress>
+    <progress class="progress" ng-value="{{ currentTime/audio.duration || 0 }}"></progress>
   </div>
 </div>
