@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var ngmin = require('gulp-ngmin');
 var uglify = require('gulp-uglify');
 var webserver = require('gulp-webserver');
+var rename = require('gulp-rename');
 
 gulp.task('compile', function() {
   return gulp.src([
@@ -26,7 +27,13 @@ gulp.task('serve', function() {
     .pipe(webserver({}));
 });
 
-gulp.task('dev', ['compile', 'serve'], function() {
-  gulp.watch(['./src/**/*'], ['compile']);
+gulp.task('dupeindex', function() {
+  gulp.src('./index.html')
+    .pipe(rename('404.html'))
+    .pipe(gulp.dest('.'));
+});
+
+gulp.task('dev', ['compile', 'dupeindex', 'serve'], function() {
+  gulp.watch(['./src/**/*', './index.html'], ['compile', 'dupeindex']);
 });
 
