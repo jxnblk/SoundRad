@@ -43,19 +43,38 @@ app.factory('soundcloud', [
   function ($window, $http, storage) {
     var soundcloud = {};
     var token = storage.get('token');
-    //soundcloud.api = 'https://api-v2.soundcloud.com';
+    // soundcloud.api = 'https://api-v2.soundcloud.com';
     soundcloud.api = 'https://api.soundcloud.com';
     soundcloud.params = {
       client_id: clientID,
       oauth_token: token
     };
+    soundcloud.next_href = null;
     soundcloud.connect = function () {
       $window.location.href = 'https://soundcloud.com/connect?client_id=' + clientID + '&redirect_uri=' + callbackUrl + '&response_type=code_and_token&scope=non-expiring&display=popup';
     };
     soundcloud.get = function (path, callback) {
       $http.get(this.api + path, { params: this.params }).error(function (err) {
-        console.log('error', err);
+        console.error('error', err);
       }).success(function (data) {
+        if (callback)
+          callback(data);
+      });
+    };
+    soundcloud.getStream = function (callback) {
+      $http.get(this.api + '/me/activities', { params: this.params }).error(function (err) {
+        console.error('error', err);
+      }).success(function (data) {
+        soundcloud.next_href = data.next_href;
+        if (callback)
+          callback(data);
+      });
+    };
+    soundcloud.getStreamNextPage = function (callback) {
+      $http.get(this.next_href, { params: this.params }).error(function (err) {
+        console.error('error', err);
+      }).success(function (data) {
+        soundcloud.next_href = data.next_href;
         if (callback)
           callback(data);
       });
@@ -118,17 +137,16 @@ app.controller('StreamCtrl', [
   'soundcloud',
   function ($scope, soundcloud) {
     $scope.page = 0;
-    soundcloud.get('/me/activities', function (data) {
+    $scope.isLoading = true;
+    soundcloud.getStream(function (data) {
       $scope.tracks = data.collection;
-      console.log(data);
+      $scope.isLoading = false;
     });
     $scope.loadMore = function () {
-      soundcloud.get($scope.next_href, function (data) {
-        $scope.$apply(function () {
-          console.log(data);
-          $scope.tracks.push(data.collection);
-          $scope.next_href = data.next_href;
-        });
+      $scope.isLoading = true;
+      soundcloud.getStreamNextPage(function (data) {
+        $scope.tracks = $scope.tracks.concat(data.collection);
+        $scope.isLoading = false;
       });
     };
   }
