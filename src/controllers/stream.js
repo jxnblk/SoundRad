@@ -1,4 +1,4 @@
-app.controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+app.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope, soundcloud, player) {
 
   $scope.page = 0;
   $scope.isLoading = true;
@@ -6,6 +6,7 @@ app.controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundclou
   soundcloud.getStream(function(data) {
     $scope.tracks = data.collection;
     $scope.isLoading = false;
+    player.tracks = $scope.tracks;
   });
 
   $scope.loadMore = function() {
@@ -13,6 +14,7 @@ app.controller('StreamCtrl', ['$scope', 'soundcloud', function($scope, soundclou
     soundcloud.getStreamNextPage(function(data) {
       $scope.tracks = $scope.tracks.concat(data.collection);
       $scope.isLoading = false;
+      player.tracks = $scope.tracks;
     });
   };
 

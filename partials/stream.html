@@ -1,14 +1,1 @@
-<ul class="list-reset">
-  <li ng-repeat="track in tracks">
-    {{ track.type }}
-    {{ track.origin.user.username }}
-    {{ track.origin.title }}
-    {{ track.origin.stream_url }}
-  </li>
-</ul>
-<div class="center py2">
-  <a href class="button button-blue-outline"
-    ng-hide="isLoading"
-    ng-click="loadMore()">Show More</a>
-  <span ng-show="isLoading">Loading...</span>
-</div>
+<div ng-include="'partials/tracklist.html'"></div>

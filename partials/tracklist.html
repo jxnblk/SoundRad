@@ -1,0 +1,18 @@
+<div ng-controller="TracklistCtrl">
+  <ul class="list-reset">
+    <li class="border-bottom" ng-repeat="track in tracks">
+      <a href class="button block button-nav-light" ng-click="player.play($index)">
+        {{ track.origin.user.username }}
+        {{ track.origin.title }}
+      </a>
+    </li>
+  </ul>
+  <div class="center py2">
+    <a href class="button block"
+      ng-hide="isLoading"
+      ng-click="loadMore()">
+        <span class="button button-blue-outline">Show More</span>
+    </a>
+    <span class="button py2" ng-show="isLoading">Loading...</span>
+  </div>
+</div>

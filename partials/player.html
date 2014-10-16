@@ -1,0 +1,23 @@
+<div class="clearfix border-bottom">
+  <div class="left mr2">
+    <button class="h2 py2 button-nav-light"
+      title="Play"
+      ng-show="player.audio.paused"
+      ng-click="player.play()">
+      <svg class="icon" icon="play"></svg>
+    </button>
+    <button class="h2 py2 button-nav-light"
+      title="Pause"
+      ng-hide="player.audio.paused"
+      ng-click="player.pause()">
+      <svg class="icon" icon="pause"></svg>
+    </button>
+  </div>
+  <div class="overflow-hidden">
+    <h1 class="h3 m0">
+      {{ player.tracks[player.i].user.username || 'Untitled' }}
+      {{ player.tracks[player.i].title || 'Untitled' }}
+    </h1>
+    <progress class="progress" ng-value=""></progress>
+  </div>
+</div>

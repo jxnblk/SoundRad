@@ -8,11 +8,13 @@ gulp.task('compile', function() {
   return gulp.src([
       './src/config.js',
       './src/app.js',
-      //'./src/services.js',
       './src/services/soundcloud.js',
+      './src/services/player.js',
       './src/services/storage.js',
+      './src/directives/icons.js',
       './src/controllers/main.js',
-      './src/controllers/stream.js',
+      './src/controllers/tracklist.js',
+      './src/controllers/stream.js'
       ])
     .pipe(concat('app.js'))
     .pipe(ngmin())

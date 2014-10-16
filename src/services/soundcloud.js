@@ -27,7 +27,7 @@ app.factory('soundcloud', function($window, $http, storage) {
   };
 
   soundcloud.getStream = function(callback) {
-    $http.get(this.api + '/me/activities', { params: this.params })
+    $http.get(this.api + '/me/activities/tracks', { params: this.params })
       .error(function(err) {
         console.error('error', err);
       })

@@ -1,9 +1,11 @@
 app.controller('MainCtrl',
-  ['$scope', '$window', '$location', 'storage', 'soundcloud',
-  function($scope, $window, $location, storage, soundcloud) {
+  ['$scope', '$window', '$location', 'storage', 'soundcloud', 'player',
+  function($scope, $window, $location, storage, soundcloud, player) {
 
   $scope.currentUser = storage.get('currentUser');
   $scope.token = storage.get('token');
+  $scope.player = player;
+  $scope.audio = player.audio;
 
   // Get token from URL hash
   if($location.hash()) {

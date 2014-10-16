@@ -11,12 +11,20 @@
   <link rel="stylesheet" href="http://d2v52k3cl9vedd.cloudfront.net/basscss/4.1.3/base.min.css">
 	<link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
+  <style>
+    .sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+    }
+  </style>
 </head>
-<body class="container p2">
+<body class="">
   
 <div ng-include="'partials/nav.html'"></div>
+<div class="sticky bg-white" ng-include="'partials/player.html'"></div>
 
-<div ng-view></div>
+<div class="container" ng-view></div>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>

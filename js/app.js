@@ -62,7 +62,7 @@ app.factory('soundcloud', [
       });
     };
     soundcloud.getStream = function (callback) {
-      $http.get(this.api + '/me/activities', { params: this.params }).error(function (err) {
+      $http.get(this.api + '/me/activities/tracks', { params: this.params }).error(function (err) {
         console.error('error', err);
       }).success(function (data) {
         soundcloud.next_href = data.next_href;
@@ -82,6 +82,63 @@ app.factory('soundcloud', [
     return soundcloud;
   }
 ]);
+app.factory('player', [
+  'soundcloud',
+  function (soundcloud) {
+    var player = {};
+    player.params = '?';
+    var paramsArray = [];
+    for (var param in soundcloud.params) {
+      paramsArray.push(encodeURIComponent(param) + '=' + encodeURIComponent(soundcloud.params[param]));
+    }
+    ;
+    player.params += paramsArray.join('&');
+    player.audio = document.createElement('audio');
+    player.tracks = [];
+    player.index = 0;
+    // Consider using audio.paused instead
+    //player.playing = false;
+    player.load = function (tracks) {
+      this.tracks = tracks;
+    };
+    player.play = function (index) {
+      if (index)
+        this.index = index;
+      if (!this.tracks[this.index])
+        return false;
+      this.audio.src = this.tracks[this.index].origin.stream_url + this.params;
+      this.audio.play();
+    };
+    player.pause = function () {
+      this.audio.pause();
+    };
+    player.playPause = function () {
+      if (this.audio.paused) {
+        if (!this.audio.src)
+          this.audio.src = this.tracks[this.index].stream_url + this.params;
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
+    };
+    player.next = function () {
+      if (this.index < this.tracks.length - 1) {
+        this.index++;
+        this.play();
+      }
+    };
+    player.previous = function () {
+      if (this.index > 0) {
+        this.index--;
+        this.play();
+      }
+    };
+    player.audio.addEventListener('ended', function () {
+      player.next();
+    }, false);
+    return player;
+  }
+]);
 app.factory('storage', function () {
   return {
     set: function (key, obj) {
@@ -98,15 +155,47 @@ app.factory('storage', function () {
     }
   };
 });
+'use strict';
+app.directive('icon', function () {
+  var sprite = {
+      play: 'M0 0 L32 16 L0 32 z',
+      pause: 'M0 0 H12 V32 H0 z M20 0 H32 V32 H20 z',
+      previous: 'M0 0 H4 V14 L32 0 V32 L4 18 V32 H0 z',
+      next: 'M0 0 L28 14 V0 H32 V32 H28 V18 L0 32 z',
+      close: 'M4 8 L8 4 L16 12 L24 4 L28 8 L20 16 L28 24 L24 28 L16 20 L8 28 L4 24 L12 16 z',
+      chevronRight: 'M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z',
+      chevronLeft: 'M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z',
+      heart: 'M0 10 C0 6, 3 2, 8 2 C12 2, 15 5, 16 6 C17 5, 20 2, 24 2 C30 2, 32 6, 32 10 C32 18, 18 29, 16 30 C14 29, 0 18, 0 10'
+    };
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function (scope, elem, attrs) {
+      var el = elem[0], id = attrs.icon, path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      console.log(id);
+      if (!sprite[id])
+        return false;
+      el.classList.add('plangular-icon', 'plangular-icon-' + id);
+      el.setAttribute('viewBox', '0 0 32 32');
+      el.setAttribute('style', 'max-height:100%');
+      el.setAttribute('fill', 'currentcolor');
+      path.setAttribute('d', sprite[id]);
+      el.appendChild(path);
+    }
+  };
+});
 app.controller('MainCtrl', [
   '$scope',
   '$window',
   '$location',
   'storage',
   'soundcloud',
-  function ($scope, $window, $location, storage, soundcloud) {
+  'player',
+  function ($scope, $window, $location, storage, soundcloud, player) {
     $scope.currentUser = storage.get('currentUser');
     $scope.token = storage.get('token');
+    $scope.player = player;
+    $scope.audio = player.audio;
     // Get token from URL hash
     if ($location.hash()) {
       var token = $location.hash().replace('#', '').split('&')[0].split('=')[1];
@@ -132,21 +221,30 @@ app.controller('MainCtrl', [
     };
   }
 ]);
+app.controller('TracklistCtrl', [
+  '$scope',
+  'player',
+  function ($scope, player) {
+  }
+]);
 app.controller('StreamCtrl', [
   '$scope',
   'soundcloud',
-  function ($scope, soundcloud) {
+  'player',
+  function ($scope, soundcloud, player) {
     $scope.page = 0;
     $scope.isLoading = true;
     soundcloud.getStream(function (data) {
       $scope.tracks = data.collection;
       $scope.isLoading = false;
+      player.tracks = $scope.tracks;
     });
     $scope.loadMore = function () {
       $scope.isLoading = true;
       soundcloud.getStreamNextPage(function (data) {
         $scope.tracks = $scope.tracks.concat(data.collection);
         $scope.isLoading = false;
+        player.tracks = $scope.tracks;
       });
     };
   }
