@@ -2,8 +2,8 @@
   <ul class="list-reset">
     <li class="border-bottom" ng-repeat="track in tracks">
       <a href class="button block button-nav-light" ng-click="player.play($index)">
-        {{ track.origin.user.username }}
-        {{ track.origin.title }}
+        {{ track.user.username }}
+        {{ track.title }}
       </a>
     </li>
   </ul>

@@ -1,3 +1,6 @@
+
+'use strict';
+
 app.factory('storage', function() {
   return {
     set: function(key, obj){

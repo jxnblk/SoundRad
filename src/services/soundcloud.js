@@ -1,3 +1,6 @@
+
+'use strict';
+
 app.factory('soundcloud', function($window, $http, storage) {
 
   var soundcloud = {};
@@ -33,7 +36,11 @@ app.factory('soundcloud', function($window, $http, storage) {
       })
       .success(function(data) {
         soundcloud.next_href = data.next_href;
-        if (callback) callback(data);
+        var tracks = [];
+        for (var i = 0; i < data.collection.length; i++) {
+          tracks.push(data.collection[i].origin);
+        }
+        if (callback) callback(tracks);
       });
   };
 
@@ -44,7 +51,11 @@ app.factory('soundcloud', function($window, $http, storage) {
       })
       .success(function(data) {
         soundcloud.next_href = data.next_href;
-        if (callback) callback(data);
+        var tracks = [];
+        for (var i = 0; i < data.collection.length; i++) {
+          tracks.push(data.collection[i].origin);
+        }
+        if (callback) callback(tracks);
       });
   };
 

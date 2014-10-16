@@ -15,7 +15,11 @@ gulp.task('compile', function() {
       './src/directives/icons.js',
       './src/controllers/main.js',
       './src/controllers/tracklist.js',
-      './src/controllers/stream.js'
+      './src/controllers/stream.js',
+      './src/controllers/user.js',
+      './src/controllers/likes.js',
+      './src/controllers/sets.js',
+      './src/controllers/set.js'
       ])
     .pipe(concat('app.js'))
     .pipe(ngmin())

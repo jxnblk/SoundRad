@@ -1,3 +1,6 @@
+
+'use strict';
+
 app.controller('MainCtrl',
   ['$scope', '$window', '$location', 'storage', 'soundcloud', 'player',
   function($scope, $window, $location, storage, soundcloud, player) {

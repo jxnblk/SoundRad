@@ -1,4 +1,5 @@
-'text use strict';
+
+'use strict';
 
 var app = angular.module('app', ['ngTouch', 'ngRoute']);
 
@@ -7,7 +8,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider.when('/callback', { templateUrl: '/partials/callback.html', controller: 'CallbackCtrl' });
   $routeProvider.when('/settings', { templateUrl: '/partials/settings.html', controller: 'SettingsCtrl' });
   $routeProvider.when('/search', { templateUrl: '/partials/search.html', controller: 'SearchCtrl' });
-  $routeProvider.when('/:user/:subpath?/:playlist?', { templateUrl: '/partials/user.html', controller: 'UserCtrl' });
+  $routeProvider.when('/:user', { templateUrl: '/partials/user.html', controller: 'UserCtrl' });
+  $routeProvider.when('/:user/likes', { templateUrl: '/partials/likes.html', controller: 'LikesCtrl' });
+  $routeProvider.when('/:user/sets', { templateUrl: '/partials/sets.html', controller: 'SetsCtrl' });
+  $routeProvider.when('/:user/sets/:set', { templateUrl: '/partials/set.html', controller: 'SetCtrl' });
   $locationProvider.html5Mode(true);
 }]);
 

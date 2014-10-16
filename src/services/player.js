@@ -1,4 +1,6 @@
 
+'use strict';
+
 app.factory('player', function(soundcloud) {
 
   var player = {};
@@ -21,9 +23,9 @@ app.factory('player', function(soundcloud) {
   };
 
   player.play = function(index) {
-    if(index) this.index = index;
+    if(index != null) this.index = index;
     if(!this.tracks[this.index]) return false;
-    this.audio.src = this.tracks[this.index].origin.stream_url + this.params;
+    this.audio.src = this.tracks[this.index].stream_url + this.params;
     this.audio.play();
   };
 
