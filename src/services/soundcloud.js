@@ -10,7 +10,9 @@ app.factory('soundcloud', function($window, $http, storage) {
   soundcloud.api = 'https://api.soundcloud.com';
   soundcloud.params = {
     client_id: clientID,
-    oauth_token: token
+    oauth_token: token,
+    offset: 0,
+    limit: 32
   };
 
   soundcloud.next_href = null;

@@ -6,16 +6,14 @@ app.controller('LikesCtrl', [
   function($scope, $routeParams, soundcloud, player) {
 
   console.log('likes controller', $routeParams);
-  $scope.user = {};
-  $scope.user.username = $routeParams.user;
+  $scope.user = $routeParams.user;
+  $scope.isLoading = true;
+  $scope.endpoint = '/users/' + $routeParams.user + '/favorites';
 
-  soundcloud.get('/users/' + $routeParams.user, function(data) {
-    $scope.user = data;
-  });
-
-  soundcloud.get('/users/' + $routeParams.user + '/favorites', function(data) {
+  soundcloud.get($scope.endpoint, function(data) {
     $scope.tracks = data;
     player.load(data);
+    $scope.isLoading = false;
   });
 
 }]);

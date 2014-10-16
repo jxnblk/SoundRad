@@ -5,11 +5,10 @@ app.controller('UserCtrl', [
   '$scope', '$routeParams', 'soundcloud', 'player',
   function($scope, $routeParams, soundcloud, player) {
 
-  soundcloud.get('/users/' + $routeParams.user, function(data) {
-    $scope.user = data;
-  });
+  $scope.user = $routeParams.user;
+  $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
 
-  soundcloud.get('/users/' + $routeParams.user + '/tracks', function(data) {
+  soundcloud.get($scope.endpoint, function(data) {
     $scope.tracks = data;
     player.load(data);
   });

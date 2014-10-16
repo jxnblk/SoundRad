@@ -24,8 +24,6 @@ app.directive('icon', function() {
           id = attrs.icon,
           path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-      console.log(id);
-
       if (!sprite[id]) return false;
 
       el.classList.add('plangular-icon', 'plangular-icon-'+id);

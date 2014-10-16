@@ -1,16 +1,26 @@
 <div ng-controller="TracklistCtrl">
   <ul class="list-reset">
-    <li class="border-bottom" ng-repeat="track in tracks">
-      <a href class="button block button-nav-light" ng-click="player.play($index)">
-        {{ track.user.username }}
-        {{ track.title }}
+    <li class="clearfix border-bottom" ng-repeat="track in tracks">
+      <div class="right">
+
+        <!--
+        Widget link: 
+        <a ng-href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ track.id }}&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;visual=true"
+          class="button button-narrow button-nav-light" target="_blank">
+        -->
+        <a ng-href="{{ track.permalink_url }}?auto_play=false" class="button button-narrow button-nav-light" target="_blank">
+          <svg class="icon" icon="chevronRight"></svg>
+        </a>
+      </div>
+      <a href class="button overflow-hidden block button-nav-light" ng-click="player.play($index)">
+        {{ track.user.username }} - {{ track.title }}
       </a>
     </li>
   </ul>
   <div class="center py2">
     <a href class="button block"
       ng-hide="isLoading"
-      ng-click="loadMore()">
+      ng-click="nextPage()">
         <span class="button button-blue-outline">Show More</span>
     </a>
     <span class="button py2" ng-show="isLoading">Loading...</span>
