@@ -17,14 +17,29 @@
       position: sticky;
       top: 0;
     }
+    button { background-color: transparent }
+    .button-nav-light { color: #333 }
+    progress {
+      width: 100%;
+      height: 1.5rem;
+      -webkit-appearance: none;
+      appearance: none;
+      padding: .5rem 0;
+    }
+    progress::-webkit-progress-bar {
+      background-color: #eee;
+    }
+    progress::-webkit-progress-value {
+      background-color: #333;
+    }
   </style>
 </head>
 <body class="">
   
 <div ng-include="'partials/nav.html'"></div>
-<div class="sticky bg-white" ng-include="'partials/player.html'"></div>
+<div class="sticky z1 bg-white" ng-include="'partials/player.html'"></div>
 
-<div class="container" ng-view></div>
+<div ng-view></div>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>

@@ -15,6 +15,8 @@ app.factory('player', function(soundcloud) {
   player.audio = document.createElement('audio');
   player.tracks = [];
   player.index = 0;
+  player.currentTime;
+  player.duration;
   // Consider using audio.paused instead
   //player.playing = false;
 

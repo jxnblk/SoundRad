@@ -13,6 +13,7 @@ gulp.task('compile', function() {
       './src/services/player.js',
       './src/services/storage.js',
       './src/directives/icons.js',
+      './src/filters/pretty-time.js',
       './src/controllers/main.js',
       './src/controllers/tracklist.js',
       './src/controllers/stream.js',

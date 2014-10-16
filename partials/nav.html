@@ -1,18 +1,18 @@
 <div class="clearfix px1 border-bottom">
   <div class="sm-col" ng-if="!currentUser">
-    <a href="/" class="button button-narrow py2 button-nav-light">SoundRad</a>
+    <a href="/" class="h6 button button-narrow py2 button-nav-light">SoundRad</a>
   </div>
   <div class="sm-col" ng-if="currentUser">
-    <a href="/" class="button button-narrow py2 button-nav-light">Stream</a>
-    <a ng-href="/{{ currentUser.permalink }}/likes" class="button button-narrow py2 button-nav-light">Likes</a>
-    <a ng-href="/{{ currentUser.permalink }}/sets" class="button button-narrow py2 button-nav-light">Playlists</a>
+    <a href="/" class="h6 button button-narrow py2 button-nav-light">Stream</a>
+    <a ng-href="/{{ currentUser.permalink }}/likes" class="h6 button button-narrow py2 button-nav-light">Likes</a>
+    <a ng-href="/{{ currentUser.permalink }}/sets" class="h6 button button-narrow py2 button-nav-light">Playlists</a>
   </div>
   <div class="sm-col-right" ng-if="currentUser">
-    <a ng-href="/{{ currentUser.permalink }}" class="button button-narrow py2 button-nav-light">{{ currentUser.username }}</a>
-    <a href class="button button-narrow py2 button-nav-light" ng-click="logout()">Sign Out</a>
+    <a ng-href="/{{ currentUser.permalink }}" class="h6 button button-narrow py2 button-nav-light">{{ currentUser.username }}</a>
+    <a href class="h6 button button-narrow py2 button-nav-light" ng-click="logout()">Sign Out</a>
   </div>
   <div class="right py1" ng-if="!currentUser">
-    <button class="button-blue" ng-click="connect()">Connect</button>
+    <button class="h6 button-blue" ng-click="connect()">Connect</button>
   </div>
 </div>
 

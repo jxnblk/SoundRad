@@ -34,5 +34,11 @@ app.controller('MainCtrl',
     $window.location.href = '/';
   };
 
+  player.audio.addEventListener('timeupdate', function() {
+    $scope.$apply(function() {
+      $scope.currentTime = player.audio.currentTime;
+    });
+  });
+
 }]);
 

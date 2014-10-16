@@ -121,6 +121,8 @@ app.factory('player', [
     player.audio = document.createElement('audio');
     player.tracks = [];
     player.index = 0;
+    player.currentTime;
+    player.duration;
     // Consider using audio.paused instead
     //player.playing = false;
     player.load = function (tracks) {
@@ -212,6 +214,25 @@ app.directive('icon', function () {
   };
 });
 'use strict';
+app.filter('prettyTime', function () {
+  return function (value) {
+    var hours = Math.floor(value / 3600), mins = '0' + Math.floor(value % 3600 / 60), secs = '0' + Math.floor(value % 60);
+    mins = mins.substr(mins.length - 2);
+    secs = secs.substr(secs.length - 2);
+    if (!isNaN(secs)) {
+      if (hours) {
+        return hours + ':' + mins + ':' + secs;
+      } else {
+        return mins + ':' + secs;
+      }
+      ;
+    } else {
+      return '00:00';
+    }
+    ;
+  };
+});
+'use strict';
 app.controller('MainCtrl', [
   '$scope',
   '$window',
@@ -247,6 +268,11 @@ app.controller('MainCtrl', [
       storage.clear();
       $window.location.href = '/';
     };
+    player.audio.addEventListener('timeupdate', function () {
+      $scope.$apply(function () {
+        $scope.currentTime = player.audio.currentTime;
+      });
+    });
   }
 ]);
 'use strict';
