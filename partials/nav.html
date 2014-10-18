@@ -28,10 +28,6 @@
       ng-if="currentUser">
       {{ currentUser.username }}
     </a>
-    <a href class="cell nowrap button button-narrow py2 button-nav-dark"
-      ng-click="logout()" ng-if="currentUser">
-      Sign Out
-    </a>
     <div class="cell" ng-if="!currentUser">
       <button class="button-blue"
         ng-click="connect()">

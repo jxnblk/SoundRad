@@ -246,6 +246,7 @@ app.controller('MainCtrl', [
     $scope.player = player;
     $scope.audio = player.audio;
     $scope.view = { current: null };
+    $scope.user = {};
     // Get token from URL hash
     if ($location.hash()) {
       var token = $location.hash().replace('#', '').split('&')[0].split('=')[1];
@@ -333,13 +334,16 @@ app.controller('UserCtrl', [
   'soundcloud',
   'player',
   function ($scope, $routeParams, soundcloud, player) {
-    $scope.user = $routeParams.user;
-    if ($scope.user == $scope.currentUser.permalink) {
+    //$scope.user = $routeParams.user;
+    if ($routeParams.user == $scope.currentUser.permalink) {
       $scope.view.current = 'me';
     } else {
       $scope.view.current = 'user';
     }
     $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
+    soundcloud.get('/users/' + $routeParams.user, function (data) {
+      $scope.user = data;
+    });
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
       player.load(data);
@@ -353,11 +357,19 @@ app.controller('LikesCtrl', [
   'soundcloud',
   'player',
   function ($scope, $routeParams, soundcloud, player) {
-    console.log('likes controller', $routeParams);
-    $scope.user = $routeParams.user;
     $scope.isLoading = true;
     $scope.view.current = 'likes';
     $scope.endpoint = '/users/' + $routeParams.user + '/favorites';
+    console.log($scope.user);
+    if ($scope.user.permalink != $routeParams.user) {
+      console.log('get user');
+      soundcloud.get('/users/' + $routeParams.user, function (data) {
+        $scope.user = data;
+        $scope.user.subview = 'Likes';
+      });
+    } else {
+      $scope.user.subview = 'Likes';
+    }
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
       player.load(data);
@@ -368,10 +380,24 @@ app.controller('LikesCtrl', [
 'use strict';
 app.controller('SetsCtrl', [
   '$scope',
+  '$routeParams',
   'soundcloud',
-  function ($scope, soundcloud) {
+  function ($scope, $routeParams, soundcloud) {
+    $scope.isLoading = true;
     $scope.view.current = 'sets';
-    console.log('sets controller');
+    //$scope.endpoint = '/users/' + $routeParams.user + '/favorites';
+    if ($scope.user.permalink != $routeParams.user) {
+      soundcloud.get('/users/' + $routeParams.user, function (data) {
+        $scope.user = data;
+        $scope.user.subview = 'Playlists';
+      });
+    } else {
+      $scope.user.subview = 'Playlists';
+    }  //soundcloud.get($scope.endpoint, function(data) {
+       //  $scope.tracks = data;
+       //  player.load(data);
+       //  $scope.isLoading = false;
+       //});
   }
 ]);
 'use strict';

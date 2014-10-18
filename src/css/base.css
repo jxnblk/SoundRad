@@ -18,6 +18,9 @@ button { background-color: transparent }
   background-color: none;
   */
 }
+.button-nav-light.is-active {
+  background-color: var(--darken-2);
+}
 
 .button-icon {
   padding-left: .5em;
