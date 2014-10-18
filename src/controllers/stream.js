@@ -5,6 +5,7 @@ app.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope,
 
   $scope.isLoading = true;
   $scope.isStream = true;
+  $scope.view.current = 'stream';
 
   soundcloud.getStream(function(data) {
     $scope.tracks = data;

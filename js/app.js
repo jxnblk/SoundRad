@@ -245,6 +245,7 @@ app.controller('MainCtrl', [
     $scope.token = storage.get('token');
     $scope.player = player;
     $scope.audio = player.audio;
+    $scope.view = { current: null };
     // Get token from URL hash
     if ($location.hash()) {
       var token = $location.hash().replace('#', '').split('&')[0].split('=')[1];
@@ -310,6 +311,7 @@ app.controller('StreamCtrl', [
   function ($scope, soundcloud, player) {
     $scope.isLoading = true;
     $scope.isStream = true;
+    $scope.view.current = 'stream';
     soundcloud.getStream(function (data) {
       $scope.tracks = data;
       $scope.isLoading = false;
@@ -332,6 +334,11 @@ app.controller('UserCtrl', [
   'player',
   function ($scope, $routeParams, soundcloud, player) {
     $scope.user = $routeParams.user;
+    if ($scope.user == $scope.currentUser.permalink) {
+      $scope.view.current = 'me';
+    } else {
+      $scope.view.current = 'user';
+    }
     $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
@@ -349,6 +356,7 @@ app.controller('LikesCtrl', [
     console.log('likes controller', $routeParams);
     $scope.user = $routeParams.user;
     $scope.isLoading = true;
+    $scope.view.current = 'likes';
     $scope.endpoint = '/users/' + $routeParams.user + '/favorites';
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
@@ -362,6 +370,7 @@ app.controller('SetsCtrl', [
   '$scope',
   'soundcloud',
   function ($scope, soundcloud) {
+    $scope.view.current = 'sets';
     console.log('sets controller');
   }
 ]);

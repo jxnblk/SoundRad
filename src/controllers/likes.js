@@ -8,6 +8,7 @@ app.controller('LikesCtrl', [
   console.log('likes controller', $routeParams);
   $scope.user = $routeParams.user;
   $scope.isLoading = true;
+  $scope.view.current = 'likes';
   $scope.endpoint = '/users/' + $routeParams.user + '/favorites';
 
   soundcloud.get($scope.endpoint, function(data) {

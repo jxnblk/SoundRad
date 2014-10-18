@@ -1,29 +1,32 @@
-<div class="clearfix border-bottom">
-  <div class="left mr2">
-    <button class="h3 py2 button-nav-light"
+<div class="flex flex-align-center px1 white bg-dark-gray">
+  <div class="cell">
+    <button class="h3 py2 button-icon-dark"
       title="Play"
       ng-show="player.audio.paused"
       ng-click="player.play()">
       <svg class="icon" icon="play"></svg>
     </button>
-    <button class="h3 py2 button-nav-light"
+    <button class="h3 py2 button-icon-dark"
       title="Pause"
       ng-hide="player.audio.paused"
       ng-click="player.pause()">
       <svg class="icon" icon="pause"></svg>
     </button>
   </div>
-  <div class="overflow-hidden">
-    <h1 class="h5 m0 clearfix">
-      <div class="h6 mt1 mr2 right sm-show">
-        {{ currentTime | prettyTime }}
-        {{ audio.duration | prettyTime }}
-      </div>
-      <div class="overflow-hidden mt1">
+  <div class="cell cell-1 px1">
+    <div class="h4 flex flex-align-center">
+      <div class="cell cell-1 col-6 bold py1">
         {{ player.tracks[player.index].user.username || '&nbsp;' }}
+        &ndash;
         {{ player.tracks[player.index].title || '&nbsp;' }}
       </div>
-    </h1>
+      <div class="h6 cell">
+        {{ currentTime | prettyTime }}
+      </div>
+      <div class="h6 cell ml1 sm-show">
+        {{ audio.duration | prettyTime }}
+      </div>
+    </div>
     <progress class="progress" value="{{ currentTime / audio.duration || 0 }}">{{ currentTime / audio.duration }}</progress>
   </div>
 </div>

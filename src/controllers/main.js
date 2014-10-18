@@ -9,6 +9,7 @@ app.controller('MainCtrl',
   $scope.token = storage.get('token');
   $scope.player = player;
   $scope.audio = player.audio;
+  $scope.view = { current: null };
 
   // Get token from URL hash
   if($location.hash()) {

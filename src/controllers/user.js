@@ -6,6 +6,11 @@ app.controller('UserCtrl', [
   function($scope, $routeParams, soundcloud, player) {
 
   $scope.user = $routeParams.user;
+  if ($scope.user == $scope.currentUser.permalink) {
+    $scope.view.current = 'me';
+  } else {
+    $scope.view.current = 'user';
+  }
   $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
 
   soundcloud.get($scope.endpoint, function(data) {

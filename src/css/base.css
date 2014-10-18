@@ -10,7 +10,25 @@
 
 button { background-color: transparent }
 
-.button-nav-light { color: #333 }
+.button-nav-light {
+  color: var(--dark-gray);
+}
+.button-nav-light:hover {
+  /*
+  background-color: none;
+  */
+}
+
+.button-icon {
+  padding-left: .5em;
+  padding-right: .5em;
+  text-align: center;
+  width: 2em;
+}
+
+.button-icon-dark {
+  color: white;
+}
 
 progress {
   width: 100%;
@@ -22,16 +40,18 @@ progress {
 
 progress::-webkit-progress-bar {
   -webkit-appearance: none;
-  background-color: #eee;
+  background-color: var(--darken-2);
 }
 
 progress::-webkit-progress-value {
   -webkit-appearance: none;
-  background-color: #333;
+  background-color: var(--blue);
 }
 
 .icon {
   width: 1em;
   height: 1em;
+  position: relative;
+  top: .125em;
 }
 
