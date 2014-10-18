@@ -6,11 +6,18 @@
       <a href class="cell cell-1 col-11 h5 button dark-gray" ng-click="player.play($index)">
         {{ track.user.username }} - {{ track.title }}
       </a>
-      <a href ng-click="toggleLike()" class="cell button button-icon button-nav-light" target="_blank">
-        <svg class="icon" icon="heart"></svg>
+      <a href ng-click="like(track)"
+        ng-hide="track.user_favorite"
+        class="cell button button-icon button-nav-light" target="_blank">
+        <svg class="icon light-gray" icon="heart"></svg>
+      </a>
+      <a href ng-click="unlike(track)"
+        ng-show="track.user_favorite"
+        class="cell button button-icon button-nav-light" target="_blank">
+        <svg class="icon red" icon="heart"></svg>
       </a>
       <a ng-href="{{ track.permalink_url }}?auto_play=false" class="cell button button-icon button-nav-light" target="_blank">
-        <svg class="icon" icon="chevronRight"></svg>
+        <svg class="icon light-gray" icon="chevronRight"></svg>
       </a>
     </li>
   </ul>

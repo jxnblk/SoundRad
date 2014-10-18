@@ -78,6 +78,12 @@ app.factory('player', function(soundcloud) {
     }
   };
 
+  player.seek = function(e) {
+    if (!this.audio.readyState) return false;
+    var xpos = e.offsetX / e.target.offsetWidth;
+    this.audio.currentTime = (xpos * this.audio.duration);
+  };
+
   player.audio.addEventListener('ended', function() {
     player.next();
   }, false);

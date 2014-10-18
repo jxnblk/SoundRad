@@ -115,6 +115,22 @@ app.factory('soundcloud', [
           callback(tracks);
       });
     };
+    soundcloud.like = function (track, callback) {
+      $http.put(this.api + '/me/favorites/' + track.id, track, { params: this.params }).error(function (err) {
+        console.error('error', err);
+      }).success(function (data) {
+        if (callback)
+          callback(data);
+      });
+    };
+    soundcloud.unlike = function (track, callback) {
+      $http.delete(this.api + '/me/favorites/' + track.id, { params: this.params }).error(function (err) {
+        console.error('error', err);
+      }).success(function (data) {
+        if (callback)
+          callback(data);
+      });
+    };
     return soundcloud;
   }
 ]);
@@ -192,6 +208,12 @@ app.factory('player', [
         this.index--;
         this.play();
       }
+    };
+    player.seek = function (e) {
+      if (!this.audio.readyState)
+        return false;
+      var xpos = e.offsetX / e.target.offsetWidth;
+      this.audio.currentTime = xpos * this.audio.duration;
     };
     player.audio.addEventListener('ended', function () {
       player.next();
@@ -342,6 +364,22 @@ app.controller('TracklistCtrl', [
           $scope.isLoading = false;
         });
       }
+    };
+    $scope.like = function (track) {
+      if (!$scope.token)
+        return false;
+      console.log('like');
+      soundcloud.like(track, function (response) {
+        track.user_favorite = true;
+      });
+    };
+    $scope.unlike = function (track) {
+      if (!$scope.token)
+        return false;
+      console.log('unlike');
+      soundcloud.unlike(track, function (response) {
+        track.user_favorite = false;
+      });
     };
   }
 ]);

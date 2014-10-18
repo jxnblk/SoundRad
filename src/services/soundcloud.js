@@ -75,6 +75,26 @@ app.factory('soundcloud', function($window, $http, storage) {
       });
   };
 
+  soundcloud.like = function(track, callback) {
+    $http.put(this.api + '/me/favorites/' + track.id, track, { params: this.params})
+      .error(function(err) {
+        console.error('error', err);
+      })
+      .success(function(data) {
+        if (callback) callback(data);
+      });
+  };
+
+  soundcloud.unlike = function(track, callback) {
+    $http.delete(this.api + '/me/favorites/' + track.id, { params: this.params})
+      .error(function(err) {
+        console.error('error', err);
+      })
+      .success(function(data) {
+        if (callback) callback(data);
+      });
+  };
+
   return soundcloud;
 
 });

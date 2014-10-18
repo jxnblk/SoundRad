@@ -33,5 +33,21 @@ app.controller('TracklistCtrl', ['$scope', 'soundcloud', 'player', function($sco
     }
   };
 
+  $scope.like = function(track) {
+    if (!$scope.token) return false;
+    console.log('like');
+    soundcloud.like(track, function(response) {
+      track.user_favorite = true;
+    });
+  };
+
+  $scope.unlike = function(track) {
+    if (!$scope.token) return false;
+    console.log('unlike');
+    soundcloud.unlike(track, function(response) {
+      track.user_favorite = false;
+    });
+  };
+
 }]);
 
