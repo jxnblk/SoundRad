@@ -1,6 +1,8 @@
 <div class="container" ng-controller="TracklistCtrl">
   <ul class="list-reset mb0">
-    <li class="flex flex-align-center flex-justify-between border-bottom button-nav-light" ng-repeat="track in tracks">
+    <li class="flex flex-align-center flex-justify-between border-bottom button-nav-light"
+      ng-class="{ 'is-active': player.tracks[player.index] == track }"
+      ng-repeat="track in tracks">
       <a href class="cell cell-1 col-11 h5 button dark-gray" ng-click="player.play($index)">
         {{ track.user.username }} - {{ track.title }}
       </a>
