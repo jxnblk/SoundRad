@@ -69,6 +69,8 @@ app.factory('soundcloud', [
       $window.location.href = 'https://soundcloud.com/connect?client_id=' + clientID + '&redirect_uri=' + callbackUrl + '&response_type=code_and_token&scope=non-expiring&display=popup';
     };
     soundcloud.get = function (path, callback) {
+      this.params.url = null;
+      this.params.callback = null;
       $http.get(this.api + path, { params: this.params }).error(function (err) {
         console.error('error', err);
       }).success(function (data) {
@@ -76,7 +78,18 @@ app.factory('soundcloud', [
           callback(data);
       });
     };
+    soundcloud.jsonp = function (path, callback) {
+      this.params.callback = 'JSON_CALLBACK';
+      $http.jsonp(this.api + path + '.json', { params: this.params }).error(function (err) {
+        console.error('error', err);
+      }).success(function (data) {
+        if (callback)
+          callback(data);
+      });
+    };
     soundcloud.getStream = function (callback) {
+      this.params.callback = null;
+      this.params.url = null;
       $http.get(this.api + '/me/activities/tracks', { params: this.params }).error(function (err) {
         console.error('error', err);
       }).success(function (data) {
@@ -412,7 +425,9 @@ app.controller('SetsCtrl', [
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
       $scope.user = data[0].user;
-      $scope.user.subview = 'Playlists';
+      if ($scope.user) {
+        $scope.user.subview = 'Playlists';
+      }
       $scope.isLoading = false;
     });
   }
@@ -433,7 +448,7 @@ app.controller('SetCtrl', [
     if ($routeParams.secret) {
       soundcloud.params.url += '/' + $routeParams.secret;
     }
-    soundcloud.get($scope.endpoint, function (data) {
+    soundcloud.jsonp($scope.endpoint, function (data) {
       $scope.set = data;
       $scope.user = data.user;
       $scope.tracks = data.tracks;

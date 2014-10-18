@@ -22,6 +22,10 @@ button { background-color: transparent }
   background-color: var(--darken-2);
 }
 
+.button-nav-dark.is-active {
+  background-color: var(--blue);
+}
+
 .button-icon {
   padding-left: .5em;
   padding-right: .5em;

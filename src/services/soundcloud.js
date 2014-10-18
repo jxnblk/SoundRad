@@ -21,6 +21,8 @@ app.factory('soundcloud', function($window, $http, storage) {
   };
 
   soundcloud.get = function(path, callback) {
+    this.params.url = null;
+    this.params.callback = null;
     $http.get(this.api + path, { params: this.params })
       .error(function(err) {
         console.error('error', err);
@@ -30,7 +32,20 @@ app.factory('soundcloud', function($window, $http, storage) {
       });
   };
 
+  soundcloud.jsonp = function(path, callback) {
+    this.params.callback = 'JSON_CALLBACK';
+    $http.jsonp(this.api + path + '.json', { params: this.params })
+      .error(function(err) {
+        console.error('error', err);
+      })
+      .success(function(data) {
+        if (callback) callback(data);
+      });
+  };
+
   soundcloud.getStream = function(callback) {
+    this.params.callback = null;
+    this.params.url = null;
     $http.get(this.api + '/me/activities/tracks', { params: this.params })
       .error(function(err) {
         console.error('error', err);

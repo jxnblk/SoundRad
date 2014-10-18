@@ -1,34 +1,34 @@
 <div class="bg-dark-gray">
-  <div class="flex flex-align-center flex-justify-between h5 px1 white bg-darken-2">
+  <div class="flex flex-align-center flex-justify-between h5 white bg-darken-2">
     <a href="/" ng-if="!currentUser"
       class="cell button button-narrow py2 button-nav-dark">
       SoundRad
     </a>
-    <a href="/" class="cell button button-narrow py2 button-nav-dark"
+    <a href="/" class="cell button px2 py2 button-nav-dark"
       ng-class="{ 'is-active': view.current == 'stream' }"
       ng-if="currentUser">
       Stream
     </a>
     <a ng-href="/{{ currentUser.permalink }}/likes"
-      class="cell sm-show button button-narrow py2 button-nav-dark"
+      class="cell button py2 button-nav-dark"
       ng-class="{ 'is-active': view.current == 'likes' }"
       ng-if="currentUser">
       Likes
     </a>
     <a ng-href="/{{ currentUser.permalink }}/sets"
-      class="cell sm-show button button-narrow py2 button-nav-dark"
+      class="cell button py2 button-nav-dark"
       ng-class="{ 'is-active': view.current == 'sets' }"
       ng-if="currentUser">
       Playlists
     </a>
-    <div class="cell cell-1 col-6"></div>
+    <div class="cell cell-1"></div>
     <a ng-href="/{{ currentUser.permalink }}"
-      class="cell button button-narrow py2 button-nav-dark"
+      class="cell button py2 button-nav-dark"
       ng-class="{ 'is-active': view.current == 'me' }"
       ng-if="currentUser">
       {{ currentUser.username }}
     </a>
-    <div class="cell" ng-if="!currentUser">
+    <div class="cell px2" ng-if="!currentUser">
       <button class="button-blue"
         ng-click="connect()">
         Connect

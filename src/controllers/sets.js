@@ -11,8 +11,10 @@ app.controller('SetsCtrl', ['$scope', '$routeParams', 'soundcloud', function($sc
 
   soundcloud.get($scope.endpoint, function(data) {
     $scope.tracks = data;
-    $scope.user = data[0].user;
-    $scope.user.subview = 'Playlists';
+    $scope.user = data[0].user; 
+    if ($scope.user) {
+      $scope.user.subview = 'Playlists';
+    }
     $scope.isLoading = false;
   });
 
