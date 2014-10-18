@@ -1,9 +1,12 @@
+
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var ngmin = require('gulp-ngmin');
 var uglify = require('gulp-uglify');
 var webserver = require('gulp-webserver');
 var rename = require('gulp-rename');
+var basswork = require('gulp-basswork');
+var mincss = require('gulp-minify-css');
 
 gulp.task('compile', function() {
   return gulp.src([
@@ -38,7 +41,15 @@ gulp.task('dupeindex', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('dev', ['compile', 'dupeindex', 'serve'], function() {
-  gulp.watch(['./src/**/*', './index.html'], ['compile', 'dupeindex']);
+gulp.task('basswork', function() {
+  gulp.src('./src/css/base.css')
+    .pipe(basswork())
+    .pipe(mincss())
+    .pipe(rename('base.min.css'))
+    .pipe(gulp.dest('./css'));
+});
+
+gulp.task('dev', ['compile', 'dupeindex', 'basswork', 'serve'], function() {
+  gulp.watch(['./src/**/*', './index.html'], ['compile', 'dupeindex', 'basswork']);
 });
 

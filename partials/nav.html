@@ -1,18 +1,37 @@
-<div class="clearfix px1 border-bottom">
-  <div class="sm-col" ng-if="!currentUser">
-    <a href="/" class="h6 button button-narrow py2 button-nav-light">SoundRad</a>
-  </div>
-  <div class="sm-col" ng-if="currentUser">
-    <a href="/" class="h6 button button-narrow py2 button-nav-light">Stream</a>
-    <a ng-href="/{{ currentUser.permalink }}/likes" class="h6 button button-narrow py2 button-nav-light">Likes</a>
-    <a ng-href="/{{ currentUser.permalink }}/sets" class="h6 button button-narrow py2 button-nav-light">Playlists</a>
-  </div>
-  <div class="sm-col-right" ng-if="currentUser">
-    <a ng-href="/{{ currentUser.permalink }}" class="h6 button button-narrow py2 button-nav-light">{{ currentUser.username }}</a>
-    <a href class="h6 button button-narrow py2 button-nav-light" ng-click="logout()">Sign Out</a>
-  </div>
-  <div class="right py1" ng-if="!currentUser">
-    <button class="h6 button-blue" ng-click="connect()">Connect</button>
+<div class="flex flex-align-center flex-justify-between h5 px1 border-bottom">
+  <a href="/" ng-if="!currentUser"
+    class="cell button button-narrow py2 button-nav-light">
+    SoundRad
+  </a>
+  <a href="/" class="cell button button-narrow py2 button-nav-light"
+    ng-if="currentUser">
+    Stream
+  </a>
+  <a ng-href="/{{ currentUser.permalink }}/likes"
+    class="cell sm-show button button-narrow py2 button-nav-light"
+    ng-if="currentUser">
+    Likes
+  </a>
+  <a ng-href="/{{ currentUser.permalink }}/sets"
+    class="cell sm-show button button-narrow py2 button-nav-light"
+    ng-if="currentUser">
+    Playlists
+  </a>
+  <div class="cell cell-1 col-6"></div>
+  <a ng-href="/{{ currentUser.permalink }}"
+    class="cell button button-narrow py2 button-nav-light"
+    ng-if="currentUser">
+    {{ currentUser.username }}
+  </a>
+  <a href class="cell nowrap button button-narrow py2 button-nav-light"
+    ng-click="logout()" ng-if="currentUser">
+    Sign Out
+  </a>
+  <div class="cell" ng-if="!currentUser">
+    <button class="button-blue"
+      ng-click="connect()">
+      Connect
+    </button>
   </div>
 </div>
 
