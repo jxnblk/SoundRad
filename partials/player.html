@@ -3,22 +3,22 @@
     <button class="h3 py2 button-icon-dark"
       title="Play"
       ng-show="player.audio.paused"
-      ng-click="player.play()">
+      ng-click="player.playPause()">
       <svg class="icon" icon="play"></svg>
     </button>
     <button class="h3 py2 button-icon-dark"
       title="Pause"
       ng-hide="player.audio.paused"
-      ng-click="player.pause()">
+      ng-click="player.playPause()">
       <svg class="icon" icon="pause"></svg>
     </button>
   </div>
   <div class="cell cell-1 px1">
     <div class="h4 flex flex-align-center">
       <div class="cell cell-1 col-6 bold py1">
-        {{ player.tracks[player.index].user.username || '&nbsp;' }}
+        {{ player.playing.user.username || player.paused.user.username || '&nbsp;' }}
         &ndash;
-        {{ player.tracks[player.index].title || '&nbsp;' }}
+        {{ player.playing.title || player.paused.title || '&nbsp;' }}
       </div>
       <div class="h6 cell">
         {{ currentTime | prettyTime }}

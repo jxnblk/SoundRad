@@ -42,7 +42,7 @@ app.config([
       templateUrl: '/partials/sets.html',
       controller: 'SetsCtrl'
     });
-    $routeProvider.when('/:user/sets/:set', {
+    $routeProvider.when('/:user/sets/:set/:secret?', {
       templateUrl: '/partials/set.html',
       controller: 'SetCtrl'
     });
@@ -57,13 +57,12 @@ app.factory('soundcloud', [
   function ($window, $http, storage) {
     var soundcloud = {};
     var token = storage.get('token');
-    // soundcloud.api = 'https://api-v2.soundcloud.com';
     soundcloud.api = 'https://api.soundcloud.com';
     soundcloud.params = {
       client_id: clientID,
       oauth_token: token,
       offset: 0,
-      limit: 32
+      limit: 24
     };
     soundcloud.next_href = null;
     soundcloud.connect = function () {
@@ -123,31 +122,50 @@ app.factory('player', [
     player.index = 0;
     player.currentTime;
     player.duration;
-    // Consider using audio.paused instead
-    //player.playing = false;
+    player.playing = false;
+    player.paused = null;
     player.load = function (tracks) {
       this.tracks = tracks;
+      this.index = 0;
+      if (!this.paused) {
+        this.paused = this.tracks[0];
+      }
     };
     player.play = function (index) {
       if (index != null)
         this.index = index;
       if (!this.tracks[this.index])
         return false;
-      if (this.audio.src != this.tracks[this.index].stream_url + this.params) {
-        this.audio.src = this.tracks[this.index].stream_url + this.params;
+      var track = this.tracks[this.index];
+      if (this.audio.src != track.stream_url + this.params) {
+        this.audio.src = track.stream_url + this.params;
       }
       this.audio.play();
+      this.playing = track;
+      this.paused = false;
     };
     player.pause = function () {
       this.audio.pause();
+      this.paused = this.playing;
+      this.playing = false;
     };
     player.playPause = function () {
-      if (this.audio.paused) {
+      if (this.paused) {
+        if (!this.audio.src)
+          this.audio.src = this.paused.stream_url + this.params;
+        this.audio.play();
+        this.playing = this.paused;
+        this.paused = false;
+      } else if (this.audio.paused) {
         if (!this.audio.src)
           this.audio.src = this.tracks[this.index].stream_url + this.params;
         this.audio.play();
+        this.playing = this.tracks[this.index];
+        this.paused = false;
       } else {
         this.audio.pause();
+        this.paused = this.playing;
+        this.playing = false;
       }
     };
     player.next = function () {
@@ -247,6 +265,8 @@ app.controller('MainCtrl', [
     $scope.audio = player.audio;
     $scope.view = { current: null };
     $scope.user = {};
+    $scope.user.username = '';
+    $scope.errors = [];
     // Get token from URL hash
     if ($location.hash()) {
       var token = $location.hash().replace('#', '').split('&')[0].split('=')[1];
@@ -257,7 +277,6 @@ app.controller('MainCtrl', [
         soundcloud.get('/me', function (data) {
           $scope.currentUser = data;
           storage.set('currentUser', data);
-          console.log('me', data);
         });
         $location.search('');
         $location.hash('');
@@ -283,11 +302,9 @@ app.controller('TracklistCtrl', [
   'soundcloud',
   'player',
   function ($scope, soundcloud, player) {
-    $scope.page = 0;
+    $scope.hasNextPage = true;
     $scope.nextPage = function () {
       $scope.isLoading = true;
-      $scope.page++;
-      soundcloud.params.offset = $scope.page * soundcloud.params.limit;
       if ($scope.isStream) {
         soundcloud.getStreamNextPage(function (data) {
           $scope.tracks = $scope.tracks.concat(data);
@@ -295,8 +312,19 @@ app.controller('TracklistCtrl', [
           $scope.isLoading = false;
         });
       } else {
+        $scope.page++;
+        soundcloud.params.offset = $scope.page * soundcloud.params.limit;
         soundcloud.get($scope.endpoint, function (data) {
-          $scope.tracks = $scope.tracks.concat(data);
+          if (!data.length) {
+            $scope.hasNextPage = false;
+            $scope.isLoading = false;
+            return false;
+          }
+          if ($scope.isPlaylist) {
+            $scope.tracks = $scope.tracks.concat(data.tracks);
+          } else {
+            $scope.tracks = $scope.tracks.concat(data);
+          }
           player.tracks = $scope.tracks;
           $scope.isLoading = false;
         });
@@ -317,14 +345,7 @@ app.controller('StreamCtrl', [
       $scope.tracks = data;
       $scope.isLoading = false;
       player.load(data);
-    });  //$scope.loadMore = function() {
-         //  $scope.isLoading = true;
-         //  soundcloud.getStreamNextPage(function(data) {
-         //    $scope.tracks = $scope.tracks.concat(data);
-         //    $scope.isLoading = false;
-         //    player.load($scope.tracks);
-         //  });
-         //};
+    });
   }
 ]);
 'use strict';
@@ -334,19 +355,23 @@ app.controller('UserCtrl', [
   'soundcloud',
   'player',
   function ($scope, $routeParams, soundcloud, player) {
-    //$scope.user = $routeParams.user;
+    $scope.page = 0;
+    soundcloud.params.offset = $scope.page * soundcloud.params.limit;
+    $scope.isLoading = true;
     if ($routeParams.user == $scope.currentUser.permalink) {
       $scope.view.current = 'me';
     } else {
       $scope.view.current = 'user';
     }
     $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
-    soundcloud.get('/users/' + $routeParams.user, function (data) {
-      $scope.user = data;
-    });
+    //soundcloud.get('/users/' + $routeParams.user, function(data) {
+    //  $scope.user = data;
+    //});
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
+      $scope.user = data[0].user;
       player.load(data);
+      $scope.isLoading = false;
     });
   }
 ]);
@@ -357,19 +382,15 @@ app.controller('LikesCtrl', [
   'soundcloud',
   'player',
   function ($scope, $routeParams, soundcloud, player) {
+    $scope.page = 0;
+    soundcloud.params.offset = $scope.page * soundcloud.params.limit;
     $scope.isLoading = true;
     $scope.view.current = 'likes';
     $scope.endpoint = '/users/' + $routeParams.user + '/favorites';
-    console.log($scope.user);
-    if ($scope.user.permalink != $routeParams.user) {
-      console.log('get user');
-      soundcloud.get('/users/' + $routeParams.user, function (data) {
-        $scope.user = data;
-        $scope.user.subview = 'Likes';
-      });
-    } else {
+    soundcloud.get('/users/' + $routeParams.user, function (data) {
+      $scope.user = data;
       $scope.user.subview = 'Likes';
-    }
+    });
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
       player.load(data);
@@ -383,28 +404,42 @@ app.controller('SetsCtrl', [
   '$routeParams',
   'soundcloud',
   function ($scope, $routeParams, soundcloud) {
+    $scope.page = 0;
+    soundcloud.params.offset = $scope.page * soundcloud.params.limit;
     $scope.isLoading = true;
     $scope.view.current = 'sets';
-    //$scope.endpoint = '/users/' + $routeParams.user + '/favorites';
-    if ($scope.user.permalink != $routeParams.user) {
-      soundcloud.get('/users/' + $routeParams.user, function (data) {
-        $scope.user = data;
-        $scope.user.subview = 'Playlists';
-      });
-    } else {
+    $scope.endpoint = '/users/' + $routeParams.user + '/playlists';
+    soundcloud.get($scope.endpoint, function (data) {
+      $scope.tracks = data;
+      $scope.user = data[0].user;
       $scope.user.subview = 'Playlists';
-    }  //soundcloud.get($scope.endpoint, function(data) {
-       //  $scope.tracks = data;
-       //  player.load(data);
-       //  $scope.isLoading = false;
-       //});
+      $scope.isLoading = false;
+    });
   }
 ]);
 'use strict';
 app.controller('SetCtrl', [
   '$scope',
+  '$routeParams',
   'soundcloud',
-  function ($scope, soundcloud) {
-    console.log('set controller');
+  'player',
+  function ($scope, $routeParams, soundcloud, player) {
+    $scope.page = 0;
+    soundcloud.params.offset = $scope.page * soundcloud.params.limit;
+    $scope.isLoading = true;
+    $scope.isPlaylist = true;
+    $scope.endpoint = '/resolve';
+    soundcloud.params.url = 'http://soundcloud.com/' + $routeParams.user + '/sets/' + $routeParams.set;
+    if ($routeParams.secret) {
+      soundcloud.params.url += '/' + $routeParams.secret;
+    }
+    soundcloud.get($scope.endpoint, function (data) {
+      $scope.set = data;
+      $scope.user = data.user;
+      $scope.tracks = data.tracks;
+      $scope.endpoint = '/playlists/' + data.id;
+      player.load(data.tracks);
+      $scope.isLoading = false;
+    });
   }
 ]);

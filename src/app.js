@@ -11,7 +11,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $routeProvider.when('/:user', { templateUrl: '/partials/user.html', controller: 'UserCtrl' });
   $routeProvider.when('/:user/likes', { templateUrl: '/partials/likes.html', controller: 'LikesCtrl' });
   $routeProvider.when('/:user/sets', { templateUrl: '/partials/sets.html', controller: 'SetsCtrl' });
-  $routeProvider.when('/:user/sets/:set', { templateUrl: '/partials/set.html', controller: 'SetCtrl' });
+  $routeProvider.when('/:user/sets/:set/:secret?', { templateUrl: '/partials/set.html', controller: 'SetCtrl' });
   $locationProvider.html5Mode(true);
 }]);
 

@@ -1,9 +1,27 @@
 
 'use strict';
 
-app.controller('SetCtrl', ['$scope', 'soundcloud', function($scope, soundcloud) {
+app.controller('SetCtrl', ['$scope', '$routeParams', 'soundcloud', 'player', function($scope, $routeParams, soundcloud, player) {
 
-  console.log('set controller');
+  $scope.page = 0;
+  soundcloud.params.offset = $scope.page * soundcloud.params.limit;
+  $scope.isLoading = true;
+  $scope.isPlaylist = true;
+
+  $scope.endpoint = '/resolve';
+  soundcloud.params.url = 'http://soundcloud.com/' + $routeParams.user + '/sets/' + $routeParams.set;
+  if ($routeParams.secret) {
+    soundcloud.params.url += '/' + $routeParams.secret;
+  }
+
+  soundcloud.get($scope.endpoint, function(data) {
+    $scope.set = data;
+    $scope.user = data.user;
+    $scope.tracks = data.tracks;
+    $scope.endpoint = '/playlists/' + data.id;
+    player.load(data.tracks);
+    $scope.isLoading = false;
+  });
 
 }]);
 

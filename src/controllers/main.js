@@ -11,6 +11,8 @@ app.controller('MainCtrl',
   $scope.audio = player.audio;
   $scope.view = { current: null };
   $scope.user = {};
+  $scope.user.username = '';
+  $scope.errors = [];
 
   // Get token from URL hash
   if($location.hash()) {
@@ -22,7 +24,6 @@ app.controller('MainCtrl',
       soundcloud.get('/me', function(data) {
         $scope.currentUser = data;
         storage.set('currentUser', data);
-        console.log('me', data);
       });
       $location.search('');
       $location.hash('');

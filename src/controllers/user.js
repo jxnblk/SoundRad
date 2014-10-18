@@ -5,7 +5,10 @@ app.controller('UserCtrl', [
   '$scope', '$routeParams', 'soundcloud', 'player',
   function($scope, $routeParams, soundcloud, player) {
 
-  //$scope.user = $routeParams.user;
+  $scope.page = 0;
+  soundcloud.params.offset = $scope.page * soundcloud.params.limit;
+  $scope.isLoading = true;
+
   if ($routeParams.user == $scope.currentUser.permalink) {
     $scope.view.current = 'me';
   } else {
@@ -13,13 +16,15 @@ app.controller('UserCtrl', [
   }
   $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
 
-  soundcloud.get('/users/' + $routeParams.user, function(data) {
-    $scope.user = data;
-  });
+  //soundcloud.get('/users/' + $routeParams.user, function(data) {
+  //  $scope.user = data;
+  //});
 
   soundcloud.get($scope.endpoint, function(data) {
     $scope.tracks = data;
+    $scope.user = data[0].user;
     player.load(data);
+    $scope.isLoading = false;
   });
 
 }]);
