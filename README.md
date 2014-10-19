@@ -6,7 +6,7 @@ http://soundrad.com
 
 ## Built for speed
 
-SoundRad is much faster than SoundCloud.
+SoundRad is significantly faster than SoundCloud.
 The reason: it focuses on the content.
 
 ### First View
@@ -42,8 +42,11 @@ Have you ever actually read a SoundCloud comment?
 
 ### Fewer network requests
 With SoundCloud, I typically see anywhere from 500 to 1,000 network requests on initial load.
-SoundRad keeps it under 40. I'm working on making that even less.
+SoundRad keeps it under 20.
 
 ## Content-Centric
 I use SoundCloud to listen to music. SoundRad focuses on loading audio above all else.
+
+### License
+[MIT License](http://opensource.org/licenses/MIT)
 
