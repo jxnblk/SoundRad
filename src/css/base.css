@@ -59,7 +59,7 @@ progress {
 
 progress::-webkit-progress-bar {
   -webkit-appearance: none;
-  background-color: var(--darken-2);
+  background-color: var(--darken-3);
 }
 
 progress::-webkit-progress-value {
