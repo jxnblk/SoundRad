@@ -3,6 +3,7 @@
   color: var(--dark-gray);
 }
 .button-nav-light:hover {
+  background-color: transparent;
 }
 .button-nav-light.is-active {
   background-color: var(--darken-2);

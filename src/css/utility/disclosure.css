@@ -3,8 +3,6 @@
 
 .disclosure-group {
   position: relative;
-  box-shadow: inset 0 0 0 32px rgba(#000, 0);
-  transition: box-shadow .2s ease-out;
 }
 
 .disclosure-body {
@@ -20,10 +18,6 @@
   background-color: white;
 }
 
-.disclosure-group.is-open {
-  box-shadow: inset 0 0 0 32px rgba(#000, .5);
-}
-
 .disclosure-group.is-open .disclosure-body {
   width: 16rem;
 }
@@ -33,13 +27,10 @@
   .disclosure-group {
     position: relative;
   }
-  .disclosure-group.is-open {
-    box-shadow: none;
-  }
   .disclosure-body {
     position: static;
     width: 12rem;
-    opacity: .1;
+    opacity: 0;
     transition: opacity .2s ease-out;
     background-color: transparent;
   }
