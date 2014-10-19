@@ -11,6 +11,23 @@
         {{ track.user.username }} - {{ track.title }}
       </a>
 
+      <div class="disclosure-body flex flex-align-center h6" style="min-height:2.5rem">
+        <a ng-href="/{{ track.user.permalink }}"
+          class="cell cell-1 truncate button button-narrow button-nav-light">
+          {{ track.user.username }}
+        </a>
+        <a ng-href="{{ track.permalink_url }}?auto_play=false"
+          ng-click="disclosureIsOpen = false"
+          class="cell col-5 center button button-narrow button-nav-light md-hide" target="_blank">
+          Soundcloud
+        </a>
+        <a ng-click="disclosureIsOpen = false"
+          class="cell h5 button button-icon button-icon-light md-hide"
+          title="Close Actions">
+          <svg class="icon" icon="close"></svg>
+        </a>
+      </div>
+
       <a href ng-click="like(track)"
         title="Like"
         ng-hide="track.user_favorite"
@@ -24,26 +41,14 @@
         <svg class="icon red" icon="heart"></svg>
       </a>
 
-      <div class="disclosure-body flex flex-align-center h6" style="min-height:2.5rem">
-        <a ng-href="/{{ track.user.permalink }}"
-          class="cell cell-1 truncate button button-narrow button-nav-light">
-          {{ track.user.username }}
-        </a>
-        <a ng-href="{{ track.permalink_url }}?auto_play=false"
-          ng-click="disclosureIsOpen = false"
-          class="cell col-5 center button button-narrow button-nav-light" target="_blank">
-          Soundcloud
-        </a>
-        <a ng-click="disclosureIsOpen = false"
-          class="cell h5 button button-icon button-icon-light md-hide"
-          title="Close Actions">
-          <svg class="icon" icon="close"></svg>
-        </a>
-      </div>
-
       <a href class="cell button button-icon button-icon-light md-hide"
         title="Toggle track actions"
         ng-click="disclosureIsOpen = !disclosureIsOpen">
+        <svg class="icon" icon="chevronRight"></svg>
+      </a>
+
+      <a ng-href="{{ track.permalink_url }}" class="cell button button-icon button-icon-light md-show"
+        title="View on Soundcloud">
         <svg class="icon" icon="chevronRight"></svg>
       </a>
 

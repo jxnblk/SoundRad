@@ -16,10 +16,6 @@
 @import "./base/roboto.css";
 */
 
-body {
-  letter-spacing: .03em;
-}
-
 :root {
   --dark-gray: #304650;
   --mid-gray: #667680;
