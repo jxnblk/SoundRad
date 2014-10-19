@@ -18,18 +18,7 @@ app.config([
       templateUrl: '/partials/stream.html',
       controller: 'StreamCtrl'
     });
-    $routeProvider.when('/callback', {
-      templateUrl: '/partials/callback.html',
-      controller: 'CallbackCtrl'
-    });
-    $routeProvider.when('/settings', {
-      templateUrl: '/partials/settings.html',
-      controller: 'SettingsCtrl'
-    });
-    $routeProvider.when('/search', {
-      templateUrl: '/partials/search.html',
-      controller: 'SearchCtrl'
-    });
+    $routeProvider.when('/about', { templateUrl: '/partials/about.html' });
     $routeProvider.when('/:user', {
       templateUrl: '/partials/user.html',
       controller: 'UserCtrl'
@@ -46,6 +35,7 @@ app.config([
       templateUrl: '/partials/set.html',
       controller: 'SetCtrl'
     });
+    $routeProvider.otherwise({ redirectTo: '/' });
     $locationProvider.html5Mode(true);
   }
 ]);
