@@ -4,34 +4,41 @@ A radically simpler & faster SoundCloud player
 
 http://soundrad.com 
 
+## Built with [Basscss](http://basscss.com) and [Angular](http://angularjs.org)
+
 ## Built for speed
 
+With around a **200 Speed Index** on repeat view,
 SoundRad is significantly faster than SoundCloud.
-The reason: it focuses on the content.
 
 ### First View
 
 Metric            | SoundCloud | SoundRad
 ------------------|------------|---------
-Load Time         | 4.324s     | 1.356s
-First Byte        | 0.885s     | 0.231s
-Start Render      | 4.325s     | 0.944s
-Speed Index       | 5645       | 1500
+Load Time         | 3.008s     | 0.980s
+First Byte        | 0.658s     | 0.242s
+Start Render      | 2.895s     | 1.294s
+Speed Index       | 4345       | 1559
 
-### Second View
+### Repeat View
 
 Metric            | SoundCloud | SoundRad
 ------------------|------------|---------
-Load Time         | 2.177s     | 0.507s
-First Byte        | 0.347s     | 0.219s
-Start Render      | 1.295s     | 0.492s
-Speed Index       | 1926       | 500
+Load Time         | 4.301s     | 0.001s
+First Byte        | 0.167s     | 0.000s
+Start Render      | 1.694s     | 0.100s
+Speed Index       | 2444       | 187
 
 Sources:
-http://www.webpagetest.org/result/140422_PY_140H/
-http://www.webpagetest.org/result/140422_SW_13ZC/
+SoundCloud: http://www.webpagetest.org/result/141019_0M_12NV/
+SoundRad: http://www.webpagetest.org/result/141019_XP_12K9/
+
+Because SoundRad is built with Angular, it really wins on repeat views.
+For fun, you can check out this test of soundcloud.com with absurdly bad results:
+http://www.webpagetest.org/result/141019_H9_12MS/
 
 ## How is it so much faster?
+SoundRad focuses on content – in this case, audio.
 
 ### No images
 SoundCloud loads separate images for each track cover.
