@@ -2,25 +2,49 @@
 /* Disclosure drawer/hover module */
 
 .disclosure-group {
+  position: relative;
+  box-shadow: inset 0 0 0 32px rgba(#000, 0);
+  transition: box-shadow .2s ease-out;
 }
 
 .disclosure-body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
   overflow: hidden;
   width: 0;
   transition: width .2s ease-out;
-  background-color: rgba(#f00, .125);
+  background-color: var(--light-gray);
+  background-color: white;
+}
+
+.disclosure-group.is-open {
+  box-shadow: inset 0 0 0 32px rgba(#000, .5);
 }
 
 .disclosure-group.is-open .disclosure-body {
-  width: 16rem;
+  width: 100%;
 }
 
 /* Hover mode */
 @media (--breakpoint-md) {
+  .disclosure-group {
+    position: relative;
+  }
+  .disclosure-group.is-open {
+    box-shadow: none;
+  }
   .disclosure-body {
+    position: static;
     width: 16rem;
     opacity: .1;
     transition: opacity .2s ease-out;
+    background-color: transparent;
+  }
+  .disclosure-group.is-open .disclosure-body {
+    width: 16rem;
   }
   .disclosure-group:hover .disclosure-body {
     opacity: 1;
