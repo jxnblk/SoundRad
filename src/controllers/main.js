@@ -2,8 +2,8 @@
 'use strict';
 
 app.controller('MainCtrl',
-  ['$scope', '$window', '$location', 'storage', 'soundcloud', 'player',
-  function($scope, $window, $location, storage, soundcloud, player) {
+  ['$scope', '$window', '$location', '$route', 'storage', 'soundcloud', 'player',
+  function($scope, $window, $location, $route, storage, soundcloud, player) {
 
   $scope.currentUser = storage.get('currentUser');
   $scope.token = storage.get('token');
@@ -27,6 +27,7 @@ app.controller('MainCtrl',
       });
       $location.search('');
       $location.hash('');
+      $route.reload();
     };
   };
 
@@ -34,7 +35,8 @@ app.controller('MainCtrl',
 
   $scope.logout = function() {
     storage.clear();
-    $window.location.href = '/';
+    //$window.location.href = '/';
+    $route.reload();
   };
 
   player.audio.addEventListener('timeupdate', function() {
