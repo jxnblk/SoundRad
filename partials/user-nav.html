@@ -10,23 +10,29 @@
       Sign Out
     </a>
   </div>
-  <div class="flex h5 mxn1 xbg-darken-1">
+  <div class="flex flex-align-stretch h5 mxn2 xbg-darken-1" style="min-height:2rem">
     <a ng-href="/{{ user.permalink }}"
-      ng-hide="!user"
-      ng-class="{ 'is-active': view.current == 'user' || view.current == 'me' }"
-      class="cell button button-narrow button-nav-light">
+      ng-class="{
+        'is-active': view.current == 'user' || view.current == 'me',
+        'is-disabled': !user.permalink
+      }"
+      class="cell button button-nav-light">
       Tracks
     </a>
     <a ng-href="/{{ user.permalink }}/likes"
-      ng-hide="!user"
-      ng-class="{ 'is-active': user.subview == 'Likes' }"
-      class="cell button button-narrow button-nav-light">
+      ng-class="{
+        'is-active': user.subview == 'Likes',
+        'is-disabled': !user.permalink
+      }"
+      class="cell button button-nav-light">
       Likes
     </a>
     <a ng-href="/{{ user.permalink }}/sets"
-      ng-hide="!user"
-      ng-class="{ 'is-active': user.subview == 'Playlists' }"
-      class="cell button button-narrow button-nav-light">
+      ng-class="{
+        'is-active': user.subview == 'Playlists',
+        'is-disabled': !user.permalink
+      }"
+      class="cell button button-nav-light">
       Playlists
     </a>
   </div>

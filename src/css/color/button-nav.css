@@ -2,11 +2,17 @@
 .button-nav-light {
   color: var(--dark-gray);
 }
+
 .button-nav-light:hover {
   background-color: transparent;
 }
+
 .button-nav-light.is-active {
   background-color: var(--darken-2);
+}
+
+.button-nav-light.is-disabled {
+  opacity: .5;
 }
 
 .button-nav-dark.is-active {

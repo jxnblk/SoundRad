@@ -8,7 +8,6 @@
 	<meta name="author" content="Jxnblk">
 	<meta name="description" content="gh A radically simple and faster SoundCloud player">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <base href="/">
   <link rel="stylesheet" href="/css/base.min.css">
 	<link rel="icon" type="image/png" href="/favicon.png" />
@@ -19,7 +18,9 @@
 <div ng-include="'/partials/nav.html'"></div>
 <div class="sticky z1" ng-include="'/partials/player.html'"></div>
 
-<div ng-view></div>
+<div class="h100" ng-view></div>
+
+<div ng-include="'/partials/footer.html'"></div>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.5/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.5/angular-route.min.js"></script>

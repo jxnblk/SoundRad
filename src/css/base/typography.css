@@ -5,3 +5,18 @@
   text-overflow: ellipsis;
 }
 
+.h0 {
+  font-size: 3rem;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (--breakpoint-sm) {
+  .h0 { font-size: 5rem }
+}
+
+@media (--breakpoint-md) {
+  .h0 { font-size: 7rem }
+}
+

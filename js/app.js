@@ -1,10 +1,10 @@
 'use strict';
 // Beta config
 var clientID = '66828e9e2042e682190d1fde4b02e265';
-var callbackUrl = 'http://beta.soundrad.com/callback';
+var callbackUrl = 'http://beta.soundrad.com';
 // Official config
 // var clientID = '683f27c0c6dace16e7498ebffcbef8be';
-// var callbackUrl = 'http://soundrad.com/callback';
+// var callbackUrl = 'http://soundrad.com';
 'use strict';
 var app = angular.module('app', [
     'ngTouch',
@@ -392,11 +392,13 @@ app.controller('StreamCtrl', [
     $scope.isLoading = true;
     $scope.isStream = true;
     $scope.view.current = 'stream';
-    soundcloud.getStream(function (data) {
-      $scope.tracks = data;
-      $scope.isLoading = false;
-      player.load(data);
-    });
+    if ($scope.currentUser) {
+      soundcloud.getStream(function (data) {
+        $scope.tracks = data;
+        $scope.isLoading = false;
+        player.load(data);
+      });
+    }
   }
 ]);
 'use strict';
@@ -415,12 +417,11 @@ app.controller('UserCtrl', [
       $scope.view.current = 'user';
     }
     $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
-    //soundcloud.get('/users/' + $routeParams.user, function(data) {
-    //  $scope.user = data;
-    //});
+    soundcloud.get('/users/' + $routeParams.user, function (data) {
+      $scope.user = data;
+    });
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
-      $scope.user = data[0].user;
       player.load(data);
       $scope.isLoading = false;
     });
@@ -460,12 +461,12 @@ app.controller('SetsCtrl', [
     $scope.isLoading = true;
     $scope.view.current = 'sets';
     $scope.endpoint = '/users/' + $routeParams.user + '/playlists';
+    soundcloud.get('/users/' + $routeParams.user, function (data) {
+      $scope.user = data;
+      $scope.user.subview = 'Playlists';
+    });
     soundcloud.get($scope.endpoint, function (data) {
       $scope.tracks = data;
-      $scope.user = data[0].user;
-      if ($scope.user) {
-        $scope.user.subview = 'Playlists';
-      }
       $scope.isLoading = false;
     });
   }
@@ -486,6 +487,10 @@ app.controller('SetCtrl', [
     if ($routeParams.secret) {
       soundcloud.params.url += '/' + $routeParams.secret;
     }
+    //soundcloud.get('/users/' + $routeParams.user, function(data) {
+    //  $scope.user = data;
+    //  $scope.user.subview = 'Playlists';
+    //});
     soundcloud.jsonp($scope.endpoint, function (data) {
       $scope.set = data;
       $scope.user = data.user;

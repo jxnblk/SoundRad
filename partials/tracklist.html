@@ -7,7 +7,9 @@
         'is-open': disclosureIsOpen
       }"
       ng-repeat="track in tracks track by $index">
-      <a href class="cell cell-1 col-6 h5 button dark-gray" ng-click="player.play($index)">
+      <a href class="cell cell-1 col-6 h5 button dark-gray"
+        title="Play {{ track.title }}"
+        ng-click="player.play($index)">
         {{ track.user.username }} - {{ track.title }}
       </a>
 
@@ -17,10 +19,12 @@
       </div>
       <div class="disclosure-body flex flex-align-center h6" style="min-height:3rem">
         <a ng-href="/{{ track.user.permalink }}"
+          title="View more tracks by {{ track.user.username }}"
           class="cell cell-1 truncate center button button-narrow button-nav-light">
           {{ track.user.username }}
         </a>
         <a ng-href="{{ track.permalink_url }}"
+          title="View track on Soundcloud"
           ng-click="disclosureIsOpen = false"
           class="cell col-5 center button button-narrow button-nav-light md-hide" target="_blank">
           Soundcloud

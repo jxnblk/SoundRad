@@ -7,11 +7,13 @@ app.controller('StreamCtrl', ['$scope', 'soundcloud', 'player', function($scope,
   $scope.isStream = true;
   $scope.view.current = 'stream';
 
-  soundcloud.getStream(function(data) {
-    $scope.tracks = data;
-    $scope.isLoading = false;
-    player.load(data);
-  });
+  if ($scope.currentUser) {
+    soundcloud.getStream(function(data) {
+      $scope.tracks = data;
+      $scope.isLoading = false;
+      player.load(data);
+    });
+  }
 
 }]);
 

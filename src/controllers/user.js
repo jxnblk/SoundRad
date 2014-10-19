@@ -16,13 +16,12 @@ app.controller('UserCtrl', [
   }
   $scope.endpoint = '/users/' + $routeParams.user + '/tracks';
 
-  //soundcloud.get('/users/' + $routeParams.user, function(data) {
-  //  $scope.user = data;
-  //});
+  soundcloud.get('/users/' + $routeParams.user, function(data) {
+    $scope.user = data;
+  });
 
   soundcloud.get($scope.endpoint, function(data) {
     $scope.tracks = data;
-    $scope.user = data[0].user;
     player.load(data);
     $scope.isLoading = false;
   });

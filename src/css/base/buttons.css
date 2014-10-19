@@ -9,5 +9,18 @@ button {
   text-align: center;
   width: 2.5em;
   border-radius: var(--border-radius);
+  transition: transform .1s ease-out;
+}
+
+@media (--breakpoint-sm) {
+  .button-icon {
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 3em;
+  }
+}
+
+.button-icon:active {
+  transform: scale(.9375);
 }
 

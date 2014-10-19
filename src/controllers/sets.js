@@ -9,12 +9,13 @@ app.controller('SetsCtrl', ['$scope', '$routeParams', 'soundcloud', function($sc
   $scope.view.current = 'sets';
   $scope.endpoint = '/users/' + $routeParams.user + '/playlists';
 
+  soundcloud.get('/users/' + $routeParams.user, function(data) {
+    $scope.user = data;
+    $scope.user.subview = 'Playlists';
+  });
+
   soundcloud.get($scope.endpoint, function(data) {
     $scope.tracks = data;
-    $scope.user = data[0].user; 
-    if ($scope.user) {
-      $scope.user.subview = 'Playlists';
-    }
     $scope.isLoading = false;
   });
 

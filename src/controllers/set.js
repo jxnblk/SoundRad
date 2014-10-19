@@ -14,6 +14,12 @@ app.controller('SetCtrl', ['$scope', '$routeParams', 'soundcloud', 'player', fun
     soundcloud.params.url += '/' + $routeParams.secret;
   }
 
+  //soundcloud.get('/users/' + $routeParams.user, function(data) {
+  //  $scope.user = data;
+  //  $scope.user.subview = 'Playlists';
+  //});
+
+
   soundcloud.jsonp($scope.endpoint, function(data) {
     $scope.set = data;
     $scope.user = data.user;

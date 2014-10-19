@@ -1,25 +1,25 @@
 <div class="flex flex-align-center px1 white bg-dark-gray">
-  <div class="cell sm-show">
-    <button class="h5 button-icon-dark"
+  <div class="cell cell-0 sm-show">
+    <button class="h5 py2 button-icon button-icon-dark"
       title="Skip to previous track"
       ng-click="player.previous()">
       <svg class="icon" icon="previous"></svg>
     </button>
   </div>
-  <div class="cell">
-    <button class="h3 py2 button-icon-dark"
+  <div class="cell cell-0">
+    <button class="h3 py2 button-icon button-icon-dark"
       title="Play"
       ng-click="player.playPause()">
       <span ng-show="player.audio.paused">
-        <svg class="icon" icon="play"></svg>
+        <svg class="icon animation-popin" icon="play"></svg>
       </span>
       <span ng-hide="player.audio.paused">
-        <svg class="icon" icon="pause"></svg>
+        <svg class="icon animation-popin" icon="pause"></svg>
       </span>
     </button>
   </div>
-  <div class="cell sm-show">
-    <button class="h5 button-icon-dark"
+  <div class="cell cell-0 sm-show">
+    <button class="h5 py2 button-icon button-icon-dark"
       title="Skip to next track"
       ng-click="player.next()">
       <svg class="icon" icon="next"></svg>
@@ -29,7 +29,7 @@
     <div class="h4 flex flex-align-center">
       <div class="cell cell-1 col-6 bold py1">
         {{ player.playing.user.username || player.paused.user.username || '&nbsp;' }}
-        &ndash;
+        <span ng-show="player.playing.user || player.paused.user">&ndash;</span>
         {{ player.playing.title || player.paused.title || '&nbsp;' }}
       </div>
       <div class="h6 cell">
