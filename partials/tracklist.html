@@ -1,0 +1,80 @@
+<div class="container" ng-controller="TracklistCtrl">
+  <ul class="list-reset mb0">
+    <li class="flex flex-align-center flex-justify-between disclosure-group border-bottom button-nav-light"
+      style="min-height:3rem"
+      ng-class="{
+        'is-active': player.playing == track,
+        'is-open': disclosureIsOpen
+      }"
+      ng-repeat="track in tracks track by $index">
+      <a href class="cell cell-1 col-6 h5 button dark-gray"
+        title="Play {{ track.title }}"
+        ng-click="player.play($index)">
+        {{ track.user.username }} - {{ track.title }}
+      </a>
+
+      <div class="absolute top-0 right-0 bottom-0 left-0 bg-darken-3"
+        ng-show="disclosureIsOpen"
+        ng-click="disclosureIsOpen = false">
+      </div>
+      <div class="disclosure-body flex flex-align-center h6" style="min-height:3rem">
+        <a ng-href="/{{ track.user.permalink }}"
+          title="View more tracks by {{ track.user.username }}"
+          class="cell cell-1 truncate center button button-narrow button-nav-light">
+          {{ track.user.username }}
+        </a>
+        <a ng-href="{{ track.permalink_url }}"
+          title="View track on Soundcloud"
+          ng-click="disclosureIsOpen = false"
+          class="cell col-5 center button button-narrow button-nav-light md-hide" target="_blank">
+          Soundcloud
+        </a>
+        <a ng-click="disclosureIsOpen = false"
+          class="cell h5 button button-icon button-icon-light md-hide"
+          title="Close Actions">
+          <svg class="icon" icon="close"></svg>
+        </a>
+      </div>
+
+      <a href ng-click="like(track)"
+        title="Like"
+        ng-hide="track.user_favorite"
+        class="cell button button-icon button-icon-light" target="_blank">
+        <svg class="icon" icon="heart"></svg>
+      </a>
+      <a href ng-click="unlike(track)"
+        title="Unlike"
+        ng-show="track.user_favorite"
+        class="cell button button-icon button-icon-light is-active" target="_blank">
+        <svg class="icon red" icon="heart"></svg>
+      </a>
+
+      <a href class="cell button button-icon button-icon-light md-hide"
+        title="Toggle track actions"
+        ng-click="disclosureIsOpen = !disclosureIsOpen">
+        <svg class="icon" icon="chevronRight"></svg>
+      </a>
+
+      <a ng-href="{{ track.permalink_url }}"
+        class="cell button button-icon button-icon-light md-show"
+        title="View on Soundcloud"
+        target="_blank">
+        <svg class="icon" icon="chevronRight"></svg>
+      </a>
+
+    </li>
+  </ul>
+
+  <a href class="center py3 button block button-nav-light"
+    ng-hide="isLoading || !hasNextPage"
+    ng-click="nextPage()">
+      Load More
+  </a>
+
+  <div class="center button block py3" ng-show="isLoading">Loading...</div>
+
+  <div class="py3" ng-show="!hasNextPage"></div>
+
+</div>
+
+

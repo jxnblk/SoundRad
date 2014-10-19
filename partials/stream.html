@@ -1,0 +1,15 @@
+<div ng-if="currentUser" ng-include="'partials/tracklist.html'"></div>
+
+<div class="container px2 py4" ng-if="!currentUser">
+
+  <h1 class="h0">SoundRad</h1>
+  <p class="h3">A Radically Simpler and Faster SoundCloud Player</p>
+
+  <div class="py3">
+    <button class="h4 button-big button-blue"
+      ng-click="connect()">
+      Connect with SoundCloud
+    </button>
+  </div>
+
+</div>

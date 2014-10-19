@@ -1,0 +1,48 @@
+<div class="flex flex-align-center px1 white bg-dark-gray" style="min-height:4rem">
+  <div class="cell cell-0 sm-show">
+    <button class="h5 py2 button-icon button-icon-dark"
+      title="Skip to previous track"
+      ng-click="player.previous()">
+      <svg class="icon" icon="previous"></svg>
+    </button>
+  </div>
+  <div class="cell cell-0">
+    <button class="h3 py2 button-icon button-icon-dark"
+      title="Play"
+      ng-click="player.playPause()">
+      <span ng-show="player.audio.paused">
+        <svg class="icon animation-popin" icon="play"></svg>
+      </span>
+      <span ng-hide="player.audio.paused">
+        <svg class="icon animation-popin" icon="pause"></svg>
+      </span>
+    </button>
+  </div>
+  <div class="cell cell-0 sm-show">
+    <button class="h5 py2 button-icon button-icon-dark"
+      title="Skip to next track"
+      ng-click="player.next()">
+      <svg class="icon" icon="next"></svg>
+    </button>
+  </div>
+  <div class="cell cell-1 px1">
+    <div class="h4 flex flex-align-baseline">
+      <div class="cell cell-1 col-6 bold mt1">
+        {{ player.playing.user.username || player.paused.user.username || '&nbsp;' }}
+        <span ng-show="player.playing.user || player.paused.user">&ndash;</span>
+        {{ player.playing.title || player.paused.title || '&nbsp;' }}
+      </div>
+      <div class="h6 cell">
+        {{ currentTime | prettyTime }}
+      </div>
+      <div class="h6 cell ml1 sm-show">
+        {{ audio.duration | prettyTime }}
+      </div>
+    </div>
+    <progress class="progress"
+      value="{{ currentTime / audio.duration || 0 }}"
+      ng-click="player.seek($event)">
+      {{ currentTime / audio.duration }}
+    </progress>
+  </div>
+</div>

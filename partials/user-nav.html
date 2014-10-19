@@ -1,0 +1,39 @@
+<div class="px2 border-bottom">
+  <div class="flex flex-align-center mxn2 border-bottom" style="min-height:4rem">
+    <h1 class="h2 cell cell-1 col-9 px2 m0">
+      {{ user.username || '&nbsp;' }}
+      {{ user.subview }}
+    </h1>
+    <a href class="cell h5 nowrap button button-narrow button-nav-light"
+      ng-click="logout()"
+      ng-if="currentUser.permalink == user.permalink">
+      Sign Out
+    </a>
+  </div>
+  <div class="flex flex-align-center h5 mxn2">
+    <a ng-href="/{{ user.permalink }}"
+      ng-class="{
+        'is-active': view.current == 'user' || view.current == 'me',
+        'is-disabled': !user.permalink
+      }"
+      class="cell button button-tall button-nav-light">
+      Tracks
+    </a>
+    <a ng-href="/{{ user.permalink }}/likes"
+      ng-class="{
+        'is-active': user.subview == 'Likes',
+        'is-disabled': !user.permalink
+      }"
+      class="cell button button-tall button-nav-light">
+      Likes
+    </a>
+    <a ng-href="/{{ user.permalink }}/sets"
+      ng-class="{
+        'is-active': user.subview == 'Playlists',
+        'is-disabled': !user.permalink
+      }"
+      class="cell button button-tall button-nav-light">
+      Playlists
+    </a>
+  </div>
+</div>

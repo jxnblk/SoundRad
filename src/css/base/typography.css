@@ -1,0 +1,23 @@
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.h0 {
+  font-size: 3rem;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (--breakpoint-sm) {
+  .h0 { font-size: 5rem }
+}
+
+@media (--breakpoint-md) {
+  .h0 { font-size: 7rem }
+}
+

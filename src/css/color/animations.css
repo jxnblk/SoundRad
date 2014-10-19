@@ -1,0 +1,19 @@
+
+@keyframes popin {
+    0% { transform: scale(0.75) }
+   75% { transform: scale(1.0625) }
+  100% { transform: scale(1) }
+}
+
+.animation-popin {
+  animation-name: popin;
+  animation-duration: .15s;
+  animation-timing-function: ease-out;
+}
+
+.animation-popin:active {
+  animation-name: popin;
+  animation-duration: .15s;
+  animation-timing-function: ease-out;
+}
+

@@ -1,0 +1,32 @@
+<div class="container" ng-controller="TracklistCtrl">
+  <ul class="list-reset mb0">
+    <li class="border-bottom button-nav-light"
+      ng-hide="private"
+      ng-repeat="set in tracks track by $index">
+      <a ng-href="/{{ user.permalink }}/sets/{{ set.permalink }}{{ set.sharing == 'private' ? '/' + set.secret_token : null }}"
+        class="flex flex-align-center flex-justify-between button button-small button-nav-light">
+          <div class="cell cell-1 col-11 h5 button dark-gray">
+            {{ set.title }}
+            <span class="ml1 h6 button button-small bg-yellow rounded"
+              ng-show="set.sharing == 'private'">Private
+            </span>
+          </div>
+          <div class="cell button button-icon button-icon-light">
+            <svg class="icon" icon="chevronRight"></svg>
+          </div>
+      </a>
+    </li>
+  </ul>
+
+  <a href class="center py3 button block button-nav-light"
+    ng-hide="isLoading || !hasNextPage"
+    ng-click="nextPage()">
+      Load More
+  </a>
+
+  <div class="center button block py3" ng-show="isLoading">Loading...</div>
+
+  <div class="py3" ng-show="!hasNextPage"></div>
+
+</div>
+

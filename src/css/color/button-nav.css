@@ -1,0 +1,26 @@
+
+.button-nav-light {
+  color: var(--dark-gray);
+}
+
+.button-nav-light:hover {
+  background-color: transparent;
+}
+
+.button-nav-light.is-active {
+  background-color: var(--darken-2);
+}
+
+.button-nav-light.is-disabled {
+  opacity: .5;
+}
+
+.button-nav-dark.is-active {
+  background-color: var(--blue);
+}
+
+.button-nav-dark:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(var(--blue), .75);
+}
+
