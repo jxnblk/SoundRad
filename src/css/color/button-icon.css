@@ -1,0 +1,30 @@
+
+.button-icon-dark {
+  color: white;
+}
+
+.button-icon-dark:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(var(--blue), .75);
+}
+
+.button-icon-light {
+  color: var(--mid-gray);
+  opacity: .5;
+  transition: opacity .1s ease-out, color .2s ease-out;
+}
+
+.button-icon-light:hover {
+  opacity: 1;
+}
+
+.button-icon-light:disabled,
+.button-icon-light.is-disabled {
+  color: var(--light-gray);
+}
+
+.button-icon-light.is-active {
+  color: var(--blue);
+  opacity: 1;
+}
+

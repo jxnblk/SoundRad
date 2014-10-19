@@ -1,0 +1,29 @@
+
+/* Disclosure drawer/hover module */
+
+.disclosure-group {
+}
+
+.disclosure-body {
+  overflow: hidden;
+  width: 0;
+  transition: width .2s ease-out;
+  background-color: rgba(#f00, .125);
+}
+
+.disclosure-group.is-open .disclosure-body {
+  width: 16rem;
+}
+
+/* Hover mode */
+@media (--breakpoint-md) {
+  .disclosure-body {
+    width: 16rem;
+    opacity: .1;
+    transition: opacity .2s ease-out;
+  }
+  .disclosure-group:hover .disclosure-body {
+    opacity: 1;
+  }
+}
+

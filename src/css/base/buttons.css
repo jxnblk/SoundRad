@@ -1,0 +1,13 @@
+
+button {
+  background-color: transparent;
+}
+
+.button-icon {
+  padding-left: .75em;
+  padding-right: .75em;
+  text-align: center;
+  width: 2.5em;
+  border-radius: var(--border-radius);
+}
+

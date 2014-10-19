@@ -1,25 +1,46 @@
 <div class="container" ng-controller="TracklistCtrl">
   <ul class="list-reset mb0">
-    <li class="flex flex-align-center flex-justify-between border-bottom button-nav-light"
+    <li class="flex flex-align-center flex-justify-between disclosure-group border-bottom button-nav-light"
       style="min-height:2.5rem"
-      ng-class="{ 'is-active': player.playing == track }"
+      ng-class="{
+        'is-active': player.playing == track,
+        'is-open': disclosureIsOpen
+      }"
       ng-repeat="track in tracks track by $index">
       <a href class="cell cell-1 col-6 h5 button dark-gray" ng-click="player.play($index)">
         {{ track.user.username }} - {{ track.title }}
       </a>
+
+      <div class="cell disclosure-body">
+        <div class="flex h6 bg-darken-1">
+          <a ng-href="/{{ track.user.permalink }}"
+            class="cell cell-1 truncate button button-narrow button-nav-light">
+            {{ track.user.username }}
+          </a>
+          <a ng-href="{{ track.permalink_url }}?auto_play=false"
+            class="cell col-5 center button button-narrow button-nav-light" target="_blank">
+            Soundcloud
+          </a>
+        </div>
+      </div>
+
       <a href ng-click="like(track)"
         ng-hide="track.user_favorite"
-        class="cell button button-icon button-nav-light" target="_blank">
-        <svg class="icon light-gray" icon="heart"></svg>
+        class="cell button button-icon button-icon-light" target="_blank">
+        <svg class="icon" icon="heart"></svg>
       </a>
       <a href ng-click="unlike(track)"
         ng-show="track.user_favorite"
-        class="cell button button-icon button-nav-light" target="_blank">
+        class="cell button button-icon button-icon-light is-active" target="_blank">
         <svg class="icon red" icon="heart"></svg>
       </a>
-      <a ng-href="{{ track.permalink_url }}?auto_play=false" class="cell button button-icon button-nav-light" target="_blank">
-        <svg class="icon light-gray" icon="chevronRight"></svg>
+
+      <a href class="cell button button-icon button-icon-light"
+        title="Toggle track actions"
+        ng-click="disclosureIsOpen = !disclosureIsOpen">
+        <svg class="icon" icon="chevronRight"></svg>
       </a>
+
     </li>
   </ul>
 
@@ -35,8 +56,4 @@
 
 </div>
 
-<!--
-Widget link: 
-<a ng-href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ track.id }}&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;visual=true" class="button button-narrow button-nav-light" target="_blank">
--->
 
