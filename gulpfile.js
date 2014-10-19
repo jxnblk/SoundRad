@@ -11,7 +11,6 @@ var mincss = require('gulp-minify-css');
 gulp.task('compile', function() {
   return gulp.src([
       './src/config.js',
-      './bower_components/ngSticky/sticky.js',
       './src/app.js',
       './src/services/soundcloud.js',
       './src/services/player.js',

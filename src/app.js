@@ -1,7 +1,7 @@
 
 'use strict';
 
-var app = angular.module('app', ['ngTouch', 'ngRoute', 'sticky']);
+var app = angular.module('app', ['ngTouch', 'ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.when('/', { templateUrl: '/partials/stream.html', controller: 'StreamCtrl' });
