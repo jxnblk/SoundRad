@@ -402,7 +402,7 @@ app.controller('UserCtrl', [
     $scope.page = 0;
     soundcloud.params.offset = $scope.page * soundcloud.params.limit;
     $scope.isLoading = true;
-    if ($routeParams.user == $scope.currentUser.permalink) {
+    if ($scope.currentUser && $routeParams.user == $scope.currentUser.permalink) {
       $scope.view.current = 'me';
     } else {
       $scope.view.current = 'user';
