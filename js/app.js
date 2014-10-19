@@ -280,11 +280,10 @@ app.controller('MainCtrl', [
   '$scope',
   '$window',
   '$location',
-  '$route',
   'storage',
   'soundcloud',
   'player',
-  function ($scope, $window, $location, $route, storage, soundcloud, player) {
+  function ($scope, $window, $location, storage, soundcloud, player) {
     $scope.currentUser = storage.get('currentUser');
     $scope.token = storage.get('token');
     $scope.player = player;
@@ -303,10 +302,10 @@ app.controller('MainCtrl', [
         soundcloud.get('/me', function (data) {
           $scope.currentUser = data;
           storage.set('currentUser', data);
+          $location.search('');
+          $location.hash('');
+          $window.location.href = '/';
         });
-        $location.search('');
-        $location.hash('');
-        $route.reload();
       }
       ;
     }
@@ -314,8 +313,7 @@ app.controller('MainCtrl', [
     $scope.connect = soundcloud.connect;
     $scope.logout = function () {
       storage.clear();
-      //$window.location.href = '/';
-      $route.reload();
+      $window.location.href = '/';
     };
     player.audio.addEventListener('timeupdate', function () {
       $scope.$apply(function () {
