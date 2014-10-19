@@ -52,7 +52,7 @@
 }
 
 .cfp-hotkeys-keys {
-  padding: .5em;
+  padding: .5em 0;
   text-align: right;
 }
 
@@ -62,14 +62,14 @@
   text-align: center;
   margin-right: .5em;
   padding: .5em 1em;
-  color: #fff;
-  background-color: var(--dark-gray);
+  color: var(--dark-gray);
+  background-color: rgba(#fff, .875);
   border-radius: var(--border-radius);
 }
 
 .cfp-hotkeys-text {
   font-weight: var(--bold-font-weight);
-  padding-left: 10px;
+  text-align: left;
 }
 
 .cfp-hotkeys-close {
