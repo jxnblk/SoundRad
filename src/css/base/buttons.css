@@ -24,3 +24,8 @@ button {
   transform: scale(.9375);
 }
 
+.button-tall {
+  padding-top: .75em;
+  padding-bottom: .75em;
+}
+

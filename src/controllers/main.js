@@ -2,8 +2,8 @@
 'use strict';
 
 app.controller('MainCtrl',
-  ['$scope', '$window', '$location', 'storage', 'soundcloud', 'player',
-  function($scope, $window, $location, storage, soundcloud, player) {
+  ['$scope', '$window', '$location', 'storage', 'soundcloud', 'player', 'hotkeys',
+  function($scope, $window, $location, storage, soundcloud, player, hotkeys) {
 
   $scope.currentUser = storage.get('currentUser');
   $scope.token = storage.get('token');
@@ -43,6 +43,79 @@ app.controller('MainCtrl',
       $scope.currentTime = player.audio.currentTime;
     });
   });
+
+
+  // Keyboard Shortcuts
+
+  hotkeys.add({
+    combo: 'space',
+    description: 'Play/Pause',
+    callback: function(e) {
+      e.preventDefault();
+      player.playPause();
+    }
+  });
+
+  hotkeys.add({
+    combo: ['right', 'j'],
+    description: 'Skip to next track',
+    callback: function(e) {
+      e.preventDefault();
+      player.next();
+    }
+  });
+
+  hotkeys.add({
+    combo: ['left', 'k'],
+    description: 'Skip to previous track',
+    callback: function(e) {
+      e.preventDefault();
+      player.previous();
+    }
+  });
+
+  hotkeys.add({
+    combo: 'g s',
+    description: 'Go to Stream',
+    callback: function(e) {
+      e.preventDefault();
+      $location.path('/');
+    }
+  });
+
+  hotkeys.add({
+    combo: 'g l',
+    description: 'Go to Likes',
+    callback: function(e) {
+      e.preventDefault();
+      if ($scope.currentUser) {
+        $location.path('/' + $scope.currentUser.permalink + '/likes');
+      }
+    }
+  });
+
+  hotkeys.add({
+    combo: 'g p',
+    description: 'Go to Playlists',
+    callback: function(e) {
+      e.preventDefault();
+      if ($scope.currentUser) {
+        $location.path('/' + $scope.currentUser.permalink + '/sets');
+      }
+    }
+  });
+
+  hotkeys.add({
+    combo: 'g m',
+    description: 'Go to My Tracks',
+    callback: function(e) {
+      e.preventDefault();
+      if ($scope.currentUser) {
+        $location.path('/' + $scope.currentUser.permalink);
+      }
+    }
+  });
+
 
 }]);
 

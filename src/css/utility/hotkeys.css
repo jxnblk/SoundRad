@@ -1,0 +1,89 @@
+
+/* Hotkeys cheatsheet */
+
+.cfp-hotkeys-container {
+  display: block !important;
+  text-align: center;
+  position: fixed;
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(var(--dark-gray), .9375);
+}
+
+.cfp-hotkeys-container.fade {
+  z-index: -1024;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+
+.cfp-hotkeys-container.fade.in {
+  z-index: 2;
+  visibility: visible;
+  opacity: 1;
+}
+
+.cfp-hotkeys-title {
+  font-weight: bold;
+}
+
+.cfp-hotkeys {
+  display: inline-block;
+  margin-top: 6rem;
+}
+
+.cfp-hotkeys table {
+  margin: auto;
+}
+
+.cfp-hotkeys td {
+  vertical-align: middle;
+}
+
+.cfp-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cfp-hotkeys-keys {
+  padding: .5em;
+  text-align: right;
+}
+
+.cfp-hotkeys-key {
+  display: inline-block;
+  font-weight: var(--bold-font-weight);
+  text-align: center;
+  margin-right: .5em;
+  padding: .5em 1em;
+  color: #fff;
+  background-color: var(--dark-gray);
+  border-radius: var(--border-radius);
+}
+
+.cfp-hotkeys-text {
+  font-weight: var(--bold-font-weight);
+  padding-left: 10px;
+}
+
+.cfp-hotkeys-close {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: .5rem;
+  margin: 1rem;
+}
+
+.cfp-hotkeys-close:hover {
+  cursor: pointer;
+}
+

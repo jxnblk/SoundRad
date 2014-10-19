@@ -1,7 +1,7 @@
 
 'use strict';
 
-var app = angular.module('app', ['ngTouch', 'ngRoute']);
+var app = angular.module('app', ['ngTouch', 'ngRoute', 'cfp.hotkeys']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.when('/', { templateUrl: '/partials/stream.html', controller: 'StreamCtrl' });

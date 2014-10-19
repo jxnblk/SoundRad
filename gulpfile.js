@@ -10,6 +10,7 @@ var mincss = require('gulp-minify-css');
 
 gulp.task('compile', function() {
   return gulp.src([
+      './node_modules/angular-hotkeys/build/hotkeys.js',
       './src/config.js',
       './src/app.js',
       './src/services/soundcloud.js',
@@ -32,7 +33,9 @@ gulp.task('compile', function() {
 
 gulp.task('serve', function() {
   gulp.src('./')
-    .pipe(webserver({}));
+    .pipe(webserver({
+      fallback: 'index.html'
+    }));
 });
 
 gulp.task('dupeindex', function() {

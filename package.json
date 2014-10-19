@@ -13,7 +13,8 @@
     "flex-object": "0.0.2",
     "basscss": "^4.1.3",
     "gulp-minify-css": "^0.3.11",
-    "gulp-basswork": "0.0.9"
+    "gulp-basswork": "0.0.9",
+    "angular-hotkeys": "^1.4.5"
   },
   "homepage": "https://github.com/jxnblk/SoundRad"
 }

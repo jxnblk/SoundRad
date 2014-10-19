@@ -1,4 +1,4 @@
-<div class="flex flex-align-center px1 white bg-dark-gray">
+<div class="flex flex-align-center px1 white bg-dark-gray" style="height:4rem">
   <div class="cell cell-0 sm-show">
     <button class="h5 py2 button-icon button-icon-dark"
       title="Skip to previous track"
@@ -26,8 +26,8 @@
     </button>
   </div>
   <div class="cell cell-1 px1">
-    <div class="h4 flex flex-align-center">
-      <div class="cell cell-1 col-6 bold py1">
+    <div class="h4 flex flex-align-baseline">
+      <div class="cell cell-1 col-6 bold mt1">
         {{ player.playing.user.username || player.paused.user.username || '&nbsp;' }}
         <span ng-show="player.playing.user || player.paused.user">&ndash;</span>
         {{ player.playing.title || player.paused.title || '&nbsp;' }}

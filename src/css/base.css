@@ -13,10 +13,7 @@
 @import "./color/button-icon.css";
 @import "./color/animations.css";
 
-
-/*
-@import "./base/roboto.css";
-*/
+@import "./utility/hotkeys.css";
 
 :root {
   --dark-gray: #304650;
