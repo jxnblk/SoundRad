@@ -8,7 +8,9 @@ app.factory('player', function(soundcloud) {
 
   var paramsArray = [];
   for (var param in soundcloud.params) {
-    paramsArray.push(encodeURIComponent(param) + '=' + encodeURIComponent(soundcloud.params[param]));
+    if (soundcloud.params[param]) {
+      paramsArray.push(encodeURIComponent(param) + '=' + encodeURIComponent(soundcloud.params[param]));
+    }
   };
   player.params += paramsArray.join('&');
 

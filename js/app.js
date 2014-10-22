@@ -1256,11 +1256,11 @@
 }(window, document));
 'use strict';
 // Beta config
-//var clientID = '66828e9e2042e682190d1fde4b02e265';
-//var callbackUrl = 'http://beta.soundrad.com';
+var clientID = '66828e9e2042e682190d1fde4b02e265';
+var callbackUrl = 'http://beta.soundrad.com';
 // Official config
-var clientID = '683f27c0c6dace16e7498ebffcbef8be';
-var callbackUrl = 'http://soundrad.com';
+//var clientID = '683f27c0c6dace16e7498ebffcbef8be';
+//var callbackUrl = 'http://soundrad.com';
 'use strict';
 var app = angular.module('app', [
     'ngTouch',
@@ -1389,7 +1389,9 @@ app.factory('player', [
     player.params = '?';
     var paramsArray = [];
     for (var param in soundcloud.params) {
-      paramsArray.push(encodeURIComponent(param) + '=' + encodeURIComponent(soundcloud.params[param]));
+      if (soundcloud.params[param]) {
+        paramsArray.push(encodeURIComponent(param) + '=' + encodeURIComponent(soundcloud.params[param]));
+      }
     }
     ;
     player.params += paramsArray.join('&');

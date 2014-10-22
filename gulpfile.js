@@ -7,6 +7,7 @@ var webserver = require('gulp-webserver');
 var rename = require('gulp-rename');
 var basswork = require('gulp-basswork');
 var mincss = require('gulp-minify-css');
+var gzip = require('gulp-gzip');
 
 gulp.task('compile', function() {
   return gulp.src([
@@ -28,6 +29,9 @@ gulp.task('compile', function() {
       ])
     .pipe(concat('app.js'))
     .pipe(ngmin())
+    .pipe(gulp.dest('./js/'))
+    .pipe(gzip())
+    .pipe(rename('app.js.gz'))
     .pipe(gulp.dest('./js/'));
 });
 
@@ -49,6 +53,9 @@ gulp.task('basswork', function() {
     .pipe(basswork())
     .pipe(mincss())
     .pipe(rename('base.min.css'))
+    .pipe(gulp.dest('./css'))
+    .pipe(gzip())
+    .pipe(rename('base.min.css.gz'))
     .pipe(gulp.dest('./css'));
 });
 
