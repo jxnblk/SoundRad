@@ -1254,8 +1254,8 @@
     define(Mousetrap);
   }
 }(window, document));
-var client_id = '66828e9e2042e682190d1fde4b02e265';
-var callback_url = 'http://beta.soundrad.com';
+var client_id = '683f27c0c6dace16e7498ebffcbef8be';
+var callback_url = 'http://soundrad.com';
 'use strict';
 var app = angular.module('app', [
     'ngTouch',
