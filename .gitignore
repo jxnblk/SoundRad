@@ -1,6 +1,6 @@
 
 bower_components
 node_modules
-config.js
+src/config.js
 config.json
 
