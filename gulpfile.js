@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var basswork = require('gulp-basswork');
 var mincss = require('gulp-minify-css');
 var gzip = require('gulp-gzip');
+var fs = require('fs');
 
 gulp.task('compile', function() {
   return gulp.src([
@@ -33,6 +34,24 @@ gulp.task('compile', function() {
     .pipe(gzip())
     .pipe(rename('app.js.gz'))
     .pipe(gulp.dest('./js/'));
+});
+
+gulp.task('production', function() {
+  var config = require('./config.json').soundcloud;
+  var string = '';
+  for (var i in config) {
+    string += 'var ' + i + ' = "' + config[i] + '";\n';
+  }
+  fs.writeFileSync('./src/config.js', string);
+});
+
+gulp.task('beta', function() {
+  var config = require('./config.json').beta;
+  var string = '';
+  for (var i in config) {
+    string += 'var ' + i + ' = "' + config[i] + '";\n';
+  }
+  fs.writeFileSync('./src/config.js', string);
 });
 
 gulp.task('serve', function() {

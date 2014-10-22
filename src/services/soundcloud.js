@@ -8,7 +8,7 @@ app.factory('soundcloud', function($window, $http, storage) {
 
   soundcloud.api = 'https://api.soundcloud.com';
   soundcloud.params = {
-    client_id: clientID,
+    client_id: client_id,
     oauth_token: token,
     offset: 0,
     limit: 24
@@ -17,7 +17,7 @@ app.factory('soundcloud', function($window, $http, storage) {
   soundcloud.next_href = null;
 
   soundcloud.connect = function(){
-    $window.location.href = 'https://soundcloud.com/connect?client_id=' + clientID + '&redirect_uri=' + callbackUrl + '&response_type=code_and_token&scope=non-expiring&display=popup';
+    $window.location.href = 'https://soundcloud.com/connect?client_id=' + client_id + '&redirect_uri=' + callback_url + '&response_type=code_and_token&scope=non-expiring&display=popup';
   };
 
   soundcloud.get = function(path, callback) {

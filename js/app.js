@@ -1254,13 +1254,8 @@
     define(Mousetrap);
   }
 }(window, document));
-'use strict';
-// Beta config
-var clientID = '66828e9e2042e682190d1fde4b02e265';
-var callbackUrl = 'http://beta.soundrad.com';
-// Official config
-//var clientID = '683f27c0c6dace16e7498ebffcbef8be';
-//var callbackUrl = 'http://soundrad.com';
+var client_id = '66828e9e2042e682190d1fde4b02e265';
+var callback_url = 'http://beta.soundrad.com';
 'use strict';
 var app = angular.module('app', [
     'ngTouch',
@@ -1306,14 +1301,14 @@ app.factory('soundcloud', [
     var token = storage.get('token');
     soundcloud.api = 'https://api.soundcloud.com';
     soundcloud.params = {
-      client_id: clientID,
+      client_id: client_id,
       oauth_token: token,
       offset: 0,
       limit: 24
     };
     soundcloud.next_href = null;
     soundcloud.connect = function () {
-      $window.location.href = 'https://soundcloud.com/connect?client_id=' + clientID + '&redirect_uri=' + callbackUrl + '&response_type=code_and_token&scope=non-expiring&display=popup';
+      $window.location.href = 'https://soundcloud.com/connect?client_id=' + client_id + '&redirect_uri=' + callback_url + '&response_type=code_and_token&scope=non-expiring&display=popup';
     };
     soundcloud.get = function (path, callback) {
       this.params.url = null;
