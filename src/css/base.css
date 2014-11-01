@@ -16,10 +16,12 @@
 @import "./utility/hotkeys.css";
 
 :root {
+  --blue: #0076df;
   --dark-gray: #304650;
   --mid-gray: #667680;
   --light-gray: #c3c9c9;
-  --lighter-gray: #f3f9f9;
+  /* --lighter-gray: #f3f9f9; */
+  --lighter-gray: #e0efff;
   --darken-1: rgba(#024, .0625);
   --darken-2: rgba(#024, .125);
   --darken-3: rgba(#024, .25);
