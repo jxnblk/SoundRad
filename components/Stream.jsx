@@ -15,7 +15,6 @@ var Stream = React.createClass({
 
   getInitialState: function() {
     return {
-      tracks: [],
       next_href: null,
     }
   },
@@ -23,7 +22,7 @@ var Stream = React.createClass({
   getTracks: function() {
     var self = this;
     var api = this.state.next_href || this.props.api + '/me/activities/tracks';
-    var tracks = this.state.tracks;
+    var tracks = this.props.tracks;
     superagent
       .get(api)
       .query({
@@ -35,17 +34,16 @@ var Stream = React.createClass({
         if (err) {
           console.error(err);
         } else {
-          self.setState({
-            tracks: tracks.concat(response.body.collection),
-            next_href: response.body.next_href
-          });
+          var newTracks = response.body.collection.map(self.mapTrack);
+          self.props.setTracks(tracks.concat(newTracks));
+          self.setState({ next_href: response.body.next_href });
         }
       });
   },
 
   mapTrack: function(track) {
     var obj = track.origin;
-    obj.type = track.type;
+    obj.type = track.type || null;
     obj.posted_at = track.created_at;
     return obj;
   },
@@ -55,10 +53,9 @@ var Stream = React.createClass({
   },
 
   render: function() {
-    var tracks = this.state.tracks.map(this.mapTrack);
     return (
       <div className="">
-        <Tracks tracks={tracks} />
+        <Tracks tracks={this.props.tracks} />
         <div className="center">
           <button onClick={this.getTracks}>
             Load More

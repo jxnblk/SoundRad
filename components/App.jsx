@@ -14,7 +14,9 @@ var App = React.createClass({
     return {
       token: this.props.token,
       player: new Player(),
+      tracks: [],
       playing: false,
+      currentIndex: 0,
     }
   },
 
@@ -22,8 +24,26 @@ var App = React.createClass({
     window.location = 'https://soundcloud.com/connect?client_id=' + this.props.client_id + '&redirect_uri=' + this.props.callback_url + '&response_type=code_and_token&scope=non-expiring&display=popup'; 
   },
 
+  setTracks: function(tracks) {
+    this.setState({ tracks: tracks });
+  },
+
+  playPause: function(i) {
+    if (typeof i === 'undefined') {
+      i = this.state.currentIndex;
+    }
+    var track = this.state.tracks[i];
+    var src = track.stream_url + '?client_id=' + this.props.client_id;
+    var player = this.state.player;
+    if (player) {
+      player.playPause(src);
+      this.setState({ currentIndex: i, playing: player.playing });
+    }
+  },
+
   componentDidMount: function() {
-    console.log('params', window.location.search);
+    //console.log('params', window.location.search);
+    // Development hack
     if (this.props.token) {
       this.setState({ token: this.props.token });
     }
@@ -32,9 +52,15 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="container px2">
-        <Controls {...this.props} {...this.state} />
+        <Controls
+          {...this.props}
+          {...this.state}
+          playPause={this.playPause} />
         <Nav />
-        <RouteHandler {...this.props} {...this.state} />
+        <RouteHandler
+          {...this.props}
+          {...this.state}
+          setTracks={this.setTracks} />
 
         <code>
           {this.state.token ? 'authed' : 'not authed'}
