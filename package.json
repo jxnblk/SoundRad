@@ -4,7 +4,7 @@
   "scripts": {
     "js": "webpack --progress --colors",
     "dev": "webpack-dev-server --progress --colors",
-    "start": ""
+    "start": "npm run dev"
   },
   "devDependencies": {
     "basscss": "^6.1.4",
