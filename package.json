@@ -7,6 +7,7 @@
     "start": "npm run dev"
   },
   "devDependencies": {
+    "audio-player": "^1.1.0",
     "basscss": "^6.1.4",
     "css-loader": "^0.12.0",
     "cssnext-loader": "^1.0.1",
@@ -16,6 +17,7 @@
     "react-geomicons": "^2.0.3",
     "react-router": "^0.13.3",
     "style-loader": "^0.12.2",
+    "superagent": "^1.2.0",
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"
   },
