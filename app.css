@@ -1,0 +1,14 @@
+
+.progress::-webkit-progress-bar {
+  background-color: transparent
+}
+
+.button-transparent::before {
+  content: none;
+}
+
+.icon {
+  position: relative;
+  top: .125em;
+}
+

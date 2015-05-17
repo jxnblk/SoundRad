@@ -55,9 +55,12 @@ var Stream = React.createClass({
   render: function() {
     return (
       <div className="">
-        <Tracks tracks={this.props.tracks} />
-        <div className="center">
-          <button onClick={this.getTracks}>
+        <Tracks
+          {...this.props}
+          tracks={this.props.tracks} />
+        <div className="">
+          <button onClick={this.getTracks}
+            className="block col-12 py3 center button button-transparent">
             Load More
           </button>
         </div>

@@ -1,11 +1,15 @@
 
 var React = require('react');
+var Track = require('./Track.jsx');
 
 var Tracks = React.createClass({
 
   renderTrack: function(track, i) {
     return (
-      <div key={'track-'+i}>{track.user.username} - {track.title} ({track.type})</div>
+      <Track key={'track-'+i}
+        {...this.props}
+        track={track}
+        i={i} />
     )
   },
 

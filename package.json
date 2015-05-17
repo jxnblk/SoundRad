@@ -21,5 +21,8 @@
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"
   },
-  "homepage": "https://github.com/jxnblk/SoundRad"
+  "homepage": "https://github.com/jxnblk/SoundRad",
+  "dependencies": {
+    "hhmmss": "^1.0.0"
+  }
 }
