@@ -17,8 +17,8 @@ class Controls extends React.Component {
   }
 
   playPause () {
-    let url = src(this.props.tracks[this.props.index].stream_url)
-    PlayerActions.playPause(url)
+    let stream_url = this.props.tracks[this.props.index].stream_url
+    PlayerActions.playPause(stream_url)
   }
 
   render () {
@@ -29,7 +29,9 @@ class Controls extends React.Component {
       title = track.title;
       username = track.user.username;
     }
-    var progress = (this.props.duration * this.props.currentTime / this.props.duration) || 0;
+    let player = this.props.player
+    let audio = player.audio
+    var progress = (audio.duration * audio.currentTime / audio.duration) || 0;
 
     return (
       <div>
@@ -56,15 +58,15 @@ class Controls extends React.Component {
             <h1 className="h4 m0">{title}</h1>
           </div>
           <div className="h6 bold nowrap p1">
-            <span>{hhmmss(this.props.player.audio.currentTime)}</span>
+            <span>{hhmmss(audio.currentTime)}</span>
             <span> | </span>
-            <span>{hhmmss(this.props.player.audio.duration)}</span>
+            <span>{hhmmss(audio.duration)}</span>
           </div>
         </div>
         <Progress
-          onClick={this.seek}
+          onClick={PlayerActions.seek}
           value={progress}
-          max={this.props.duration || 1}
+          max={audio.duration || 1}
           min={0} />
       </div>
     )
