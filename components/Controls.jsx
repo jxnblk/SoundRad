@@ -1,12 +1,27 @@
 
-var React = require('react');
-var hhmmss = require('hhmmss');
-var Icon = require('react-geomicons');
-var Progress = require('./Progress.jsx');
+import React from 'react'
+import hhmmss from 'hhmmss'
+import Icon from 'react-geomicons'
+import data from '../data'
+import src from '../utils/src'
+import Progress from './Progress.jsx'
 
-var Player = React.createClass({
+import PlayerActions from '../actions/PlayerActions'
+import TrackActions from '../actions/TrackActions'
 
-  render: function() {
+class Controls extends React.Component {
+
+  constructor () {
+    super ()
+    this.playPause = this.playPause.bind(this)
+  }
+
+  playPause () {
+    let url = src(this.props.tracks[this.props.index].stream_url)
+    PlayerActions.playPause(url)
+  }
+
+  render () {
     var track = this.props.tracks[this.props.index];
     var title;
     var username;
@@ -21,17 +36,17 @@ var Player = React.createClass({
         <div className="flex flex-center py2 mxn1">
           <div className="nowrap px1">
             <button
-              onClick={this.props.previous}
+              onClick={PlayerActions.previous}
               className="h3 button-narrow button-transparent">
               <Icon name="previous" />
             </button>
             <button
-              onClick={this.props.playPause}
+              onClick={this.playPause}
               className="h2 button-narrow button-transparent">
-              <Icon name={this.props.playing ? 'pause' : 'play'} />
+              <Icon name={this.props.player.playing ? 'pause' : 'play'} />
             </button>
             <button
-              onClick={this.props.next}
+              onClick={PlayerActions.next}
               className="h3 button-narrow button-transparent">
               <Icon name="next" />
             </button>
@@ -41,13 +56,13 @@ var Player = React.createClass({
             <h1 className="h4 m0">{title}</h1>
           </div>
           <div className="h6 bold nowrap p1">
-            <span>{hhmmss(this.props.currentTime)}</span>
+            <span>{hhmmss(this.props.player.audio.currentTime)}</span>
             <span> | </span>
-            <span>{hhmmss(this.props.duration)}</span>
+            <span>{hhmmss(this.props.player.audio.duration)}</span>
           </div>
         </div>
         <Progress
-          onClick={this.props.seek}
+          onClick={this.seek}
           value={progress}
           max={this.props.duration || 1}
           min={0} />
@@ -55,7 +70,7 @@ var Player = React.createClass({
     )
   }
 
-});
+}
 
-module.exports = Player;
+export default Controls
 

@@ -1,20 +1,17 @@
 
-import _ from 'lodash'
 import superagent from 'superagent'
 import data from '../data'
-import token from './Token'
+import token from './token'
 
-//let endpoint = '/me/activities/tracks'
 let endpoint = '/me'
 
+let params = {
+  oauth_token: token,
+  client_id: data.client_id
+}
 
 let UserFetcher = {
-  fetch (params) {
-    var params = _.assign(params, {
-      oauth_token: token,
-      client_id: data.client_id
-    })
-    console.log('params', params)
+  fetch () {
     return new Promise(function(resolve, reject) {
       if (!token) {
         reject('Not connected')

@@ -8,7 +8,6 @@ class UserActions {
   }
 
   fetchUser () {
-    //this.dispatch()
     UserFetcher.fetch({})
       .then((user) => {
         this.actions.updateUser(user)

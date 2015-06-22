@@ -5,7 +5,7 @@ import data from './data'
 import css from './app.css'
 import routes from './Routes.jsx'
 
-import token from './utils/Token'
+import token from './utils/token'
 
 data.token = token
 

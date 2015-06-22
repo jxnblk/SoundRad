@@ -1,18 +1,49 @@
 
 import alt from '../alt'
 import TrackActions from '../actions/TrackActions'
+import src from '../utils/src'
 
 class TrackStore {
 
   constructor () {
     this.tracks = []
+    this.index = 0
+    this.errorMessage = null
     this.bindListeners({
-      handleUpdateTracks: TrackActions.UPDATE_TRACKS
+      handleUpdateTracks: TrackActions.UPDATE_TRACKS,
+      handleFetchStream: TrackActions.FETCH_STREAM,
+      handleTracksFailed: TrackActions.TRACKS_FAILED,
+      handlePrevious: TrackActions.PREVIOUS,
+      handleNext: TrackActions.NEXT
     })
   }
 
-  handleUpdateTracks(tracks) {
+  handleUpdateTracks (tracks) {
     this.tracks = tracks
+  }
+
+  handleFetchStream () {
+    this.tracks = []
+  }
+
+  handleTracksFailed (errorMessage) {
+    this.dispatch(errorMessage)
+  }
+
+  handlePrevious () {
+    if (this.index > 0) {
+      this.index--
+    } else {
+      //PlayerActions.pause()
+    }
+  }
+
+  handleNext () {
+    if (this.index < this.tracks.length - 1) {
+      this.index++
+    } else {
+      //PlayerActions.pause()
+    }
   }
 
 }
