@@ -15,6 +15,7 @@ class UserStore {
 
   handleUpdateUser(user) {
     this.user = user
+    this.errorMessage = null
   }
 
   handleFetchUser() {

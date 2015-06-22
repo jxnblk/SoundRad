@@ -4,10 +4,11 @@ import superagent from 'superagent'
 import { RouteHandler } from 'react-router'
 import Player from 'audio-player'
 import qs from 'qs'
-import LocalStorage from '../utils/LocalStorage'
 import Controls from './Controls.jsx'
 import Nav from './Nav.jsx'
+
 import LogIn from './LogIn.jsx'
+import CurrentUser from './CurrentUser.jsx'
 
 import TrackStore from '../stores/TrackStore'
 import UserStore from '../stores/UserStore'
@@ -18,17 +19,15 @@ class App extends React.Component {
   constructor () {
     super ()
     this.state = {
-      token: false,
       player: new Player(),
       tracks: TrackStore.getState(),
       playing: false,
       index: 0,
       duration: 0,
       currentTime: 0,
-      currentUser: UserStore.getState(),
+      //user: UserStore.getState(),
     }
     this.src = this.src.bind(this)
-    this.connect = this.connect.bind(this)
     this.playPause = this.playPause.bind(this)
     this.previous = this.previous.bind(this)
     this.next = this.next.bind(this)
@@ -40,40 +39,6 @@ class App extends React.Component {
     var src = track.stream_url + '?client_id=' + this.props.client_id;
     return src;
   }
-
-  connect () {
-    let href = [
-      'https://soundcloud.com/connect?',
-
-    ].join('')
-    window.location = href
-    //'https://soundcloud.com/connect?client_id=' + this.props.client_id + '&redirect_uri=' + this.props.callback_url + '&response_type=code_and_token&scope=non-expiring&display=popup'; 
-  }
-
-  /*
-  getCurrentUser () {
-    //var self = this;
-    //var api = this.props.api + '/me';
-    //superagent
-    //  .get(api)
-    //  .query({
-    //    client_id: this.props.client_id,
-    //    oauth_token: this.state.token
-    //  })
-    //  .end(function(err, response) {
-    //    if (err) {
-    //      console.error(err);
-    //    }
-    //    var user = JSON.parse(response.text);
-    //    console.log(user);
-    //    self.setState({ currentUser: user });
-    //  });
-  }
-  */
-
-  //setTracks (tracks) {
-  //  this.setState({ tracks: tracks });
-  //}
 
   playPause (i) {
     if (typeof i !== 'number') {
@@ -122,30 +87,10 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    UserStore.listen(this.onChange)
-    UserActions.fetchUser()
-    let params = qs.parse(window.location.search.replace(/^\?/, ''))
-    let hash = window.location.hash
-    let storage = new LocalStorage()
-    let token = storage.getObj('token')
-    if (token) {
-      console.log('stored token', token)
-      this.setState({ token: token })
-    } else if (hash) {
-      let obj = qs.parse(hash.replace(/^\#/, ''))
-      if (obj.access_token) {
-        let token = obj.access_token
-        storage.setObj('token', token)
-        this.setState({ token: token })
-        console.log(token)
-      }
-    }
-    if (params) {
-      console.log('params', params.code)
-    }
-    // Get token
+    //UserStore.listen(this.onChange)
+    //UserActions.fetchUser()
+    
     var self = this;
-
     var player = this.state.player;
     player.audio.addEventListener('timeupdate', function() {
       self.setState({
@@ -175,6 +120,8 @@ class App extends React.Component {
       }
     }
 
+    console.log('state', this.state)
+
     return (
       <div className='container px2'>
         <div className='px2' style={styles.fixed}>
@@ -197,9 +144,10 @@ class App extends React.Component {
 
         <div className='p4'>
           <code>
-            {this.state.token ? 'authed' : 'not authed'}
+            {this.props.token ? ('Connected ') : 'Disconnected'}
           </code>
           <hr />
+          <CurrentUser {...this.props} />
           <LogIn {...this.props} />
         </div>
       </div>
