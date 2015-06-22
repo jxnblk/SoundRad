@@ -1,63 +1,63 @@
 
-var React = require('react');
-var superagent = require('superagent');
-var Tracks = require('./Tracks.jsx');
-var querystring = require('querystring');
+import React from 'react'
+import superagent from 'superagent'
+import Tracks from './Tracks.jsx'
+import querystring from 'querystring'
 
-var Stream = React.createClass({
+class Stream extends React.Component {
 
-  statics: {
-    end: '/me/activities/tracks',
-    endpoint: function() {
-      return '/me/activities/tracks';
-    }
-  },
+  constructor () {
+    super ()
+    //this.statics = {
+    //  end: '/me/activities/tracks',
+    //  endpoint: function() {
+    //    return '/me/activities/tracks';
+    //  }
+    //}
+    //this.state = {}
+  }
 
-  getInitialState: function() {
-    return {
-      next_href: null,
-    }
-  },
+  //getTracks: function() {
+  //  var self = this;
+  //  var api = this.state.next_href || this.props.api + '/me/activities/tracks';
+  //  var tracks = this.props.tracks;
+  //  superagent
+  //    .get(api)
+  //    .query({
+  //      client_id: this.props.client_id,
+  //      oauth_token: this.props.token,
+  //      limit: this.props.pageSize,
+  //    })
+  //    .end(function(err, response) {
+  //      if (err) {
+  //        console.error(err);
+  //      } else {
+  //        var newTracks = response.body.collection.map(self.mapTrack);
+  //        self.props.setTracks(tracks.concat(newTracks));
+  //        self.setState({ next_href: response.body.next_href });
+  //      }
+  //    });
+  //},
 
-  getTracks: function() {
-    var self = this;
-    var api = this.state.next_href || this.props.api + '/me/activities/tracks';
-    var tracks = this.props.tracks;
-    superagent
-      .get(api)
-      .query({
-        client_id: this.props.client_id,
-        oauth_token: this.props.token,
-        limit: this.props.pageSize,
-      })
-      .end(function(err, response) {
-        if (err) {
-          console.error(err);
-        } else {
-          var newTracks = response.body.collection.map(self.mapTrack);
-          self.props.setTracks(tracks.concat(newTracks));
-          self.setState({ next_href: response.body.next_href });
-        }
-      });
-  },
-
-  mapTrack: function(track) {
+  mapTrack (track) {
     var obj = track.origin;
     obj.type = track.type || null;
     obj.posted_at = track.created_at;
     return obj;
-  },
+  }
 
-  componentDidMount: function() {
-    this.getTracks();
-  },
+  componentDidMount () {
+    //this.getTracks();
+  }
 
-  render: function() {
+  render () {
     return (
       <div className="">
+        {/*
         <Tracks
           {...this.props}
           tracks={this.props.tracks} />
+        */}
         <div className="">
           <button onClick={this.getTracks}
             className="block col-12 py3 center button button-transparent">
@@ -68,7 +68,7 @@ var Stream = React.createClass({
     )
   }
 
-});
+}
 
-module.exports = Stream;
+export default Stream
 

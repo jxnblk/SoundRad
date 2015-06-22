@@ -1,18 +1,25 @@
 {
   "name": "SoundRad",
-  "version": "0.0.0",
+  "version": "5.0.0",
   "scripts": {
     "js": "webpack --progress --colors",
     "dev": "webpack-dev-server --progress --colors",
     "start": "npm run dev"
   },
-  "devDependencies": {
+  "homepage": "https://github.com/jxnblk/SoundRad",
+  "dependencies": {
+    "alt": "^0.16.10",
     "audio-player": "^1.1.0",
+    "babel-core": "^5.6.1",
+    "babel-loader": "^5.1.4",
     "basscss": "^6.1.4",
     "css-loader": "^0.12.0",
     "cssnext-loader": "^1.0.1",
+    "hhmmss": "^1.0.0",
     "jsx-loader": "^0.13.2",
+    "lodash": "^3.9.3",
     "node-libs-browser": "^0.5.0",
+    "qs": "^3.1.0",
     "react": "^0.13.3",
     "react-geomicons": "^2.0.3",
     "react-router": "^0.13.3",
@@ -20,9 +27,5 @@
     "superagent": "^1.2.0",
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"
-  },
-  "homepage": "https://github.com/jxnblk/SoundRad",
-  "dependencies": {
-    "hhmmss": "^1.0.0"
   }
 }

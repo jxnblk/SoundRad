@@ -1,9 +1,9 @@
 
-var config = require('./config');
+var config = require('./config-local');
 
 module.exports = {
   client_id: config.client_id,
-    token: config.token,
+  //token: config.token,
   api: 'https://api.soundcloud.com',
   pageSize: 32,
   callback_url: 'http://localhost:8080',

@@ -1,4 +1,6 @@
 
+@import 'basscss';
+
 .progress::-webkit-progress-bar {
   background-color: transparent
 }
@@ -10,5 +12,10 @@
 .icon {
   position: relative;
   top: .125em;
+}
+
+:root {
+  --bold-font-weight: 500;
+  --button-font-size: var(--h5);
 }
 

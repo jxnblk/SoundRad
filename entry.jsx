@@ -1,27 +1,12 @@
 
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var App = require('./components/App.jsx');
-var Stream = require('./components/Stream.jsx');
-var User = require('./components/User.jsx');
-var Likes = require('./components/Likes.jsx');
-var Playlists = require('./components/Playlists.jsx');
-var data = require('./data');
-require('basscss/src/basscss.css');
-require('./app.css');
+import React from 'react'
+import Router from 'react-router'
+import data from './data'
+import css from './app.css'
 
-var routes = (
-  <Route handler={App} path="/">
-    <DefaultRoute handler={Stream} />
-    <Route name="user" path=":user" handler={User} />
-    <Route name="likes" path=":user/likes" handler={Likes} />
-    <Route name="playlists" path=":user/sets" handler={Playlists} />
-  </Route>
-);
+import routes from './Routes.jsx'
 
 Router.run(routes, Router.HistoryLocation, function(Handler) {
-  React.render(<Handler {...data} />, document.querySelector('#app'));
-});
+  React.render(<Handler {...data} />, document.querySelector('#app'))
+})
 
