@@ -31,6 +31,7 @@ class App extends React.Component {
     PlayerStore.listen(this.onChange)
     TrackStore.listen(this.onChange)
     UserActions.fetchUser()
+    console.log('app page', this.props)
   }
 
   componentDidUnmount () {

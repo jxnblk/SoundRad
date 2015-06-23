@@ -51,12 +51,17 @@ let soundcloud = {
     })
   },
 
-  fetchUserTracks (username) {
+  fetchUserTracks (username, page) {
     return new Promise(function(resolve, reject) {
       let endpoint = '/users/' + username + '/tracks'
+      let offset = 0
+      if (page) {
+        offset = data.pageSize * (page - 1)
+      }
       superagent
         .get(data.api + endpoint)
         .query(params)
+        .query({ offset: offset })
         .end(function(err, res) {
           if (err) {
             reject(err)

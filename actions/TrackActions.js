@@ -12,6 +12,14 @@ class TrackActions {
     this.dispatch(playlists)
   }
 
+  updateIndex(index) {
+    this.dispatch(index)
+  }
+
+  updatePage(page) {
+    this.dispatch(page)
+  }
+
   fetchStream () {
     this.actions.updateTracks([])
     soundcloud.fetchStream()
@@ -23,9 +31,9 @@ class TrackActions {
       })
   }
 
-  fetchUserTracks (username) {
+  fetchUserTracks (username, page) {
     this.actions.updateTracks([])
-    soundcloud.fetchUserTracks(username)
+    soundcloud.fetchUserTracks(username, page)
       .then((tracks) => {
         this.actions.updateTracks(tracks)
       })
@@ -66,10 +74,6 @@ class TrackActions {
 
   next () {
     this.dispatch()
-  }
-
-  updateIndex(index) {
-    this.dispatch(index)
   }
 
 }
