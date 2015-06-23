@@ -20,6 +20,7 @@ class App extends React.Component {
       player: PlayerStore.getState().player,
       index: TrackStore.getState().index,
       tracks: TrackStore.getState().tracks,
+      playlists: TrackStore.getState().playlists,
       user: UserStore.getState().user,
     }
     this.onChange = this.onChange.bind(this)

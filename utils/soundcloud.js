@@ -9,7 +9,7 @@ const params = {
   limit: data.pageSize
 }
 
-let TracksFetcher = {
+let soundcloud = {
 
   fetchStream () {
     return new Promise(function(resolve, reject) {
@@ -35,6 +35,22 @@ let TracksFetcher = {
     })
   },
 
+  fetchUser (username) {
+    return new Promise(function(resolve, reject) {
+      let endpoint = '/users/' + username
+      superagent
+        .get(data.api + endpoint)
+        .query(params)
+        .end(function(err, res) {
+          if (err) {
+            reject(err)
+          }
+          let user = JSON.parse(res.text)
+          resolve(user)
+        })
+    })
+  },
+
   fetchUserTracks (username) {
     return new Promise(function(resolve, reject) {
       let endpoint = '/users/' + username + '/tracks'
@@ -49,9 +65,42 @@ let TracksFetcher = {
           resolve(tracks)
         })
     })
+  },
+
+  fetchUserFavorites (username) {
+    return new Promise(function(resolve, reject) {
+      let endpoint = '/users/' + username + '/favorites'
+      superagent
+        .get(data.api + endpoint)
+        .query(params)
+        .end(function(err, res) {
+          if (err) {
+            reject(err)
+          }
+          let tracks = JSON.parse(res.text)
+          resolve(tracks)
+        })
+    })
+  },
+
+  fetchUserPlaylists (username) {
+    return new Promise(function(resolve, reject) {
+      let endpoint = '/users/' + username + '/playlists'
+      superagent
+        .get(data.api + endpoint)
+        .query(params)
+        .end(function(err, res) {
+          if (err) {
+            reject(err)
+          }
+          let playlists = JSON.parse(res.text)
+          console.log(playlists)
+          resolve(playlists)
+        })
+    })
   }
 
 }
 
-export default TracksFetcher
+export default soundcloud
 

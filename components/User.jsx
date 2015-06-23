@@ -1,15 +1,12 @@
 
 import React from 'react'
-import superagent from 'superagent'
-import { RouteHandler } from 'react-router'
 import Tracks from './Tracks.jsx'
 import TrackActions from '../actions/TrackActions'
 
 class User extends React.Component {
 
   componentDidMount () {
-    var username = this.props.params.user
-    TrackActions.fetchUserTracks(username)
+    TrackActions.fetchUserTracks(this.props.params.user)
   }
 
   render () {

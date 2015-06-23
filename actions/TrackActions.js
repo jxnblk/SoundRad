@@ -1,8 +1,6 @@
 
 import alt from '../alt'
-import TracksFetcher from '../utils/TracksFetcher'
-
-import PlayerActions from './PlayerActions'
+import soundcloud from '../utils/soundcloud'
 
 class TrackActions {
 
@@ -10,9 +8,13 @@ class TrackActions {
     this.dispatch(tracks)
   }
 
+  updatePlaylists(playlists) {
+    this.dispatch(playlists)
+  }
+
   fetchStream () {
     this.actions.updateTracks([])
-    TracksFetcher.fetchStream()
+    soundcloud.fetchStream()
       .then((tracks) => {
         this.actions.updateTracks(tracks)
       })
@@ -23,9 +25,31 @@ class TrackActions {
 
   fetchUserTracks (username) {
     this.actions.updateTracks([])
-    TracksFetcher.fetchUserTracks(username)
+    soundcloud.fetchUserTracks(username)
       .then((tracks) => {
         this.actions.updateTracks(tracks)
+      })
+      .catch((errorMessage) => {
+        this.actions.tracksFailed(errorMessage)
+      })
+  }
+
+  fetchUserFavorites (username) {
+    this.actions.updateTracks([])
+    soundcloud.fetchUserFavorites(username)
+      .then((tracks) => {
+        this.actions.updateTracks(tracks)
+      })
+      .catch((errorMessage) => {
+        this.actions.tracksFailed(errorMessage)
+      })
+  }
+
+  fetchUserPlaylists (username) {
+    this.actions.updatePlaylists([])
+    soundcloud.fetchUserPlaylists(username)
+      .then((playlists) => {
+        this.actions.updatePlaylists(playlists)
       })
       .catch((errorMessage) => {
         this.actions.tracksFailed(errorMessage)

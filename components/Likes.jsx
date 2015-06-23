@@ -1,17 +1,23 @@
 
-var React = require('react');
+import React from 'react'
+import Tracks from './Tracks.jsx'
+import TrackActions from '../actions/TrackActions'
 
-var Likes = React.createClass({
+class Likes extends React.Component {
 
-  render: function() {
+  componentDidMount () {
+    TrackActions.fetchUserFavorites(this.props.params.user)
+  }
+
+  render () {
     return (
       <div className="">
-        likes
+        <Tracks {...this.props} />
       </div>
     )
   }
 
-});
+}
 
-module.exports = Likes;
+export default Likes
 

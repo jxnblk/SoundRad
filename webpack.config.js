@@ -15,6 +15,10 @@ module.exports = {
     ]
   },
 
+  devServer: {
+    historyApiFallback: true
+  },
+
   cssnext: {
     features: {
       import : {
