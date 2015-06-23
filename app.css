@@ -1,14 +1,10 @@
 
-@import 'blk';
+@import 'basscss';
 @import 'basscss-progress';
 @import 'basscss-color-progress';
 
 .progress::-webkit-progress-bar {
   background-color: transparent
-}
-
-.button-transparent::before {
-  content: none;
 }
 
 .icon {
@@ -17,7 +13,18 @@
 }
 
 :root {
-  --bold-font-weight: 500;
+  --font-family: 'SF Compact Text', Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  /*
+  --heading-font-family: 'SF UI Display', Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  */
+
   --button-font-size: var(--h5);
+
+  --body-color: var(--slate);
+  --blue: #007bbd;
+  --red: #ff6200;
+  --green: #00a865;
+  --slate: #172C36;
+  --brightblue: #33b8ff;
 }
 

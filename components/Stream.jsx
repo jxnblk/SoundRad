@@ -7,10 +7,20 @@ import TrackActions from '../actions/TrackActions'
 
 class Stream extends React.Component {
 
+  constructor () {
+    super ()
+    this.loadMore = this.loadMore.bind(this)
+  }
+
   componentDidMount () {
     if (this.props.token) {
       TrackActions.fetchStream()
     }
+  }
+
+  loadMore () {
+    let href = this.props.nextHref
+    TrackActions.fetchStream(href)
   }
 
   render () {
@@ -19,8 +29,8 @@ class Stream extends React.Component {
         <Tracks {...this.props}
           tracks={this.props.tracks} />
         <div>
-          <button onClick={this.getTracks}
-            className="block col-12 py3 center button button-transparent">
+          <button onClick={this.loadMore}
+            className='btn py2 mt2 block col-12'>
             Load More
           </button>
         </div>

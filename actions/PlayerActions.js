@@ -12,9 +12,14 @@ class PlayerActions {
     this.dispatch(player)
   }
 
-  playPause (stream_url) {
-    let url = src(stream_url)
+  updateTrack (track) {
+    this.dispatch(track)
+  }
+
+  playPause (track) {
+    let url = src(track.stream_url)
     player.playPause(url)
+    this.actions.updateTrack(track)
     this.actions.updatePlayer(player)
   }
 
@@ -26,19 +31,22 @@ class PlayerActions {
   previous () {
     TrackActions.previous()
     let state = TrackStore.getState()
+    this.actions.updateTrack(state.tracks[state.index])
     this.actions.playPause(state.tracks[state.index].stream_url)
   }
 
   next () {
     TrackActions.next()
     let state = TrackStore.getState()
-    this.actions.playPause(state.tracks[state.index].stream_url)
+    this.actions.updateTrack(state.tracks[state.index])
+    this.actions.playPause(state.tracks[state.index])
   }
 
   playIndex (index) {
     TrackActions.updateIndex(index)
     let state = TrackStore.getState()
-    this.actions.playPause(state.tracks[state.index].stream_url)
+    this.actions.updateTrack(state.tracks[state.index])
+    this.actions.playPause(state.tracks[state.index])
   }
 
   seek (e) {

@@ -9,7 +9,7 @@ class Track extends React.Component {
     let self = this
     let track = this.props.track
     let i = this.props.i
-    let active = i === this.props.index && track.id === this.props.tracks[this.props.index].id
+    let active = (i === this.props.index && track.id === this.props.tracks[this.props.index].id)
     let classNames = {
       container: [
         'flex',
@@ -26,13 +26,13 @@ class Track extends React.Component {
       PlayerActions.playIndex(i)
     }
     let icon = false
-    if (track.type === 'track-repost') {
-      icon = (
-        <span className="h6 caps nowrap flex flex-center px1 muted">
-          <Icon name="repost" className="h4 mr1" />
-        </span>
-      )
-    }
+    //if (track.type === 'track-repost') {
+    //  icon = (
+    //    <span className="h6 caps nowrap flex flex-center px1 muted">
+    //      <Icon name="repost" className="h4 mr1" />
+    //    </span>
+    //  )
+    //}
 
     return (
       <div key={i} className={classNames.container}>

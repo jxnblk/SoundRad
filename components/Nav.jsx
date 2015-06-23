@@ -17,12 +17,12 @@ var Nav = React.createClass({
       playlistLink = <Link to={'/'+userslug+'/sets'} className="btn">Playlists</Link>
     }
     return (
-      <nav className="border-bottom">
-        <div className="flex mxn2">
-          <Link to="/" className="btn">Stream</Link>
+      <nav className=''>
+        <div className='flex'>
+          <Link to='/' className='btn'>Stream</Link>
           {likesLink}
-          {playlistLink}
-          <div className="flex-auto" />
+          {/*playlistLink*/}
+          <div className='flex-auto' />
           {userLink}
         </div>
       </nav>

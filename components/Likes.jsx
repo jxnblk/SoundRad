@@ -2,6 +2,8 @@
 import React from 'react'
 import Tracks from './Tracks.jsx'
 import TrackActions from '../actions/TrackActions'
+import Pagination from './Pagination.jsx'
+import Loading from './Loading.jsx'
 
 class Likes extends React.Component {
 
@@ -10,24 +12,26 @@ class Likes extends React.Component {
     this.getTracks = this.getTracks.bind(this)
   }
 
-  getTracks () {
-    TrackActions.fetchUserFavorites(this.props.params.user, this.props.page)
+  getTracks (user) {
+    TrackActions.fetchUserFavorites(user, this.props.page)
   }
 
   componentDidMount () {
-    TrackActions.fetchUserFavorites(this.props.params.user)
+    this.getTracks(this.props.params.user)
   }
 
   componentWillUpdate (nextProps) {
-    if (nextProps.page !== this.props.page) {
-      this.getTracks()
+    if (nextProps.page !== this.props.page || nextProps.params !== this.props.params) {
+      this.getTracks(nextProps.params.user)
     }
   }
 
   render () {
     return (
       <div>
+        {this.props.tracks.length ? false : <Loading />}
         <Tracks {...this.props} />
+        <Pagination {...this.props} />
       </div>
     )
   }

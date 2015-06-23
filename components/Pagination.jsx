@@ -30,7 +30,7 @@ class Pagination extends React.Component {
     let path = this.props.router.path
 
     return (
-      <div className='p2 flex flex-center'>
+      <div className='py2 flex flex-center'>
         <Link
           to={path}
           onClick={this.previous}
@@ -39,7 +39,8 @@ class Pagination extends React.Component {
           Previous
         </Link>
         <div className='flex-auto' />
-        <div>{page}</div>
+        <div className='h5 bold'>{page}</div>
+        <div className='flex-auto' />
         <Link
           to={path}
           onClick={this.next}

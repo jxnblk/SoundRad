@@ -9,6 +9,14 @@ class TrackActions {
     this.dispatch(tracks)
   }
 
+  concatTracks(tracks) {
+    this.dispatch(tracks)
+  }
+
+  updateNextHref(nextHref) {
+    this.dispatch(nextHref)
+  }
+
   updatePlaylists(playlists) {
     this.dispatch(playlists)
   }
@@ -17,11 +25,18 @@ class TrackActions {
     this.dispatch(index)
   }
 
-  fetchStream () {
-    this.actions.updateTracks([])
-    soundcloud.fetchStream()
-      .then((tracks) => {
-        this.actions.updateTracks(tracks)
+  fetchStream (nextHref) {
+    if (!nextHref) {
+      this.actions.updateTracks([])
+    }
+    soundcloud.fetchStream(nextHref)
+      .then((res) => {
+        if (!nextHref) {
+          this.actions.updateTracks(res.tracks)
+        } else {
+          this.actions.concatTracks(res.tracks)
+        }
+        this.actions.updateNextHref(res.nextHref)
       })
       .catch((errorMessage) => {
         this.actions.tracksFailed(errorMessage)

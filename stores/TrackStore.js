@@ -7,11 +7,14 @@ class TrackStore {
 
   constructor () {
     this.tracks = []
+    this.nextHref = false
     this.playlists = []
     this.index = 0
     this.errorMessage = null
     this.bindListeners({
       handleUpdateTracks: TrackActions.UPDATE_TRACKS,
+      handleConcatTracks: TrackActions.CONCAT_TRACKS,
+      handleUpdateNextHref: TrackActions.UPDATE_NEXT_HREF,
       handleUpdatePlaylists: TrackActions.UPDATE_PLAYLISTS,
       handleUpdateIndex: TrackActions.UPDATE_INDEX,
       handleFetchStream: TrackActions.FETCH_STREAM,
@@ -25,6 +28,14 @@ class TrackStore {
 
   handleUpdateTracks (tracks) {
     this.tracks = tracks
+  }
+
+  handleConcatTracks (tracks) {
+    this.tracks = this.tracks.concat(tracks)
+  }
+
+  handleUpdateNextHref (nextHref) {
+    this.nextHref = nextHref
   }
 
   handleUpdatePlaylists (playlists) {

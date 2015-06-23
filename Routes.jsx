@@ -9,7 +9,9 @@ import Likes from './components/Likes.jsx'
 import Playlists from './components/Playlists.jsx'
 
 var routes = (
-  <Route handler={App} path="/">
+  <Route handler={App}
+    path="/"
+    ignoreScrollBehavior={true}>
     <DefaultRoute handler={Stream} />
     <Route name="user" path=":user" handler={User} />
     <Route name="likes" path=":user/likes" handler={Likes} />

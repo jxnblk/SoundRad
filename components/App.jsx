@@ -5,7 +5,7 @@ import { RouteHandler } from 'react-router'
 import qs from 'qs'
 import Controls from './Controls.jsx'
 import Nav from './Nav.jsx'
-import LogIn from './LogIn.jsx'
+import Connect from './Connect.jsx'
 import PlayerStore from '../stores/PlayerStore'
 import UserStore from '../stores/UserStore'
 import TrackStore from '../stores/TrackStore'
@@ -14,7 +14,6 @@ import PlayerActions from '../actions/PlayerActions'
 
 import PageStore from '../stores/PageStore'
 import PageActions from '../actions/PageActions'
-import Pagination from './Pagination.jsx'
 
 class App extends React.Component {
 
@@ -23,12 +22,15 @@ class App extends React.Component {
     this.state = {
       player: PlayerStore.getState().player,
       index: TrackStore.getState().index,
-      page: PageStore.getState().page,
       tracks: TrackStore.getState().tracks,
+      track: PlayerStore.getState().track,
+      page: PageStore.getState().page,
+      nextHref: TrackStore.getState().nextHref,
       playlists: TrackStore.getState().playlists,
       user: UserStore.getState().user,
     }
     this.onChange = this.onChange.bind(this)
+    this.updatePage = this.updatePage.bind(this)
   }
 
   componentDidMount () {
@@ -43,8 +45,9 @@ class App extends React.Component {
     let query = this.props.router.query
     if (query && query.page) {
       page = parseInt(query.page, 10)
-      PageActions.updatePage(page)
     }
+    PageActions.updatePage(page)
+    //this.updatePage()
   }
 
   componentDidUnmount () {
@@ -58,41 +61,43 @@ class App extends React.Component {
     this.setState(state)
   }
 
+  updatePage () {
+    let page = 1
+    let query = this.props.router.query
+    if (query && query.page) {
+      page = parseInt(query.page, 10)
+    }
+    PageActions.updatePage(page)
+  }
+
   render () {
     const styles = {
       fixed: {
-        position: 'fixed',
-        zIndex: 2,
-        top: 0,
-        right: 0,
-        left: 0,
-        backgroundColor: 'white'
+        //position: 'fixed',
+        //zIndex: 2,
+        //top: 0,
+        //right: 0,
+        //left: 0,
+        //backgroundColor: 'white'
       },
       body: {
-        position: 'relative',
-        zIndex: 1,
-        marginTop: 144
+        //position: 'relative',
+        //zIndex: 1,
+        //marginTop: 144
       }
     }
 
     return (
-      <div className='container px2'>
-        <div className='px2' style={styles.fixed}>
+      <div className=''>
+        <div className='' style={styles.fixed}>
           <Nav {...this.props} {...this.state} />
           <Controls {...this.props} {...this.state} />
         </div>
         <div style={styles.body}>
           <RouteHandler {...this.props} {...this.state} />
-          <Pagination {...this.props} {...this.state} />
         </div>
 
-        <div className='p4 border'>
-          <code>
-            {this.props.token ? ('Connected ' + this.state.user.username) : 'Disconnected'}
-          </code>
-          <hr />
-          <LogIn {...this.props} />
-        </div>
+        <Connect {...this.props} {...this.state} />
       </div>
     )
   }

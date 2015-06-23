@@ -17,14 +17,14 @@ class Controls extends React.Component {
   }
 
   playPause () {
-    let stream_url = this.props.tracks[this.props.index].stream_url
-    PlayerActions.playPause(stream_url)
+    let track = this.props.track
+    PlayerActions.playPause(track)
   }
 
   render () {
-    var track = this.props.tracks[this.props.index];
-    var title;
-    var username;
+    let track = this.props.track
+    let title
+    let username
     if (track) {
       title = track.title;
       username = track.user.username;
@@ -34,41 +34,43 @@ class Controls extends React.Component {
     var progress = (audio.duration * audio.currentTime / audio.duration) || 0;
 
     return (
-      <div>
-        <div className="flex flex-center py2 mxn1">
-          <div className="nowrap px1">
+      <div className='mb3'>
+        <div className='flex flex-center mxn1'>
+          <div className='nowrap px1'>
             <button
               onClick={PlayerActions.previous}
-              className="h3 btn">
-              <Icon name="previous" />
+              className='h3 btn'>
+              <Icon name='previous' />
             </button>
             <button
               onClick={this.playPause}
-              className="h2 btn">
+              className='h3 btn'>
               <Icon name={this.props.player.playing ? 'pause' : 'play'} />
             </button>
             <button
               onClick={PlayerActions.next}
-              className="h3 btn">
-              <Icon name="next" />
+              className='h3 btn'>
+              <Icon name='next' />
             </button>
           </div>
-          <div className="flex-auto px1">
-            <h1 className="h5 m0">{username}</h1>
-            <h1 className="h4 m0">{title}</h1>
+          <div className='flex-auto px1'>
+            <h1 className='h5 m0'>{username}</h1>
+            <h1 className='h4 m0'>{title}</h1>
           </div>
-          <div className="h6 bold nowrap p1">
+          <div className='h6 bold nowrap px3 py1'>
             <span>{hhmmss(audio.currentTime)}</span>
             <span> | </span>
             <span>{hhmmss(audio.duration)}</span>
           </div>
         </div>
-        <Progress
-          className='progress col-12'
-          onClick={PlayerActions.seek}
-          value={progress}
-          max={audio.duration || 1}
-          min={0} />
+        <div className='px2'>
+          <Progress
+            className='progress col-12'
+            onClick={PlayerActions.seek}
+            value={progress}
+            max={audio.duration || 1}
+            min={0} />
+        </div>
       </div>
     )
   }

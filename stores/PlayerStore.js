@@ -6,8 +6,10 @@ import player from '../utils/player'
 class PlayerStore {
   constructor () {
     this.player = player
+    this.track = false
     this.bindListeners({
-      handleUpdatePlayer: PlayerActions.UPDATE_PLAYER
+      handleUpdatePlayer: PlayerActions.UPDATE_PLAYER,
+      handleUpdateTrack: PlayerActions.UPDATE_TRACK
     })
     let self = this
     player.audio.addEventListener('timeupdate', function() {
@@ -20,6 +22,10 @@ class PlayerStore {
 
   handleUpdatePlayer (player) {
     this.player = player
+  }
+
+  handleUpdateTrack (track) {
+    this.track = track
   }
 
 }

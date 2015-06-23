@@ -1,9 +1,9 @@
 
 import React from 'react'
 import Tracks from './Tracks.jsx'
-import { Link } from 'react-router'
 import TrackActions from '../actions/TrackActions'
-import TrackStore from '../stores/TrackStore'
+import Pagination from './Pagination.jsx'
+import Loading from './Loading.jsx'
 
 class User extends React.Component {
 
@@ -12,24 +12,26 @@ class User extends React.Component {
     this.getTracks = this.getTracks.bind(this)
   }
 
-  getTracks () {
-    TrackActions.fetchUserTracks(this.props.params.user, this.props.page)
+  getTracks (user) {
+    TrackActions.fetchUserTracks(user, this.props.page)
   }
 
   componentDidMount () {
-    this.getTracks()
+    this.getTracks(this.props.params.user)
   }
 
   componentWillUpdate (nextProps) {
-    if (nextProps.page !== this.props.page) {
-      this.getTracks()
+    if (nextProps.page !== this.props.page || nextProps.params !== this.props.params) {
+      this.getTracks(nextProps.params.user)
     }
   }
 
   render () {
     return (
       <div>
+        {this.props.tracks.length ? false : <Loading />}
         <Tracks {...this.props} />
+        <Pagination {...this.props} />
       </div>
     )
   }

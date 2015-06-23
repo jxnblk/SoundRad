@@ -11,9 +11,9 @@ const params = {
 
 let soundcloud = {
 
-  fetchStream () {
+  fetchStream (nextHref) {
     return new Promise(function(resolve, reject) {
-      let endpoint = '/me/activities/tracks'
+      let api = nextHref ? nextHref : data.api + '/me/activities/tracks'
       function mapStreamTrack (track) {
         let obj = track.origin;
         obj.type = track.type || null;
@@ -21,7 +21,7 @@ let soundcloud = {
         return obj;
       }
       superagent
-        .get(data.api + endpoint)
+        .get(api)
         .query(params)
         .end(function(err, res) {
           if (err) {
@@ -29,8 +29,8 @@ let soundcloud = {
           }
           let response = JSON.parse(res.text)
           let tracks = response.collection.map(mapStreamTrack)
-          console.log('future_href', response.future_href)
-          resolve(tracks)
+          let nextHref = response.next_href
+          resolve({ tracks: tracks, nextHref: nextHref })
         })
     })
   },
