@@ -12,6 +12,10 @@ import TrackStore from '../stores/TrackStore'
 import UserActions from '../actions/UserActions'
 import PlayerActions from '../actions/PlayerActions'
 
+import PageStore from '../stores/PageStore'
+import PageActions from '../actions/PageActions'
+import Pagination from './Pagination.jsx'
+
 class App extends React.Component {
 
   constructor () {
@@ -19,6 +23,7 @@ class App extends React.Component {
     this.state = {
       player: PlayerStore.getState().player,
       index: TrackStore.getState().index,
+      page: PageStore.getState().page,
       tracks: TrackStore.getState().tracks,
       playlists: TrackStore.getState().playlists,
       user: UserStore.getState().user,
@@ -30,14 +35,24 @@ class App extends React.Component {
     UserStore.listen(this.onChange)
     PlayerStore.listen(this.onChange)
     TrackStore.listen(this.onChange)
-    UserActions.fetchUser()
-    console.log('app page', this.props)
+    PageStore.listen(this.onChange)
+    if (this.props.token) {
+      UserActions.fetchUser()
+    }
+    let page = 1
+    let query = this.props.router.query
+    if (query && query.page) {
+      page = parseInt(query.page, 10)
+      PageActions.updatePage(page)
+    }
+    console.log('App page', page)
   }
 
   componentDidUnmount () {
     UserStore.unlisten(this.onChange)
     PlayerStore.unlisten(this.onChange)
     TrackStore.unlisten(this.onChange)
+    PageStore.unlisten(this.onChange)
   }
 
   onChange (state) {
@@ -61,6 +76,8 @@ class App extends React.Component {
       }
     }
 
+    console.log('App render page', this.state.page)
+
     return (
       <div className='container px2'>
         <div className='px2' style={styles.fixed}>
@@ -69,6 +86,7 @@ class App extends React.Component {
         </div>
         <div style={styles.body}>
           <RouteHandler {...this.props} {...this.state} />
+          <Pagination {...this.props} {...this.state} />
         </div>
 
         <div className='p4 border'>

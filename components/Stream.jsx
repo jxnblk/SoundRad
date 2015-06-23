@@ -8,7 +8,9 @@ import TrackActions from '../actions/TrackActions'
 class Stream extends React.Component {
 
   componentDidMount () {
-    TrackActions.fetchStream()
+    if (this.props.token) {
+      TrackActions.fetchStream()
+    }
   }
 
   render () {

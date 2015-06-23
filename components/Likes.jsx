@@ -11,7 +11,7 @@ class Likes extends React.Component {
 
   render () {
     return (
-      <div className="">
+      <div>
         <Tracks {...this.props} />
       </div>
     )

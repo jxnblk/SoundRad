@@ -9,13 +9,11 @@ class TrackStore {
     this.tracks = []
     this.playlists = []
     this.index = 0
-    this.page = 1
     this.errorMessage = null
     this.bindListeners({
       handleUpdateTracks: TrackActions.UPDATE_TRACKS,
       handleUpdatePlaylists: TrackActions.UPDATE_PLAYLISTS,
       handleUpdateIndex: TrackActions.UPDATE_INDEX,
-      handleUpdatePage: TrackActions.UPDATE_PAGE,
       handleFetchStream: TrackActions.FETCH_STREAM,
       handleFetchUserTracks: TrackActions.FETCH_USER_TRACKS,
       handleFetchUserFavorites: TrackActions.FETCH_USER_FAVORITES,
@@ -37,10 +35,6 @@ class TrackStore {
     this.index = index
   }
 
-  handleUpdatePage (page) {
-    this.page = page
-  }
-
   handleFetchStream () {
     this.tracks = []
   }
@@ -54,7 +48,7 @@ class TrackStore {
   }
 
   handleTracksFailed (errorMessage) {
-    this.dispatch(errorMessage)
+    this.errorMessage = errorMessage
   }
 
   handlePrevious () {

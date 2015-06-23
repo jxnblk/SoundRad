@@ -12,14 +12,14 @@ var Nav = React.createClass({
     if (this.props.user) {
       var userslug = this.props.user.permalink;
       var username = this.props.user.username;
-      userLink = <Link to={'/'+userslug} className="button button-transparent">{username}</Link>
-      likesLink = <Link to={'/'+userslug+'/likes'} className="button button-transparent">Likes</Link>
-      playlistLink = <Link to={'/'+userslug+'/sets'} className="button button-transparent">Playlists</Link>
+      userLink = <Link to={'/'+userslug} className="btn">{username}</Link>
+      likesLink = <Link to={'/'+userslug+'/likes'} className="btn">Likes</Link>
+      playlistLink = <Link to={'/'+userslug+'/sets'} className="btn">Playlists</Link>
     }
     return (
       <nav className="border-bottom">
         <div className="flex mxn2">
-          <Link to="/" className="button button-transparent">Stream</Link>
+          <Link to="/" className="btn">Stream</Link>
           {likesLink}
           {playlistLink}
           <div className="flex-auto" />

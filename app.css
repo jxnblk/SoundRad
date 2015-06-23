@@ -1,5 +1,7 @@
 
-@import 'basscss';
+@import 'blk';
+@import 'basscss-progress';
+@import 'basscss-color-progress';
 
 .progress::-webkit-progress-bar {
   background-color: transparent

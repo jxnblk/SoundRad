@@ -39,17 +39,17 @@ class Controls extends React.Component {
           <div className="nowrap px1">
             <button
               onClick={PlayerActions.previous}
-              className="h3 button-narrow button-transparent">
+              className="h3 btn">
               <Icon name="previous" />
             </button>
             <button
               onClick={this.playPause}
-              className="h2 button-narrow button-transparent">
+              className="h2 btn">
               <Icon name={this.props.player.playing ? 'pause' : 'play'} />
             </button>
             <button
               onClick={PlayerActions.next}
-              className="h3 button-narrow button-transparent">
+              className="h3 btn">
               <Icon name="next" />
             </button>
           </div>
@@ -64,6 +64,7 @@ class Controls extends React.Component {
           </div>
         </div>
         <Progress
+          className='progress col-12'
           onClick={PlayerActions.seek}
           value={progress}
           max={audio.duration || 1}

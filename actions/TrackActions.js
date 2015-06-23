@@ -16,10 +16,6 @@ class TrackActions {
     this.dispatch(index)
   }
 
-  updatePage(page) {
-    this.dispatch(page)
-  }
-
   fetchStream () {
     this.actions.updateTracks([])
     soundcloud.fetchStream()
@@ -65,7 +61,7 @@ class TrackActions {
   }
 
   tracksFailed (errorMessage) {
-    this.dispatch(errorMessage)
+    //this.dispatch(errorMessage)
   }
 
   previous () {

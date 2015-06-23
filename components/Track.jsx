@@ -19,8 +19,7 @@ class Track extends React.Component {
         'left-align',
         'block',
         'flex-auto',
-        'button',
-        'button-transparent',
+        'btn',
       ].join(' '),
     }
     let handleClick = function(e) {
@@ -51,7 +50,7 @@ class Track extends React.Component {
         <button className="h4 button button-transparent">
           <Icon name="heart" className="icon" />
         </button>
-        <button className="h4 button button-transparent">
+        <button className="h4 btn">
           <Icon name="chevronRight" className="icon" />
         </button>
         */}
