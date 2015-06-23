@@ -6,11 +6,11 @@ import PlayerActions from '../actions/PlayerActions'
 class Track extends React.Component {
 
   render () {
-    var self = this
-    var track = this.props.track
-    var i = this.props.i
-    var active = i === this.props.index && track.id === this.props.tracks[this.props.index].id
-    var classNames = {
+    let self = this
+    let track = this.props.track
+    let i = this.props.i
+    let active = i === this.props.index && track.id === this.props.tracks[this.props.index].id
+    let classNames = {
       container: [
         'flex',
         (active ? 'white bg-black' : '')
@@ -23,11 +23,10 @@ class Track extends React.Component {
         'button-transparent',
       ].join(' '),
     }
-    var handleClick = function(e) {
+    let handleClick = function(e) {
       PlayerActions.playIndex(i)
-      //self.props.playPause(i)
     }
-    var icon = false
+    let icon = false
     if (track.type === 'track-repost') {
       icon = (
         <span className="h6 caps nowrap flex flex-center px1 muted">

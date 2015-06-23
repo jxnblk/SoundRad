@@ -11,7 +11,19 @@ class TrackActions {
   }
 
   fetchStream () {
+    this.actions.updateTracks([])
     TracksFetcher.fetchStream()
+      .then((tracks) => {
+        this.actions.updateTracks(tracks)
+      })
+      .catch((errorMessage) => {
+        this.actions.tracksFailed(errorMessage)
+      })
+  }
+
+  fetchUserTracks (username) {
+    this.actions.updateTracks([])
+    TracksFetcher.fetchUserTracks(username)
       .then((tracks) => {
         this.actions.updateTracks(tracks)
       })

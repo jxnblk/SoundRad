@@ -3,7 +3,7 @@ import superagent from 'superagent'
 import data from '../data'
 import token from './token'
 
-let params = {
+const params = {
   oauth_token: token,
   client_id: data.client_id,
   limit: data.pageSize
@@ -29,15 +29,27 @@ let TracksFetcher = {
           }
           let response = JSON.parse(res.text)
           let tracks = response.collection.map(mapStreamTrack)
-          console.log('tracks', tracks)
           console.log('future_href', response.future_href)
           resolve(tracks)
         })
     })
-  }
+  },
 
-  //fetchUserTracks(user) {
-  //}
+  fetchUserTracks (username) {
+    return new Promise(function(resolve, reject) {
+      let endpoint = '/users/' + username + '/tracks'
+      superagent
+        .get(data.api + endpoint)
+        .query(params)
+        .end(function(err, res) {
+          if (err) {
+            reject(err)
+          }
+          let tracks = JSON.parse(res.text)
+          resolve(tracks)
+        })
+    })
+  }
 
 }
 

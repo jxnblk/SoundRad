@@ -1,60 +1,20 @@
 
-var React = require('react');
-var superagent = require('superagent');
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
-var Tracks = require('./Tracks.jsx');
+import React from 'react'
+import superagent from 'superagent'
+import { RouteHandler } from 'react-router'
+import Tracks from './Tracks.jsx'
+import TrackActions from '../actions/TrackActions'
 
-var User = React.createClass({
+class User extends React.Component {
 
-  getInitialState: function() {
-    return {
-      page: 0,
-    }
-  },
+  componentDidMount () {
+    var username = this.props.params.user
+    TrackActions.fetchUserTracks(username)
+  }
 
-  getTracks: function() {
-    var self = this;
-    var tracks = this.props.tracks;
-    console.log(tracks.length);
-    var api = this.props.api + '/users/' + this.props.params.user + '/tracks';
-    superagent
-      .get(api)
-      .query({
-        client_id: this.props.client_id,
-        oauth_token: this.props.token,
-        offset: this.props.pageSize * this.state.page,
-      })
-      .end(function(err, response) {
-        if (err) {
-          console.error(err);
-        }
-        var newTracks = JSON.parse(response.text);
-        if (self.state.page > 0) {
-          newTracks = tracks.concat(newTracks);
-        }
-        self.props.setTracks(newTracks);
-      });
-  },
-
-  loadMore: function() {
-    var self = this;
-    var page = this.state.page;
-    page++;
-    this.setState({ page: page }, function() {
-      self.getTracks();
-    });
-  },
-
-  componentDidMount: function() {
-    this.props.setTracks([]);
-    this.getTracks();
-  },
-
-  render: function() {
-    var username = this.props.params.user;
+  render () {
     return (
-      <div className="">
+      <div>
         User
         <Tracks {...this.props} />
         <button onClick={this.loadMore}
@@ -65,7 +25,7 @@ var User = React.createClass({
     )
   }
 
-});
+}
 
-module.exports = User;
+export default User;
 

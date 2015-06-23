@@ -25,7 +25,6 @@ class App extends React.Component {
     this.onChange = this.onChange.bind(this)
   }
 
-
   componentDidMount () {
     UserStore.listen(this.onChange)
     PlayerStore.listen(this.onChange)
@@ -43,7 +42,6 @@ class App extends React.Component {
     this.setState(state)
   }
 
-
   render () {
     const styles = {
       fixed: {
@@ -60,7 +58,6 @@ class App extends React.Component {
         marginTop: 144
       }
     }
-    //console.log('App state', this.state)
 
     return (
       <div className='container px2'>
