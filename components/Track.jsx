@@ -1,14 +1,15 @@
 
-var React = require('react');
-var Icon = require('react-geomicons');
+import React from 'react'
+import Icon from 'react-geomicons'
+import PlayerActions from '../actions/PlayerActions'
 
-var Track = React.createClass({
+class Track extends React.Component {
 
-  render: function() {
-    var self = this;
-    var track = this.props.track;
-    var i = this.props.i;
-    var active = i === this.props.index && track.id === this.props.tracks[this.props.index].id;
+  render () {
+    var self = this
+    var track = this.props.track
+    var i = this.props.i
+    var active = i === this.props.index && track.id === this.props.tracks[this.props.index].id
     var classNames = {
       container: [
         'flex',
@@ -21,11 +22,12 @@ var Track = React.createClass({
         'button',
         'button-transparent',
       ].join(' '),
-    };
-    var handleClick = function(e) {
-      self.props.playPause(i);
     }
-    var icon = false;
+    var handleClick = function(e) {
+      PlayerActions.playIndex(i)
+      //self.props.playPause(i)
+    }
+    var icon = false
     if (track.type === 'track-repost') {
       icon = (
         <span className="h6 caps nowrap flex flex-center px1 muted">
@@ -35,7 +37,7 @@ var Track = React.createClass({
     }
 
     return (
-      <div key={'track-'+i} className={classNames.container}>
+      <div key={i} className={classNames.container}>
         <button 
           onClick={handleClick}
           className={classNames.button}>
@@ -58,7 +60,7 @@ var Track = React.createClass({
     )
   }
 
-});
+}
 
-module.exports = Track;
+export default Track
 

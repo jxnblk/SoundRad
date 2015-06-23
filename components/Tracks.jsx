@@ -15,7 +15,7 @@ var Tracks = React.createClass({
 
   render: function() {
     return (
-      <div className="">
+      <div>
         {this.props.tracks.map(this.renderTrack)}
       </div>
     )

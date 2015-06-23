@@ -13,6 +13,9 @@ class PlayerStore {
     player.audio.addEventListener('timeupdate', function() {
       PlayerActions.updatePlayer(self.player)
     })
+    player.audio.addEventListener('ended', function() {
+      PlayerActions.next()
+    })
   }
 
   handleUpdatePlayer (player) {

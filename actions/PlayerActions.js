@@ -35,6 +35,12 @@ class PlayerActions {
     this.actions.playPause(state.tracks[state.index].stream_url)
   }
 
+  playIndex (index) {
+    TrackActions.updateIndex(index)
+    let state = TrackStore.getState()
+    this.actions.playPause(state.tracks[state.index].stream_url)
+  }
+
   seek (e) {
     e.offsetX = e.clientX - e.target.offsetLeft
     player.seek(e)

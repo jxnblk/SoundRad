@@ -32,6 +32,10 @@ class TrackActions {
     this.dispatch()
   }
 
+  updateIndex(index) {
+    this.dispatch(index)
+  }
+
 }
 
 export default alt.createActions(TrackActions)

@@ -11,6 +11,7 @@ class TrackStore {
     this.errorMessage = null
     this.bindListeners({
       handleUpdateTracks: TrackActions.UPDATE_TRACKS,
+      handleUpdateIndex: TrackActions.UPDATE_INDEX,
       handleFetchStream: TrackActions.FETCH_STREAM,
       handleTracksFailed: TrackActions.TRACKS_FAILED,
       handlePrevious: TrackActions.PREVIOUS,
@@ -20,6 +21,10 @@ class TrackStore {
 
   handleUpdateTracks (tracks) {
     this.tracks = tracks
+  }
+
+  handleUpdateIndex (index) {
+    this.index = index
   }
 
   handleFetchStream () {
