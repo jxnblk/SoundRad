@@ -24,7 +24,6 @@ let UserFetcher = {
             reject(err)
           }
           let user = JSON.parse(res.text)
-          console.log('res', user)
           resolve(user)
         })
     })

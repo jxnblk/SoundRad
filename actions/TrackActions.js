@@ -1,6 +1,7 @@
 
 import alt from '../alt'
 import soundcloud from '../utils/soundcloud'
+import PageStore from '../stores/PageStore'
 
 class TrackActions {
 
@@ -27,7 +28,8 @@ class TrackActions {
       })
   }
 
-  fetchUserTracks (username, page) {
+  fetchUserTracks (username) {
+    let page = PageStore.getState().page
     this.actions.updateTracks([])
     soundcloud.fetchUserTracks(username, page)
       .then((tracks) => {
@@ -39,8 +41,9 @@ class TrackActions {
   }
 
   fetchUserFavorites (username) {
+    let page = PageStore.getState().page
     this.actions.updateTracks([])
-    soundcloud.fetchUserFavorites(username)
+    soundcloud.fetchUserFavorites(username, page)
       .then((tracks) => {
         this.actions.updateTracks(tracks)
       })
@@ -50,8 +53,9 @@ class TrackActions {
   }
 
   fetchUserPlaylists (username) {
+    let page = PageStore.getState().page
     this.actions.updatePlaylists([])
-    soundcloud.fetchUserPlaylists(username)
+    soundcloud.fetchUserPlaylists(username, page)
       .then((playlists) => {
         this.actions.updatePlaylists(playlists)
       })
@@ -61,7 +65,7 @@ class TrackActions {
   }
 
   tracksFailed (errorMessage) {
-    //this.dispatch(errorMessage)
+    this.dispatch(errorMessage)
   }
 
   previous () {

@@ -51,13 +51,19 @@ let soundcloud = {
     })
   },
 
+  getOffset(page) {
+    if (page) {
+      return (page - 1) * data.pageSize
+    } else {
+      return 0
+    }
+  },
+
   fetchUserTracks (username, page) {
+    let self = this
     return new Promise(function(resolve, reject) {
       let endpoint = '/users/' + username + '/tracks'
-      let offset = 0
-      if (page) {
-        offset = data.pageSize * (page - 1)
-      }
+      let offset = self.getOffset(page)
       superagent
         .get(data.api + endpoint)
         .query(params)
@@ -72,12 +78,15 @@ let soundcloud = {
     })
   },
 
-  fetchUserFavorites (username) {
+  fetchUserFavorites (username, page) {
+    let self = this
     return new Promise(function(resolve, reject) {
       let endpoint = '/users/' + username + '/favorites'
+      let offset = self.getOffset(page)
       superagent
         .get(data.api + endpoint)
         .query(params)
+        .query({ offset: offset })
         .end(function(err, res) {
           if (err) {
             reject(err)
@@ -89,17 +98,19 @@ let soundcloud = {
   },
 
   fetchUserPlaylists (username) {
+    let self = this
     return new Promise(function(resolve, reject) {
       let endpoint = '/users/' + username + '/playlists'
+      let offset = self.getOffset(page)
       superagent
         .get(data.api + endpoint)
         .query(params)
+        .query({ offset: offset })
         .end(function(err, res) {
           if (err) {
             reject(err)
           }
           let playlists = JSON.parse(res.text)
-          console.log(playlists)
           resolve(playlists)
         })
     })

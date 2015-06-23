@@ -45,7 +45,6 @@ class App extends React.Component {
       page = parseInt(query.page, 10)
       PageActions.updatePage(page)
     }
-    console.log('App page', page)
   }
 
   componentDidUnmount () {
@@ -75,8 +74,6 @@ class App extends React.Component {
         marginTop: 144
       }
     }
-
-    console.log('App render page', this.state.page)
 
     return (
       <div className='container px2'>

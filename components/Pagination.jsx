@@ -27,7 +27,6 @@ class Pagination extends React.Component {
 
   render () {
     let page = this.props.page
-    console.log(this.props.router)
     let path = this.props.router.path
 
     return (

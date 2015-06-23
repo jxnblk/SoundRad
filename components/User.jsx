@@ -13,7 +13,6 @@ class User extends React.Component {
   }
 
   getTracks () {
-    console.log('page', this.props.page)
     TrackActions.fetchUserTracks(this.props.params.user, this.props.page)
   }
 
@@ -21,7 +20,6 @@ class User extends React.Component {
     this.getTracks()
   }
 
-  //componentWillReceiveProps (nextProps) {
   componentWillUpdate (nextProps) {
     if (nextProps.page !== this.props.page) {
       this.getTracks()
@@ -29,7 +27,6 @@ class User extends React.Component {
   }
 
   render () {
-    console.log('User render', this.props.page)
     return (
       <div>
         <Tracks {...this.props} />
